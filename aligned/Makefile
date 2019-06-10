@@ -1,5 +1,5 @@
 .PHONY:clean
-#CC =powerpc-fsl-linux-gnuspe-gcc
+CC =gcc
 #CFLAGS=-Wall  -O2
 OBJ = test
 #OBJ = test
