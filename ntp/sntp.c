@@ -75,26 +75,21 @@ double get_rrt(const struct ntphdr *ntp, const struct timeval *recvtv)
 double get_offset(const struct ntphdr *ntp, const struct timeval *recvtv)
 {
     double t1, t2, t3, t4;
-
     t1 = NTP_LFIXED2DOUBLE(&ntp->ntp_orits);
     t2 = NTP_LFIXED2DOUBLE(&ntp->ntp_recvts);
     t3 = NTP_LFIXED2DOUBLE(&ntp->ntp_transts);
     t4 = recvtv->tv_sec + recvtv->tv_usec / 1000000.0;
-	//printf("t1:%lf t2: %lf t3:%lf t4:%lf \n\n", t1, t2, t3, t4);
-	
+	if(0)
+		printf("t1: %lf\nt2: %lf\nt3: %lf\nt4: %lf\n", t1, t2, t3, t4);
 	return ((t2 - t1) + (t3 - t4)) / 2;
-	
 }
-
 
 
 
 int main(int argc, char *argv[])
 {
 
-	static unsigned int rcnt=5;
 	static double last_time;
-	
 	char buf[BUFSIZE];
     size_t nbytes;
     int sockfd, maxfd1;
@@ -102,7 +97,8 @@ int main(int argc, char *argv[])
     fd_set readfds;
     struct timeval timeout, recvtv, tv;
     double offset;
-
+	
+	
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(NTP_PORT);
     servaddr.sin_addr.s_addr = inet_host(NTP_SERVER);
@@ -119,7 +115,7 @@ int main(int argc, char *argv[])
 
     nbytes = BUFSIZE;
 	
-	while(rcnt--)
+	while(1)
 	{
 	    if (get_ntp_packet(buf, &nbytes) != 0) {
 	        fprintf(stderr, "construct ntp request error \n");
@@ -150,8 +146,8 @@ int main(int argc, char *argv[])
 		            }
 		            gettimeofday(&recvtv, NULL);
 		            offset = get_offset((struct ntphdr *) buf, &recvtv);
-					
-					printf("off= %lfus,  jitter= %lfus\n\n", offset /K_MS, (offset- last_time)/K_MS);
+					//double jitter= offset- last_time;
+					printf("off= %lf,  jitter= %lf\n\n", offset, (offset- last_time));
 					last_time= offset;
 					gettimeofday(&tv, NULL);
 					tv.tv_sec += (int) offset;
@@ -164,7 +160,7 @@ int main(int argc, char *argv[])
 		        }
 				break;
 	    }
-		sleep(1);
+		sleep(2*60);
 	}
     close(sockfd);
     return 0;

@@ -1,6 +1,6 @@
 .PHONY:clean
-#CC =csky-linux-gcc
-CC =gcc
+CC =csky-linux-gcc
+#CC =gcc
 #CFLAGS=-Wall  -O2
 OBJ = test
 #OBJ = test

@@ -4,7 +4,7 @@
 #define VERSION_3           3
 #define VERSION_4           4		/*default*/
 #define MODE_CLIENT         3	
-#define NTP_LI_UNNONE       0x11	/*default*/
+#define NTP_LI_UNNONE       0x3		/*default*/
 #define NTP_LI_NO       	0x0
 #define NTP_VN              VERSION_4   
 #define NTP_MODE            MODE_CLIENT
