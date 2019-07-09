@@ -25,20 +25,33 @@
 #include "cJSON.h"
 
 /* Parse text to JSON, then render back to text, and print! */
+static cJSON *json;
 void doit(char *text)
 {
-	char *out;cJSON *json;
+	char *out;
 	
 	json=cJSON_Parse(text);
 	if (!json) {printf("Error before: [%s]\n",cJSON_GetErrorPtr());}
 	else
 	{
 		out=cJSON_Print(json);
-		cJSON_Delete(json);
+		//cJSON_Delete(json);
 		printf("%s\n",out);
 		free(out);
 	}
 }
+
+//#define NSTAR_LOGIC_ADDR_LENGTH			6
+//#define NSTAR_PHYSICS_ADDR_LENGTH		6
+//struct _sys_status{
+//	unsigned char physicsAddr[NSTAR_PHYSICS_ADDR_LENGTH];
+//	unsigned char platformModeMask;
+//	unsigned char initFlag;
+//	struct _search_mode_change searchModeInfo;
+//	struct _nstar_flash_data flashData;		
+//	struct _platform platform;
+
+//};
 
 
 
@@ -90,222 +103,45 @@ void dofile(char *filename)
 	free(data);
 }
 
+static cJSON *root, *item1, *item2;
+
 void Create_2(void)
 {
-	cJSON * root =	cJSON_CreateObject();
-	cJSON * item =  cJSON_CreateObject();
-	cJSON * next =  cJSON_CreateObject();
+	root  =	 cJSON_CreateObject();
+	item1 =  cJSON_CreateObject();
+	item2 =  cJSON_CreateObject();
 
-	cJSON_AddItemToObject(root, "nb1", cJSON_CreateString("zxsad"));
-	cJSON_AddItemToObject(root, "nb2", cJSON_CreateNumber(2));
-	cJSON_AddItemToObject(root, "item", item);//root节点下添加semantic节点
-	cJSON_AddItemToObject(item, "name", cJSON_CreateString("zx"));//添加name节点
-		
-	 char *out= cJSON_Print(root);
+	cJSON_AddItemToObject(root, "name", cJSON_CreateString("zx"));
+	cJSON_AddItemToObject(root, "age", cJSON_CreateNumber(33));
+	cJSON_AddItemToObject(root, "item1", item1);
+
+	char *out= cJSON_Print(root);
+	printf("node: %s\n", out);
 	FILE* fp = fopen("tests/test2.txt", "w+"); 	
-	 fprintf(fp, out);   
-    fclose(fp);
-	out = NULL;
-    root = NULL;
+	fprintf(fp, out);   
+	fclose(fp);
+
 }
 
-void Create_Pkgs(char* option1, char* option2)
+static void *cjson_malloc(size_t sz)
 {
-    cJSON *root,*fld;
-    char *out;
-    FILE* fp = fopen("tests/test2.txt", "w+");
-    root=cJSON_CreateArray();
-
-    cJSON_AddItemToArray(root,fld=cJSON_CreateObject());
-    cJSON_AddStringToObject(fld, "id", "c1");
-    cJSON_AddStringToObject(fld, "option", option1);
-    cJSON_AddStringToObject(fld, "fid", "1");
-
-    cJSON_AddItemToArray(root,fld=cJSON_CreateObject());
-    cJSON_AddStringToObject(fld, "id", "p1");
-    cJSON_AddStringToObject(fld, "option", option2);
-    cJSON_AddStringToObject(fld, "fid", "2");  
-   
-    out=cJSON_Print(root);
-    fprintf(fp, out);   
-    fclose(fp);
-
-    cJSON_Delete(root);
-    free(out);
-
-    out = NULL;
-    root = NULL;
+	printf("cjson_malloc %d\n", sz);
+	return malloc(sz);
 }
 
-
-
-/* Used by some code below as an example datatype. */
-struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };
-
-/* Create a bunch of objects as demonstration. */
-void create_objects()
+static void cjson_free(size_t sz)
 {
-	cJSON *root,*fmt,*img,*thm,*fld;char *out;int i;	/* declare a few. */
-	/* Our "days of the week" array: */
-	const char *strings[7]={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
-	/* Our matrix: */
-	int numbers[3][3]={{0,-1,0},{1,0,0},{0,0,1}};
-	/* Our "gallery" item: */
-	int ids[4]={116,943,234,38793};
-	/* Our array of "records": */
-	struct record fields[2]={
-		{"zip",37.7668,-1.223959e+2,"","SAN FRANCISCO","CA","94107","US"},
-		{"zip",37.371991,-1.22026e+2,"","SUNNYVALE","CA","94085","US"}};
-
-	/* Here we construct some JSON standards, from the JSON site. */
-	
-	/* Our "Video" datatype: */
-	root=cJSON_CreateObject();	
-	cJSON_AddItemToObject(root, "name", cJSON_CreateString("Jack (\"Bee\") Nimble"));
-	cJSON_AddItemToObject(root, "format", fmt=cJSON_CreateObject());
-	cJSON_AddStringToObject(fmt,"type",		"rect");
-	cJSON_AddNumberToObject(fmt,"width",		1920);
-	cJSON_AddNumberToObject(fmt,"height",		1080);
-	cJSON_AddFalseToObject (fmt,"interlace");
-	cJSON_AddNumberToObject(fmt,"frame rate",	24);
-	
-	out=cJSON_Print(root);	cJSON_Delete(root);	printf("%s\n",out);	free(out);	/* Print to text, Delete the cJSON, print it, release the string. */
-
-	/* Our "days of the week" array: */
-	root=cJSON_CreateStringArray(strings,7);
-
-	out=cJSON_Print(root);	cJSON_Delete(root);	printf("%s\n",out);	free(out);
-
-	/* Our matrix: */
-	root=cJSON_CreateArray();
-	for (i=0;i<3;i++) cJSON_AddItemToArray(root,cJSON_CreateIntArray(numbers[i],3));
-
-/*	cJSON_ReplaceItemInArray(root,1,cJSON_CreateString("Replacement")); */
-	
-	out=cJSON_Print(root);	cJSON_Delete(root);	printf("%s\n",out);	free(out);
-
-
-	/* Our "gallery" item: */
-	root=cJSON_CreateObject();
-	cJSON_AddItemToObject(root, "Image", img=cJSON_CreateObject());
-	cJSON_AddNumberToObject(img,"Width",800);
-	cJSON_AddNumberToObject(img,"Height",600);
-	cJSON_AddStringToObject(img,"Title","View from 15th Floor");
-	cJSON_AddItemToObject(img, "Thumbnail", thm=cJSON_CreateObject());
-	cJSON_AddStringToObject(thm, "Url", "http:/*www.example.com/image/481989943");
-	cJSON_AddNumberToObject(thm,"Height",125);
-	cJSON_AddStringToObject(thm,"Width","100");
-	cJSON_AddItemToObject(img,"IDs", cJSON_CreateIntArray(ids,4));
-
-	out=cJSON_Print(root);	cJSON_Delete(root);	printf("%s\n",out);	free(out);
-
-	/* Our array of "records": */
-
-	root=cJSON_CreateArray();
-	for (i=0;i<2;i++)
-	{
-		cJSON_AddItemToArray(root,fld=cJSON_CreateObject());
-		cJSON_AddStringToObject(fld, "precision", fields[i].precision);
-		cJSON_AddNumberToObject(fld, "Latitude", fields[i].lat);
-		cJSON_AddNumberToObject(fld, "Longitude", fields[i].lon);
-		cJSON_AddStringToObject(fld, "Address", fields[i].address);
-		cJSON_AddStringToObject(fld, "City", fields[i].city);
-		cJSON_AddStringToObject(fld, "State", fields[i].state);
-		cJSON_AddStringToObject(fld, "Zip", fields[i].zip);
-		cJSON_AddStringToObject(fld, "Country", fields[i].country);
-	}
-	
-/*	cJSON_ReplaceItemInObject(cJSON_GetArrayItem(root,1),"City",cJSON_CreateIntArray(ids,4)); */
-	
-	out=cJSON_Print(root);	
-	cJSON_Delete(root);
-	printf("%s\n",out);
-	free(out);
-
+	printf("cjson_free %d\n", sz);
+	free(sz);
 }
-
-
-
-/*
-//创建json对象
-cJSON *info; 
-info=cJSON_CreateObject();
- 
-//添加数据
-cJSON_AddStringToObject(info,"sex","male");
-cJSON_AddNumberToObject(info,"age",20);
-cJSON_AddStringToObject(info,"name","weijun");
-
-将JSON对象转换成字符串
-//字符指针
-char *jsonStr;
-//转换函数
-jsonStr=cJSON_Print(info);
- 
-
-将字符串转换成JSON并取数据
-//创建JSON对象
-cJSON *root;
-cJSON *name;
-char *exeStr;
- 
-//解析字符串
-root = cJSON_Parse(data);
-if (!root) {
-    printf("get root faild !\n");
-    printf("Error before: [%s]\n", cJSON_GetErrorPtr());
-}
- 
-//获取数据
-name = cJSON_GetObjectItem(root, "name");
-if (!name) {
-    printf("get name faild !\n");
-    printf("Error before: [%s]\n", cJSON_GetErrorPtr());
-}
- 
-//转移数据到指针
-exeStr = (char*)malloc(strlen(name->valuestring));
-sprintf(exeStr, "%s", name->valuestring);
- 
-//内存回收
-cJSON_Delete(root);
-
-*/
-
 
 int main (int argc, const char * argv[]) {
-	/* a bunch of json: */
-	char text1[]="{\n\"name\": \"Jack (\\\"Bee\\\") Nimble\", \n\"format\": {\"type\":       \"rect\", \n\"width\":      1920, \n\"height\":     1080, \n\"interlace\":  false,\"frame rate\": 24\n}\n}";	
-//	char text2[]="[\"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\"]";
-//	char text3[]="[\n    [0, -1, 0],\n    [1, 0, 0],\n    [0, 0, 1]\n	]\n";
-//	char text4[]="{\n		\"Image\": {\n			\"Width\":  800,\n			\"Height\": 600,\n			\"Title\":  \"View from 15th Floor\",\n			\"Thumbnail\": {\n				\"Url\":    \"http:/*www.example.com/image/481989943\",\n				\"Height\": 125,\n				\"Width\":  \"100\"\n			},\n			\"IDs\": [116, 943, 234, 38793]\n		}\n	}";
-//	char text5[]="[\n	 {\n	 \"precision\": \"zip\",\n	 \"Latitude\":  37.7668,\n	 \"Longitude\": -122.3959,\n	 \"Address\":   \"\",\n	 \"City\":      \"SAN FRANCISCO\",\n	 \"State\":     \"CA\",\n	 \"Zip\":       \"94107\",\n	 \"Country\":   \"US\"\n	 },\n	 {\n	 \"precision\": \"zip\",\n	 \"Latitude\":  37.371991,\n	 \"Longitude\": -122.026020,\n	 \"Address\":   \"\",\n	 \"City\":      \"SUNNYVALE\",\n	 \"State\":     \"CA\",\n	 \"Zip\":       \"94085\",\n	 \"Country\":   \"US\"\n	 }\n	 ]";
+	
+	cJSON_Hooks hooks= {cjson_malloc, cjson_free};
+	cJSON_InitHooks(&hooks);
+	//Create_2();
 
-	/* Process each json textblock by parsing, then rebuilding: */
-	//doit(text1);
-//	doit(text2);	
-//	doit(text3);
-//	doit(text4);
-//	doit(text5);
-	//dofile("tests/test1.txt");
-	//Create_Pkgs("parm1","parm2");
-	Create_2();
 	dofile("tests/test2.txt");
-	dofile2("tests/test2.txt");
-	//dofile2
-	//create_objects();
-	/* Parse standard testfiles: */
-/*	dofile("../../tests/test1"); */
-/*	dofile("../../tests/test2"); */
-/*	dofile("../../tests/test3"); */
-/*	dofile("../../tests/test4"); */
-/*	dofile("../../tests/test5"); */
 
-	/* Now some samplecode for building objects concisely: */
-	//create_objects();
-
-	
-
-	
 	return 0;
 }

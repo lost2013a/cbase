@@ -1,7 +1,6 @@
 {
-	"nb1":	"zxsad",
-	"nb2":	2,
-	"item":	{
-		"name":	"zx"
-	}
+	"name":	"zx",
+	"age":	33,
+	"item1":	{
+}
 }
