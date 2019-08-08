@@ -440,12 +440,12 @@ HTML_PARM2_JSON\
 "                </p>"\
 "            </div>"\
 "            <div style='padding:1px 00px 00px 85px;'>"\
-"                <p> <input  type='submit' value='登录' onClick='return login();' id='rcorners1'/></p>"\
+"                <p> <input  type='submit' value='登录' onClick='return setCookie();' id='rcorners1'/></p>"\
 "      </form>"\
 "  </div>     "\
 "</div>"\
 "</div>"\
-"</body>"\
+"<setCookie();/body>"\
 "<script>"\
 "   function login(){"\
 "   var pass=document.getElementById('pass').value;"\
@@ -458,7 +458,36 @@ HTML_PARM2_JSON\
 "   return false;"\
 "     }   "\
 "   }"\
-"</script>"
+"</script>"\
+"<script>"\
+"function setCookie(exdays){"\
+"	var d = new Date();"\
+"	d.setTime(d.getTime()+(exdays*24*60*60*1000));"\
+"	var expires = 'expires='+d.toGMTString();"\
+"	document.cookie = '+++++++++++=======================================================================';"\
+"}"\
+"function getCookie(cname){"\
+"	var name = cname + '=';"\
+"	var ca = document.cookie.split(';');"\
+"	for(var i=0; i<ca.length; i++) {"\
+"		var c = ca[i].trim();"\
+"		if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }"\
+"	}"\
+"	return '';"\
+"}"\
+"function checkCookie(){"\
+"	var user=getCookie('username');"\
+"	if (user!=''){"\
+"		alert('欢迎 ' + user + ' 再次访问');"\
+"	}"\
+"	else {"\
+"		user = prompt('请输入你的名字:','');"\
+"  		if (user!='' && user!=null){"\
+"    		setCookie('username',user,30);"\
+"    	}"\
+"	}"\
+"}"\
+"</script>"\
 
 
 #endif
