@@ -9,8 +9,29 @@ extern int conn_sock;
 static int http_send(unsigned char *data, unsigned int len)
 {
 #define DEAFULT_FLAG 0
+#if 1
+#include "write_log.h"
+	write_dbg(data, len,"[2]W");
+#endif
 	return send(conn_sock, data, len, DEAFULT_FLAG);
 }
+
+static int http_rec(unsigned char *data, unsigned int rmax_len)
+{
+#define DEAFULT_FLAG MSG_DONTWAIT
+	int retlen;
+	retlen= recv(conn_sock, data, rmax_len, DEAFULT_FLAG);
+#if 1
+#include "write_log.h"
+	if(retlen > 1)
+	write_dbg(data, retlen ,"[1]R");
+#endif
+	return retlen;
+}
+
+
+
+
 
 typedef struct _CFG_TYPE{
 	unsigned char save_head_flag;
@@ -185,7 +206,8 @@ int do_https(SOCKET s)
 {			
 	int len;									
 	st_http_request *http_request = (st_http_request*)nstar_web_rx_buf;
-	len	= recv(s, (unsigned char*)http_request, MAX_URI_SIZE,MSG_DONTWAIT);
+//	len	= recv(s, (unsigned char*)http_request, MAX_URI_SIZE,MSG_DONTWAIT);
+	len	= http_rec((unsigned char*)http_request, MAX_URI_SIZE);
 	if(len < 1)
 		return 0;
 	*(((unsigned char*)http_request)+len) = 0;
@@ -206,6 +228,12 @@ static void repos_parm_htm(SOCKET s, unsigned char* http_response, const char* h
 	make_http_response_head((unsigned char*)http_response, PTYPE_HTML,file_len);
 	http_send(http_response, strlen((char const*)http_response));
 	send_len=0;
+
+#if 1	
+	http_send((unsigned char *)pweb, file_len);
+	
+#else
+
 	while(file_len)
 	{
 		if(file_len>1024)
@@ -223,6 +251,7 @@ static void repos_parm_htm(SOCKET s, unsigned char* http_response, const char* h
 	}
 
 
+#endif
 }
 
 
@@ -247,7 +276,7 @@ int proc_http(SOCKET s, unsigned char * buf)
 	parse_http_request(http_request, buf);    							/*解析http请求报文头*/
 
 	switch (http_request->METHOD)		
-  {
+ 	{
 		case METHOD_ERR :																			/*请求报文头错误*/
 			memcpy(http_response, ERROR_REQUEST_PAGE, sizeof(ERROR_REQUEST_PAGE));
 			http_send((unsigned char *)http_response, strlen((char const*)http_response));

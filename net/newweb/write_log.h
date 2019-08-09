@@ -3,7 +3,7 @@
 
 int dbg_write_open(void);
 void write_printf(char* fmt,...);  
-void write_dbg(unsigned char *p_dta, unsigned int dtalen);
+void write_dbg(unsigned char *p_dta, unsigned int dtalen , char* head);
 
 
 #endif

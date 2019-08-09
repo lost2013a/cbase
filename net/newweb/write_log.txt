@@ -1,0 +1,139 @@
+WDBG:379 ([1]R)[0881.589]:
+GET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/config.cgi
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123
+
+
+
+WDBG:400 ([1]R)[0883.541]:
+GET / HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123
+
+
+
+WDBG:66 ([2]W)[0883.543]:
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 2992
+
+
+
+WDBG:2992 ([2]W)[0883.557]:
+<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理</title><meta http-equiv='Content-Type' content='text/html' charset='utf-8'/><style type='text/css'>label{display: inline-block;width: 80px;font-weight: bolder;color: #0066FF;}body {	background-color: #35a6e8;	background: -webkit-linear-gradient(right, #f0f0f0 , #35a6e8);    background: -o-linear-gradient( right, #f0f0f0, #35a6e8);    background: -moz-linear-gradient( right, #f0f0f0, #35a6e8);    background: linear-gradient(to right, #f0f0f0 , #35a6e8);}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: left;color: #ffffff;font-size: 24px;font-weight: bolder;}h4 {color: #78e4ca;font-size: 33px;font-style: oblique;}h5 {text-align: end;color: #FFFFFF;font-size: 11px;}h6 {text-align: left;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}.wrapper {width:720px;margin:auto;}.wrapper1 {	width: 310px;	height: 360px;	padding: 20px;	background: #5e85c0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;	background: -webkit-linear-gradient(left top, #78e4ca , #506de3);	background: -o-linear-gradient(bottom right, #78e4ca, #506de3);	background: -moz-linear-gradient(bottom right, #78e4ca, #506de3);	background: linear-gradient(to bottom right, #78e4ca , #506de3);}.wrapper2 {	width: 330px;	height: 380px;	padding: 10px;	background: #f0f0f0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;}#rcorners1 {	color: #FFFFFF;	font-weight: bolder;	font-size: 18px;	border-radius: 15px;	background: #4cbdf7;	background: #0066CC;	width: 158px;	height: 30px;	border: 0px;}</style></head><body><h1 > STAR-XINHUI </h1><h2> chengdu sida web management interface </h2><br><br><br><br><br><br><div class='wrapper' >    <div class='wrapper1' >    	  <h4> Welcome！ </h4>   	  <h3> 终端网页管理界面Ver1.0 </h3>      <br><br><br><br>      <h5> 型号：IP适配器<br>&copy;斯达鑫辉视讯科技有限公司 </h5>    </div>    <div class='wrapper2' >    		<div style='padding:100px 00px 00px 85px;'>           	 <h6> 用户密码：</h6>	            </div>            <form id='frmSetting' method='POST' action='config.cgi'>            <div style='padding:0px 00px 00px 0px;'>                <p>	                    <label for='txtpass' ></label> <input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0'  name='pass'onFocus="if(value==defaultValue){value='';this.style.color='#303030'}"onBlur="if(!value){value=defaultValue;this.style.color='#c0c0c0'}" />                </p>            </div>            <div style='padding:1px 00px 00px 85px;'>                <p> <input  type='submit' value='登录' onClick='login();' id='rcorners1'/></p>      </form>  </div>     </div></div><script>   function login(){      document.getElementById('frmSetting').submit();   }</script>
+
+WDBG:369 ([1]R)[0883.604]:
+GET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123
+
+
+
+WDBG:369 ([1]R)[0883.687]:
+GET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123
+
+
+
+WDBG:369 ([1]R)[0883.786]:
+GET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123
+
+
+
+WDBG:369 ([1]R)[0883.864]:
+GET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123
+
+
+
+WDBG:579 ([1]R)[0885.495]:
+POST /config.cgi HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Cache-Control: max-age=0
+Origin: http://192.168.251.175
+Upgrade-Insecure-Requests: 1
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123
+Content-Length: 8
+
+pass=123
+
+WDBG:437 ([2]W)[0885.496]:
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:373
+
+<html><head><title>iWeb - Configuration</title><script language=javascript>j=5;function func(){document.getElementById('delay').innerText=' '+j + ' ';j--;setTimeout('func()',1000);if(j==0)location.href='http://0.0.0.0/';}</script></head><body onload='func()'>please wait for a while, the module will boot in<span style='color:red;' id='delay'></span> seconds.</body></html>
+
+WDBG:379 ([1]R)[0885.521]:
+GET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/config.cgi
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123
+
+
+
+WDBG:379 ([1]R)[0885.599]:
+GET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/config.cgi
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123
+
+
+

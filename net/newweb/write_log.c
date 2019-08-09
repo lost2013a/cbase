@@ -7,6 +7,9 @@
 #include <string.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include "app_delay.h"
+
+
 
 #define DBG_FILE "write_log.txt"
 #define max_dbg_len (1024*20)
@@ -35,22 +38,41 @@ void write_printf(char* fmt,...)
 	int ret;
 	unsigned int len;
 	unsigned char* pbuf = dbg_wbuf;
+	char buf[30];
+	unsigned int time;
 	va_list ap;
 	va_start(ap,fmt);
+	time= app_get_systime();
+	len= snprintf(buf, 30, "WDBG[%04d.%02d]:\r\n",(time/1000)%1000, (time%1000));
+	ret = write(dbg_fd, buf, len);
+	if(ret <0 )
+		printf("erro, write failed\n");	
+	
 	len=vsnprintf((char*)pbuf, max_dbg_len, fmt,ap);
 	va_end(ap);
 	ret = write(dbg_fd, dbg_wbuf, len);
 	if(ret <0 )
 		printf("erro, write failed\n");	
+	ret=write(dbg_fd, "\n\n", 2);
 	fsync(dbg_fd);
 }
 
-void write_dbg(unsigned char *p_dta, unsigned int dtalen)
+void write_dbg(unsigned char *p_dta, unsigned int dtalen , char* head)
 {  	
-	int ret = write(dbg_fd, p_dta, dtalen);
+	int ret,len;
+	unsigned int time= app_get_systime();
+	char buf[40];
+	//if(head != NULL)
+		len= snprintf(buf, 40, "WDBG:%d (%s)[%04d.%02d]:\r\n", dtalen, head, (time/1000)%1000, (time%1000));
+	ret = write(dbg_fd, buf, len);
 	if(ret <0 )
 		printf("erro, write failed\n");	
+	ret = write(dbg_fd, p_dta, dtalen);
+	if(ret <0 )
+		printf("erro, write failed\n");	
+	ret=write(dbg_fd, "\n\n", 2);
 	fsync(dbg_fd);
+
 }
 
 

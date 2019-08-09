@@ -356,7 +356,6 @@ HTML_PARM2_JSON\
 
 
 
-
 #define INDEX_HTML "<!DOCTYPE html>"\
 "<html>"\
 "<head>"\
@@ -434,30 +433,60 @@ HTML_PARM2_JSON\
 "            <div style='padding:0px 00px 00px 0px;'>"\
 "                <p>	"\
 "                    <label for='txtpass' ></label> "\
-"<input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0'"\
+"<input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0'  name='pass'"\
 "onFocus=\"if(value==defaultValue){value='';this.style.color='#303030'}\""\
-"onBlur=\"if(!value){value=defaultValue;this.style.color='#c0c0c0'}\" id='pass' '/>"\
+"onBlur=\"if(!value){value=defaultValue;this.style.color='#c0c0c0'}\" />"\
 "                </p>"\
 "            </div>"\
 "            <div style='padding:1px 00px 00px 85px;'>"\
-"                <p> <input  type='submit' value='登录' onClick='return login();' id='rcorners1'/></p>"\
+"                <p> <input  type='submit' value='登录' onClick='login();' id='rcorners1'/></p>"\
 "      </form>"\
 "  </div>     "\
 "</div>"\
 "</div>"\
 "<script>"\
 "   function login(){"\
-"   var pass=document.getElementById('pass').value;"\
-"   if(pass=='0'){"\
-"       window.location.href='home.html';"\
-"   return false;"\
-"   }else{"\
-"       alert('密码错误');"\
-"       document.getElementById('pass').value = null; "\
-"   return false;"\
-"     }   "\
+"      document.getElementById('frmSetting').submit();"\
 "   }"\
 "</script>"
+
+
+
+#if 0
+
+#define INDEX_HTML "<!DOCTYPE html>"\
+"<html>"\
+"<head>"\
+"<meta charset='utf-8'>"\
+"<title>菜鸟教程(runoob.com)</title>"\
+"</head>"\
+"<head>"\
+"<script>"\
+"function setCookie(){"\
+"	document.cookie = 'username=zx';"\
+"}"\
+"function getCookie(cname){"\
+"	var name = cname + '=';"\
+"	var ca = document.cookie.split(';');"\
+"	for(var i=0; i<ca.length; i++) {"\
+"		var c = ca[i].trim();"\
+"		if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }"\
+"	}"\
+"	return '';"\
+"}"\
+"function checkCookie(){"\
+"	var user=getCookie('username');"\
+"	setCookie();"\
+"	alert('欢迎 ' + user + ' 访问');"\
+"}"\
+"</script>"\
+"</head>"\
+"	"\
+"<body  onload='checkCookie()'></body>"\
+"	"\
+"</html>"
+
+#endif
 
 
 #endif

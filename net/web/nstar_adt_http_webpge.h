@@ -356,7 +356,7 @@ HTML_PARM2_JSON\
 
 
 
-#if 0
+#if 1
 #define INDEX_HTML "<!DOCTYPE html>"\
 "<html>"\
 "<head>"\
@@ -445,7 +445,6 @@ HTML_PARM2_JSON\
 "  </div>     "\
 "</div>"\
 "</div>"\
-"<onload='checkCookie();/body>"\
 "<script>"\
 "   function login(){"\
 "   var pass=document.getElementById('pass').value;"\
@@ -458,36 +457,8 @@ HTML_PARM2_JSON\
 "   return false;"\
 "     }   "\
 "   }"\
-"</script>"\
-"<script>"\
-"function setCookie(exdays){"\
-"	var d = new Date();"\
-"	d.setTime(d.getTime()+(exdays*24*60*60*1000));"\
-"	var expires = 'expires='+d.toGMTString();"\
-"	document.cookie = '+++++++++++=======================================================================';"\
-"}"\
-"function getCookie(cname){"\
-"	var name = cname + '=';"\
-"	var ca = document.cookie.split(';');"\
-"	for(var i=0; i<ca.length; i++) {"\
-"		var c = ca[i].trim();"\
-"		if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }"\
-"	}"\
-"	return '';"\
-"}"\
-"function checkCookie(){"\
-"	var user=getCookie('username');"\
-"	if (user!=''){"\
-"		alert('欢迎 ' + user + ' 再次访问');"\
-"	}"\
-"	else {"\
-"		user = prompt('请输入你的名字:','');"\
-"  		if (user!='' && user!=null){"\
-"    		setCookie('username',user,30);"\
-"    	}"\
-"	}"\
-"}"\
 "</script>"
+
 #endif
 
 #define INDEX_HTML "<!DOCTYPE html>"\

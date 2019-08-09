@@ -92,6 +92,10 @@ void nstar_web_servo(void* arg)
 	server_sock = web_socket_init();
 	if(server_sock < 1)
 		goto release;
+#if 1	
+#include "write_log.h"
+	dbg_write_open();
+#endif
 	while (1) 
 	{
 		conn_sock= accept(server_sock, (struct sockaddr *)&client_addr, &sock_len);
