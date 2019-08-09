@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "nstar_adt_http_server.h"
+#include "write_log.h"
 
 
 

@@ -14,6 +14,7 @@ char *nstar_web_rx_buf;
 
 static unsigned char *p_webmem;
 static int server_sock;
+int conn_sock;
 
 static void* aligned_malloc(size_t required_bytes, size_t alignment)
 {
@@ -84,7 +85,6 @@ err:
 void nstar_web_servo(void* arg)
 {
 	int fin_waiting;
-	int conn_sock, server_sock;
 	struct sockaddr_in client_addr;
 	socklen_t sock_len= sizeof(client_addr);
 	if(web_mem_init() < 0)

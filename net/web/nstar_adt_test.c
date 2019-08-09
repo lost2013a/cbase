@@ -5,14 +5,6 @@
 #include <sys/wait.h>
 #include <netinet/tcp.h> // for TCP_NODELAY
 
-//#include <sys/socket.h>
-//#include <netinet/in.h>
-//#include <arpa/inet.h>
-
-//#include "nstar_common.h"
-//#include "nstar_adt_cmd.h"
-//#include "nstar_api.h"
-//#include "gx_nstar_hg_version.h"
 
 #include "nstar_adt_test.h"
 #include "nstar_adt_httputil.h"

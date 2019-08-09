@@ -4,7 +4,13 @@
 
 extern char *nstar_web_tx_buf; 
 extern char *nstar_web_rx_buf;
-#define SOCKET_SEND_FLAG 0
+extern int conn_sock;
+
+static int http_send(unsigned char *data, unsigned int len)
+{
+#define DEAFULT_FLAG 0
+	return send(conn_sock, data, len, DEAFULT_FLAG);
+}
 
 typedef struct _CFG_TYPE{
 	unsigned char save_head_flag;
@@ -76,9 +82,9 @@ static struct http_cookie g_httpCookie = {0,};
 static unsigned char __check_cookie_by_respinse(unsigned char *p_dta)
 {
 	unsigned char ret = 0;
-	unsigned char *p_cooki;
+	char *p_cooki;
 	unsigned int sec;
-	p_cooki = strstr((const unsigned char *) p_dta, (const unsigned char *)WEB_CMM_COOKIE_HEAD);
+	p_cooki = strstr((const char *) p_dta, (const char *)WEB_CMM_COOKIE_HEAD);
 	if(p_cooki != 0 && g_httpCookie.cookieLen > 0){
 		mydbg(" __check_cookie_by_respinse %d %s\n",p_cooki[g_httpCookie.cookieLen+WEB_CMM_COOKIE_HEAD_LEN],p_cooki);
 		p_cooki += WEB_CMM_COOKIE_HEAD_LEN;
@@ -198,19 +204,19 @@ static void repos_parm_htm(SOCKET s, unsigned char* http_response, const char* h
 	pweb= (char*)htm;
 	file_len = strlen(pweb);
 	make_http_response_head((unsigned char*)http_response, PTYPE_HTML,file_len);
-	send(s,http_response,strlen((char const*)http_response), SOCKET_SEND_FLAG);
+	http_send(http_response, strlen((char const*)http_response));
 	send_len=0;
 	while(file_len)
 	{
 		if(file_len>1024)
 		{
-			send(s, (unsigned char *)pweb+send_len, 1024, SOCKET_SEND_FLAG);
+			http_send((unsigned char *)pweb+send_len, 1024);
 			send_len+=1024;
 			file_len-=1024;
 		}
 		else
 		{
-			send(s, (unsigned char *)pweb+send_len, file_len, SOCKET_SEND_FLAG);
+			http_send((unsigned char *)pweb+send_len, file_len);
 			send_len+=file_len;
 			file_len-=file_len;
 		} 
@@ -219,78 +225,7 @@ static void repos_parm_htm(SOCKET s, unsigned char* http_response, const char* h
 
 }
 
-#ifdef ONLINE_WEB_UPDATE
-#define ADDR_FLASH_SECTOR_BAK  0
 
-unsigned char boundary[64];
-unsigned char tmp_buf[1464]={0xff,};
-
-WEB_FIRMWARE webfw={ADDR_FLASH_SECTOR_BAK,0};
-
-#define TRUE 1
-
-static int find_head(WEB_FIRMWARE *webfw, unsigned int content_len)
-{
-	if(webfw->head_flag != TRUE)
-	{
-		webfw->pos1= strstr((char*)webfw->pdata, (char*)boundary);	//在数据区中找头部分隔线。
-		if(webfw->pos1 != NULL){
-			//myprintf("找到分隔线\r\n");
-			webfw->pos2= strstr(webfw->pos1+strlen((char*)boundary), "\r\n\r\n");
-			if(webfw->pos2 == NULL){				//没找数据的起始区
-				myprintf("没有找到升级文件数据区\r\n");
-				return -1;
-			}
-			webfw->pos2+=4;
-			webfw->pdata= (unsigned char*)webfw->pos2;
-			webfw->head_flag = TRUE;
-			//myprintf("找到升级文件数据区\r\n");
-			webfw->hdr_len= (webfw->pos2-webfw->pos1)+2;	//多了1个"--"
-			webfw->tail_len= strlen((char*)boundary)+4+4;   //多了2个"--"再加上2个"\r\n"
-			webfw->data_len= content_len-webfw->hdr_len-webfw->tail_len;
-			myprintf("数据长度:%ld= %d-%ld\r\n", webfw->data_len, content_len, webfw->hdr_len);
-#if 0			
-			if(0 == iap_check_head((unsigned char*)webfw->pdata)){
-				WEB_LOG_UPDATE_ERR1();
-				return -1;	
-			}
-			if(webfw->total_rxlen == content_len){	//
-				webfw->current_rxlen= webfw->data_len;
-			}
-			else{
-				webfw->current_rxlen= webfw->total_rxlen-webfw->hdr_len;
-			}	
-			webfw->remain_len = webfw->current_rxlen % 4;
-			memcpy(tmp_buf, webfw->pdata ,webfw->current_rxlen); //把当前收到数据的全拷贝
-			webfw->real_wl= webfw->current_rxlen- webfw->remain_len;
-			iap_write_nocheck(webfw->fw_offset , (unsigned int*)tmp_buf, webfw->real_wl/4);
-			webfw->fw_offset+=webfw->real_wl;
-			webfw->total_w_len+=webfw->real_wl;
-			if(webfw->remain_len!=0)
-			{
-				memcpy(webfw->remain_buf, &tmp_buf[webfw->real_wl] ,webfw->remain_len);
-			}
-#endif			
-		}	
-
-		return 1;
-		
-	}
-	return 0;
-}
-static void web_log_htm(SOCKET s,  const char* htm)
-{
-}
-
-
-static void make_json_weblog(SOCKET s, char *log)
-{
-
-}
-
-
-
-#endif
 
 
 int proc_http(SOCKET s, unsigned char * buf)
@@ -304,9 +239,10 @@ int proc_http(SOCKET s, unsigned char * buf)
 	http_response = (unsigned char*)nstar_web_rx_buf;
 	http_request = (st_http_request*)nstar_web_tx_buf;
 
-	unsigned char cookieStatus;
-	cookieStatus = __check_cookie_by_respinse(http_request);
-
+	if(0){
+		unsigned char cookieStatus;
+		cookieStatus = __check_cookie_by_respinse((unsigned char*)http_request);
+	}
 	
 	parse_http_request(http_request, buf);    							/*解析http请求报文头*/
 
@@ -314,7 +250,7 @@ int proc_http(SOCKET s, unsigned char * buf)
   {
 		case METHOD_ERR :																			/*请求报文头错误*/
 			memcpy(http_response, ERROR_REQUEST_PAGE, sizeof(ERROR_REQUEST_PAGE));
-			send(s, (unsigned char *)http_response, strlen((char const*)http_response), SOCKET_SEND_FLAG);
+			http_send((unsigned char *)http_response, strlen((char const*)http_response));
 			break;
 		
 		case METHOD_HEAD:																			/*HEAD请求方式*/		
@@ -322,9 +258,6 @@ int proc_http(SOCKET s, unsigned char * buf)
 			name = http_request->URI;
 			if(strncmp(name,"/index.htm", strlen("/index.htm"))==0 || strcmp(name,"/")==0 ){
 				repos_parm_htm(s, http_response, INDEX_HTML);
-			}
-			else if(cookieStatus == 0 ){
-				mydbg("cookieStatus\n");
 			}
 			else if(strncmp(name,"/home.htm", strlen("/home.htm"))==0 )
 			{
@@ -351,21 +284,21 @@ int proc_http(SOCKET s, unsigned char * buf)
 				memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
 				make_json_callback_config(nstar_web_tx_buf);
 				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
-				send(s, (unsigned char *)http_response, strlen((char const*)http_response), SOCKET_SEND_FLAG);
+				http_send((unsigned char *)http_response, strlen((char const*)http_response));
 			}
 			else if(strncmp(name,"/pb.js", strlen("/pb.js"))==0 )
 			{
 				memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
 				make_json_callback_cps(nstar_web_tx_buf);
 				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
-				send(s, (unsigned char *)http_response, strlen((char const*)http_response), SOCKET_SEND_FLAG);
+				http_send((unsigned char *)http_response, strlen((char const*)http_response));
 			}
 			else if(strncmp(name,"/sta.php", strlen("/sta.php"))==0 )
 			{
 				memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
 				make_json_callback_sta(nstar_web_tx_buf);
 				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
-				send(s, (unsigned char *)http_response, strlen((char const*)http_response), SOCKET_SEND_FLAG);
+				http_send((unsigned char *)http_response, strlen((char const*)http_response));
 			}
 			break;
 		case METHOD_POST:		
@@ -377,7 +310,7 @@ int proc_http(SOCKET s, unsigned char * buf)
 				cgi_ipconfig(http_request, 1, jumpto, maxlen);			/*重启并保存*/
 				make_cgi_response(5, (char*)config->local_ip, jumpto, nstar_web_tx_buf);	
 				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
-				send(s, (unsigned char *)http_response, strlen((char *)http_response), SOCKET_SEND_FLAG);																				
+				http_send((unsigned char *)http_response, strlen((char const*)http_response));
 			}
 			else if(strcmp(req_name,"saveonly.cgi")==0)							  	
 			{
@@ -385,7 +318,7 @@ int proc_http(SOCKET s, unsigned char * buf)
 				cgi_ipconfig(http_request, 0, jumpto, maxlen);			/*只保存*/
 				make_cgi_noboot((char*)config->local_ip, jumpto, nstar_web_tx_buf);	
 				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
-				send(s, (unsigned char *)http_response, strlen((char *)http_response), SOCKET_SEND_FLAG);																					
+				http_send((unsigned char *)http_response, strlen((char const*)http_response));
 			}
 			else if(strcmp(req_name,"bootmode.cgi")==0)							  	
 			{
@@ -393,7 +326,7 @@ int proc_http(SOCKET s, unsigned char * buf)
 				cgi_ipconfig(http_request, 0, jumpto, maxlen);			/*只保存*/
 				make_cgi_noboot((char*)config->local_ip, jumpto, nstar_web_tx_buf);	
 				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
-				send(s, (unsigned char *)http_response, strlen((char *)http_response), SOCKET_SEND_FLAG);		
+				http_send((unsigned char *)http_response, strlen((char const*)http_response));
 			}
 			break;
 		default :

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "write_log.h"
 
 #define mydbg 	printf
 #define SOCKET  int
