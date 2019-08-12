@@ -146,17 +146,6 @@ static void make_json_callback_config(char* buf)
 void make_cgi_noboot(char* ip, char* jumptourl, char* cgi_response_buf);
 
 
-int do_https(SOCKET s)
-{			
-	int len;									
-	st_http_request *http_request = (st_http_request*)nstar_web_rx_buf;
-	len	= http_rec((unsigned char*)http_request, MAX_URI_SIZE);
-	if(len < 1)
-		return 0;
-	*(((unsigned char*)http_request)+len) = 0;
-	proc_http(s, (unsigned char*)http_request);	
-	return len; 
-}
 
 
 void pb_ipconfig(st_http_request *http_request);
@@ -294,21 +283,18 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 	}
 }
 
-int proc_http(SOCKET s, unsigned char * buf)
+int proc_http(void)
 {
 	int ret=0;											
 	unsigned char* http_response;
 	st_http_request *http_request;
-	
-	memset(nstar_web_tx_buf,0x00,MAX_URI_SIZE);
 	http_response = (unsigned char*)nstar_web_rx_buf;
-	
 	http_request = (st_http_request*)nstar_web_tx_buf;
-
+	memset(nstar_web_tx_buf,0x00,MAX_URI_SIZE);
 	if(1){
 		cookie_verify((unsigned char*)http_response);
 	}
-	parse_http_request(http_request, buf);
+	parse_http_request(http_request, (unsigned char*)nstar_web_rx_buf);
 	switch (http_request->METHOD)	
  	{
 		case METHOD_ERR:
@@ -326,6 +312,18 @@ int proc_http(SOCKET s, unsigned char * buf)
 	}
 	return ret;
 }
+
+int do_https(void)
+{			
+	int len;									
+	len	= http_rec((unsigned char*)nstar_web_rx_buf, MAX_URI_SIZE);
+	if(len < 1)
+		return 0;
+	nstar_web_rx_buf[len] = 0;
+	proc_http();	
+	return len; 
+}
+
 
 
 void cgi_ipconfig(st_http_request *http_request, unsigned char mode , char* jump_to, unsigned char jumplen)

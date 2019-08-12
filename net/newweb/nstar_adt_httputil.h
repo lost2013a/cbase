@@ -6,8 +6,7 @@
 
 
 
-int proc_http(SOCKET s, unsigned char * buf);
-int do_https(SOCKET s);
+int do_https(void);
 void cgi_ipconfig(st_http_request *http_request, unsigned char mode, char* jump_to, unsigned char jumplen);
 unsigned short make_msg_response(unsigned char* buf,char* msg);
 

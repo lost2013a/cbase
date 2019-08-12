@@ -105,7 +105,7 @@ void nstar_web_servo(void* arg)
 		}
 		fin_waiting=FIN_WCNT;
 		do{
-			if(do_https(conn_sock)){
+			if(do_https()){
 				fin_waiting=FIN_WCNT;
 			}
 			usleep(10*1000);
