@@ -6,25 +6,26 @@ extern char *nstar_web_tx_buf;
 extern char *nstar_web_rx_buf;
 extern int conn_sock;
 
+#define SOCKET_SND_FLAG 0
+#define SOCKET_REC_FLAG MSG_DONTWAIT
+
 static int http_send(unsigned char *data, unsigned int len)
 {
-#define DEAFULT_FLAG 0
 #if 1
 #include "write_log.h"
-	write_dbg(data, len,"[2]W");
+	log_write(data, len,"[2]W");
 #endif
-	return send(conn_sock, data, len, DEAFULT_FLAG);
+	return send(conn_sock, data, len, SOCKET_SND_FLAG);
 }
 
 static int http_rec(unsigned char *data, unsigned int rmax_len)
 {
-#define DEAFULT_FLAG MSG_DONTWAIT
 	int retlen;
-	retlen= recv(conn_sock, data, rmax_len, DEAFULT_FLAG);
+	retlen= recv(conn_sock, data, rmax_len, SOCKET_REC_FLAG);
 #if 1
 #include "write_log.h"
 	if(retlen > 1)
-	write_dbg(data, retlen ,"[1]R");
+	log_write(data, retlen ,"[1]R");
 #endif
 	return retlen;
 }
@@ -66,63 +67,6 @@ static const CFG_TYPE *READ_CFG= &TEST_CFG;
 
 extern char BDTIMEBUF[16];
 extern char HADWARE[16];
-
-struct nstar_time{
-    unsigned int seconds;
-    unsigned int millisecond;
-};
-
-struct nstar_userpasswd{ 
-#define NSTAR_HTTP_USER_LEN_MAX		(8)
-#define NSTAR_HTTP_PASSWD_LEN_MAX	(10)
-
-#define _USERPASSWD_LEN_MAX 15
-#if NSTAR_HTTP_USER_LEN_MAX > _USERPASSWD_LEN_MAX | NSTAR_HTTP_PASSWD_LEN_MAX >   _USERPASSWD_LEN_MAX
-	#param err!!
-#endif
-		unsigned char auth;
-		unsigned char lenUser:4;
-		unsigned char lenPasswd:4;
-		unsigned char user[NSTAR_HTTP_USER_LEN_MAX];
-		unsigned char passwd[NSTAR_HTTP_PASSWD_LEN_MAX];
-};
-
-
-struct http_cookie{
-#define COOKIE_LEN	32
-	unsigned char cookieLen;
-	unsigned char cookie[COOKIE_LEN+1];
-	struct nstar_userpasswd userpasswd;
-	struct nstar_time time;
-	unsigned int lastSec;
-};
-
-static struct http_cookie g_httpCookie = {0,};
-#define WEB_CMM_COOKIE_HEAD 	"newstar"
-#define WEB_CMM_COOKIE_HEAD_LEN	7
-static unsigned char __check_cookie_by_respinse(unsigned char *p_dta)
-{
-	unsigned char ret = 0;
-	char *p_cooki;
-	unsigned int sec;
-	p_cooki = strstr((const char *) p_dta, (const char *)WEB_CMM_COOKIE_HEAD);
-	if(p_cooki != 0 && g_httpCookie.cookieLen > 0){
-		mydbg(" __check_cookie_by_respinse %d %s\n",p_cooki[g_httpCookie.cookieLen+WEB_CMM_COOKIE_HEAD_LEN],p_cooki);
-		p_cooki += WEB_CMM_COOKIE_HEAD_LEN;
-		if(p_cooki[g_httpCookie.cookieLen] == '\r' && 0 == memcmp(p_cooki,g_httpCookie.cookie,g_httpCookie.cookieLen)){
-			//sec = nstar_cmm_get_time_sec();
-			sec = 1000;
-			if(g_httpCookie.time.seconds + 	43200 < sec ||	6000 + g_httpCookie.lastSec < sec  ){
-				g_httpCookie.cookieLen = 0;
-			}
-			else{
-				ret = 1;
-				g_httpCookie.lastSec = sec;
-			}
-		}
-	}
-	return ret;
-}
 
 
 
@@ -206,7 +150,6 @@ int do_https(SOCKET s)
 {			
 	int len;									
 	st_http_request *http_request = (st_http_request*)nstar_web_rx_buf;
-//	len	= recv(s, (unsigned char*)http_request, MAX_URI_SIZE,MSG_DONTWAIT);
 	len	= http_rec((unsigned char*)http_request, MAX_URI_SIZE);
 	if(len < 1)
 		return 0;
@@ -218,147 +161,167 @@ int do_https(SOCKET s)
 
 void pb_ipconfig(st_http_request *http_request);
 
-static void repos_parm_htm(SOCKET s, unsigned char* http_response, const char* htm)
+static void repos_parm_htm(unsigned char* http_response, const char* htm)
 {
 	char* pweb;
-	unsigned long file_len=0;											/*定义http请求报文头的结构体指针*/
-	unsigned short send_len=0;
+	unsigned long file_len=0;	
 	pweb= (char*)htm;
 	file_len = strlen(pweb);
 	make_http_response_head((unsigned char*)http_response, PTYPE_HTML,file_len);
 	http_send(http_response, strlen((char const*)http_response));
-	send_len=0;
-
-#if 1	
 	http_send((unsigned char *)pweb, file_len);
-	
-#else
+}
 
-	while(file_len)
+#define COOKIE_HEAD1 "{ document.cookie='"
+#define COOKIE_HEAD2 "'; window.location='home.html';}</script>"
+
+char tmpbuf[1000];
+
+
+void cgi_log_in(st_http_request *http_request, unsigned char mode , char* jump_to, unsigned char jumplen)
+{ 
+	int idx=0;
+	char *data; 
+	char *parm_url;
+	unsigned char *buf = (unsigned char*)nstar_web_rx_buf;	
+	parm_url = (char*)get_param_url(http_request->URI, jump_to, jumplen);		/*获取修改后的IP地址*/
+	if(parm_url == NULL){
+		mydbg("parm url not found\r\n");
+		return;
+	}
+	data = get_http_param_value(buf, parm_url, "login_pass");		
+	if(data)
 	{
-		if(file_len>1024)
-		{
-			http_send((unsigned char *)pweb+send_len, 1024);
-			send_len+=1024;
-			file_len-=1024;
+		if(1 == login_pass_check(data)){
+			sprintf(&tmpbuf[idx], "%s%s%s%s", HTML_VERIFY_PASS, COOKIE_HEAD1, cookie_getstr(), COOKIE_HEAD2);
+			http_send((unsigned char *)tmpbuf, strlen((char const*)tmpbuf));
 		}
 		else
-		{
-			http_send((unsigned char *)pweb+send_len, file_len);
-			send_len+=file_len;
-			file_len-=file_len;
-		} 
+			http_send((unsigned char *)HTML_VERIFY_FAILURE, strlen((char const*)HTML_VERIFY_FAILURE));
 	}
-
-
-#endif
 }
 
 
+static unsigned char _comp_uri(const char* uri, const char* str)
+{
+	//return (0 == strncmp(uri,str,strlen(str)))? 1: 0;
+	return (0 == strcmp(uri,str))? 1: 0;
+}
 
+
+static void _repos_method_get(st_http_request     *http_request, unsigned char* http_response)
+{
+	char *name= http_request->URI;
+	if(strncmp(name,"/index.htm", strlen("/index.htm"))==0 || strcmp(name,"/")==0 ){
+		repos_parm_htm(http_response, INDEX_HTML);
+	}
+	else if(_comp_uri(name, "/home.html"))
+	{
+		repos_parm_htm(http_response, HOME_HTML);
+	}	
+	else if(_comp_uri(name, "/parm_1.html"))
+	{
+		repos_parm_htm(http_response, PARM_1_HTML);
+	}
+	else if(_comp_uri(name, "/parm_2.html"))
+	{
+		repos_parm_htm(http_response, PARM_2_HTML);
+	}
+	else if(_comp_uri(name, "/parm_3.html"))
+	{
+		repos_parm_htm(http_response, PARM_3_HTML);
+	}
+	else if(_comp_uri(name, "/parm_4.html"))
+	{
+		repos_parm_htm(http_response, PARM_4_HTML);
+	}
+	else if(_comp_uri(name, "/config.js"))
+	{
+		memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
+		make_json_callback_config(nstar_web_tx_buf);
+		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
+		http_send((unsigned char *)http_response, strlen((char const*)http_response));
+	}
+	else if(_comp_uri(name, "/pb.js"))
+	{
+		memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
+		make_json_callback_cps(nstar_web_tx_buf);
+		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
+		http_send((unsigned char *)http_response, strlen((char const*)http_response));
+	}
+	else if(_comp_uri(name, "/sta.php"))
+	{
+		memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
+		make_json_callback_sta(nstar_web_tx_buf);
+		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
+		http_send((unsigned char *)http_response, strlen((char const*)http_response));
+	}
+	
+
+}
+
+static void _repos_method_post(st_http_request     *http_request, unsigned char* http_response)
+{
+	char req_name[32]={0x00,};								
+	mid(http_request->URI, "/", " ", req_name);	
+	if(strcmp(req_name,"log_in.cgi")==0){
+		char jumpto[20];unsigned char maxlen=20;
+		cgi_log_in(http_request, 1, jumpto, maxlen);			/*重启并保存*/
+	}				
+	else if(strcmp(req_name,"config.cgi")==0)							  	
+	{
+		char jumpto[20];unsigned char maxlen=20;
+		cgi_ipconfig(http_request, 1, jumpto, maxlen);			/*重启并保存*/
+		make_cgi_response(5, (char*)config->local_ip, jumpto, nstar_web_tx_buf);	
+		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
+		http_send((unsigned char *)http_response, strlen((char const*)http_response));
+	}
+	else if(strcmp(req_name,"saveonly.cgi")==0)							  	
+	{
+		char jumpto[20];unsigned char maxlen=20;
+		cgi_ipconfig(http_request, 0, jumpto, maxlen);			/*只保存*/
+		make_cgi_noboot((char*)config->local_ip, jumpto, nstar_web_tx_buf);	
+		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
+		http_send((unsigned char *)http_response, strlen((char const*)http_response));
+	}
+	else if(strcmp(req_name,"bootmode.cgi")==0)							  	
+	{
+		char jumpto[20];unsigned char maxlen=20;
+		cgi_ipconfig(http_request, 0, jumpto, maxlen);			/*只保存*/
+		make_cgi_noboot((char*)config->local_ip, jumpto, nstar_web_tx_buf);	
+		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
+		http_send((unsigned char *)http_response, strlen((char const*)http_response));
+	}
+}
 
 int proc_http(SOCKET s, unsigned char * buf)
 {
-	int ret=0;
-	char* name; 											
-	char req_name[32]={0x00,};											/*定义一个http响应报文的指针*/
+	int ret=0;											
 	unsigned char* http_response;
 	st_http_request *http_request;
+	
 	memset(nstar_web_tx_buf,0x00,MAX_URI_SIZE);
 	http_response = (unsigned char*)nstar_web_rx_buf;
+	
 	http_request = (st_http_request*)nstar_web_tx_buf;
 
-	if(0){
-		unsigned char cookieStatus;
-		cookieStatus = __check_cookie_by_respinse((unsigned char*)http_request);
+	if(1){
+		cookie_verify((unsigned char*)http_response);
 	}
-	
-	parse_http_request(http_request, buf);    							/*解析http请求报文头*/
-
-	switch (http_request->METHOD)		
+	parse_http_request(http_request, buf);
+	switch (http_request->METHOD)	
  	{
-		case METHOD_ERR :																			/*请求报文头错误*/
-			memcpy(http_response, ERROR_REQUEST_PAGE, sizeof(ERROR_REQUEST_PAGE));
-			http_send((unsigned char *)http_response, strlen((char const*)http_response));
+		case METHOD_ERR:
+			http_send((unsigned char*)ERROR_REQUEST_PAGE, sizeof(ERROR_REQUEST_PAGE));
 			break;
-		
-		case METHOD_HEAD:																			/*HEAD请求方式*/		
-		case METHOD_GET:																			/*GET请求方式*/
-			name = http_request->URI;
-			if(strncmp(name,"/index.htm", strlen("/index.htm"))==0 || strcmp(name,"/")==0 ){
-				repos_parm_htm(s, http_response, INDEX_HTML);
-			}
-			else if(strncmp(name,"/home.htm", strlen("/home.htm"))==0 )
-			{
-				repos_parm_htm(s, http_response, HOME_HTML);
-			}	
-			else if(strncmp(name,"/parm_1.htm", strlen("/parm_1.htm"))==0 )
-			{
-				repos_parm_htm(s, http_response, PARM_1_HTML);
-			}
-			else if(strncmp(name,"/parm_2.htm", strlen("/parm_2.htm"))==0 )
-			{
-				repos_parm_htm(s, http_response, PARM_2_HTML);
-			}
-			else if(strncmp(name,"/parm_3.htm", strlen("/parm_3.htm"))==0 )
-			{
-				repos_parm_htm(s, http_response, PARM_3_HTML);
-			}
-			else if(strncmp(name,"/parm_4.htm", strlen("/parm_4.htm"))==0 )
-			{
-				repos_parm_htm(s, http_response, PARM_4_HTML);
-			}
-			else if(strncmp(name,"/config.js", strlen("/config.js"))==0 )
-			{
-				memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
-				make_json_callback_config(nstar_web_tx_buf);
-				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
-				http_send((unsigned char *)http_response, strlen((char const*)http_response));
-			}
-			else if(strncmp(name,"/pb.js", strlen("/pb.js"))==0 )
-			{
-				memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
-				make_json_callback_cps(nstar_web_tx_buf);
-				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
-				http_send((unsigned char *)http_response, strlen((char const*)http_response));
-			}
-			else if(strncmp(name,"/sta.php", strlen("/sta.php"))==0 )
-			{
-				memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
-				make_json_callback_sta(nstar_web_tx_buf);
-				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
-				http_send((unsigned char *)http_response, strlen((char const*)http_response));
-			}
+		case METHOD_HEAD:			
+		case METHOD_GET:		
+			_repos_method_get(http_request, http_response);
 			break;
-		case METHOD_POST:		
-			
-			mid(http_request->URI, "/", " ", req_name);	
-			if(strcmp(req_name,"config.cgi")==0)							  	
-			{
-				char jumpto[20];unsigned char maxlen=20;
-				cgi_ipconfig(http_request, 1, jumpto, maxlen);			/*重启并保存*/
-				make_cgi_response(5, (char*)config->local_ip, jumpto, nstar_web_tx_buf);	
-				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
-				http_send((unsigned char *)http_response, strlen((char const*)http_response));
-			}
-			else if(strcmp(req_name,"saveonly.cgi")==0)							  	
-			{
-				char jumpto[20];unsigned char maxlen=20;
-				cgi_ipconfig(http_request, 0, jumpto, maxlen);			/*只保存*/
-				make_cgi_noboot((char*)config->local_ip, jumpto, nstar_web_tx_buf);	
-				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
-				http_send((unsigned char *)http_response, strlen((char const*)http_response));
-			}
-			else if(strcmp(req_name,"bootmode.cgi")==0)							  	
-			{
-				char jumpto[20];unsigned char maxlen=20;
-				cgi_ipconfig(http_request, 0, jumpto, maxlen);			/*只保存*/
-				make_cgi_noboot((char*)config->local_ip, jumpto, nstar_web_tx_buf);	
-				sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
-				http_send((unsigned char *)http_response, strlen((char const*)http_response));
-			}
+		case METHOD_POST:
+			_repos_method_post(http_request, http_response);
 			break;
-		default :
+		default:
 			break;
 	}
 	return ret;
@@ -375,9 +338,6 @@ void cgi_ipconfig(st_http_request *http_request, unsigned char mode , char* jump
 	}
 
 }
-
-
-
 
 void make_cgi_response(unsigned short delay, char* ip, char* jumptourl, char* cgi_response_buf)
 {

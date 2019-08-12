@@ -1,139 +1,256 @@
-WDBG:379 ([1]R)[0881.589]:
-GET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/config.cgi
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123
-
-
-
-WDBG:400 ([1]R)[0883.541]:
-GET / HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123
-
-
-
-WDBG:66 ([2]W)[0883.543]:
-HTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length: 2992
-
-
-
-WDBG:2992 ([2]W)[0883.557]:
-<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理</title><meta http-equiv='Content-Type' content='text/html' charset='utf-8'/><style type='text/css'>label{display: inline-block;width: 80px;font-weight: bolder;color: #0066FF;}body {	background-color: #35a6e8;	background: -webkit-linear-gradient(right, #f0f0f0 , #35a6e8);    background: -o-linear-gradient( right, #f0f0f0, #35a6e8);    background: -moz-linear-gradient( right, #f0f0f0, #35a6e8);    background: linear-gradient(to right, #f0f0f0 , #35a6e8);}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: left;color: #ffffff;font-size: 24px;font-weight: bolder;}h4 {color: #78e4ca;font-size: 33px;font-style: oblique;}h5 {text-align: end;color: #FFFFFF;font-size: 11px;}h6 {text-align: left;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}.wrapper {width:720px;margin:auto;}.wrapper1 {	width: 310px;	height: 360px;	padding: 20px;	background: #5e85c0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;	background: -webkit-linear-gradient(left top, #78e4ca , #506de3);	background: -o-linear-gradient(bottom right, #78e4ca, #506de3);	background: -moz-linear-gradient(bottom right, #78e4ca, #506de3);	background: linear-gradient(to bottom right, #78e4ca , #506de3);}.wrapper2 {	width: 330px;	height: 380px;	padding: 10px;	background: #f0f0f0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;}#rcorners1 {	color: #FFFFFF;	font-weight: bolder;	font-size: 18px;	border-radius: 15px;	background: #4cbdf7;	background: #0066CC;	width: 158px;	height: 30px;	border: 0px;}</style></head><body><h1 > STAR-XINHUI </h1><h2> chengdu sida web management interface </h2><br><br><br><br><br><br><div class='wrapper' >    <div class='wrapper1' >    	  <h4> Welcome！ </h4>   	  <h3> 终端网页管理界面Ver1.0 </h3>      <br><br><br><br>      <h5> 型号：IP适配器<br>&copy;斯达鑫辉视讯科技有限公司 </h5>    </div>    <div class='wrapper2' >    		<div style='padding:100px 00px 00px 85px;'>           	 <h6> 用户密码：</h6>	            </div>            <form id='frmSetting' method='POST' action='config.cgi'>            <div style='padding:0px 00px 00px 0px;'>                <p>	                    <label for='txtpass' ></label> <input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0'  name='pass'onFocus="if(value==defaultValue){value='';this.style.color='#303030'}"onBlur="if(!value){value=defaultValue;this.style.color='#c0c0c0'}" />                </p>            </div>            <div style='padding:1px 00px 00px 85px;'>                <p> <input  type='submit' value='登录' onClick='login();' id='rcorners1'/></p>      </form>  </div>     </div></div><script>   function login(){      document.getElementById('frmSetting').submit();   }</script>
-
-WDBG:369 ([1]R)[0883.604]:
-GET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123
-
-
-
-WDBG:369 ([1]R)[0883.687]:
-GET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123
-
-
-
-WDBG:369 ([1]R)[0883.786]:
-GET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123
-
-
-
-WDBG:369 ([1]R)[0883.864]:
-GET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123
-
-
-
-WDBG:579 ([1]R)[0885.495]:
-POST /config.cgi HTTP/1.1
+[1]RGET /parm_1.html HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 Cache-Control: max-age=0
-Origin: http://192.168.251.175
 Upgrade-Insecure-Requests: 1
-Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-Referer: http://192.168.251.175/
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123
-Content-Length: 8
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
 
-pass=123
 
-WDBG:437 ([2]W)[0885.496]:
-HTTP/1.1 200 OK
+
+[2]WHTTP/1.1 200 OK
 Content-Type: text/html
-Content-Length:373
+Content-Length: 3244
 
-<html><head><title>iWeb - Configuration</title><script language=javascript>j=5;function func(){document.getElementById('delay').innerText=' '+j + ' ';j--;setTimeout('func()',1000);if(j==0)location.href='http://0.0.0.0/';}</script></head><body onload='func()'>please wait for a while, the module will boot in<span style='color:red;' id='delay'></span> seconds.</body></html>
 
-WDBG:379 ([1]R)[0885.521]:
-GET /favicon.ico HTTP/1.1
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul>  <li><a class='home'	href='home.html'>STAR-XINHUI</a></li>  <li><a class='active'	href='parm_1.html'>网络配置</a></li>  <li><a href='parm_2.html'>参数设置</a></li>  <li><a href='parm_3.html'>通道设置</a></li>  <li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='config.cgi'><p><label for='txtlip'>IP地址:</label><input type='text' id='txtlip' name='lip' size='16' /></p><p><label for='txtsub'>子网掩码:</label><input type='text' id='txtsub' name='sub' size='16' /></p><p><label for='txtgw'>默认网关:</label><input type='text' id='txtgw' name='gw' size='16' /></p><p><label for='txtmac'>MAC地址:</label><input type='text' id='txtmac' name='mac' size='16' disabled='disabled'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_callback_config(o) {if ($('txtlip')) $('txtlip').value = o.lip;if ($('txtsub')) $('txtsub').value = o.sub;if ($('txtgw')) $('txtgw').value = o.gw;if ($('txtlport')) $('txtlport').value = o.lport;if ($('txtrip')) $('txtrip').value = o.rip;if ($('txtrport')) $('txtrport').value = o.rport;if ($('txtmac')) $('txtmac').value = o.mac;if ($('txtvol')) $('txtvol').value = o.vol;if ($('txtbctl')) $('txtbctl').value = o.bctl;if ($('txtpassw')) $('txtpassw').value = o.passw;};</script><script type='text/javascript' src='config.js'></script><script>function savereboot(){document.getElementById('frmSetting').action='config.cgi'; document.getElementById('frmSetting').submit(); }function saveonly(){document.getElementById('frmSetting').action='saveonly.cgi'; document.getElementById('frmSetting').submit(); }</script>
+
+[1]RGET /config.js HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:66
+
+json_callback_config({		"lip":"0.0.0.0",		"sub":"0.0.0.0",	    });
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[1]RGET /parm_2.html HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 2949
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul>  <li><a class='home'	href='home.html'>STAR-XINHUI</a></li>  <li><a href='parm_1.html'>网络配置</a></li>  <li><a class='active'	href='parm_2.html'>参数设置</a></li>  <li><a href='parm_3.html'>通道设置</a></li>  <li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 参数设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='config.cgi'><p><label for='txtbctl'>背光控制:</label><input type='text' id='txtbctl' name='bctl' size='16'/></p><p><label for='txtpassw'>用户密码:</label><input type='text' id='txtpassw' name='passw' size='16' /></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_callback_config(o) {if ($('txtlip')) $('txtlip').value = o.lip;if ($('txtsub')) $('txtsub').value = o.sub;if ($('txtgw')) $('txtgw').value = o.gw;if ($('txtlport')) $('txtlport').value = o.lport;if ($('txtrip')) $('txtrip').value = o.rip;if ($('txtrport')) $('txtrport').value = o.rport;if ($('txtmac')) $('txtmac').value = o.mac;if ($('txtvol')) $('txtvol').value = o.vol;if ($('txtbctl')) $('txtbctl').value = o.bctl;if ($('txtpassw')) $('txtpassw').value = o.passw;};</script><script type='text/javascript' src='config.js'></script><script>function savereboot(){document.getElementById('frmSetting').action='config.cgi'; document.getElementById('frmSetting').submit(); }function saveonly(){document.getElementById('frmSetting').action='saveonly.cgi'; document.getElementById('frmSetting').submit(); }</script>
+
+[1]RGET /config.js HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.175/parm_2.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:66
+
+json_callback_config({		"lip":"0.0.0.0",		"sub":"0.0.0.0",	    });
+
+[1]RGET /favicon.ico HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/config.cgi
+Referer: http://192.168.251.175/parm_2.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
 
 
 
-WDBG:379 ([1]R)[0885.599]:
-GET /favicon.ico HTTP/1.1
+[1]RGET /favicon.ico HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/config.cgi
+Referer: http://192.168.251.175/parm_2.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[1]RGET /parm_3.html HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_2.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 5316
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul>  <li><a class='home'	href='home.html'>STAR-XINHUI</a></li>  <li><a href='parm_1.html'>网络配置</a></li>  <li><a href='parm_2.html'>参数配置</a></li>  <li><a class='active'	href='parm_3.html'>通道设置</a></li>  <li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 通道设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='config.cgi'><p><label for='txtchport1'>通道1端口:</label><input type='text' id='txtchport1' name='chport1' size='12' /><label for='txtvol1' style='padding-left:30px;'>通道1音量:</label><input type='text' id='txtvol1' name='vol1' size='12' /></p><p><label for='txtchport2'>通道2端口:</label><input type='text' id='txtchport2' name='chport2' size='12' /><label for='txtvol2' style='padding-left:30px;'>通道2音量:</label><input type='text' id='txtvol2' name='vol2' size='12' /></p><p><label for='txtchport3'>通道3端口:</label><input type='text' id='txtchport3' name='chport3' size='12' /><label for='txtvol3' style='padding-left:30px;'>通道3音量:</label><input type='text' id='txtvol3' name='vol3' size='12' /></p><p><label for='txtchport4'>通道4端口:</label><input type='text' id='txtchport4' name='chport4' size='12' /><label for='txtvol4' style='padding-left:30px;'>通道4音量:</label><input type='text' id='txtvol4' name='vol4' size='12' /></p><p><label for='txtchport5'>通道5端口:</label><input type='text' id='txtchport5' name='chport5' size='12' /><label for='txtvol5' style='padding-left:30px;'>通道5音量:</label><input type='text' id='txtvol5' name='vol5' size='12' /></p><p><label for='txtchport6'>通道6端口:</label><input type='text' id='txtchport6' name='chport6' size='12' /><label for='txtvol6' style='padding-left:30px;'>通道6音量:</label><input type='text' id='txtvol6' name='vol6' size='12' /></p><p><label for='txtchport7'>通道7端口:</label><input type='text' id='txtchport7' name='chport7' size='12' /><label for='txtvol7' style='padding-left:30px;'>通道7音量:</label><input type='text' id='txtvol7' name='vol7' size='12' /></p><p><label for='txtchport8'>通道8端口:</label><input type='text' id='txtchport8' name='chport8' size='12' /><label for='txtvol8' style='padding-left:30px;'>通道8音量:</label><input type='text' id='txtvol8' name='vol8' size='12' /></p><p><label for='txtbctl'>异常重连时间:</label><input type='text' id='txtt_out' name='t_out' size='12'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_callback_config(o) {if ($('txtt_out')) $('txtt_out').value = o.t_out;if ($('txtchport1')) $('txtchport1').value = o.chport1;if ($('txtchport2')) $('txtchport2').value = o.chport2;if ($('txtchport3')) $('txtchport3').value = o.chport3;if ($('txtchport4')) $('txtchport4').value = o.chport4;if ($('txtchport5')) $('txtchport5').value = o.chport5;if ($('txtchport6')) $('txtchport6').value = o.chport6;if ($('txtchport7')) $('txtchport7').value = o.chport7;if ($('txtchport8')) $('txtchport8').value = o.chport8;if ($('txtvol1')) $('txtvol1').value = o.vol1;if ($('txtvol2')) $('txtvol2').value = o.vol2;if ($('txtvol3')) $('txtvol3').value = o.vol3;if ($('txtvol4')) $('txtvol4').value = o.vol4;if ($('txtvol5')) $('txtvol5').value = o.vol5;if ($('txtvol6')) $('txtvol6').value = o.vol6;if ($('txtvol7')) $('txtvol7').value = o.vol7;if ($('txtvol8')) $('txtvol8').value = o.vol8;};</script><script type='text/javascript' src='config.js'></script><script>function savereboot(){document.getElementById('frmSetting').action='config.cgi'; document.getElementById('frmSetting').submit(); }function saveonly(){document.getElementById('frmSetting').action='saveonly.cgi'; document.getElementById('frmSetting').submit(); }function bootmode(){document.getElementById('frmSetting').action='bootmode.cgi'; document.getElementById('frmSetting').submit(); }</script>
+
+[1]RGET /config.js HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.175/parm_3.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:66
+
+json_callback_config({		"lip":"0.0.0.0",		"sub":"0.0.0.0",	    });
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_3.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_3.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[1]RGET /parm_4.html HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_3.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 2650
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'	href='home.html'>STAR-XINHUI</a></li><li><a href='parm_1.html'>网络配置</a></li><li><a href='parm_2.html'>参数设置</a></li><li><a href='parm_3.html'>通道设置</a></li><li><a class='active'	href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 信息日志</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='pb.cgi'><p><label for='txtver1'>硬件版本:</label><input type='text' id='txtver1' size='16'  disabled='disabled' /></p><p><label for='txtver2'>软件版本:</label><input type='text' id='txtver2' size='16'  disabled='disabled' /></p><p><textarea name='ph1' style='color: #444444;font-size: 11px;' cols='140' rows='30' id='txtph1' ></textarea></p><p></p><p><input type='button' onclick ='bootmode();' value='重启进入升级模式' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：请在厂家技术指导下进行升级操作</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_callback_pb(o) {if ($('txtver1')) $('txtver1').value = o.ver1;if ($('txtver2')) $('txtver2').value = o.ver2;if ($('txtph1')) $('txtph1').value = o.ph1;};</script><script type='text/javascript' src='pb.js'></script><script>function bootmode(){document.getElementById('frmSetting').action='bootmode.cgi'; document.getElementById('frmSetting').submit(); }</script>
+
+[1]RGET /pb.js HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.175/parm_4.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:77
+
+json_callback_pb({		"ver1":"v1.0",		"ver2":"v1.0",		"ph1":"test\r\n",	    });
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_4.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_4.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; newstare936bf062f066f061930ff00ff00ff06
 
 
 

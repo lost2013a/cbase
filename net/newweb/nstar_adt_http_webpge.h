@@ -429,64 +429,38 @@ HTML_PARM2_JSON\
 "    		<div style='padding:100px 00px 00px 85px;'>"\
 "           	 <h6> 用户密码：</h6>	"\
 "            </div>"\
-"            <form id='frmSetting' method='POST' action='config.cgi'>"\
+"            <form id='frmSetting' method='POST' action='log_in.cgi'>"\
 "            <div style='padding:0px 00px 00px 0px;'>"\
 "                <p>	"\
 "                    <label for='txtpass' ></label> "\
-"<input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0'  name='pass'"\
+"<input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0'  name='login_pass'"\
 "onFocus=\"if(value==defaultValue){value='';this.style.color='#303030'}\""\
 "onBlur=\"if(!value){value=defaultValue;this.style.color='#c0c0c0'}\" />"\
 "                </p>"\
 "            </div>"\
 "            <div style='padding:1px 00px 00px 85px;'>"\
-"                <p> <input  type='submit' value='登录' onClick='login();' id='rcorners1'/></p>"\
+"                <p> <input  type='submit' value='登录' id='rcorners1'/></p>"\
 "      </form>"\
 "  </div>     "\
 "</div>"\
-"</div>"\
-"<script>"\
-"   function login(){"\
-"      document.getElementById('frmSetting').submit();"\
-"   }"\
-"</script>"
+"</div>"
 
 
-
-#if 0
-
-#define INDEX_HTML "<!DOCTYPE html>"\
-"<html>"\
+#define HTML_VERIFY_PASS "<!DOCTYPE html><html>"\
 "<head>"\
-"<meta charset='utf-8'>"\
-"<title>菜鸟教程(runoob.com)</title>"\
+"<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>"\
 "</head>"\
-"<head>"\
-"<script>"\
-"function setCookie(){"\
-"	document.cookie = 'username=zx';"\
-"}"\
-"function getCookie(cname){"\
-"	var name = cname + '=';"\
-"	var ca = document.cookie.split(';');"\
-"	for(var i=0; i<ca.length; i++) {"\
-"		var c = ca[i].trim();"\
-"		if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }"\
-"	}"\
-"	return '';"\
-"}"\
-"function checkCookie(){"\
-"	var user=getCookie('username');"\
-"	setCookie();"\
-"	alert('欢迎 ' + user + ' 访问');"\
-"}"\
-"</script>"\
-"</head>"\
-"	"\
-"<body  onload='checkCookie()'></body>"\
-"	"\
-"</html>"
+"<body><span style='color:green;'>...验证通过 </span></body></html>"\
+"<script>var int=setTimeout('refresh()',1800);function refresh()"
 
-#endif
+
+#define HTML_VERIFY_FAILURE "<!DOCTYPE html><html>"\
+"<head>"\
+"<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>"\
+"</head>"\
+"<body><span style='color:red;'>...验证失败 </span></body></html>"\
+"<script>var int=setTimeout('refresh()',1800);function refresh()"\
+"{ document.cookie='newstare936bf062f066f061930ff00ff00ff06'; window.location='index.html';}</script>"
 
 
 #endif

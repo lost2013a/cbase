@@ -76,7 +76,6 @@ static int web_socket_init(void)
 	}
 	return server_sock;
 err:
-   close(server_sock);
    return -1;
 
 }
@@ -94,8 +93,10 @@ void nstar_web_servo(void* arg)
 		goto release;
 #if 1	
 #include "write_log.h"
-	dbg_write_open();
+	log_file_open();
 #endif
+
+	cookie_init();
 	while (1) 
 	{
 		conn_sock= accept(server_sock, (struct sockaddr *)&client_addr, &sock_len);
@@ -123,6 +124,8 @@ release:
 int main(void)
 {
 	nstar_web_servo(0);
+	close(conn_sock);
+	close(server_sock);
 	return 0;
 }
 

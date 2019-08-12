@@ -2,6 +2,7 @@
 #define	__HTTPUTIL_H__
 
 #include "nstar_adt_http_server.h"
+#include "ntart_cookie.h"
 
 
 
