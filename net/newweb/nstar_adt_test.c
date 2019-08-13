@@ -50,7 +50,8 @@ static int web_mem_init(void)
 
 static int web_socket_init(void)
 {
-	int on = 1;  
+	int on = 1; 
+	int ret;
 	struct sockaddr_in server_addr, client_addr;
 	socklen_t	sock_len	= sizeof(client_addr);
 	server_sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -58,15 +59,21 @@ static int web_socket_init(void)
 		myerro("web socket error\n");
 		return 0;
 	}
-    setsockopt(server_sock, IPPROTO_TCP, TCP_NODELAY, (void *)&on, sizeof(on));  
+	
+	if(setsockopt(server_sock, IPPROTO_TCP, TCP_NODELAY, (void *)&on, sizeof(on)) < 0) 
+	{
+		perror("web setsockopet error\n");
+		return -1;
+	}
 	
 	(void)memset(&server_addr, 0, sock_len);
 	server_addr.sin_family		= AF_INET;
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	server_addr.sin_port		= htons(WEB_PORT);
-
-	if (bind(server_sock, (struct sockaddr *)&server_addr, sizeof(server_addr))) {
-		myerro("web bind error\n");
+	
+	ret= bind(server_sock, (struct sockaddr *)&server_addr, sizeof(server_addr));
+	if (ret<0) {
+		myprintf("web bind error:%d\n",ret);
 		goto err;
 	}
 

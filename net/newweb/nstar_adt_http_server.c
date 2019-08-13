@@ -209,9 +209,23 @@ char* get_http_param_value(unsigned char* buf, char* uri, char* param_name )
 	else
 		return NULL;
 	return (char*)buf;		
-
-
-
 }
+
+
+void http_mid(char* src, char* s1, char* s2, char* sub)
+{
+	char* sub1;
+	char* sub2;
+	unsigned short n;
+	sub1=strstr(src,s1);
+	sub1+=strlen(s1);
+	sub2=strstr(sub1,s2);
+	n=sub2-sub1;
+	strncpy(sub,sub1,n);
+	sub[n]=0;
+}
+
+
+
 
 

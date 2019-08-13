@@ -2,14 +2,15 @@
 #include "nstar_adt_httputil.h"
 #include "nstar_adt_http_webpge.h"
 
-extern char *nstar_web_tx_buf; 
-extern char *nstar_web_rx_buf;
+#include "htm_login.h"
+
+
 extern int conn_sock;
 
 #define SOCKET_SND_FLAG 0
 #define SOCKET_REC_FLAG MSG_DONTWAIT
 
-static int http_send(unsigned char *data, unsigned int len)
+int http_send(unsigned char *data, unsigned int len)
 {
 #if 1
 #include "write_log.h"
@@ -18,7 +19,7 @@ static int http_send(unsigned char *data, unsigned int len)
 	return send(conn_sock, data, len, SOCKET_SND_FLAG);
 }
 
-static int http_rec(unsigned char *data, unsigned int rmax_len)
+int http_rec(unsigned char *data, unsigned int rmax_len)
 {
 	int retlen;
 	retlen= recv(conn_sock, data, rmax_len, SOCKET_REC_FLAG);
@@ -31,7 +32,19 @@ static int http_rec(unsigned char *data, unsigned int rmax_len)
 }
 
 
+void make_cgi_response(unsigned short delay, char* ip, char* jumptourl, char* cgi_response_buf)
+{
+  sprintf(cgi_response_buf,"<html><head><title>iWeb - Configuration</title><script language=javascript>j=%d;function func(){document.getElementById('delay').innerText=' '+j + ' ';j--;setTimeout('func()',1000);if(j==0)location.href='http://%d.%d.%d.%d%s';}</script></head><body onload='func()'>please wait for a while, the module will boot in<span style='color:red;' id='delay'></span> seconds.</body></html>"
+  	,delay,ip[0],ip[1],ip[2],ip[3],jumptourl);
+  return;
+}
 
+void make_cgi_noboot(char* ip, char* jumptourl, char* cgi_response_buf)
+{
+  sprintf(cgi_response_buf,"<html><head><title>iWeb - Configuration</title><script language=javascript>;function func(){location.href='http://%d.%d.%d.%d%s';}</script></head><body onload='func()'></body></html>"
+  	,ip[0],ip[1],ip[2],ip[3],jumptourl);
+  return;
+}
 
 
 typedef struct _CFG_TYPE{
@@ -69,19 +82,6 @@ extern char BDTIMEBUF[16];
 extern char HADWARE[16];
 
 
-
-void mid(char* src, char* s1, char* s2, char* sub)
-{
-	char* sub1;
-	char* sub2;
-	unsigned short n;
-	sub1=strstr(src,s1);
-	sub1+=strlen(s1);
-	sub2=strstr(sub1,s2);
-	n=sub2-sub1;
-	strncpy(sub,sub1,n);
-	sub[n]=0;
-}
 
 static void make_json_callback_sta(char* buf)
 {	
@@ -129,7 +129,6 @@ static void make_json_callback_cps(char* buf)
 }
 
 
-
 static void make_json_callback_config(char* buf)
 {
 	snprintf(buf,MAX_URI_SIZE,"json_callback_config({\
@@ -142,14 +141,6 @@ static void make_json_callback_config(char* buf)
 }
 
 
-
-void make_cgi_noboot(char* ip, char* jumptourl, char* cgi_response_buf);
-
-
-
-
-void pb_ipconfig(st_http_request *http_request);
-
 static void repos_parm_htm(unsigned char* http_response, const char* htm)
 {
 	char* pweb;
@@ -161,50 +152,19 @@ static void repos_parm_htm(unsigned char* http_response, const char* htm)
 	http_send((unsigned char *)pweb, file_len);
 }
 
-#define COOKIE_HEAD1 "{ document.cookie='"
-#define COOKIE_HEAD2 "'; window.location='home.html';}</script>"
-
-char tmpbuf[1000];
-
-
-void cgi_log_in(st_http_request *http_request, unsigned char mode , char* jump_to, unsigned char jumplen)
-{ 
-	int idx=0;
-	char *data; 
-	char *parm_url;
-	unsigned char *buf = (unsigned char*)nstar_web_rx_buf;	
-	parm_url = (char*)get_param_url(http_request->URI, jump_to, jumplen);		/*获取修改后的IP地址*/
-	if(parm_url == NULL){
-		mydbg("parm url not found\r\n");
-		return;
-	}
-	data = get_http_param_value(buf, parm_url, "login_pass");		
-	if(data)
-	{
-		if(1 == login_pass_check(data)){
-			sprintf(&tmpbuf[idx], "%s%s%s%s", HTML_VERIFY_PASS, COOKIE_HEAD1, cookie_getstr(), COOKIE_HEAD2);
-			http_send((unsigned char *)tmpbuf, strlen((char const*)tmpbuf));
-		}
-		else
-			http_send((unsigned char *)HTML_VERIFY_FAILURE, strlen((char const*)HTML_VERIFY_FAILURE));
-	}
-}
 
 
 static unsigned char _comp_uri(const char* uri, const char* str)
 {
-	//return (0 == strncmp(uri,str,strlen(str)))? 1: 0;
-	return (0 == strcmp(uri,str))? 1: 0;
+	return (0 == strncmp(uri,str,strlen(str)))? 1: 0;
+	//return (0 == strcmp(uri,str))? 1: 0;
 }
 
 
 static void _repos_method_get(st_http_request     *http_request, unsigned char* http_response)
 {
 	char *name= http_request->URI;
-	if(strncmp(name,"/index.htm", strlen("/index.htm"))==0 || strcmp(name,"/")==0 ){
-		repos_parm_htm(http_response, INDEX_HTML);
-	}
-	else if(_comp_uri(name, "/home.html"))
+	if(_comp_uri(name, "/home.html"))
 	{
 		repos_parm_htm(http_response, HOME_HTML);
 	}	
@@ -245,6 +205,9 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
 		http_send((unsigned char *)http_response, strlen((char const*)http_response));
 	}
+	else if(_comp_uri(name,"/") ||  _comp_uri(name,"/index.htm")){
+		repos_parm_htm(http_response, INDEX_HTML);
+	}
 	
 
 }
@@ -252,15 +215,15 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 static void _repos_method_post(st_http_request     *http_request, unsigned char* http_response)
 {
 	char req_name[32]={0x00,};								
-	mid(http_request->URI, "/", " ", req_name);	
+	http_mid(http_request->URI, "/", " ", req_name);
 	if(strcmp(req_name,"log_in.cgi")==0){
 		char jumpto[20];unsigned char maxlen=20;
-		cgi_log_in(http_request, 1, jumpto, maxlen);			/*重启并保存*/
+		cgi_log_in(http_request, 1, jumpto, maxlen);
 	}				
 	else if(strcmp(req_name,"config.cgi")==0)							  	
 	{
 		char jumpto[20];unsigned char maxlen=20;
-		cgi_ipconfig(http_request, 1, jumpto, maxlen);			/*重启并保存*/
+		cgi_ipconfig(http_request, 1, jumpto, maxlen);
 		make_cgi_response(5, (char*)config->local_ip, jumpto, nstar_web_tx_buf);	
 		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
 		http_send((unsigned char *)http_response, strlen((char const*)http_response));
@@ -268,7 +231,7 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 	else if(strcmp(req_name,"saveonly.cgi")==0)							  	
 	{
 		char jumpto[20];unsigned char maxlen=20;
-		cgi_ipconfig(http_request, 0, jumpto, maxlen);			/*只保存*/
+		cgi_ipconfig(http_request, 0, jumpto, maxlen);
 		make_cgi_noboot((char*)config->local_ip, jumpto, nstar_web_tx_buf);	
 		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
 		http_send((unsigned char *)http_response, strlen((char const*)http_response));
@@ -276,16 +239,15 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 	else if(strcmp(req_name,"bootmode.cgi")==0)							  	
 	{
 		char jumpto[20];unsigned char maxlen=20;
-		cgi_ipconfig(http_request, 0, jumpto, maxlen);			/*只保存*/
+		cgi_ipconfig(http_request, 0, jumpto, maxlen);
 		make_cgi_noboot((char*)config->local_ip, jumpto, nstar_web_tx_buf);	
 		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);																				/*发送http响应*/
 		http_send((unsigned char *)http_response, strlen((char const*)http_response));
 	}
 }
 
-int proc_http(void)
-{
-	int ret=0;											
+static void proc_http(void)
+{								
 	unsigned char* http_response;
 	st_http_request *http_request;
 	http_response = (unsigned char*)nstar_web_rx_buf;
@@ -310,7 +272,6 @@ int proc_http(void)
 		default:
 			break;
 	}
-	return ret;
 }
 
 int do_https(void)
@@ -337,18 +298,6 @@ void cgi_ipconfig(st_http_request *http_request, unsigned char mode , char* jump
 
 }
 
-void make_cgi_response(unsigned short delay, char* ip, char* jumptourl, char* cgi_response_buf)
-{
-  sprintf(cgi_response_buf,"<html><head><title>iWeb - Configuration</title><script language=javascript>j=%d;function func(){document.getElementById('delay').innerText=' '+j + ' ';j--;setTimeout('func()',1000);if(j==0)location.href='http://%d.%d.%d.%d%s';}</script></head><body onload='func()'>please wait for a while, the module will boot in<span style='color:red;' id='delay'></span> seconds.</body></html>"
-  	,delay,ip[0],ip[1],ip[2],ip[3],jumptourl);
-  return;
-}
 
-void make_cgi_noboot(char* ip, char* jumptourl, char* cgi_response_buf)
-{
-  sprintf(cgi_response_buf,"<html><head><title>iWeb - Configuration</title><script language=javascript>;function func(){location.href='http://%d.%d.%d.%d%s';}</script></head><body onload='func()'></body></html>"
-  	,ip[0],ip[1],ip[2],ip[3],jumptourl);
-  return;
-}
 
 

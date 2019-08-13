@@ -446,21 +446,7 @@ HTML_PARM2_JSON\
 "</div>"
 
 
-#define HTML_VERIFY_PASS "<!DOCTYPE html><html>"\
-"<head>"\
-"<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>"\
-"</head>"\
-"<body><span style='color:green;'>...验证通过 </span></body></html>"\
-"<script>var int=setTimeout('refresh()',1800);function refresh()"
 
-
-#define HTML_VERIFY_FAILURE "<!DOCTYPE html><html>"\
-"<head>"\
-"<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>"\
-"</head>"\
-"<body><span style='color:red;'>...验证失败 </span></body></html>"\
-"<script>var int=setTimeout('refresh()',1800);function refresh()"\
-"{ document.cookie='newstare936bf062f066f061930ff00ff00ff06'; window.location='index.html';}</script>"
 
 
 #endif
