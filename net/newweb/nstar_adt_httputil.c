@@ -167,20 +167,6 @@ static void make_json_callback_cps(char* buf)
 }
 
 
-static void make_json_dev_parm(char* buf)
-{
-	snprintf(buf,MAX_URI_SIZE,"json_dev_parm({\
-		\"lip\":\"%d.%d.%d.%d\",\
-		\"sub\":\"%d.%d.%d.%d\",\
-	    });",
-	    config->local_ip[0],config->local_ip[1],config->local_ip[2],config->local_ip[3],
-	    config->mask[0],config->mask[1],config->mask[2],config->mask[3]
-	);
-}
-
-
-
-
 
 
 static void repos_parm_htm(unsigned char* http_response, const char* htm)
@@ -201,27 +187,31 @@ static void repos_parm_htm(unsigned char* http_response, const char* htm)
 
 #define REQUST_JSCRIPT_HEAD "<script>"\
 "function $(id) { return document.getElementById(id); };"\
-"function %s(o) {"\
+"function %s(o) {"
+
+#define REQUST_JSCRIPT_ELEMENT_STR		"if ($('%s')) $('%s').value = o.%s;"
+#define REQUST_JSCRIPT_ELEMENT(element) http_sprintf(REQUST_JSCRIPT_ELEMENT_STR, element, element, element);
 
 
-#define REQUST_JSCRIPT_STR				"if ($('%s')) $('%s').value = o.%s;"
-#define REQUST_JSCRIPT_ELEMENT(name) 	http_sprintf(REQUST_JSCRIPT_STR, name, name, name);
-
-#define REQUST_JSCRIPT_END "};"\
+#define REQUST_JSCRIPT_END_STR "};"\
 "</script>"\
-"<script type='text/javascript' src='config.js'></script>"\
+"<script type='text/javascript' src='%s'></script>"\
 "<script>"\
 "function savereboot(){document.getElementById('frmSetting').action='config.cgi'; document.getElementById('frmSetting').submit(); }"\
 "function saveonly(){document.getElementById('frmSetting').action='saveonly.cgi'; document.getElementById('frmSetting').submit(); }"\
-"</script>"\
+"</script>"
+#define REQUST_JSCRIPT_END(js_name) 	http_sprintf(REQUST_JSCRIPT_END_STR, js_name);
 
 
 static void requst_jscript(void)
 {
 	const char *name= JSON_NAME_DevParm;
 	http_sprintf(REQUST_JSCRIPT_HEAD, name);
-	REQUST_JSCRIPT_ELEMENT("lip");
-	http_sprintf(REQUST_JSCRIPT_END);
+	REQUST_JSCRIPT_ELEMENT(JS_DevParm_Lip);
+	REQUST_JSCRIPT_ELEMENT(JS_DevParm_Sub);
+	REQUST_JSCRIPT_ELEMENT(JS_DevParm_Gateway);
+	REQUST_JSCRIPT_ELEMENT(JS_DevParm_Mac);
+	REQUST_JSCRIPT_END(JSON_JSCRIPT_DevParm);
 }
 
 
@@ -234,19 +224,15 @@ static void _repos_parm(unsigned char* http_response, const char* head, const ch
 }
 
 
-
-
-
 static void _repos_jsack(void)
 {
 	const char *name= JSON_NAME_DevParm;
 	http_sprintf_init();
 	http_sprintf("%s%s", name, JSON_START_SYMBOL);
-	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Lip, 192,1,1,2 );
-	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Sub, 192,1,1,2 );
-	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Lip, 192,1,1,2 );
-	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Gateway, 192,1,1,2 );
-	http_sprintf("'%s':'%d-%d-%d-%d-%d-%d',",JS_DevParm_Mac, 192,1,1,2,3,4 );
+	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Lip, 192,1,1,170 );
+	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Sub, 192,1,1,1 );
+	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Gateway, 255,255,255,0 );
+	http_sprintf("'%s':'%02X-%02X-%02X-%02X-%02X-%02X'",JS_DevParm_Mac, 1,2,3,4,5,6 );
 	http_sprintf("%s", JSON_END_SYMBOL);
 	http_sprintf_send();
 }
@@ -258,56 +244,62 @@ static void _repos_jsack(void)
 
 static unsigned char _comp_uri(const char* uri, const char* str)
 {
-	return (0 == strncmp(uri,str,strlen(str)))? 1: 0;
+	if(uri[0]!='/')
+		return 0;
+	else{
+		uri+=1;
+		return (0 == strncmp(uri,str,strlen(str)))? 1: 0;
+	}
 }
 
 
 static void _repos_method_get(st_http_request     *http_request, unsigned char* http_response)
 {
 	char *name= http_request->URI;
-	if(_comp_uri(name, "/home.html"))
+	if(_comp_uri(name, "home.html"))
 	{
 		repos_parm_htm(http_response, HOME_HTML);
 	}	
-	else if(_comp_uri(name, "/parm_1.html"))
+	else if(_comp_uri(name, "parm_1.html"))
 	{
 		_repos_parm(http_response, HTML_PARM_HEAD, PARM_1_HTML, "");
 	}
-	else if(_comp_uri(name, "/parm_2.html"))
-	{
-		_repos_parm(http_response, HTML_PARM_HEAD, PARM_2_HTML, "");
-	}
-	else if(_comp_uri(name, "/parm_3.html"))
-	{
-		_repos_parm(http_response, HTML_PARM_HEAD, PARM_3_HTML, HTML_PARM3_JSON);
-	}
-	else if(_comp_uri(name, "/parm_4.html"))
-	{
-		_repos_parm(http_response, HTML_PARM_HEAD, PARM_4_HTML, "");
-	}
-	else if(_comp_uri(name, "/config.js"))
+	else if(_comp_uri(name, JSON_JSCRIPT_DevParm))
 	{
 		_repos_jsack();
 	}
-	else if(_comp_uri(name, "/pb.js"))
+	else if(_comp_uri(name, "parm_2.html"))
+	{
+		_repos_parm(http_response, HTML_PARM_HEAD, PARM_2_HTML, "");
+	}
+	else if(_comp_uri(name, "parm_3.html"))
+	{
+		_repos_parm(http_response, HTML_PARM_HEAD, PARM_3_HTML, HTML_PARM3_JSON);
+	}
+	else if(_comp_uri(name, "parm_4.html"))
+	{
+		_repos_parm(http_response, HTML_PARM_HEAD, PARM_4_HTML, "");
+	}
+	else if(_comp_uri(name, "pb.js"))
 	{
 		memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
 		make_json_callback_cps(nstar_web_tx_buf);
 		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
 		http_send((unsigned char *)http_response, strlen((char const*)http_response));
 	}
-	else if(_comp_uri(name, "/sta.php"))
+	else if(_comp_uri(name, "sta.php"))
 	{
 		memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
 		make_json_callback_sta(nstar_web_tx_buf);
 		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
 		http_send((unsigned char *)http_response, strlen((char const*)http_response));
 	}
-	else if(_comp_uri(name, "/favicon.ico")){
-	}
-	else if(_comp_uri(name,"/") ||  _comp_uri(name,"/index.htm")){
+	else if(_comp_uri(name, "favicon.ico")){
+		;
+	}	
+	else if(_comp_uri(name,"\0") ||  _comp_uri(name,"index.htm")){
 		repos_parm_htm(http_response, INDEX_HTML);
-	}
+	}	
 	
 
 }

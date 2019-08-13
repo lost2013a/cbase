@@ -204,11 +204,13 @@ const char *ch_sta_uft8[]={
 "</script>"\
 
 
-#define JSON_NAME_DevParm 	"json_dev_parm"
+#define JSON_NAME_DevParm 		"json_dev_parm"
+#define JSON_JSCRIPT_DevParm 	"dev_parm.js"
 #define JS_DevParm_Lip 		"lip"
 #define JS_DevParm_Sub 		"sub"
 #define JS_DevParm_Gateway 	"gateway"
 #define JS_DevParm_Mac 	    "mac"
+
 #define PARM_1_HTML "<body>"\
 "<ul>"\
 "<li><a class='home'	href='home.html'>STAR-XINHUI</a></li>"\
@@ -220,11 +222,11 @@ const char *ch_sta_uft8[]={
 "<h2> chengdu sida web management interface </h2>"\
 "<h3> 网络设置</h3>"\
 "<div style='background:snow; display:block; padding:10px 10%;'>"\
-"<form id='frmSetting' method='POST' action='config.cgi'>"\
-"<p><label>IP地址:</label><input type='text' id='lip' size='16' /></p>"\
-"<p><label>子网掩码:</label><input type='text' id='sub' name='sub' size='16' /></p>"\
-"<p><label>默认网关:</label><input type='text' id='gateway' name='gw' size='16' /></p>"\
-"<p><label>MAC地址:</label><input type='text' id='mac' name='mac' size='16' disabled='disabled'/></p>"\
+"<form id='frmSetting' method='POST'>"\
+"<p><label>IP地址:</label><input type='text' size='16' id='lip' name='lip'/></p>"\
+"<p><label>子网掩码:</label><input type='text' size='16' id='sub' name='sub'/></p>"\
+"<p><label>默认网关:</label><input type='text' size='16' id='gateway' name='gateway'/></p>"\
+"<p><label>MAC地址:</label><input type='text' size='16' disabled='disabled' id='mac' name='mac'/></p>"\
 "<p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/>"\
 "<input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p>"\
 "<p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p>"\
