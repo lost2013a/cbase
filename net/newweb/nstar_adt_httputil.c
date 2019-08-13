@@ -1,9 +1,11 @@
 #include <sys/socket.h>
+#include <stdarg.h>
 #include "nstar_adt_httputil.h"
 #include "nstar_adt_http_webpge.h"
 
 #include "htm_login.h"
 
+#define HTTP_SENDBUF nstar_web_tx_buf
 
 extern int conn_sock;
 
@@ -30,6 +32,42 @@ int http_rec(unsigned char *data, unsigned int rmax_len)
 #endif
 	return retlen;
 }
+
+volatile static unsigned int http_sprintf_len;
+#define HTTP_SPRINTF_MAXLEN 8000
+static unsigned char http_sprintf_buf[HTTP_SPRINTF_MAXLEN];
+
+void http_sprintf_init(void)
+{
+	http_sprintf_len=0;
+}
+void http_sprintf(char* fmt,...)  
+{  
+	volatile unsigned int *len= &http_sprintf_len;
+	unsigned char* pbuf = (unsigned char*)http_sprintf_buf;
+	va_list ap;
+	va_start(ap,fmt);
+	*len+= vsnprintf((char*)&pbuf[*len], HTTP_SPRINTF_MAXLEN - *len, fmt,ap);
+	if(*len >= HTTP_SPRINTF_MAXLEN)
+		printf("http printf maybe flow out\n");
+	va_end(ap);
+}
+
+void http_sprintf_addhead(void)
+{
+	http_send(http_sprintf_buf, http_sprintf_len);
+}
+#define HTML_PTYPE_HEAD "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n"
+	
+void http_sprintf_send(void)
+{
+	unsigned char headbuf[100];
+	int hend_len;
+	hend_len= sprintf(headbuf, HTML_PTYPE_HEAD, http_sprintf_len);
+	http_send(headbuf, hend_len);
+	http_send(http_sprintf_buf, http_sprintf_len);
+}
+
 
 
 void make_cgi_response(unsigned short delay, char* ip, char* jumptourl, char* cgi_response_buf)
@@ -129,9 +167,9 @@ static void make_json_callback_cps(char* buf)
 }
 
 
-static void make_json_callback_config(char* buf)
+static void make_json_dev_parm(char* buf)
 {
-	snprintf(buf,MAX_URI_SIZE,"json_callback_config({\
+	snprintf(buf,MAX_URI_SIZE,"json_dev_parm({\
 		\"lip\":\"%d.%d.%d.%d\",\
 		\"sub\":\"%d.%d.%d.%d\",\
 	    });",
@@ -141,23 +179,86 @@ static void make_json_callback_config(char* buf)
 }
 
 
+
+
+
+
 static void repos_parm_htm(unsigned char* http_response, const char* htm)
 {
-	char* pweb;
-	unsigned long file_len=0;	
-	pweb= (char*)htm;
-	file_len = strlen(pweb);
-	make_http_response_head((unsigned char*)http_response, PTYPE_HTML,file_len);
-	http_send(http_response, strlen((char const*)http_response));
-	http_send((unsigned char *)pweb, file_len);
+#define HTML_PTYPE_HEAD "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n"
+	unsigned int len=0;
+	len+= strlen(HTML_PARM_HEAD);
+	len+= strlen(htm);
+	http_sprintf_init();
+	http_sprintf(HTML_PTYPE_HEAD, len);
+	http_sprintf("%s", HTML_PARM_HEAD);
+	http_sprintf("%s",(char*)htm);
+	http_sprintf_send();
 }
+
+
+
+
+#define REQUST_JSCRIPT_HEAD "<script>"\
+"function $(id) { return document.getElementById(id); };"\
+"function %s(o) {"\
+
+
+#define REQUST_JSCRIPT_STR				"if ($('%s')) $('%s').value = o.%s;"
+#define REQUST_JSCRIPT_ELEMENT(name) 	http_sprintf(REQUST_JSCRIPT_STR, name, name, name);
+
+#define REQUST_JSCRIPT_END "};"\
+"</script>"\
+"<script type='text/javascript' src='config.js'></script>"\
+"<script>"\
+"function savereboot(){document.getElementById('frmSetting').action='config.cgi'; document.getElementById('frmSetting').submit(); }"\
+"function saveonly(){document.getElementById('frmSetting').action='saveonly.cgi'; document.getElementById('frmSetting').submit(); }"\
+"</script>"\
+
+
+static void requst_jscript(void)
+{
+	const char *name= JSON_NAME_DevParm;
+	http_sprintf(REQUST_JSCRIPT_HEAD, name);
+	REQUST_JSCRIPT_ELEMENT("lip");
+	http_sprintf(REQUST_JSCRIPT_END);
+}
+
+
+static void _repos_parm(unsigned char* http_response, const char* head, const char* htm, const char* jscript)
+{
+	http_sprintf_init();
+	http_sprintf("%s%s%s", head, htm, jscript);
+	requst_jscript();
+	http_sprintf_send();
+}
+
+
+
+
+
+static void _repos_jsack(void)
+{
+	const char *name= JSON_NAME_DevParm;
+	http_sprintf_init();
+	http_sprintf("%s%s", name, JSON_START_SYMBOL);
+	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Lip, 192,1,1,2 );
+	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Sub, 192,1,1,2 );
+	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Lip, 192,1,1,2 );
+	http_sprintf("'%s':'%d.%d.%d.%d',",JS_DevParm_Gateway, 192,1,1,2 );
+	http_sprintf("'%s':'%d-%d-%d-%d-%d-%d',",JS_DevParm_Mac, 192,1,1,2,3,4 );
+	http_sprintf("%s", JSON_END_SYMBOL);
+	http_sprintf_send();
+}
+
+
+
 
 
 
 static unsigned char _comp_uri(const char* uri, const char* str)
 {
 	return (0 == strncmp(uri,str,strlen(str)))? 1: 0;
-	//return (0 == strcmp(uri,str))? 1: 0;
 }
 
 
@@ -170,26 +271,23 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 	}	
 	else if(_comp_uri(name, "/parm_1.html"))
 	{
-		repos_parm_htm(http_response, PARM_1_HTML);
+		_repos_parm(http_response, HTML_PARM_HEAD, PARM_1_HTML, "");
 	}
 	else if(_comp_uri(name, "/parm_2.html"))
 	{
-		repos_parm_htm(http_response, PARM_2_HTML);
+		_repos_parm(http_response, HTML_PARM_HEAD, PARM_2_HTML, "");
 	}
 	else if(_comp_uri(name, "/parm_3.html"))
 	{
-		repos_parm_htm(http_response, PARM_3_HTML);
+		_repos_parm(http_response, HTML_PARM_HEAD, PARM_3_HTML, HTML_PARM3_JSON);
 	}
 	else if(_comp_uri(name, "/parm_4.html"))
 	{
-		repos_parm_htm(http_response, PARM_4_HTML);
+		_repos_parm(http_response, HTML_PARM_HEAD, PARM_4_HTML, "");
 	}
 	else if(_comp_uri(name, "/config.js"))
 	{
-		memset(nstar_web_tx_buf,0,MAX_URI_SIZE);
-		make_json_callback_config(nstar_web_tx_buf);
-		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
-		http_send((unsigned char *)http_response, strlen((char const*)http_response));
+		_repos_jsack();
 	}
 	else if(_comp_uri(name, "/pb.js"))
 	{
@@ -204,6 +302,8 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 		make_json_callback_sta(nstar_web_tx_buf);
 		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);
 		http_send((unsigned char *)http_response, strlen((char const*)http_response));
+	}
+	else if(_comp_uri(name, "/favicon.ico")){
 	}
 	else if(_comp_uri(name,"/") ||  _comp_uri(name,"/index.htm")){
 		repos_parm_htm(http_response, INDEX_HTML);
@@ -263,7 +363,7 @@ static void proc_http(void)
 			http_send((unsigned char*)ERROR_REQUEST_PAGE, sizeof(ERROR_REQUEST_PAGE));
 			break;
 		case METHOD_HEAD:			
-		case METHOD_GET:		
+		case METHOD_GET:	
 			_repos_method_get(http_request, http_response);
 			break;
 		case METHOD_POST:

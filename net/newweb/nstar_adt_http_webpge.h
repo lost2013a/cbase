@@ -174,31 +174,10 @@ const char *ch_sta_uft8[]={
 
 
 
-#define HTML_PARM_JSON  "<script>"\
-"function $(id) { return document.getElementById(id); };"\
-"function json_callback_config(o) {"\
-"if ($('txtlip')) $('txtlip').value = o.lip;"\
-"if ($('txtsub')) $('txtsub').value = o.sub;"\
-"if ($('txtgw')) $('txtgw').value = o.gw;"\
-"if ($('txtlport')) $('txtlport').value = o.lport;"\
-"if ($('txtrip')) $('txtrip').value = o.rip;"\
-"if ($('txtrport')) $('txtrport').value = o.rport;"\
-"if ($('txtmac')) $('txtmac').value = o.mac;"\
-"if ($('txtvol')) $('txtvol').value = o.vol;"\
-"if ($('txtbctl')) $('txtbctl').value = o.bctl;"\
-"if ($('txtpassw')) $('txtpassw').value = o.passw;"\
-"};"\
-"</script>"\
-"<script type='text/javascript' src='config.js'></script>"\
-"<script>"\
-"function savereboot(){document.getElementById('frmSetting').action='config.cgi'; document.getElementById('frmSetting').submit(); }"\
-"function saveonly(){document.getElementById('frmSetting').action='saveonly.cgi'; document.getElementById('frmSetting').submit(); }"\
-"</script>"\
 
-
-#define HTML_PARM2_JSON  "<script>"\
+#define HTML_PARM3_JSON  "<script>"\
 "function $(id) { return document.getElementById(id); };"\
-"function json_callback_config(o) {"\
+"function json_dev_parm(o) {"\
 "if ($('txtt_out')) $('txtt_out').value = o.t_out;"\
 "if ($('txtchport1')) $('txtchport1').value = o.chport1;"\
 "if ($('txtchport2')) $('txtchport2').value = o.chport2;"\
@@ -225,38 +204,38 @@ const char *ch_sta_uft8[]={
 "</script>"\
 
 
-
-
-#define PARM_1_HTML  HTML_PARM_HEAD\
-"<body>"\
+#define JSON_NAME_DevParm 	"json_dev_parm"
+#define JS_DevParm_Lip 		"lip"
+#define JS_DevParm_Sub 		"sub"
+#define JS_DevParm_Gateway 	"gateway"
+#define JS_DevParm_Mac 	    "mac"
+#define PARM_1_HTML "<body>"\
 "<ul>"\
-"  <li><a class='home'	href='home.html'>STAR-XINHUI</a></li>"\
-"  <li><a class='active'	href='parm_1.html'>网络配置</a></li>"\
-"  <li><a href='parm_2.html'>参数设置</a></li>"\
-"  <li><a href='parm_3.html'>通道设置</a></li>"\
-"  <li><a href='parm_4.html'>信息日志</a></li>"\
+"<li><a class='home'	href='home.html'>STAR-XINHUI</a></li>"\
+"<li><a class='active'	href='parm_1.html'>网络配置</a></li>"\
+"<li><a href='parm_2.html'>参数设置</a></li>"\
+"<li><a href='parm_3.html'>通道设置</a></li>"\
+"<li><a href='parm_4.html'>信息日志</a></li>"\
 "</ul>"\
 "<h2> chengdu sida web management interface </h2>"\
 "<h3> 网络设置</h3>"\
 "<div style='background:snow; display:block; padding:10px 10%;'>"\
 "<form id='frmSetting' method='POST' action='config.cgi'>"\
-"<p><label for='txtlip'>IP地址:</label><input type='text' id='txtlip' name='lip' size='16' /></p>"\
-"<p><label for='txtsub'>子网掩码:</label><input type='text' id='txtsub' name='sub' size='16' /></p>"\
-"<p><label for='txtgw'>默认网关:</label><input type='text' id='txtgw' name='gw' size='16' /></p>"\
-"<p><label for='txtmac'>MAC地址:</label><input type='text' id='txtmac' name='mac' size='16' disabled='disabled'/></p>"\
+"<p><label>IP地址:</label><input type='text' id='lip' size='16' /></p>"\
+"<p><label>子网掩码:</label><input type='text' id='sub' name='sub' size='16' /></p>"\
+"<p><label>默认网关:</label><input type='text' id='gateway' name='gw' size='16' /></p>"\
+"<p><label>MAC地址:</label><input type='text' id='mac' name='mac' size='16' disabled='disabled'/></p>"\
 "<p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/>"\
 "<input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p>"\
 "<p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p>"\
 "</form>"\
 "</div>"\
 "</body>"\
-"</html>"\
-HTML_PARM_JSON\
+"</html>"
 
 
 
-#define PARM_2_HTML  HTML_PARM_HEAD\
-"<body>"\
+#define PARM_2_HTML  "<body>"\
 "<ul>"\
 "  <li><a class='home'	href='home.html'>STAR-XINHUI</a></li>"\
 "  <li><a href='parm_1.html'>网络配置</a></li>"\
@@ -275,12 +254,10 @@ HTML_PARM_JSON\
 "</form>"\
 "</div>"\
 "</body>"\
-"</html>"\
-HTML_PARM_JSON\
+"</html>"
 
 
-#define PARM_3_HTML  HTML_PARM_HEAD\
-"<body>"\
+#define PARM_3_HTML "<body>"\
 "<ul>"\
 "  <li><a class='home'	href='home.html'>STAR-XINHUI</a></li>"\
 "  <li><a href='parm_1.html'>网络配置</a></li>"\
@@ -314,12 +291,10 @@ HTML_PARM_JSON\
 "</form>"\
 "</div>"\
 "</body>"\
-"</html>"\
-HTML_PARM2_JSON\
+"</html>"
 
 
-#define PARM_4_HTML  HTML_PARM_HEAD\
-"<body>"\
+#define PARM_4_HTML "<body>"\
 "<ul>"\
 "<li><a class='home'	href='home.html'>STAR-XINHUI</a></li>"\
 "<li><a href='parm_1.html'>网络配置</a></li>"\
@@ -352,7 +327,7 @@ HTML_PARM2_JSON\
 "<script type='text/javascript' src='pb.js'></script>"\
 "<script>"\
 "function bootmode(){document.getElementById('frmSetting').action='bootmode.cgi'; document.getElementById('frmSetting').submit(); }"\
-"</script>"\
+"</script>"
 
 
 

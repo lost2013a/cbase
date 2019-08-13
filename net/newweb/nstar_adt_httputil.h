@@ -7,6 +7,9 @@
 extern char *nstar_web_tx_buf; 
 extern char *nstar_web_rx_buf;
 
+#define	JSON_START_SYMBOL	"({"	
+#define	JSON_END_SYMBOL		"});"
+
 
 
 int do_https(void);
@@ -24,6 +27,9 @@ int http_rec(unsigned char *data, unsigned int rmax_len);
 
 #define WEB_CMM_VARIABLE_CALC(func)	do{ offset = func;len += offset;p_offset += offset;}while(0)
 				
+void http_sprintf_init(void);
+void http_sprintf(char* fmt,...);
+void http_sprintf_send(void);
 
 
 #endif
