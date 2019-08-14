@@ -1,3 +1,264 @@
+[1]RGET /parm_1.html HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2785
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'	href='home.html'>STAR-XINHUI</a></li><li><a class='active'	href='parm_1.html'>网络配置</a></li><li><a href='parm_2.html'>参数设置</a></li><li><a href='parm_3.html'>通道设置</a></li><li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function ipset.json(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};</script><script type='text/javascript' src='ipset.js'></script>
+
+[1]RGET /ipset.js HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:152
+
+
+
+[2]Wipset.json({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[1]RGET /parm_1.html HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2785
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'	href='home.html'>STAR-XINHUI</a></li><li><a class='active'	href='parm_1.html'>网络配置</a></li><li><a href='parm_2.html'>参数设置</a></li><li><a href='parm_3.html'>通道设置</a></li><li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function ipset.json(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};</script><script type='text/javascript' src='ipset.js'></script>
+
+[1]RGET /ipset.js HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:152
+
+
+
+[2]Wipset.json({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[1]RGET /parm_1.html HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2785
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'	href='home.html'>STAR-XINHUI</a></li><li><a class='active'	href='parm_1.html'>网络配置</a></li><li><a href='parm_2.html'>参数设置</a></li><li><a href='parm_3.html'>通道设置</a></li><li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function ipset.json(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};</script><script type='text/javascript' src='ipset.js'></script>
+
+[1]RGET /ipset.js HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:152
+
+
+
+[2]Wipset.json({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[1]RGET /parm_1.html HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2785
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'	href='home.html'>STAR-XINHUI</a></li><li><a class='active'	href='parm_1.html'>网络配置</a></li><li><a href='parm_2.html'>参数设置</a></li><li><a href='parm_3.html'>通道设置</a></li><li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function ipset.json(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};</script><script type='text/javascript' src='ipset.js'></script>
+
+[1]RGET /ipset.js HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:152
+
+
+
+[2]Wipset.json({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[1]RGET /parm_2.html HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
 [1]RGET /parm_2.html HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
@@ -5,49 +266,6 @@ Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-Referer: http://192.168.251.175/parm_2.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:3153
-
-
-
-[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul>  <li><a class='home'	href='home.html'>STAR-XINHUI</a></li>  <li><a href='parm_1.html'>网络配置</a></li>  <li><a class='active'	href='parm_2.html'>参数设置</a></li>  <li><a href='parm_3.html'>通道设置</a></li>  <li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST'><p><label>指令PID:</label><input type='text' size='16' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='Pnumb' name='Pnumb'/></p><p><label>播放音量:</label><input type='text' size='16' id='PlayVol' name='PlayVol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='Brate' name='Brate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='Srata' name='Srata'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function JsonDevParm(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('Pnumb')) $('Pnumb').value = o.Pnumb;if ($('PlayVol')) $('PlayVol').value = o.PlayVol;if ($('Brate')) $('Brate').value = o.Brate;if ($('Srata')) $('Srata').value = o.Srata;if ($('Gain')) $('Gain').value = o.Gain;};</script><script type='text/javascript' src='devparm.js'></script><script>function savereboot(){document.getElementById('frmSetting').action='config.cgi'; document.getElementById('frmSetting').submit(); }function saveonly(){document.getElementById('frmSetting').action='saveonly.cgi'; document.getElementById('frmSetting').submit(); }</script>
-
-[1]RGET /devparm.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/parm_2.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:105
-
-
-
-[2]WJsonDevParm({'CmdPid':'6691','Pnumb':'103','PlayVol':'50','Brate':'128','Srata':'48000','Gain':'1024',});
-
-[1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-Pragma: no-cache
-Cache-Control: no-cache
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/parm_2.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
@@ -57,24 +275,22 @@ Cookie: username=123; NSTAR_COOKIE8898619860075651
 [1]RGET /favicon.ico HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
-Pragma: no-cache
-Cache-Control: no-cache
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/parm_2.html
+Referer: http://192.168.251.175/parm_1.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
 
 
 
-[1]RGET /home.html HTTP/1.1
+[1]RGET /parm_1.html HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-Referer: http://192.168.251.175/parm_2.html
+Referer: http://192.168.251.175/parm_1.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
@@ -83,22 +299,18 @@ Cookie: username=123; NSTAR_COOKIE8898619860075651
 
 [2]WHTTP/1.1 200 OK
 Content-Type: text/html
-Content-Length:7043
+Content-Length:2785
 
 
 
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:6978
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'	href='home.html'>STAR-XINHUI</a></li><li><a class='active'	href='parm_1.html'>网络配置</a></li><li><a href='parm_2.html'>参数设置</a></li><li><a href='parm_3.html'>通道设置</a></li><li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function ipset.json(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};</script><script type='text/javascript' src='ipset.js'></script>
 
-<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><!DOCTYPE><html style='font-size:400%;'><head><meta http-equiv='Content-Type' content='text/html' charset='utf-8' /><title>终端网页管理主页</title><style type='text/css'>body {	background-color: #35a6e8;	background: -webkit-linear-gradient(right, #f0f0f0 , #35a6e8);    background: -o-linear-gradient( right, #f0f0f0, #35a6e8);    background: -moz-linear-gradient( right, #f0f0f0, #35a6e8);    background: linear-gradient(to right, #f0f0f0 , #35a6e8);}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #222222;font-size: 24px;}h4 {margin:0.2rem auto;; text-align: center;color: #222222;font-size: 10px;}div.d0{margin:0 auto;	width: 860px;height:500px;padding: 10px;}div.d1{display: table-cell;vertical-align: middle;font-size: 24px;text-align: center;float: left;background-color: #F0F0F0;filter:alpha(Opacity=00);-moz-opacity:0.9;opacity: 0.8; width: 300px;padding: 10px;margin: 30px 50px;}div.d2{text-align: left;float: left;width: 570px;margin: 50px 0 ; }div.d3{float: left;width: 220px;margin: 0 ; }a.five{font-size: 24px;margin: 50px ;font-weight: bold; }a.five:link {color: #0077FF;text-decoration: none;}a.five:visited{color: #0077FF;text-decoration: none;}a.five:hover {color: #0000CC;}section{width:2rem;height:2rem;position: relative;margin:1rem auto 0.2rem; padding:  0rem auto ;}.wrap,.circle,.percent{position: absolute; width: 2rem; height: 2rem; border-radius: 50%;}.wrap{top:0; left:0; background-color:#ccc;}.circle{box-sizing: border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; -moz-box-sizing:border-box; -o-box-sizing:border-box; border:1px solid #ccc; clip:rect(0,2rem,2rem,1rem);}.clip-auto{clip:rect(auto, auto, auto, auto);} .percent{box-sizing: border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; -moz-box-sizing:border-box; -o-box-sizing:border-box; top:-1px; left:-1px;}.left{border:0.1rem solid #ff6300; clip: rect(0,1rem,2rem,0);} .right{border:0.1rem solid #ff6300; clip: rect(0,2rem,2rem,1rem);}.wth0{width:0;}.num{position: absolute; box-sizing: border-box; -webkit-box-sizing:border-box; -ms-box-sizing:border-box; -moz-box-sizing:border-box; -o-box-sizing:border-box; width:1.8rem; height:1.8rem; line-height:1.8rem; text-align: center; font-size: 0.4rem; left:0.1rem; top:0.1rem; border-radius: 50%; color:#0077FF; background: white; z-index: 1;}table, td, th{border:1px solid black;font-size: 12px;color: #222222;}th{height:45px;width:100px;}</style></head><body><h1 > STAR-XINHUI </h1><h2> chengdu sida web management interface </h2><h3> 终端网页管理Ver1.0 </h3><div class='d0'>	<div class='d1'>        <a class='five' href='parm_1.html' >网络配置</a>        <h4 >可以设IP地址，网关地址...</h4>    </div>    <div class='d1'>        <a class='five' href='parm_2.html' >参数设置</a>        <h4 >可以设置用户密码，背光控制...</h4>    </div>    <div class='d1'>        <a class='five' href='parm_3.html' >通道设置</a>      <h4 >可以设置通道音量，网络端口...</h4>	</div>    <div class='d1'>        <a class='five' href='parm_4.html' >信息日志</a>        <h4 >可以查看装置日志和版本信息...</h4>    </div>    <div class='d3'>   	<section ><div class='wrap'>	<div id= 'cleft' class='circle'>	<div class='percent left' style='-webkit-transform:rotate(0deg);'></div>	<div id= 'cright' class='percent right wth0'></div>	</div>	<div class='num' id='cpuusage'></div>	</div>	</section> 	<h4 >CPU使用率</h4>	</div><div class='d2'>  <table><tr><th>通道编号</th><th>通道1</th><th>通道2</th><th>通道3</th><th>通道4</th><th>通道5</th><th>通道6</th><th>通道7</th></tr><tr><th>接收/缓冲</th><th id='txtsq1'></th><th id='txtsq2'></th><th id='txtsq3'></th><th id='txtsq4'></th><th id='txtsq5'></th><th id='txtsq6'></th><th id='txtsq7'></th></tr><tr><th>当前状态</th><th id='txtstep1'></th><th id='txtstep2'></th><th id='txtstep3'></th><th id='txtstep4'></th><th id='txtstep5'></th><th id='txtstep6'></th><th id='txtstep7'></th></tr></table><h4>模块状态</h4></div></div></body></html><script>function $(id) { return document.getElementById(id); };function myrefresh(){var xmlHttp = new XMLHttpRequest();xmlHttp.open('GET', '/sta.php?t='+ Math.random(), true);xmlHttp.send(null);xmlHttp.onreadystatechange=function(){if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {var json=xmlHttp.responseText;var o=eval('('+json+')');if ($('txtsq1')) $('txtsq1').innerHTML = o.sq1;if ($('txtsq2')) $('txtsq2').innerHTML = o.sq2;if ($('txtsq3')) $('txtsq3').innerHTML = o.sq3;if ($('txtsq4')) $('txtsq4').innerHTML = o.sq4;if ($('txtsq5')) $('txtsq5').innerHTML = o.sq5;if ($('txtsq6')) $('txtsq6').innerHTML = o.sq6;if ($('txtsq7')) $('txtsq7').innerHTML = o.sq7;if ($('txtstep1')) $('txtstep1').innerHTML = o.step1;if ($('txtstep2')) $('txtstep2').innerHTML = o.step2;if ($('txtstep3')) $('txtstep3').innerHTML = o.step3;if ($('txtstep4')) $('txtstep4').innerHTML = o.step4;if ($('txtstep5')) $('txtstep5').innerHTML = o.step5;if ($('txtstep6')) $('txtstep6').innerHTML = o.step6;if ($('txtstep7')) $('txtstep7').innerHTML = o.step7;var cpushow= parseFloat(o.cpuuse);var x = document.getElementById('cleft');var y = document.getElementById('cright');var z = document.getElementsByClassName('percent left');var a = document.getElementsByClassName('num');if(cpushow> 50){x.className  = 'clip-auto circle';y.className  = 'percent right';}else{x.className  = 'circle';y.className  = 'percent right wth0';}	a[0].innerHTML = cpushow+'%';z[0].style='-webkit-transform:rotate(' + 3.6*cpushow +'deg);'}}}</script>	<script language='JavaScript'>setInterval('myrefresh()',3000);</script><script>myrefresh();</script>
-
-[1]RGET /sta.php?t=0.5670310291340794 HTTP/1.1
+[1]RGET /ipset.js HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/home.html
+Referer: http://192.168.251.175/parm_1.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
@@ -107,2152 +319,43 @@ Cookie: username=123; NSTAR_COOKIE8898619860075651
 
 [2]WHTTP/1.1 200 OK
 Content-Type: text/html
-Content-Length:278
+Content-Length:152
 
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
+
+
+[2]Wipset.json({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
 
 [1]RGET /favicon.ico HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/home.html
+Referer: http://192.168.251.175/parm_1.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
 
 
 
-[1]RGET /sta.php?t=0.8894408664013207 HTTP/1.1
+[1]RGET /favicon.ico HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9125824759325063 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9821879913120188 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.20946655921649437 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5145867099812236 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.23983956501298698 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.30666870888590925 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.18151998204589925 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.787552582627628 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.06857747401027714 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.13996443446479434 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8023073367406004 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9789246982427457 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.44106337455556344 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.934434954657978 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8639138509853825 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.35703343606346394 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.10068179305121627 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7321604459617166 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.11514836207320456 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.357764480974883 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5227187169020762 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7537965298628202 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.6481564562355515 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9390338459521159 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.003132377029502642 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7263356841687494 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8326175050652556 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5214329100944184 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8449714958926018 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7542373898225625 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7528907256196822 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.1591439684882996 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5727671285239062 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.03970576934177017 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.6806847742263444 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.29405768008882816 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.632409333425709 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.09231427228490241 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.1144978509511807 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5588986298884222 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9391239164166778 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.23309505228354133 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7386305877401553 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8572408736798118 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7482778592837218 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7497561137857258 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.07303338483236255 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.4447078870301977 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5718321456434365 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9510713624190286 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9455798077648392 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.39836521677673664 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.11217434301811813 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7567810749514334 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8821445449990444 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.45402326253905034 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.3638583203321133 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.26267030470023833 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.6064738430496608 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.2921407148449273 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.23504318336919616 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.3469745368165613 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.532895278116118 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7623499147704997 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7483732675746373 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8873787097018864 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.44271143835523974 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7442617042844328 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.19142771939556114 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8757291657331834 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.18587142515426547 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.509418748806608 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.6032037371807724 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9002467749614282 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8405126951945503 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.15369286707806995 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5475616781655319 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.44345426421005496 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.24611419684883118 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.4008012789074722 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.6400112526688422 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.821190679044987 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.701117695624351 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9817296588694926 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.619516085060474 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8650504669954224 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7933958118288271 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5562566375159683 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7277567517350914 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.30857406824145217 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5807118421938249 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.6079021630967012 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5856117808438204 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.6548878771726623 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5369283678248842 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.6456213357090692 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.639257853525963 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.20299081269610686 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.1707864872391751 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.11438874760724516 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.825526814952046 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7653886427071914 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9691947744058846 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.057514802837775436 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.4562041027650843 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.008839066942698981 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.03491192715667979 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.3802213160180381 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5514936228781875 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.748222066497517 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.6206680051324907 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.10645339327752579 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.18402535837409073 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.06435358753115006 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9788861158722266 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9905797200555864 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.8052709382395002 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
-
-
 
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
 
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
 
-[1]RGET /sta.php?t=0.12840272070145153 HTTP/1.1
+[1]RGET /parm_1.html HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
+Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
@@ -2261,34 +364,18 @@ Cookie: username=123; NSTAR_COOKIE8898619860075651
 
 [2]WHTTP/1.1 200 OK
 Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
+Content-Length:2785
 
-[1]RGET /sta.php?t=0.34940767127494854 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
-
 
 
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'	href='home.html'>STAR-XINHUI</a></li><li><a class='active'	href='parm_1.html'>网络配置</a></li><li><a href='parm_2.html'>参数设置</a></li><li><a href='parm_3.html'>通道设置</a></li><li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function ipset.json(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};</script><script type='text/javascript' src='ipset.js'></script>
 
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.7567010557605927 HTTP/1.1
+[1]RGET /ipset.js HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/home.html
+Referer: http://192.168.251.175/parm_1.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
@@ -2297,61 +384,33 @@ Cookie: username=123; NSTAR_COOKIE8898619860075651
 
 [2]WHTTP/1.1 200 OK
 Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.3590916443495169 HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: username=123; NSTAR_COOKIE8898619860075651
+Content-Length:152
 
 
 
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
+[2]Wipset.json({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
 
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.9422166283274545 HTTP/1.1
+[1]RGET /favicon.ico HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
 
 
 
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
-
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
-
-[1]RGET /sta.php?t=0.5766357431101905 HTTP/1.1
+[1]RGET /favicon.ico HTTP/1.1
 Host: 192.168.251.175
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/home.html
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: username=123; NSTAR_COOKIE8898619860075651
-
 
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:278
 
-{		"sq1":"1",		"sq2":"2",		"sq3":"3",		"sq4":"4",		"sq5":"5",		"sq6":"6",		"sq7":"7",		"step1":"初始化..",		"step2":"初始化..",		"step3":"初始化..",		"step4":"初始化..",		"step5":"初始化..",		"step6":"初始化..",		"step7":"初始化..",		"cpuuse":"01.00",	    }
 

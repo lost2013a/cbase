@@ -32,6 +32,26 @@ void http_sprintf(char* fmt,...);
 void http_sprintf_send(void);
 
 
+#define HTML_PTYPE_HEAD "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%d\r\n\r\n"
+	
+
+
+#define REQUST_JSCRIPT_HEAD "<script>"\
+"function $(id) { return document.getElementById(id); };"\
+"function %s.json(o) {"
+
+#define REQUST_JSCRIPT_ELEMENT_STR		"if ($('%s')) $('%s').value = o.%s;"
+#define REQUST_JSCRIPT_ELEMENT(element) http_sprintf(REQUST_JSCRIPT_ELEMENT_STR, element, element, element);
+
+
+#define REQUST_JSCRIPT_END_STR "};"\
+"</script>"\
+"<script type='text/javascript' src='%s.js'></script>"\
+
+#define REQUST_JSCRIPT_END(name) 	http_sprintf(REQUST_JSCRIPT_END_STR, name);
+
+
+
 #endif
 
 
