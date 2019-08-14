@@ -204,12 +204,13 @@ const char *ch_sta_uft8[]={
 "</script>"\
 
 
-#define JSON_NAME_DevParm 		"json_dev_parm"
-#define JSON_JSCRIPT_DevParm 	"dev_parm.js"
-#define JS_DevParm_Lip 		"lip"
-#define JS_DevParm_Sub 		"sub"
-#define JS_DevParm_Gateway 	"gateway"
-#define JS_DevParm_Mac 	    "mac"
+#define JSON_NAME_P1 	"JsonIP"
+#define JSCRIPT_P1 		"ip.js"
+#define JS_P1_E1 		"sip"
+#define JS_P1_E2 		"dip"
+#define JS_P1_E3 		"programIP"
+#define JS_P1_E4 	    "logicID"
+#define JS_P1_E5 	    "physID"
 
 #define PARM_1_HTML "<body>"\
 "<ul>"\
@@ -223,10 +224,11 @@ const char *ch_sta_uft8[]={
 "<h3> 网络设置</h3>"\
 "<div style='background:snow; display:block; padding:10px 10%;'>"\
 "<form id='frmSetting' method='POST'>"\
-"<p><label>IP地址:</label><input type='text' size='16' id='lip' name='lip'/></p>"\
-"<p><label>子网掩码:</label><input type='text' size='16' id='sub' name='sub'/></p>"\
-"<p><label>默认网关:</label><input type='text' size='16' id='gateway' name='gateway'/></p>"\
-"<p><label>MAC地址:</label><input type='text' size='16' disabled='disabled' id='mac' name='mac'/></p>"\
+"<p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p>"\
+"<p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p>"\
+"<p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p>"\
+"<p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p>"\
+"<p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p>"\
 "<p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/>"\
 "<input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p>"\
 "<p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p>"\
@@ -235,6 +237,15 @@ const char *ch_sta_uft8[]={
 "</body>"\
 "</html>"
 
+
+#define JSON_NAME_P2 	"JsonDevParm"
+#define JSCRIPT_P2 		"devparm.js"
+#define JS_P2_E1 		"CmdPid"
+#define JS_P2_E2 		"Pnumb"
+#define JS_P2_E3 		"PlayVol"
+#define JS_P2_E4 	    "Brate"
+#define JS_P2_E5 	    "Srata"
+#define JS_P2_E6 	    "Gain"
 
 
 #define PARM_2_HTML  "<body>"\
@@ -246,17 +257,23 @@ const char *ch_sta_uft8[]={
 "  <li><a href='parm_4.html'>信息日志</a></li>"\
 "</ul>"\
 "<h2> chengdu sida web management interface </h2>"\
-"<h3> 参数设置</h3>"\
+"<h3> 网络设置</h3>"\
 "<div style='background:snow; display:block; padding:10px 10%;'>"\
-"<form id='frmSetting' method='POST' action='config.cgi'>"\
-"<p><label for='txtbctl'>背光控制:</label><input type='text' id='txtbctl' name='bctl' size='16'/></p>"\
-"<p><label for='txtpassw'>用户密码:</label><input type='text' id='txtpassw' name='passw' size='16' /></p>"\
+"<form id='frmSetting' method='POST'>"\
+"<p><label>指令PID:</label><input type='text' size='16' id='CmdPid' name='CmdPid'/></p>"\
+"<p><label>节目号:</label><input type='text' size='16' id='Pnumb' name='Pnumb'/></p>"\
+"<p><label>播放音量:</label><input type='text' size='16' id='PlayVol' name='PlayVol'/></p>"\
+"<p><label>编码比特率:</label><input type='text' size='16' id='Brate' name='Brate'/></p>"\
+"<p><label>编码采样率:</label><input type='text' size='16' id='Srata' name='Srata'/></p>"\
+"<p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p>"\
 "<p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/>"\
 "<input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p>"\
+"<p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p>"\
 "</form>"\
 "</div>"\
 "</body>"\
 "</html>"
+
 
 
 #define PARM_3_HTML "<body>"\
