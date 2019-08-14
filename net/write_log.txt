@@ -1,0 +1,65 @@
+[1]RGET /parm_1.html HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:3036
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理参数配置</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'	href='home.html'>STAR-XINHUI</a></li><li><a class='active'	href='parm_1.html'>网络配置</a></li><li><a href='parm_2.html'>参数设置</a></li><li><a href='parm_3.html'>通道设置</a></li><li><a href='parm_4.html'>信息日志</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p><p style='color: #FF2222;font-size: 14px;'> 注意：参数修改后建议断电重启</p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function JsonIP(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};</script><script type='text/javascript' src='ip.js'></script><script>function savereboot(){document.getElementById('frmSetting').action='config.cgi'; document.getElementById('frmSetting').submit(); }function saveonly(){document.getElementById('frmSetting').action='saveonly.cgi'; document.getElementById('frmSetting').submit(); }</script>
+
+[1]RGET /ip.js HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:148
+
+
+
+[2]WJsonIP({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.175
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.175/parm_1.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: username=123; NSTAR_COOKIE8898619860075651
+
+
+

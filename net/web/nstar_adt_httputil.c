@@ -269,6 +269,14 @@ void proc_http(SOCKET s, unsigned char * buf)
 	}
 }
 
+void make_cgi_noboot(char* ip, char* jumptourl, char* cgi_response_buf)
+{
+  sprintf(cgi_response_buf,"<html><head><title>iWeb - Configuration</title><script language=javascript>;function func(){location.href='http://%d.%d.%d.%d%s';}</script></head><body onload='func()'></body></html>"
+  	,ip[0],ip[1],ip[2],ip[3],jumptourl);
+  return;
+}
+
+
 
 void cgi_ipconfig(st_http_request *http_request, unsigned char mode , char* jump_to, unsigned char jumplen)
 { 
