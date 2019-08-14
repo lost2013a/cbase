@@ -67,6 +67,24 @@ void parm2_pos_htm(unsigned char mode)
 }
 
 
+static unsigned char set_sip(char* sip)
+{
+	printf("sip=%s\n", sip);	
+	return 0;
+}
+
+void parm2_rpos_cgi(char *url)
+{ 
+	char *p_content; 
+	p_content = (char*)my_get_param_url(url);
+	if(NULL == p_content){
+		return;
+	}
+	http_handle_parm(p_content, JS_P1_E1, (void*)set_sip);
+	http_sprintf_init();
+	http_sprintf(HTML_CGI_JUMP, "192.168.251.175", HTML_PAGE2_NAME);
+	http_sprintf_send();
+}
 
 
 

@@ -71,9 +71,6 @@ void http_sprintf_send(void)
 	http_send(http_sprintf_buf, http_sprintf_len);
 }
 
-
-
-
 static unsigned char GET_comp_uri(const char* uri, const char* str)
 {
 
@@ -91,18 +88,6 @@ static unsigned char GET_comp_uri(const char* uri, const char* str)
 	return ret;
 }
 
-static unsigned char _comp_uri(const char* uri, const char* str)
-{
-	if(uri[0]!='/')
-		return 0;
-	else{
-		uri+=1;
-		return (0 == strncmp(uri,str,strlen(str)))? 1: 0;
-	}
-}
-
-
-
 static void _repos_method_get(st_http_request     *http_request, unsigned char* http_response)
 {
 	char *name= http_request->URI;
@@ -112,43 +97,27 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 	if((mode= GET_comp_uri(name, HTML_PAGE2_NAME) ) > 0)
 		parm2_pos_htm(mode);
 
-
 }
-
-
-static void make_cgi_noboot(char* ip, char* jumptourl, char* cgi_response_buf)
-{
-  sprintf(cgi_response_buf,"<html><head><title>iWeb - Configuration</title><script language=javascript>;function func(){location.href='http://%s%s';}</script></head><body onload='func()'></body></html>"
-  	,ip,jumptourl);
-  return;
-}
-		
 
 
 static void _repos_method_post(st_http_request     *http_request, unsigned char* http_response)
 {
 	char req_name[32]={0x00,};			
-	char jumpto[20];unsigned char maxlen=20;
-	http_mid(http_request->URI, "/", " ", req_name);
+	char *uri= http_request->URI;
+	http_mid(uri, "/", " ", req_name);
 	if(strcmp(req_name,"log_in.cgi")==0){
 	}				
-	else if(strcmp(req_name,""HTML_PAGE1_NAME".cgi")==0)							  	
-	{
-		char jumpto[20];unsigned char maxlen=20;
-		parm1_rpos_cgi(http_request, 0, jumpto, maxlen);			/*只保存*/
-		make_cgi_noboot((char*)"192.168.251.175", jumpto, nstar_web_tx_buf);	
-		sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%ld\r\n\r\n%s",strlen(nstar_web_tx_buf),nstar_web_tx_buf);				
-		http_send((unsigned char *)http_response, strlen((char *)http_response));
+	else if(strcmp(req_name,""HTML_PAGE1_NAME".cgi") == 0)							  	
+	{	
+		parm1_rpos_cgi(uri);
 	}
 	else if(strcmp(req_name,""HTML_PAGE2_NAME".cgi")==0)							  	
 	{
+		parm2_rpos_cgi(uri);
 	}
-	else if(strcmp(req_name,"bootmode.cgi")==0)							  	
-	{
-	}
+
 }
 
-	
 
 static void proc_http(void)
 {								
@@ -209,6 +178,15 @@ void http_page_json(const char *name, void (fun_add_elemnet)(unsigned char))
 	fun_add_elemnet(URI_REPOS_JSON);
 	http_sprintf(JSON_END_SYMBOL);
 	http_sprintf_send();
+}
+
+void http_handle_parm(char *p_content, char *name, void(fun_set_parm)(char*))
+{
+	char *p_parm= get_http_param_value((unsigned char*)nstar_web_rx_buf, p_content, name);		
+	if(p_parm)
+	{	
+		fun_set_parm(p_parm);
+	}
 }
 
 

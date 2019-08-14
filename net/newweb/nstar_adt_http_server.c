@@ -182,6 +182,29 @@ unsigned char* get_param_url(char* uri, char* jump_to, unsigned char maxlen)
 }
 
 
+unsigned char* my_get_param_url(char* uri)
+{
+	char *p1;
+	if(!uri){
+		printf("NULL\r\n");
+		return NULL;
+	}
+	p1= strstr(uri,"Referer: http://");
+	if(p1 == NULL){
+		printf("no Referer\r\n");
+		return NULL;
+	}
+
+	p1= strstr(p1,"\r\n\r\n");
+	if(p1 == NULL){
+		printf("url no parm part\r\n");
+		return NULL;
+	}
+	p1 +=4;
+	return (unsigned char*)p1;
+}
+
+
 
 char* get_http_param_value(unsigned char* buf, char* uri, char* param_name )
 {

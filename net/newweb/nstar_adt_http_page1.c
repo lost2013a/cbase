@@ -61,22 +61,23 @@ void parm1_pos_htm(unsigned char mode)
 }
 
 
-void parm1_rpos_cgi(st_http_request *http_request, unsigned char mode , char* jump_to, unsigned char jumplen)
+static unsigned char set_sip(char* sip)
+{
+	printf("sip=%s\n", sip);	
+	return 0;
+}
+
+void parm1_rpos_cgi(char *url)
 { 
-	char *parm_url;
-	char *data; 
-	unsigned char *buf = (unsigned char*)nstar_web_rx_buf;	//只有1个参数且很长，临时借用rxbuf;
-	unsigned int val;
-	parm_url = (char*)get_param_url(http_request->URI, jump_to, jumplen);
-	if(parm_url == NULL){
-		mydbg("parm url not found\r\n");
+	char *p_content; 
+	p_content = (char*)my_get_param_url(url);
+	if(NULL == p_content){
 		return;
 	}
-	data = get_http_param_value(buf, parm_url, JS_P1_E1);		
-	if(data)
-	{	
-		printf("JS_P1_E1=%s\n", data);	
-	}
+	http_handle_parm(p_content, JS_P1_E1, (void*)set_sip);
+	http_sprintf_init();
+	http_sprintf(HTML_CGI_JUMP, "192.168.251.175", HTML_PAGE1_NAME);
+	http_sprintf_send();
 }
 
 

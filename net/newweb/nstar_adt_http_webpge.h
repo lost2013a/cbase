@@ -2,16 +2,6 @@
 #define __WEBPAGE_H
 //need save as utf-8 with BOM
 
-const char *ch_sta_uft8[]={
-	"网络状态异常",
-	"初始化..",
-	"等待连接..",		
-	"暂停中..",	
-	"正常播放",			
-	"测试中",
-	"ERROR",
-};
-
 
 #define HOME_HTML  "<!DOCTYPE>"\
 "<html style='font-size:400%;'>"\
@@ -175,112 +165,6 @@ const char *ch_sta_uft8[]={
 
 
 
-#define HTML_PARM3_JSON  "<script>"\
-"function $(id) { return document.getElementById(id); };"\
-"function json_dev_parm(o) {"\
-"if ($('txtt_out')) $('txtt_out').value = o.t_out;"\
-"if ($('txtchport1')) $('txtchport1').value = o.chport1;"\
-"if ($('txtchport2')) $('txtchport2').value = o.chport2;"\
-"if ($('txtchport3')) $('txtchport3').value = o.chport3;"\
-"if ($('txtchport4')) $('txtchport4').value = o.chport4;"\
-"if ($('txtchport5')) $('txtchport5').value = o.chport5;"\
-"if ($('txtchport6')) $('txtchport6').value = o.chport6;"\
-"if ($('txtchport7')) $('txtchport7').value = o.chport7;"\
-"if ($('txtchport8')) $('txtchport8').value = o.chport8;"\
-"if ($('txtvol1')) $('txtvol1').value = o.vol1;"\
-"if ($('txtvol2')) $('txtvol2').value = o.vol2;"\
-"if ($('txtvol3')) $('txtvol3').value = o.vol3;"\
-"if ($('txtvol4')) $('txtvol4').value = o.vol4;"\
-"if ($('txtvol5')) $('txtvol5').value = o.vol5;"\
-"if ($('txtvol6')) $('txtvol6').value = o.vol6;"\
-"if ($('txtvol7')) $('txtvol7').value = o.vol7;"\
-"if ($('txtvol8')) $('txtvol8').value = o.vol8;};"\
-"</script>"\
-"<script type='text/javascript' src='config.js'></script>"\
-"<script>"\
-"function savereboot(){document.getElementById('frmSetting').action='config.cgi'; document.getElementById('frmSetting').submit(); }"\
-"function saveonly(){document.getElementById('frmSetting').action='saveonly.cgi'; document.getElementById('frmSetting').submit(); }"\
-"function bootmode(){document.getElementById('frmSetting').action='bootmode.cgi'; document.getElementById('frmSetting').submit(); }"\
-"</script>"\
-
-
-
-
-
-#define JSON_NAME_P2 	"JsonDevParm"
-#define JSCRIPT_P2 		"devparm.js"
-#define JS_P2_E1 		"CmdPid"
-#define JS_P2_E2 		"Pnumb"
-#define JS_P2_E3 		"PlayVol"
-#define JS_P2_E4 	    "Brate"
-#define JS_P2_E5 	    "Srata"
-#define JS_P2_E6 	    "Gain"
-
-
-#define PARM_2_HTML  "<body>"\
-"<ul>"\
-"  <li><a class='home'	href='home.html'>STAR-XINHUI</a></li>"\
-"  <li><a href='parm_1.html'>网络配置</a></li>"\
-"  <li><a class='active'	href='parm_2.html'>参数设置</a></li>"\
-"  <li><a href='parm_3.html'>通道设置</a></li>"\
-"  <li><a href='parm_4.html'>信息日志</a></li>"\
-"</ul>"\
-"<h2> chengdu sida web management interface </h2>"\
-"<h3> 网络设置</h3>"\
-"<div style='background:snow; display:block; padding:10px 10%;'>"\
-"<form id='frmSetting' method='POST'>"\
-"<p><label>指令PID:</label><input type='text' size='16' id=\""JS_P2_E1"\" name=\""JS_P2_E1"\"/></p>"\
-"<p><label>节目号:</label><input type='text' size='16' id=\""JS_P2_E2"\" name=\""JS_P2_E2"\"/></p>"\
-"<p><label>播放音量:</label><input type='text' size='16' id=\""JS_P2_E3"\" name=\""JS_P2_E3"\"/></p>"\
-"<p><label>编码比特率:</label><input type='text' size='16' id=\""JS_P2_E4"\" name=\""JS_P2_E4"\"/></p>"\
-"<p><label>编码采样率:</label><input type='text' size='16' id=\""JS_P2_E5"\" name=\""JS_P2_E5"\"/></p>"\
-"<p><label>编码增益:</label><input type='text' size='16' id=\""JS_P2_E6"\" name=\""JS_P2_E6"\"/></p>"\
-"<p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/>"\
-"<input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p>"\
-"</form>"\
-"</div>"\
-"</body>"\
-"</html>"
-
-
-
-#define PARM_3_HTML "<body>"\
-"<ul>"\
-"  <li><a class='home'	href='home.html'>STAR-XINHUI</a></li>"\
-"  <li><a href='parm_1.html'>网络配置</a></li>"\
-"  <li><a href='parm_2.html'>参数配置</a></li>"\
-"  <li><a class='active'	href='parm_3.html'>通道设置</a></li>"\
-"  <li><a href='parm_4.html'>信息日志</a></li>"\
-"</ul>"\
-"<h2> chengdu sida web management interface </h2>"\
-"<h3> 通道设置</h3>"\
-"<div style='background:snow; display:block; padding:10px 10%;'>"\
-"<form id='frmSetting' method='POST' action='config.cgi'>"\
-"<p><label for='txtchport1'>通道1端口:</label><input type='text' id='txtchport1' name='chport1' size='12' />"\
-"<label for='txtvol1' style='padding-left:30px;'>通道1音量:</label><input type='text' id='txtvol1' name='vol1' size='12' /></p>"\
-"<p><label for='txtchport2'>通道2端口:</label><input type='text' id='txtchport2' name='chport2' size='12' />"\
-"<label for='txtvol2' style='padding-left:30px;'>通道2音量:</label><input type='text' id='txtvol2' name='vol2' size='12' /></p>"\
-"<p><label for='txtchport3'>通道3端口:</label><input type='text' id='txtchport3' name='chport3' size='12' />"\
-"<label for='txtvol3' style='padding-left:30px;'>通道3音量:</label><input type='text' id='txtvol3' name='vol3' size='12' /></p>"\
-"<p><label for='txtchport4'>通道4端口:</label><input type='text' id='txtchport4' name='chport4' size='12' />"\
-"<label for='txtvol4' style='padding-left:30px;'>通道4音量:</label><input type='text' id='txtvol4' name='vol4' size='12' /></p>"\
-"<p><label for='txtchport5'>通道5端口:</label><input type='text' id='txtchport5' name='chport5' size='12' />"\
-"<label for='txtvol5' style='padding-left:30px;'>通道5音量:</label><input type='text' id='txtvol5' name='vol5' size='12' /></p>"\
-"<p><label for='txtchport6'>通道6端口:</label><input type='text' id='txtchport6' name='chport6' size='12' />"\
-"<label for='txtvol6' style='padding-left:30px;'>通道6音量:</label><input type='text' id='txtvol6' name='vol6' size='12' /></p>"\
-"<p><label for='txtchport7'>通道7端口:</label><input type='text' id='txtchport7' name='chport7' size='12' />"\
-"<label for='txtvol7' style='padding-left:30px;'>通道7音量:</label><input type='text' id='txtvol7' name='vol7' size='12' /></p>"\
-"<p><label for='txtchport8'>通道8端口:</label><input type='text' id='txtchport8' name='chport8' size='12' />"\
-"<label for='txtvol8' style='padding-left:30px;'>通道8音量:</label><input type='text' id='txtvol8' name='vol8' size='12' /></p>"\
-"<p><label for='txtbctl'>异常重连时间:</label><input type='text' id='txtt_out' name='t_out' size='12'/></p>"\
-"<p><p><input type='button' value='保存' onclick ='saveonly();'  id='rcorners1'/>"\
-"<input type='button' onclick ='savereboot();' value='保存并重启' id='rcorners1' style='background: #ff6300'/></p>"\
-"</form>"\
-"</div>"\
-"</body>"\
-"</html>"
-
-
 #define PARM_4_HTML "<body>"\
 "<ul>"\
 "<li><a class='home'	href='home.html'>STAR-XINHUI</a></li>"\
@@ -315,6 +199,8 @@ const char *ch_sta_uft8[]={
 "<script>"\
 "function bootmode(){document.getElementById('frmSetting').action='bootmode.cgi'; document.getElementById('frmSetting').submit(); }"\
 "</script>"
+
+
 
 
 
@@ -381,29 +267,29 @@ const char *ch_sta_uft8[]={
 "<h2> chengdu sida web management interface </h2>"\
 "<br><br><br><br><br><br>"\
 "<div class='wrapper' >"\
-"    <div class='wrapper1' > "\
-"   	  <h4> Welcome！ </h4>"\
-"   	  <h3> 终端网页管理界面Ver1.0 </h3>"\
-"      <br><br><br><br>"\
-"      <h5> 型号：IP适配器<br>&copy;斯达鑫辉视讯科技有限公司 </h5>"\
-"    </div>"\
-"    <div class='wrapper2' >"\
-"    		<div style='padding:100px 00px 00px 85px;'>"\
-"           	 <h6> 用户密码：</h6>	"\
-"            </div>"\
-"            <form id='frmSetting' method='POST' action='log_in.cgi'>"\
-"            <div style='padding:0px 00px 00px 0px;'>"\
-"                <p>	"\
-"                    <label for='txtpass' ></label> "\
+"<div class='wrapper1' > "\
+"<h4> Welcome！ </h4>"\
+"<h3> 终端网页管理界面Ver1.1 </h3>"\
+"<br><br><br><br>"\
+"<h5> 型号：适配器<br>&copy;斯达鑫辉视讯科技有限公司 </h5>"\
+"</div>"\
+"<div class='wrapper2' >"\
+"<div style='padding:100px 00px 00px 85px;'>"\
+"<h6> 用户密码：</h6>	"\
+"</div>"\
+"<form id='frmSetting' method='POST' action='log_in.cgi'>"\
+"<div style='padding:0px 00px 00px 0px;'>"\
+"<p>"\
+"<label for='txtpass' ></label> "\
 "<input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0'  name='login_pass'"\
 "onFocus=\"if(value==defaultValue){value='';this.style.color='#303030'}\""\
 "onBlur=\"if(!value){value=defaultValue;this.style.color='#c0c0c0'}\" />"\
-"                </p>"\
-"            </div>"\
-"            <div style='padding:1px 00px 00px 85px;'>"\
-"                <p> <input  type='submit' value='登录' id='rcorners1'/></p>"\
-"      </form>"\
-"  </div>     "\
+"</p>"\
+"</div>"\
+"<div style='padding:1px 00px 00px 85px;'>"\
+"<p> <input  type='submit' value='登录' id='rcorners1'/></p>"\
+"</form>"\
+"</div>"\
 "</div>"\
 "</div>"
 

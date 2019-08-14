@@ -79,9 +79,15 @@ void http_sprintf_send(void);
 "</head>"\
 
 
+#define HTML_CGI_JUMP "<html><head><script language=javascript>;"\
+"function func(){location.href='http://%s/%s.html';}</script></head><body onload='func()'></body></html>"
+
+
 void http_page_json(const char *name, void (fun_add_elemnet)(unsigned char));
 
 void http_page_htm(const char *name, const char *body, void (fun_add_elemnet)(unsigned char));
+
+void http_handle_parm(char *p_content, char *name, void(fun_set_parm)(char*));
 
 #endif
 
