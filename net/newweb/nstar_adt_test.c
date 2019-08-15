@@ -5,16 +5,14 @@
 #include "nstar_adt_http_server.h"
 
 #define WEB_PORT 80
-#define myprintf printf
-#define myerro   perror
 #define FIN_WCNT 5
-
-char *nstar_web_tx_buf; 
-char *nstar_web_rx_buf;
 
 static unsigned char *p_webmem;
 static int server_sock;
 int conn_sock;
+
+char *nstar_web_tx_buf; 
+char *nstar_web_rx_buf;
 
 static void* aligned_malloc(size_t required_bytes, size_t alignment)
 {
@@ -33,14 +31,13 @@ static void aligned_free(void *p2)
     free(p1);
 }
 
-
 static int web_mem_init(void)
 {
 	unsigned int mem_len= 2*MAX_URI_SIZE+32;
 	
 	unsigned char *p_webmem= aligned_malloc(mem_len,8);
 	if(p_webmem == NULL){
-		myerro("web malloc failed\n");
+		perror("web malloc failed\n");
 		return -1;
 	}
 	nstar_web_tx_buf= (char*)p_webmem;
@@ -56,7 +53,7 @@ static int web_socket_init(void)
 	socklen_t	sock_len	= sizeof(client_addr);
 	server_sock = socket(AF_INET, SOCK_STREAM, 0);
 	if (server_sock < 0) {
-		myerro("web socket error\n");
+		perror("web socket error\n");
 		return 0;
 	}
 	
@@ -73,12 +70,12 @@ static int web_socket_init(void)
 	
 	ret= bind(server_sock, (struct sockaddr *)&server_addr, sizeof(server_addr));
 	if (ret<0) {
-		myprintf("web bind error:%d\n",ret);
+		perror("web bind error\n");
 		goto err;
 	}
 
 	if (listen(server_sock, 5)) {
-		myerro("web listen error\n");
+		perror("web listen error\n");
 		goto err;
 	}
 	return server_sock;
@@ -108,6 +105,7 @@ void nstar_web_servo(void* arg)
 	{
 		conn_sock= accept(server_sock, (struct sockaddr *)&client_addr, &sock_len);
 		if (conn_sock < 0) {
+			printf("web shutdown\n");
 			goto shutdown;
 		}
 		fin_waiting=FIN_WCNT;

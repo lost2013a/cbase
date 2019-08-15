@@ -1,7 +1,4 @@
-#include <sys/socket.h>
-#include <stdarg.h>
 #include "nstar_adt_httputil.h"
-#include "htm_login.h"
 #include "nstar_adt_http_page.h"
 
 
@@ -15,13 +12,13 @@
 
 #define C_PAGE_BODY "<body>"\
 "<ul>"\
-"<li><a href='"HTML_PAGE1_NAME".html' class='active'>网络配置</a></li>"\
-"<li><a href='"HTML_PAGE2_NAME".html'>参数设置</a></li>"\
-"<li><a href='"HTML_PAGE3_NAME".html'>通道设置</a></li>"\
+"<li><a href='"HTML_PAGE1_NAME".html' class='active'>参数状态</a></li>"\
+"<li><a href='"HTML_PAGE2_NAME".html'>网络设置</a></li>"\
+"<li><a href='"HTML_PAGE3_NAME".html'>音频设置</a></li>"\
 "<li><a href='"HTML_PAGE4_NAME".html'>信息日志</a></li>"\
 "</ul>"\
 "<h2> chengdu sida web management interface </h2>"\
-"<h3> 网络设置</h3>"\
+"<h3> 参数状态</h3>"\
 "<div style='background:snow; display:block; padding:10px 10%;'>"\
 "<form id='frmSetting' method='POST' action='"C_PAGE_NAME".cgi'>"\
 "<p><label>服务器IP地址:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E1"' name='"JS_P1_E1"'/></p>"\
@@ -33,9 +30,6 @@
 "</div>"\
 "</body>"\
 "</html>"
-
-
-
 
 
 static void _add_htm_element(unsigned char mode)
@@ -80,7 +74,7 @@ void parm1_rpos_cgi(char *url)
 	}
 	http_handle_parm(p_content, JS_P1_E1, (void*)set_sip);
 	http_sprintf_init();
-	http_sprintf(HTML_CGI_JUMP, "192.168.251.175", C_PAGE_NAME);
+	http_sprintf(HTML_CGI_JUMP, LOCAL_IP, C_PAGE_NAME);
 	http_sprintf_send();
 }
 

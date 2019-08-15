@@ -1,8 +1,6 @@
 #include <sys/socket.h>
 #include <stdarg.h>
 #include "nstar_adt_httputil.h"
-#include "htm_login.h"
-
 #include "nstar_adt_http_page.h"
 
 #define HTTP_SENDBUF nstar_web_tx_buf
@@ -11,12 +9,14 @@ extern int conn_sock;
 
 #define HTML_PTYPE_HEAD "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%d\r\n\r\n"
 	
-
-
 #define SOCKET_SND_FLAG 0
 #define SOCKET_REC_FLAG MSG_DONTWAIT
 
-int http_send(unsigned char *data, unsigned int len)
+volatile static unsigned int http_sprintf_len;
+#define HTTP_SPRINTF_MAXLEN 8000
+static unsigned char http_sprintf_buf[HTTP_SPRINTF_MAXLEN];
+
+static int http_send(unsigned char *data, unsigned int len)
 {
 #if 1
 #include "write_log.h"
@@ -25,7 +25,7 @@ int http_send(unsigned char *data, unsigned int len)
 	return send(conn_sock, data, len, SOCKET_SND_FLAG);
 }
 
-int http_rec(unsigned char *data, unsigned int rmax_len)
+static int http_rec(unsigned char *data, unsigned int rmax_len)
 {
 	int retlen;
 	retlen= recv(conn_sock, data, rmax_len, SOCKET_REC_FLAG);
@@ -36,10 +36,6 @@ int http_rec(unsigned char *data, unsigned int rmax_len)
 #endif
 	return retlen;
 }
-
-volatile static unsigned int http_sprintf_len;
-#define HTTP_SPRINTF_MAXLEN 8000
-static unsigned char http_sprintf_buf[HTTP_SPRINTF_MAXLEN];
 
 void http_sprintf_init(void)
 {
@@ -88,11 +84,23 @@ static unsigned char GET_comp_uri(const char* uri, const char* str)
 	return ret;
 }
 
+static unsigned char _comp_uri(const char* uri, const char* str)
+{
+	return (0 == strncmp(uri,str,strlen(str)))? 1: 0;
+}
+
+
 static void _repos_method_get(st_http_request     *http_request, unsigned char* http_response)
 {
 	char *name= http_request->URI;
 	unsigned char mode=0;
-	if((mode= GET_comp_uri(name, HTML_PAGE1_NAME) ) > 0)
+	if(0 == memcmp(name, "/\0", 2) || _comp_uri(name, "/"HTML_PAGE0_NAME"") ){
+		parm0_pos_htm(mode);
+		return;
+	}
+	if(1 != cookie_verify((unsigned char*)http_response))
+		verify_time_out();
+	else if((mode= GET_comp_uri(name, HTML_PAGE1_NAME) ) > 0)
 		parm1_pos_htm(mode);
 	else if((mode= GET_comp_uri(name, HTML_PAGE2_NAME) ) > 0)
 		parm2_pos_htm(mode);
@@ -100,6 +108,9 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 		parm3_pos_htm(mode);
 	else if((mode= GET_comp_uri(name, HTML_PAGE4_NAME) ) > 0)
 		parm4_pos_htm(mode);
+	else if(_comp_uri(name,"/favicon.ico")){
+		/*nothing need to do*/
+	}
 
 }
 
@@ -109,8 +120,12 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 	char req_name[32]={0x00,};			
 	char *uri= http_request->URI;
 	http_mid(uri, "/", " ", req_name);
-	if(strcmp(req_name,"log_in.cgi")==0){
-	}				
+	if(strcmp(req_name,""HTML_PAGE0_NAME".cgi")==0){
+		parm0_rpos_cgi(uri);	
+		return;
+	}
+	if(1 != cookie_verify((unsigned char*)http_response))
+		verify_time_out();			
 	else if(strcmp(req_name,""HTML_PAGE1_NAME".cgi") == 0)							  	
 		parm1_rpos_cgi(uri);
 	else if(strcmp(req_name,""HTML_PAGE2_NAME".cgi")==0)							  	
@@ -123,16 +138,14 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 }
 
 
+
 static void proc_http(void)
 {								
 	unsigned char* http_response;
 	st_http_request *http_request;
 	http_response = (unsigned char*)nstar_web_rx_buf;
 	http_request = (st_http_request*)nstar_web_tx_buf;
-	memset(nstar_web_tx_buf,0x00,MAX_URI_SIZE);
-	if(1){
-		cookie_verify((unsigned char*)http_response);
-	}
+	memset(http_request,0x00,MAX_URI_SIZE);
 	parse_http_request(http_request, (unsigned char*)nstar_web_rx_buf);
 	switch (http_request->METHOD)	
  	{

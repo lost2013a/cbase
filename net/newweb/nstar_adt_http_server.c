@@ -143,7 +143,6 @@ unsigned char* get_param_url(char* uri, char* jump_to, unsigned char maxlen)
 		printf("NULL\r\n");
 		return NULL;
 	}
-	//mydbg("uri:%s\r\n",uri);
 	p1= strstr(uri,"Referer: http://");
 	if(p1 == NULL){
 		
@@ -152,32 +151,18 @@ unsigned char* get_param_url(char* uri, char* jump_to, unsigned char maxlen)
 	}
 	p1+= strlen("Referer: http://");
 	p1= strstr(p1+1,"/");
-	//mydbg("p1:%s\r\n",p1);
 	p2= strstr(p1+1,"\r\n");
-	//mydbg("p2:%s\r\n",p2);
 	content_len= p2-p1;
 	if(content_len < maxlen){
 		memcpy(jump_to, p1, content_len);
 		jump_to[content_len]= 0;
 	}
-	//mydbg("jumpto:%s\r\n", jump_to);
 	p1= strstr(uri,"\r\n\r\n");
 	if(p1 == NULL){
 		printf("url no parm part\r\n");
 		return NULL;
 	}
 	p1 +=4;
-#if 0	
-	p2=strstr(uri, "Content-Length: ");
-	if(p2 == NULL){
-		myerro("url no Content-Length\r\n");
-		return NULL;
-	}
-	p2+= strlen("Content-Length: ");
-	content_len= atoi(p2);
-	//p1[content_len]=0;//err
-#endif	
-	//mydbg("p1:%s\r\n",p1);
 	return (unsigned char*)p1;
 }
 

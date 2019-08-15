@@ -17,30 +17,8 @@ extern char *nstar_web_rx_buf;
 #define URI_JSON ".js"
 
 
-int do_https(void);
-void cgi_ipconfig(st_http_request *http_request, unsigned char mode, char* jump_to, unsigned char jumplen);
-unsigned short make_msg_response(unsigned char* buf,char* msg);
-
-void make_cgi_response(unsigned short delay, char* ip, char* jumptourl, char* cgi_response_buf);
-void make_pwd_response(char isRight,unsigned short delay,char* cgi_response_content, char isTimeout);
-
-
-int http_send(unsigned char *data, unsigned int len);
-
-int http_rec(unsigned char *data, unsigned int rmax_len);
-
-
-#define WEB_CMM_VARIABLE_CALC(func)	do{ offset = func;len += offset;p_offset += offset;}while(0)
-				
-void http_sprintf_init(void);
-void http_sprintf(char* fmt,...);
-void http_sprintf_send(void);
-
-
 #define HTML_PTYPE_HEAD "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%d\r\n\r\n"
 	
-
-
 #define REQUST_JSCRIPT_HEAD "<script>"\
 "function $(id) { return document.getElementById(id); };"\
 "function json_%s(o) {"
@@ -48,10 +26,8 @@ void http_sprintf_send(void);
 #define REQUST_JSCRIPT_ELEMENT_STR		"if ($('%s')) $('%s').value = o.%s;"
 #define REQUST_JSCRIPT_ELEMENT(element) http_sprintf(REQUST_JSCRIPT_ELEMENT_STR, element, element, element);
 
-
 #define REQUST_JSCRIPT_END_STR "};function commit(){document.getElementById('frmSetting').submit();}</script>"\
 "<script type='text/javascript' src='%s.js'> </script>"\
-
 
 #define REQUST_JSCRIPT_END(name) 	http_sprintf(REQUST_JSCRIPT_END_STR, name);
 
@@ -78,15 +54,18 @@ void http_sprintf_send(void);
 "</style>"\
 "</head>"\
 
-
 #define HTML_CGI_JUMP "<html><head><script language=javascript>;"\
 "function func(){location.href='http://%s/%s.html';}</script></head><body onload='func()'></body></html>"
 
 
+int do_https(void);
+
+void http_sprintf_init(void);
+void http_sprintf(char* fmt,...);
+void http_sprintf_send(void);
+
 void http_page_json(const char *name, void (fun_add_elemnet)(unsigned char));
-
 void http_page_htm(const char *name, const char *body, void (fun_add_elemnet)(unsigned char));
-
 void http_handle_parm(char *p_content, char *name, void(fun_set_parm)(char*));
 
 #endif

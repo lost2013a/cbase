@@ -6,12 +6,6 @@
 #include <string.h>
 #include "write_log.h"
 
-#define mydbg 	printf
-#define SOCKET  int
-
-
-#define HTTP_SERVER_PORT		80		/**< Http server well-known port number */
-
 /* HTTP Method */
 #define		METHOD_ERR			0				/**< Error Method. */
 #define		METHOD_GET			1				/**< GET Method.   */

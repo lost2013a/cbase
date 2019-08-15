@@ -29,12 +29,11 @@ static struct http_cookie h_cookie= {0};
 
 static void _set_cookie(unsigned int last_time)
 {
-	unsigned int number1= (last_time << 1)+ SERIAL_NUMB;
-	unsigned int number2= (last_time >> 1)- SERIAL_NUMB;
+	unsigned int number1= (last_time >> 1) ;
+	unsigned int number2= (last_time << 1)*SERIAL_NUMB;
 	number1%=100000000;
 	number2%=100000000;
 	h_cookie.vaild_len= snprintf(h_cookie.cookie, COOKIE_LEN, "%s%08d%08d", COOKIE_HEAD, number1, number2);
-	//mydbg("h_cookie[%d]:%s\n", h_cookie.vaild_len, h_cookie.cookie);
 }
 
 static void _update_cookie(void)
@@ -43,7 +42,6 @@ static void _update_cookie(void)
 	unsigned int current_time= app_get_systime();
 	int off = current_time- *p_last;
 	if(off > COOKIE_PERIOD_TIME){
-		//mydbg("update cookie: period\n");
 		_set_cookie(current_time);
 		*p_last= current_time;
 	}
@@ -54,16 +52,21 @@ void cookie_init(void)
 	unsigned int current_time= app_get_systime();
 	_set_cookie(current_time);
 	h_cookie.last_time= current_time;
-	//mydbg("update cookie: init\n");
 }
 
 
 int cookie_verify(unsigned char *http)
 {
-	char *p_cooki = strstr((const char *)http, (const char *)COOKIE_HEAD);
+#if 1
+	printf("cookie_verify dbg :\n");
+	return 1;
+#endif
+	#define HTTP_BASE_LEN 20
+	char *p_cooki;
+	http+= HTTP_BASE_LEN;
+	p_cooki= strstr((const char *)http, (const char *)COOKIE_HEAD);
 	if(p_cooki == NULL)
 		return -1;
-
 	_update_cookie();
 	if(memcmp(p_cooki, h_cookie.cookie, h_cookie.vaild_len)==0){
 		return 1;
@@ -78,16 +81,10 @@ const char* cookie_getstr(void)
 }
 
 
-unsigned char login_pass_check(const char* dst)
-{
-	unsigned char ret=0;
-	if(dst == NULL)
-		return ret;
-	if(memcmp(SUPPER_PASS, dst, SUPPER_PASS_LEN) == 0)
-		ret=1;
-	else if(memcmp(USER_PASS, dst, PASS_LEN) == 0)
-		ret=1;
-	return ret;
-}
+//GET /sta.js HTTP/1.1
+//Host: 192.168.251.175
+//Connection: keep-alive
+//User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+
 
 

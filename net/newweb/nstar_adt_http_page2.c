@@ -1,7 +1,4 @@
-#include <sys/socket.h>
-#include <stdarg.h>
 #include "nstar_adt_httputil.h"
-#include "htm_login.h"
 #include "nstar_adt_http_page.h"
 
 
@@ -15,9 +12,9 @@
 
 #define C_PAGE_BODY "<body>"\
 "<ul>"\
-"<li><a href='"HTML_PAGE1_NAME".html'>网络配置</a></li>"\
-"<li><a href='"HTML_PAGE2_NAME".html' class='active'>参数设置</a></li>"\
-"<li><a href='"HTML_PAGE3_NAME".html'>通道设置</a></li>"\
+"<li><a href='"HTML_PAGE1_NAME".html'>参数状态</a></li>"\
+"<li><a href='"HTML_PAGE2_NAME".html' class='active'>网络设置</a></li>"\
+"<li><a href='"HTML_PAGE3_NAME".html'>音频设置</a></li>"\
 "<li><a href='"HTML_PAGE4_NAME".html'>信息日志</a></li>"\
 "</ul>"\
 "<h2> chengdu sida web management interface </h2>"\
@@ -77,7 +74,7 @@ void parm2_rpos_cgi(char *url)
 	}
 	http_handle_parm(p_content, JS_P1_E1, (void*)set_sip);
 	http_sprintf_init();
-	http_sprintf(HTML_CGI_JUMP, "192.168.251.175", C_PAGE_NAME);
+	http_sprintf(HTML_CGI_JUMP, LOCAL_IP, C_PAGE_NAME);
 	http_sprintf_send();
 }
 
