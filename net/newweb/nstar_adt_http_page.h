@@ -37,6 +37,9 @@ void parm3_rpos_cgi(char *url);
 void parm4_pos_htm(unsigned char mode);
 void parm4_rpos_cgi(char *url);
 
+#define HTML_PAGE5_NAME "firmware"
+void parm5_pos_htm(unsigned char mode);
+void parm5_rpos_cgi(char *url);
 
 
 
