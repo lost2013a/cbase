@@ -16,7 +16,6 @@
 "<li><a href='"HTML_PAGE2_NAME".html' class='active'>网络设置</a></li>"\
 "<li><a href='"HTML_PAGE3_NAME".html'>音频设置</a></li>"\
 "<li><a href='"HTML_PAGE4_NAME".html'>信息日志</a></li>"\
-"<li><a href='"HTML_PAGE5_NAME".html'>面板固件</a></li>"\
 "</ul>"\
 "<h2> chengdu sida web management interface </h2>"\
 "<h3> 网络设置</h3>"\

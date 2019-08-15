@@ -108,8 +108,6 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 		parm3_pos_htm(mode);
 	else if((mode= GET_comp_uri(name, HTML_PAGE4_NAME) ) > 0)
 		parm4_pos_htm(mode);
-	else if((mode= GET_comp_uri(name, HTML_PAGE5_NAME) ) > 0)
-		parm5_pos_htm(mode);
 	else if(_comp_uri(name,"/favicon.ico")){
 		/*nothing need to do*/
 	}
@@ -136,8 +134,6 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 		parm3_rpos_cgi(uri);
 	else if(strcmp(req_name,""HTML_PAGE4_NAME".cgi")==0)							  	
 		parm4_rpos_cgi(uri);
-	else if(strcmp(req_name,""HTML_PAGE5_NAME".cgi")==0)							  	
-		parm5_rpos_cgi(uri);
 
 }
 
