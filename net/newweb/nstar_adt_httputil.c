@@ -94,8 +94,12 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 	unsigned char mode=0;
 	if((mode= GET_comp_uri(name, HTML_PAGE1_NAME) ) > 0)
 		parm1_pos_htm(mode);
-	if((mode= GET_comp_uri(name, HTML_PAGE2_NAME) ) > 0)
+	else if((mode= GET_comp_uri(name, HTML_PAGE2_NAME) ) > 0)
 		parm2_pos_htm(mode);
+	else if((mode= GET_comp_uri(name, HTML_PAGE3_NAME) ) > 0)
+		parm3_pos_htm(mode);
+	else if((mode= GET_comp_uri(name, HTML_PAGE4_NAME) ) > 0)
+		parm4_pos_htm(mode);
 
 }
 
@@ -108,13 +112,13 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 	if(strcmp(req_name,"log_in.cgi")==0){
 	}				
 	else if(strcmp(req_name,""HTML_PAGE1_NAME".cgi") == 0)							  	
-	{	
 		parm1_rpos_cgi(uri);
-	}
 	else if(strcmp(req_name,""HTML_PAGE2_NAME".cgi")==0)							  	
-	{
 		parm2_rpos_cgi(uri);
-	}
+	else if(strcmp(req_name,""HTML_PAGE3_NAME".cgi")==0)							  	
+		parm3_rpos_cgi(uri);
+	else if(strcmp(req_name,""HTML_PAGE4_NAME".cgi")==0)							  	
+		parm4_rpos_cgi(uri);
 
 }
 
@@ -157,8 +161,6 @@ int do_https(void)
 	proc_http();	
 	return len; 
 }
-
-
 
 
 void http_page_htm(const char *name, const char *body, void (fun_add_elemnet)(unsigned char))
