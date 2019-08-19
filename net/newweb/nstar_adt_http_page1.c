@@ -12,6 +12,7 @@
 
 #define C_PAGE_BODY "<body>"\
 "<ul>"\
+"<li><a class='home'>STAR-斯达鑫辉</a></li>"\
 "<li><a href='"HTML_PAGE1_NAME".html' class='active'>参数状态</a></li>"\
 "<li><a href='"HTML_PAGE2_NAME".html'>网络设置</a></li>"\
 "<li><a href='"HTML_PAGE3_NAME".html'>音频设置</a></li>"\
@@ -21,19 +22,53 @@
 "<h3> 参数状态</h3>"\
 "<div style='background:snow; display:block; padding:10px 10%;'>"\
 "<form id='frmSetting' method='POST' action='"C_PAGE_NAME".cgi'>"\
-"<p><label>服务器IP地址:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E1"' name='"JS_P1_E1"'/></p>"\
-"<p><label>终端IP地址:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E2"' name='"JS_P1_E2"'/></p>"\
-"<p><label>节目源地址:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E3"' name='"JS_P1_E3"'/></p>"\
-"<p><label>逻辑地址:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E4"' name='"JS_P1_E4"'/></p>"\
-"<p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E5"' name='"JS_P1_E5"'/></p>"\
+"<p><label>工作模式:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E1"' name='"JS_P1_E1"'/></p>"\
+"<p><label>指令端口状态:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E2"' name='"JS_P1_E2"'/></p>"\
+"<p><label>编码器状态:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E3"' name='"JS_P1_E3"'/></p>"\
+"<p><label>数据流量:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E4"' name='"JS_P1_E4"'/></p>"\
+"<p><label>当前音源:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E5"' name='"JS_P1_E5"'/></p>"\
 "</form>"\
 "</div>"\
 "</body>"\
-"</html>"
+"</html>"\
 
+
+#define STA_REFRESH_HTML_START "<script>function $(id) { return document.getElementById(id); };"\
+"function myrefresh()"\
+"{"\
+"	var xmlHttp = new XMLHttpRequest();"\
+"	xmlHttp.open('GET', '/sta.js', true);"\
+"	xmlHttp.send(null);"\
+"	xmlHttp.onreadystatechange=function()"\
+"	{"\
+"		if(xmlHttp.readyState == 4 && xmlHttp.status == 200) "\
+"		{"\
+"			function json_"C_PAGE_NAME"(o){"
+
+#define STA_REFRESH_HTML_END  "};"\
+"		}"\
+"	}"\
+"}</script>	"\
+"<script language='JavaScript'>setInterval('myrefresh()',2000);</script>"\
+"<script>myrefresh();</script>"
+
+
+
+
+
+
+
+#if 0
+"var json=xmlHttp.responseText;"\
+"var o=eval(\'(\'+json+\')\');"\
+"if ($('programIP')) $('programIP').value = o.programIP;"\
+"if ($('logicID')) $('logicID').value = o.logicID;"\
+
+#endif
 
 static void _add_htm_element(unsigned char mode)
 {
+	static int i=0;
 	if(mode == URI_REPOS_HTML){
 		REQUST_JSCRIPT_ELEMENT(JS_P1_E1);
 		REQUST_JSCRIPT_ELEMENT(JS_P1_E2);
@@ -42,7 +77,7 @@ static void _add_htm_element(unsigned char mode)
 		REQUST_JSCRIPT_ELEMENT(JS_P1_E5);
 	}
 	else if(mode == URI_REPOS_JSON){
-		http_sprintf("'%s':'%d.%d.%d.%d:%d',",JS_P1_E1, 192,1,1,170,40001 );
+		http_sprintf("'%s':'%d.%d.%d.%d:%d',",JS_P1_E1, 192,1,1,170,i++ );
 		http_sprintf("'%s':'%d.%d.%d.%d:%d',",JS_P1_E2, 192,1,1,1,51001);
 		http_sprintf("'%s':'%d.%d.%d.%d',",JS_P1_E3, 255,255,255,0 );
 		http_sprintf("'%s':'%02X-%02X-%02X-%02X-%02X-%02X',",JS_P1_E4, 1,2,3,4,5,6 );
@@ -50,33 +85,42 @@ static void _add_htm_element(unsigned char mode)
 	}
 }
 
-void parm1_pos_htm(unsigned char mode)
+void http_page_sta(const char* name, void (fun_add_elemnet)(unsigned char))
 {
-	if(mode == URI_REPOS_HTML)
-		http_page_htm(C_PAGE_NAME, C_PAGE_BODY, _add_htm_element);
-	else if(mode == URI_REPOS_JSON)
-		http_page_json(C_PAGE_NAME, _add_htm_element);
-}
-
-
-static unsigned char set_sip(char* sip)
-{
-	printf("sip=%s\n", sip);	
-	return 0;
-}
-
-void parm1_rpos_cgi(char *url)
-{ 
-	char *p_content; 
-	p_content = (char*)my_get_param_url(url);
-	if(NULL == p_content){
-		return;
-	}
-	http_handle_parm(p_content, JS_P1_E1, (void*)set_sip);
 	http_sprintf_init();
-	http_sprintf(HTML_CGI_JUMP, LOCAL_IP, C_PAGE_NAME);
+	http_sprintf("%s%s", HTML_PARM_HEAD, C_PAGE_BODY);
+	http_sprintf(STA_REFRESH_HTML_START);
+	fun_add_elemnet(URI_REPOS_JSON);
+	http_sprintf(STA_REFRESH_HTML_END);
 	http_sprintf_send();
 }
+
+
+void http_sta_json(void (fun_add_elemnet)(unsigned char))
+{
+
+	http_sprintf_init();
+	http_sprintf("{");
+	fun_add_elemnet(URI_REPOS_JSON);
+	http_sprintf("}");
+	http_sprintf_send();
+}
+
+
+
+void parm1_pos_htm(unsigned char mode)
+{
+	if(mode == URI_REPOS_HTML){
+		http_page_sta(HTML_PAGE1_NAME, _add_htm_element);
+	}
+	else{
+	
+		http_sta_json(_add_htm_element);
+	
+	}
+	
+}
+
 
 
 

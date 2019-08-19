@@ -58,7 +58,6 @@ void cookie_init(void)
 int cookie_verify(unsigned char *http)
 {
 #if 1
-	printf("cookie_verify dbg :\n");
 	return 1;
 #endif
 	#define HTTP_BASE_LEN 20
