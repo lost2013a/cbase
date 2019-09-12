@@ -7,71 +7,105 @@
 #include <netdb.h>
 #include <errno.h>
 
-#define BUFLEN 255
+#define MCAST_PORT 50001
+#define MCAST_ADDR "237.0.0.3"
+#define BUFLEN 1460
+char buff[BUFLEN];
 
-int
-main (int argc, char **argv) 
-{  
-    struct sockaddr_in peeraddr,ia;  
-    int sockfd; 
-    char recmsg[BUFLEN + 1]; 
-    unsigned int socklen, n; 
-    struct ip_mreq mreq; 
+static rec_ts(int len, unsigned char *buf)
+{
 
-    /* 创建 socket 用于UDP通讯 */ 
-    sockfd = socket (AF_INET, SOCK_DGRAM, 0); 
-    if (sockfd < 0)
-    {          
-        printf ("socket creating err in udptalk\n");          
-        exit (1);        
-    } 
-    /* 设置要加入组播的地址 */ 
-    bzero(&mreq, sizeof (struct ip_mreq)); 
-    
-    inet_pton(AF_INET,"226.0.1.192",&ia.sin_addr);
-    /* 设置组地址 */ 
-    bcopy (&ia.sin_addr.s_addr, &mreq.imr_multiaddr.s_addr, sizeof (struct in_addr)); 
-    /* 设置发送组播消息的源主机的地址信息 */ 
-    mreq.imr_interface.s_addr = htonl (INADDR_ANY);  
-   // mreq.imr_interface.s_addr = inet_addr("192.168.0.88");  
+	static unsigned short last_pid;
+	static unsigned char s_tsCount ;
+	unsigned int tsCount=0;
+	unsigned short pid,audioPid,cal=0;
+	int i=0;
+	audioPid= 6501;
+	unsigned char *p_dta= buf;
 
-    /* 把本机加入组播地址，即本机网卡作为组播成员，只有加入组才能收到组播消息 */ 
-    if (setsockopt(sockfd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq,sizeof (struct ip_mreq)) == -1)
-    {     
-        perror ("asdfsetsockopt");      
-        exit (-1);   
-    }
+	for(i=0;i< 188;i++){
+		cal+=p_dta[i];
+	}	
 
-    socklen = sizeof (struct sockaddr_in); 
-    memset (&peeraddr, 0, socklen); 
-    peeraddr.sin_family = AF_INET;
-    peeraddr.sin_port = htons (7838);
-    inet_pton(AF_INET, "226.0.1.192", &peeraddr.sin_addr); 
+	if(p_dta[0] == 0x47 ){
+		pid = (p_dta[1] << 8 | p_dta[2])&0x1fff;
+		
+		if(pid != audioPid){
+			p_dta+=188;
+			len -= 188;
+			return;
+		}
+		tsCount = p_dta[3]&0xf;
 
-    /* 绑定自己的端口和IP信息到socket上 */ 
-    if (bind(sockfd, (struct sockaddr *) &peeraddr,sizeof (struct sockaddr_in)) == -1)
-    {      
-        printf ("Bind error\n");      
-        exit (0);    
-    }
-  
-    /* 循环接收网络上来的组播消息 */ 
-    for (;;)
-    {     
-        //bzero (recmsg, BUFLEN + 1);     
-        n = recvfrom (sockfd, recmsg, BUFLEN, 0, (struct sockaddr *) &peeraddr, &socklen);
-        if (n < 0)
-        {      
-            printf ("recvfrom err in udptalk!\n");      
-            exit (4);    
-        }
-        else{      
-        /* 成功接收到数据报 */ 
-            recmsg[n] = 0;      
-            printf ("peer:%s", recmsg);    
-        }
-    
-    }
+		printf("len %d[%02d]: ",len, tsCount);
+		for(i=0;i< 20;i++){
+			printf("%02x ", p_dta[i]);
 
+		}	
+		for(i=0;i< 188;i++){
+			cal+=p_dta[i];
+		}	
+		printf("cal =%d \r\n", cal);	
+			//s_tsCount = (tsCount+1)%0x10;	
+
+			
+	}
+	else{
+		return;
+	}
+	p_dta+=188;
+	len -= 188;
+	printf("\n");
 }
+int main(int argc, char*argv[])
+{
+	int s, rlen, err = -1;
+	struct sockaddr_in local_addr;
+	struct ip_mreq mreq;
+	s = socket(AF_INET, SOCK_DGRAM, 0);
+	if (s == -1)
+	{
+		perror("pg socket err");
+		return -1;
+	}
+	memset(&local_addr, 0, sizeof(local_addr));
+	local_addr.sin_family = AF_INET;
+	local_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	local_addr.sin_port = htons(MCAST_PORT);
+	err = bind(s,(struct sockaddr*)&local_addr, sizeof(local_addr)) ;
+	if(err < 0)
+	{
+		perror("pg bind err");
+		return -2;
+	}
+	mreq.imr_multiaddr.s_addr = inet_addr(MCAST_ADDR);
+	mreq.imr_interface.s_addr = htonl(INADDR_ANY);
+	err = setsockopt(s, IPPROTO_IP, IP_ADD_MEMBERSHIP,&mreq, sizeof(mreq));
+	if (err < 0)
+	{
+		perror("pg add multiaddr err");
+		return -3;
+	}
+	while(1)	
+	{	
+		rlen = recv(s, buff, BUFLEN, 0);	
+		if( rlen < 0){
+			perror("pg recv err");
+		}
+		else if(rlen > 1){
+			
+			rec_ts(rlen, buff);
+			memset(buff, 0, BUFLEN);
+			//printf("Recv%d\n", rlen);
+		}
+		usleep(5000);
+	}
+	setsockopt(s, IPPROTO_IP, IP_DROP_MEMBERSHIP,&mreq, sizeof(mreq));
+	close(s);
+	return 0;
+}
+
+
+
+
 

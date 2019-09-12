@@ -5,11 +5,6 @@
 #define UPDATE_FILE 	"firmware"
 
 #define C_PAGE_NAME HTML_PAGE5_NAME
-#define mydbg printf
-#define myprintf printf
-
-#define JS_P1_E1 		"CmdPid"
-
 
 #define C_PAGE_BODY "<style>"\
 "progress{"\
@@ -35,23 +30,23 @@
 "</div>"\
 "<body>"\
 "<ul>"\
-"<li><a href='"HTML_PAGE1_NAME".html'>å‚æ•°çŠ¶æ€</a></li>"\
-"<li><a href='"HTML_PAGE2_NAME".html'>ç½‘ç»œè®¾ç½®</a></li>"\
-"<li><a href='"HTML_PAGE3_NAME".html'>éŸ³é¢‘è®¾ç½®</a></li>"\
-"<li><a href='"HTML_PAGE4_NAME".html'>ä¿¡æ¯æ—¥å¿—</a></li>"\
-"<li><a href='"HTML_PAGE5_NAME".html' class='active'>é¢æ¿å›ºä»¶</a></li>"\
+"<li><a href='"HTML_PAGE1_NAME".html'>²ÎÊı×´Ì¬</a></li>"\
+"<li><a href='"HTML_PAGE2_NAME".html'>ÍøÂçÉèÖÃ</a></li>"\
+"<li><a href='"HTML_PAGE3_NAME".html'>ÒôÆµÉèÖÃ</a></li>"\
+"<li><a href='"HTML_PAGE4_NAME".html'>ĞÅÏ¢ÈÕÖ¾</a></li>"\
+"<li><a href='"HTML_PAGE5_NAME".html' class='active'>Ãæ°å¹Ì¼ş</a></li>"\
 "</ul>"\
 "<h2> chengdu sida web management interface </h2>"\
-"<h3>é¢æ¿å›ºä»¶å‡çº§</h3>"\
+"<h3>Ãæ°å¹Ì¼şÉı¼¶</h3>"\
 "<div style='background:snow; display:block; padding:10px 10%;'>"\
 "<form id='frmFirmware' method='post' action='firmware.cgi' enctype='multipart/form-data'>"\
 "<input type='text' id='textfield' class='txt'/>"\
-"<label class='ui-upload'>é€‰æ‹©å‡çº§æ–‡ä»¶<input type='file' id='file' name='myfile' value='' accept='.bin'style='display: none;'onchange=\"document.getElementById('textfield').value=this.files[0].name\"></label>"\
-"<input type='button' onclick ='UpladFile();' value='å¼€å§‹å‡çº§' id='rcorners1' style='background: #ff6300'/>"\
+"<label class='ui-upload'>Ñ¡ÔñÉı¼¶ÎÄ¼ş<input type='file' id='file' name='myfile' value='' accept='.bin'style='display: none;'onchange=\"document.getElementById('textfield').value=this.files[0].name\"></label>"\
+"<input type='button' onclick ='UpladFile();' value='¿ªÊ¼Éı¼¶' id='rcorners1' style='background: #ff6300'/>"\
 "<br />"\
 "<progress id='progressBar' value='0' max='100' ></progress>"\
 "<span id='percentage'></span><span id='time' style='color: #FF2222;font-size: 14px;'></span>"\
-"<p style='color: #FF2222;font-size: 14px;'> æ³¨æ„ï¼šç”¨äºé¢æ¿ç¨‹åºå‡çº§ï¼Œè¯·åœ¨å‚å®¶æŠ€æœ¯æŒ‡å¯¼ä¸‹è¿›è¡Œå‡çº§æ“ä½œ</a></p>"\
+"<p style='color: #FF2222;font-size: 14px;'> ×¢Òâ£ºÓÃÓÚÃæ°å³ÌĞòÉı¼¶£¬ÇëÔÚ³§¼Ò¼¼ÊõÖ¸µ¼ÏÂ½øĞĞÉı¼¶²Ù×÷</a></p>"\
 "</form>"\
 "</body>"\
 "</html>"\
@@ -79,7 +74,7 @@
 "progressBar.max = evt.total;"\
 "progressBar.value = evt.loaded;"\
 "percentageDiv.innerHTML = Math.round(evt.loaded / evt.total * 100) + '%';}"\
-"time.innerHTML = 'ï¼Œå‡çº§è¿‡ç¨‹éœ€è¦å¤§çº¦1åˆ†é’Ÿï¼Œå‡çº§åè¯·æ£€æŸ¥ç‰ˆæœ¬ä¿¡æ¯';"\
+"time.innerHTML = '£¬Éı¼¶¹ı³ÌĞèÒª´óÔ¼1·ÖÖÓ£¬Éı¼¶ºóÇë¼ì²é°æ±¾ĞÅÏ¢';"\
 "}"\
 "</script>"\
 
@@ -101,17 +96,17 @@ void parm5_pos_htm(unsigned char mode)
 
 #define TRUE 1
 typedef struct __firmware{
-	unsigned int fw_offset ;			//å†™FLASHåœ°å€
-	unsigned int current_rxlen;			//å½“å‰æ¥æ”¶é•¿åº¦
-	unsigned int total_rxlen; 			//æ€»çš„æ¥æ”¶é•¿åº¦
-	unsigned int total_w_len ;			//å·²å†™é•¿åº¦
-	unsigned int hdr_len; 				//Contentä¸­ï¼Œæ•°æ®åŒºçš„å¤´éƒ¨é•¿åº¦
-	unsigned int data_len;				//Contentä¸­ï¼Œæ•°æ®åŒºçš„é•¿åº¦
-	unsigned int tail_len;				//Contentä¸­ï¼Œæ•°æ®åŒºçš„å°¾éƒ¨
-	unsigned int real_wl; 				//çœŸæ­£å†™å…¥FLASHçš„é•¿åº¦ï¼Œéœ€è¦4å­—èŠ‚å¯¹é½
-	unsigned char  remain_buf[3];		//æœª4å­—èŠ‚å¯¹é½çš„æ•°æ®ä¿å­˜ä½ç½®
-	unsigned char  remain_len ; 		//æœª4å­—èŠ‚å¯¹é½çš„æ•°æ®é•¿åº¦
-	unsigned char  head_flag;			//æ‰¾åˆ°æ•°æ®èµ·å§‹ä½ç½®çš„æ ‡å¿—
+	unsigned int fw_offset ;			//Ğ´FLASHµØÖ·
+	unsigned int current_rxlen;			//µ±Ç°½ÓÊÕ³¤¶È
+	unsigned int total_rxlen; 			//×ÜµÄ½ÓÊÕ³¤¶È
+	unsigned int total_w_len ;			//ÒÑĞ´³¤¶È
+	unsigned int hdr_len; 				//ContentÖĞ£¬Êı¾İÇøµÄÍ·²¿³¤¶È
+	unsigned int data_len;				//ContentÖĞ£¬Êı¾İÇøµÄ³¤¶È
+	unsigned int tail_len;				//ContentÖĞ£¬Êı¾İÇøµÄÎ²²¿
+	unsigned int real_wl; 				//ÕæÕıĞ´ÈëFLASHµÄ³¤¶È£¬ĞèÒª4×Ö½Ú¶ÔÆë
+	unsigned char  remain_buf[3];		//Î´4×Ö½Ú¶ÔÆëµÄÊı¾İ±£´æÎ»ÖÃ
+	unsigned char  remain_len ; 		//Î´4×Ö½Ú¶ÔÆëµÄÊı¾İ³¤¶È
+	unsigned char  head_flag;			//ÕÒµ½Êı¾İÆğÊ¼Î»ÖÃµÄ±êÖ¾
 	char *pos1;
 	char *pos2;
 	unsigned char *pdata;
@@ -129,22 +124,22 @@ static int find_head(WEB_FIRMWARE *webfw, unsigned int content_len)
 {
 	if(webfw->head_flag != TRUE)
 	{
-		webfw->pos1= strstr((char*)webfw->pdata, (char*)boundary);		//åœ¨æ•°æ®åŒºä¸­æ‰¾å¤´éƒ¨åˆ†éš”çº¿ã€‚
+		webfw->pos1= strstr((char*)webfw->pdata, (char*)boundary);		//ÔÚÊı¾İÇøÖĞÕÒÍ·²¿·Ö¸ôÏß¡£
 		if(webfw->pos1 != NULL){
-			//myprintf("æ‰¾åˆ°åˆ†éš”çº¿\r\n");
+			//myprintf("ÕÒµ½·Ö¸ôÏß\r\n");
 			webfw->pos2= strstr(webfw->pos1+strlen((char*)boundary), "\r\n\r\n");
-			if(webfw->pos2 == NULL){				//æ²¡æ‰¾æ•°æ®çš„èµ·å§‹åŒº
-				myprintf("æ²¡æœ‰æ‰¾åˆ°å‡çº§æ–‡ä»¶æ•°æ®åŒº\r\n");
+			if(webfw->pos2 == NULL){				//Ã»ÕÒÊı¾İµÄÆğÊ¼Çø
+				myprintf("Ã»ÓĞÕÒµ½Éı¼¶ÎÄ¼şÊı¾İÇø\r\n");
 				return -1;
 			}
 			webfw->pos2+=4;
 			webfw->pdata= (unsigned char*)webfw->pos2;
 			webfw->head_flag = TRUE;
-			//myprintf("æ‰¾åˆ°å‡çº§æ–‡ä»¶æ•°æ®åŒº\r\n");
-			webfw->hdr_len= (webfw->pos2-webfw->pos1)+2;	//å¤šäº†1ä¸ª"--"
-			webfw->tail_len= strlen((int8*)boundary)+4+4; //å¤šäº†2ä¸ª"--"å†åŠ ä¸Š2ä¸ª"\r\n"
+			//myprintf("ÕÒµ½Éı¼¶ÎÄ¼şÊı¾İÇø\r\n");
+			webfw->hdr_len= (webfw->pos2-webfw->pos1)+2;	//¶àÁË1¸ö"--"
+			webfw->tail_len= strlen((int8*)boundary)+4+4; //¶àÁË2¸ö"--"ÔÙ¼ÓÉÏ2¸ö"\r\n"
 			webfw->data_len= content_len-webfw->hdr_len-webfw->tail_len;
-			myprintf("æ•°æ®é•¿åº¦:%ld= %d-%ld\r\n", webfw->data_len, content_len, webfw->hdr_len);
+			myprintf("Êı¾İ³¤¶È:%ld= %d-%ld\r\n", webfw->data_len, content_len, webfw->hdr_len);
 			bin_head *app_head= (bin_head*)(webfw->pdata);
 			if(0 == verify_app_head(app_head)){
 				myprintf("not match\n");
@@ -157,7 +152,7 @@ static int find_head(WEB_FIRMWARE *webfw, unsigned int content_len)
 				webfw->current_rxlen= webfw->total_rxlen-webfw->hdr_len;
 			}	
 			webfw->remain_len = webfw->current_rxlen % 4;
-			memcpy(tmp_buf, webfw->pdata ,webfw->current_rxlen); //æŠŠå½“å‰æ”¶åˆ°æ•°æ®çš„å…¨æ‹·è´
+			memcpy(tmp_buf, webfw->pdata ,webfw->current_rxlen); //°Ñµ±Ç°ÊÕµ½Êı¾İµÄÈ«¿½±´
 			webfw->real_wl= webfw->current_rxlen- webfw->remain_len;
 			stm32_write_nocheck(webfw->fw_offset , (unsigned int*)tmp_buf, webfw->real_wl/4);
 			webfw->fw_offset+=webfw->real_wl;
@@ -178,14 +173,14 @@ static int find_head(WEB_FIRMWARE *webfw, unsigned int content_len)
 
 
 
-static void rec_file(void)
+
 			{
-//Content æ•°æ®ç»“æ„
+//Content Êı¾İ½á¹¹
 //--boundary\r\n
 //header\r\n\r\n
 //data......
 //\r\n--boundary--\r\n
-//ä¸¾ä¾‹
+//¾ÙÀı
 /*
 ------WebKitFormBoundaryTnvuoPlJq5lIiOy7
 Content-Disposition: form-data; name="fwfile"; filename="4.txt"
@@ -195,28 +190,28 @@ Content-Type: text/plain
 ------WebKitFormBoundaryTnvuoPlJq5lIiOy7--
 */		
 				WEB_FIRMWARE webfw={ADDR_FLASH_SECTOR_BAK,0};
-				uint32 wcnt=0;						//å¼‚å¸¸è®¡æ•°
+				uint32 wcnt=0;						//Òì³£¼ÆÊı
 				uint32 content_len=0;		
 				char jumpto[20];unsigned char maxlen=20;
 				char sub[10];
-				mydbg("raw:\r\n%s\r\n", &rx_buf[20]);
-				mid((char*)http_request->URI,"Content-Length: ","\r\n",sub);		//æ‰¾åˆ°æ–‡ä»¶é•¿
+				//mydbg("raw:\r\n%s\r\n", &rx_buf[20]);
+				mid((char*)http_request->URI,"Content-Length: ","\r\n",sub);		//ÕÒµ½ÎÄ¼ş³¤
 				content_len=atoi(sub);
-				mydbg("content_len=%ld \r\n", content_len);
+				//mydbg("content_len=%ld \r\n", content_len);
 				if(content_len > 1024*384){
-					printf("å›ºä»¶é•¿åº¦ä¸æ­£å¸¸\r\n");
+					printf("¹Ì¼ş³¤¶È²»Õı³£\r\n");
 					disconnect(s);
 					return;
 				}
-				mid((int8*)http_request->URI,"boundary=", "\r\n", (int8*)boundary);//æ‰¾åˆ†å‰²ç¬¦
-				mydbg("åˆ†å‰²ç¬¦boundary=%s\r\n",boundary);	
-				webfw.pos1 = (char*)get_param_url(http_request->URI, jumpto, maxlen);
+				mid((int8*)http_request->URI,"boundary=", "\r\n", (int8*)boundary);//ÕÒ·Ö¸î·û
+				//myprintf("¹Ì¼şÉı¼¶£¬·Ö¸î·ûboundary=%s\r\n",boundary);	
+				webfw.pos1 = (char*)get_param_url(http_request->URI, jumpto, maxlen);		/*»ñÈ¡ĞŞ¸ÄºóµÄIPµØÖ·*/
 				if(webfw.pos1 == NULL){
 					myerro("parm url not found\r\n");
 					disconnect(s);
 					return;
 				}
-				if(webfw.pos1- rx_buf < len-10){//ç›®å‰æ”¶åˆ°çš„æ•°æ®åŒ…å«æ•°æ®åŒº
+				if(webfw.pos1- rx_buf < len-10){//Ä¿Ç°ÊÕµ½µÄÊı¾İ°üº¬Êı¾İÇø
 					webfw.pos1= strstr(&rx_buf[16], "\r\n\r\n");
 					if(webfw.pos1 == NULL){
 						myerro("content not found\r\n");
@@ -256,7 +251,7 @@ Content-Type: text/plain
 						else if(res==1)
 							continue;
 						if(webfw.remain_len){	
-							//myarg(webfw.remain_len);	//è¿˜å­˜åœ¨ä¸Šä¸€æ¬¡æœªå¯¹é½çš„æ•°æ®
+							//myarg(webfw.remain_len);	//»¹´æÔÚÉÏÒ»´ÎÎ´¶ÔÆëµÄÊı¾İ
 							memcpy(tmp_buf, webfw.remain_buf , webfw.remain_len);
 						}
 						memcpy(&tmp_buf[webfw.remain_len], rx_buf , webfw.current_rxlen);
@@ -287,10 +282,10 @@ Content-Type: text/plain
 						if(webfw.total_rxlen < content_len)	
 							webfw.total_w_len+= webfw.current_rxlen;
 						else
-							webfw.total_w_len+= webfw.current_rxlen-webfw.tail_len;	//æœ«å°¾æ—¶å€™ï¼Œå‡å»å°¾
+							webfw.total_w_len+= webfw.current_rxlen-webfw.tail_len;	//Ä©Î²Ê±ºò£¬¼õÈ¥Î²
 						wcnt=0;	
 						#if 0
-						//W5300åªåšæ¥æ”¶ç«¯ï¼Œéœ€è¦æ‰‹åŠ¨å‘ç©ºåŒ…å‘Šè¯‰å‘é€ç«¯ï¼ŒTCPæ»‘åŠ¨çª—å£çš„å˜åŒ–ã€‚é’ˆå¯¹æŸäº›æƒ…å†µï¼Œç”¨HTML ç©ºåŒ… ä»£æ›¿W5300çš„1å­—èŠ‚ç©ºåŒ…
+						//W5300Ö»×ö½ÓÊÕ¶Ë£¬ĞèÒªÊÖ¶¯·¢¿Õ°ü¸æËß·¢ËÍ¶Ë£¬TCP»¬¶¯´°¿ÚµÄ±ä»¯¡£Õë¶ÔÄ³Ğ©Çé¿ö£¬ÓÃHTML ¿Õ°ü ´úÌæW5300µÄ1×Ö½Ú¿Õ°ü
 						const char vv[]="HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:15\r\n\r\n{\"ver\":\"1\"}";
 						send(s, (uint8_t *)vv, strlen(vv));
 						#endif
@@ -302,11 +297,11 @@ Content-Type: text/plain
 				if(webfw.total_rxlen == content_len){
 					#if 0
 					make_cgi_firmware_ret(10,(char*)config->local_ip, "/home.html", STR_NOTICE_OK, tx_buf);	
-					sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%d\r\n\r\n%s",strlen(tx_buf),tx_buf);																				/*å‘é€httpå“åº”*/
+					sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%d\r\n\r\n%s",strlen(tx_buf),tx_buf);																				/*·¢ËÍhttpÏìÓ¦*/
 					send(s, (uint8_t *)http_response, strlen((char *)http_response));	
 					#endif
 					disconnect(s);
-					printf("å‡çº§æ–‡ä»¶æ¥æ”¶å®Œæˆ\r\n");
+					printf("Éı¼¶ÎÄ¼ş½ÓÊÕÍê³É\r\n");
 					bin_head *app_head= (bin_head*)ADDR_FLASH_SECTOR_BAK;
 					if(0 != verify_app_head(app_head))
 						if(1 == verify_app_data((u8*)ADDR_FLASH_SECTOR_BAK)){
@@ -317,10 +312,10 @@ Content-Type: text/plain
 					}
 				else{
 					make_cgi_firmware_ret(3,(char*)config->local_ip, jumpto, STR_NOTICE_ERR, tx_buf);	
-					sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%d\r\n\r\n%s",strlen(tx_buf),tx_buf);																				/*å‘é€httpå“åº”*/
+					sprintf((char *)http_response,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:%d\r\n\r\n%s",strlen(tx_buf),tx_buf);																				/*·¢ËÍhttpÏìÓ¦*/
 					send(s, (uint8_t *)http_response, strlen((char *)http_response));	
 					disconnect(s);
-					printf("å‡çº§æ–‡ä»¶æ¥æ”¶å¤±è´¥,len=%d/%d\r\n", webfw.total_rxlen,webfw.data_len);
+					printf("Éı¼¶ÎÄ¼ş½ÓÊÕÊ§°Ü,len=%d/%d\r\n", webfw.total_rxlen,webfw.data_len);
 					WEB_LOG_UPDATE_ERR3(webfw.total_rxlen, webfw.data_len);
 				}
 				return;	
@@ -328,114 +323,16 @@ Content-Type: text/plain
 
 #endif
 
-
-static unsigned char set_sip(char* sip)
-{
-	printf("sip=%s\n", sip);	
-	return 0;
-}
-
-extern int test_http_rec(unsigned char *data, unsigned int rmax_len);
-
-
-unsigned char boundary[64];
-unsigned char tmp_buf[1464]={0xff,};
-
-
-typedef struct __firmware{
-	unsigned int fw_offset ;			//å†™FLASHåœ°å€
-	unsigned int current_rxlen;			//å½“å‰æ¥æ”¶é•¿åº¦
-	unsigned int total_rxlen; 			//æ€»çš„æ¥æ”¶é•¿åº¦
-	unsigned int total_w_len ;			//å·²å†™é•¿åº¦
-	unsigned int hdr_len; 				//Contentä¸­ï¼Œæ•°æ®åŒºçš„å¤´éƒ¨é•¿åº¦
-	unsigned int data_len;				//Contentä¸­ï¼Œæ•°æ®åŒºçš„é•¿åº¦
-	unsigned int tail_len;				//Contentä¸­ï¼Œæ•°æ®åŒºçš„å°¾éƒ¨
-	unsigned int real_wl; 				//çœŸæ­£å†™å…¥FLASHçš„é•¿åº¦ï¼Œéœ€è¦4å­—èŠ‚å¯¹é½
-	unsigned char  remain_buf[3];		//æœª4å­—èŠ‚å¯¹é½çš„æ•°æ®ä¿å­˜ä½ç½®
-	unsigned char  remain_len ; 		//æœª4å­—èŠ‚å¯¹é½çš„æ•°æ®é•¿åº¦
-	unsigned char  head_flag;			//æ‰¾åˆ°æ•°æ®èµ·å§‹ä½ç½®çš„æ ‡å¿—
-	char *pos1;
-	char *pos2;
-	unsigned char *pdata;
-}WEB_FIRMWARE;
-
-WEB_FIRMWARE gwebfw;
-
-
-static char* parse_head(const char* url)
-{
-	unsigned int wcnt=0;						//å¼‚å¸¸è®¡æ•°
-	unsigned int content_len=0;		
-	char *pstr, str_buf[20];
-	pstr= http_mid((char*)url,"Content-Length: ","\r\n",str_buf);
-	if(pstr == NULL)
-		return NULL;
-	content_len=atoi(str_buf);
-	mydbg("content_len=%ld \r\n", content_len);
-	if(content_len > 1024*384){
-		printf("å›ºä»¶é•¿åº¦ä¸æ­£å¸¸\r\n");
-		return NULL;
-	}
-	pstr= http_mid(pstr,"boundary=", "\r\n", (char*)boundary);//æ‰¾åˆ†å‰²ç¬¦
-	if(pstr == NULL)
-		return NULL;
-	mydbg("åˆ†å‰²ç¬¦boundary=%s\r\n",boundary); 
-	return pstr;
-	
-
-}
-			
-
-
-
-
-static void find_date_boundary(const char* str)
-{
-		WEB_FIRMWARE *webfw= &gwebfw;
-		webfw->pos1= strstr((char*)webfw->pdata, (char*)boundary);		//åœ¨æ•°æ®åŒºä¸­æ‰¾å¤´éƒ¨åˆ†éš”çº¿ã€‚
-		if(webfw->pos1 != NULL){
-			//myprintf("æ‰¾åˆ°åˆ†éš”çº¿\r\n");
-			webfw->pos2= strstr(webfw->pos1+strlen((char*)boundary), "\r\n\r\n");
-			if(webfw->pos2 == NULL){				//æ²¡æ‰¾æ•°æ®çš„èµ·å§‹åŒº
-				myprintf("æ²¡æœ‰æ‰¾åˆ°å‡çº§æ–‡ä»¶æ•°æ®åŒº\r\n");
-				return ;
-			}
-			webfw->pos2+=4;
-			webfw->pdata= (unsigned char*)webfw->pos2;
-			webfw->head_flag = 1;
-			//myprintf("æ‰¾åˆ°å‡çº§æ–‡ä»¶æ•°æ®åŒº\r\n");
-			webfw->hdr_len= (webfw->pos2-webfw->pos1)+2;	//å¤šäº†1ä¸ª"--"
-			webfw->tail_len= strlen((char*)boundary)+4+4; //å¤šäº†2ä¸ª"--"å†åŠ ä¸Š2ä¸ª"\r\n"
-			webfw->data_len= content_len-webfw->hdr_len-webfw->tail_len;
-			myprintf("æ•°æ®é•¿åº¦:%d= %d-%d\r\n", webfw->data_len, content_len, webfw->hdr_len);
-		
-			
-		}	
-		else
-			myprintf("boundary null\r\n");
-
-
-}
-
-char tmpbuf[1024*1000];
-
 void parm5_rpos_cgi(char *url)
 { 
 
-//	const char vv[]="HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:15\r\n\r\n{\"ver\":\"1\"}";
-//	send(s, (uint8_t *)vv, strlen(vv));
-	int len= test_http_rec((unsigned char*)tmpbuf, 1024*1000);
-	
-	printf("rec parm5_rpos_cgi:%d\n",len);
-	parse_head(url);
-	//find_head(len);
+	printf("rec parm5_rpos_cgi\n");
 		return;
 	char *p_content; 
 	p_content = (char*)my_get_param_url(url);
 	if(NULL == p_content){
 		return;
 	}
-	http_handle_parm(p_content, JS_P1_E1, (void*)set_sip);
 	http_sprintf_init();
 	http_sprintf(HTML_CGI_JUMP, LOCAL_IP, C_PAGE_NAME);
 	http_sprintf_send();

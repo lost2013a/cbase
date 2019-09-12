@@ -17,6 +17,7 @@
 "<li><a href='"HTML_PAGE2_NAME".html'>网络设置</a></li>"\
 "<li><a href='"HTML_PAGE3_NAME".html'>音频设置</a></li>"\
 "<li><a href='"HTML_PAGE4_NAME".html'>信息日志</a></li>"\
+"<li><a href='"HTML_PAGE5_NAME".html'>面板固件</a></li>"\
 "</ul>"\
 "<h2> chengdu sida web management interface </h2>"\
 "<h3> 参数状态</h3>"\
@@ -32,7 +33,6 @@
 "</body>"\
 "</html>"\
 
-
 #define STA_REFRESH_HTML_START "<script>function $(id) { return document.getElementById(id); };"\
 "function myrefresh()"\
 "{"\
@@ -43,10 +43,10 @@
 "	{"\
 "		if(xmlHttp.readyState == 4 && xmlHttp.status == 200) "\
 "		{"\
-"			function json_"C_PAGE_NAME"(o){"
+		"var json=xmlHttp.responseText;"\
+		"var o=eval(\'(\'+json+\')\');"\
 
-#define STA_REFRESH_HTML_END  "};"\
-"		}"\
+#define STA_REFRESH_HTML_END  "}"\
 "	}"\
 "}</script>	"\
 "<script language='JavaScript'>setInterval('myrefresh()',2000);</script>"\
@@ -54,17 +54,6 @@
 
 
 
-
-
-
-
-#if 0
-"var json=xmlHttp.responseText;"\
-"var o=eval(\'(\'+json+\')\');"\
-"if ($('programIP')) $('programIP').value = o.programIP;"\
-"if ($('logicID')) $('logicID').value = o.logicID;"\
-
-#endif
 
 static void _add_htm_element(unsigned char mode)
 {
@@ -85,18 +74,18 @@ static void _add_htm_element(unsigned char mode)
 	}
 }
 
-void http_page_sta(const char* name, void (fun_add_elemnet)(unsigned char))
+void http_html_sta(const char* name, void (fun_add_elemnet)(unsigned char))
 {
 	http_sprintf_init();
 	http_sprintf("%s%s", HTML_PARM_HEAD, C_PAGE_BODY);
 	http_sprintf(STA_REFRESH_HTML_START);
-	fun_add_elemnet(URI_REPOS_JSON);
+	fun_add_elemnet(URI_REPOS_HTML);
 	http_sprintf(STA_REFRESH_HTML_END);
 	http_sprintf_send();
 }
 
 
-void http_sta_json(void (fun_add_elemnet)(unsigned char))
+void http_json_sta(void (fun_add_elemnet)(unsigned char))
 {
 
 	http_sprintf_init();
@@ -111,11 +100,11 @@ void http_sta_json(void (fun_add_elemnet)(unsigned char))
 void parm1_pos_htm(unsigned char mode)
 {
 	if(mode == URI_REPOS_HTML){
-		http_page_sta(HTML_PAGE1_NAME, _add_htm_element);
+		http_html_sta(HTML_PAGE1_NAME, _add_htm_element);
 	}
 	else{
 	
-		http_sta_json(_add_htm_element);
+		http_json_sta(_add_htm_element);
 	
 	}
 	

@@ -220,17 +220,24 @@ char* get_http_param_value(unsigned char* buf, char* uri, char* param_name )
 }
 
 
-void http_mid(char* src, char* s1, char* s2, char* sub)
+char* http_mid(char* src, char* s1, char* s2, char* sub)
 {
+	
 	char* sub1;
 	char* sub2;
 	unsigned short n;
+	unsigned char res=0 ;
 	sub1=strstr(src,s1);
+	if(sub1 == NULL)
+		return NULL;
 	sub1+=strlen(s1);
 	sub2=strstr(sub1,s2);
+	if(sub2 == NULL)
+		return NULL;
 	n=sub2-sub1;
 	strncpy(sub,sub1,n);
 	sub[n]=0;
+	return sub2;
 }
 
 

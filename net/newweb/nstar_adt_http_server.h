@@ -85,7 +85,7 @@ unsigned char* get_param_url(char* uri, char* jump_to, unsigned char maxlen);
 
 char* get_http_param_value(unsigned char* buf, char* uri, char* param_name );	
 
-void http_mid(char* src, char* s1, char* s2, char* sub);
+char* http_mid(char* src, char* s1, char* s2, char* sub);
 
 unsigned char* my_get_param_url(char* uri);
 

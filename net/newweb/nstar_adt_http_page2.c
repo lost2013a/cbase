@@ -16,6 +16,7 @@
 "<li><a href='"HTML_PAGE2_NAME".html' class='active'>网络设置</a></li>"\
 "<li><a href='"HTML_PAGE3_NAME".html'>音频设置</a></li>"\
 "<li><a href='"HTML_PAGE4_NAME".html'>信息日志</a></li>"\
+"<li><a href='"HTML_PAGE5_NAME".html'>面板固件</a></li>"\
 "</ul>"\
 "<h2> chengdu sida web management interface </h2>"\
 "<h3> 网络设置</h3>"\
@@ -31,6 +32,90 @@
 "</div>"\
 "</body>"\
 "</html>"
+
+
+
+
+#define MIN(a,b) ( ((a)>=(b))?(b):(a))
+#define MAX(a,b) ( ((a)>=(b))?(a):(b))
+
+int str2ip(const char *str, unsigned char *ip, unsigned char len)
+{
+	char buf[4]={'\0'};
+	int tmp;
+	int i,j=0,nb=0;
+	for(i= 0;i<len && nb<4;i++)									   
+	{
+		if (str[i]=='\0'||str[i]=='.'||str[i]==':'||j>=4)
+		{
+			tmp =atoi(buf);
+			if (tmp<0||tmp>255){
+				return 1;
+			}
+			ip[nb++]= tmp;	//set val
+			memset(buf,0,4);
+			j=0;
+			continue;
+		}
+		buf[j]=str[i];	//copy
+		j++;
+	}
+	return 0;
+}
+
+int str2mac(char *str, unsigned char *ip, unsigned char len)
+{
+	char buf[3]={'\0'};
+	int tmp;
+	int i,j=0,nb=0;
+	for(i= 0;i<len && nb<6;i++)								   
+	{
+		if (str[i]=='\0'||str[i]==':'||j>=3)
+		{
+			sscanf(buf, "%x", &tmp);	
+			if (tmp<0||tmp>255){
+				return 1;
+			}
+			ip[nb++]= tmp;
+			memset(buf,0,sizeof(buf));
+			j=0;
+			continue;
+		}
+		buf[j]=str[i];
+		j++;
+	}
+	return 0;
+}
+
+
+
+
+static unsigned char _modify_pg_ip(char *p_dta)
+{
+/*命令通道*/
+	unsigned short port=0;
+	unsigned char ip[4], ret=0;
+	//unsigned int u32_ip=0;
+	char *p_port;
+	if(0 == str2ip(p_dta, ip, MIN(16, strlen(p_dta)+1))){
+		//u32_ip= (ip[0] << 24 | ip[1] << 16 | ip[2] << 8| ip[3]);
+		p_port= strstr(p_dta, ":");
+		if(NULL != p_port){
+			p_port+=1;
+			port= atoi(p_port);
+			ret= 1;
+		}
+	}
+	
+	if(ip > 0 && port >0){
+		
+	}
+	return ret;
+
+}
+
+
+
 
 static void _add_htm_element(unsigned char mode)
 {
@@ -59,11 +144,6 @@ void parm2_pos_htm(unsigned char mode)
 }
 
 
-static unsigned char set_sip(char* sip)
-{
-	printf("sip=%s\n", sip);	
-	return 0;
-}
 
 void parm2_rpos_cgi(char *url)
 { 
@@ -72,7 +152,7 @@ void parm2_rpos_cgi(char *url)
 	if(NULL == p_content){
 		return;
 	}
-	http_handle_parm(p_content, JS_P1_E1, (void*)set_sip);
+	http_handle_parm(p_content, JS_P1_E1, (void*)_modify_pg_ip);
 	http_sprintf_init();
 	http_sprintf(HTML_CGI_JUMP, LOCAL_IP, C_PAGE_NAME);
 	http_sprintf_send();
