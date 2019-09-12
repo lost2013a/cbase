@@ -32,10 +32,7 @@ printf("[%s] ", gettime_str());\
 printf(""fmt"", ##__VA_ARGS__);\
 }while(0)
 
-#define sw16(x) \
-    ((unsigned short)( \
-        (((unsigned short)(x) & (unsigned short)0x00ffU) << 8 ) | \
-        (((unsigned short)(x) & (unsigned short)0xff00U) >> 8 ) ))
+
 
 const char* str_operate_lv[]={
 	"无效",
@@ -184,6 +181,20 @@ static void log_ts_data(unsigned char *src_ts)
 	if(date_len < NSTAR_MSG_TITILE_LEN+ 4){
 		return ;
 	}
+#if 0
+{
+	int i, len;
+	unsigned char *log_data;
+	len= date_len;
+	log_data= src_ts + sizeof(COMM_TS_HEAD_TYPE);
+	for(i=0; i< len; i++){
+		printf("%02x ", log_data[i]);
+		if(len > 0 && (len%32) == 0)
+			printf("\r\n");
+	}
+	printf("\r\n");
+}
+#endif
 	date_len-= NSTAR_MSG_TITILE_LEN+4 ;
 	if((p_ts->check_byte&0xf) +(p_ts->check_byte>>0x4) != 24){
 		/*验证错误*/
@@ -205,15 +216,23 @@ static void log_ts_data(unsigned char *src_ts)
 			}
 			break;
 		case 2:
-			
-			
-			break;
-		case 3:
-			if(date_len >=  NSTAR_OTHER_CTL_LEN && cnt >0){
+			if(date_len >=  NSTAR_TEXT_LEN && cnt >0){
 				mylog("[%s(%s)]%04d, %02x%02x%02x%02x%02x%02x, %02d, %s\n", str_operate_type[p_ts->type],str_operate_lv[p_ts->lv],
 					 p_ts->pid, l_id[0], l_id[1], l_id[2], l_id[3], l_id[4], l_id[5],
-					 date_len, webmsg_nstar_msg_other_ctl((unsigned char*)p_ts));
+					 date_len, webmsg_nstar_msg_text((unsigned char*)p_ts));
 				
+			}	
+			break;
+		case 3:
+			while(date_len >=  NSTAR_OTHER_CTL_LEN && cnt >0){
+				const char *pstr= webmsg_nstar_msg_other_ctl((unsigned char*)p_ts);
+				if(pstr != NULL){
+					mylog("[%s(%s)]%04d, %02x%02x%02x%02x%02x%02x, %02d, %s\n", str_operate_type[p_ts->type],str_operate_lv[p_ts->lv],
+						 p_ts->pid, l_id[0], l_id[1], l_id[2], l_id[3], l_id[4], l_id[5],
+						 date_len, pstr);
+				}
+				date_len-= NSTAR_OTHER_CTL_LEN;
+				cnt--;
 			}
 			break;	
 		default:

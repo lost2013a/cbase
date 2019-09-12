@@ -18,12 +18,10 @@
 #include "ts_monitor.h"
 
 
-
-typedef struct nstar_ts_text{
-	unsigned short type;
-	unsigned char content_len;
-	unsigned char content[144];
-}__attribute__((packed))NSTAR_TEXT_TYPE;
+#define sw16(x) \
+    ((unsigned short)( \
+        (((unsigned short)(x) & (unsigned short)0x00ffU) << 8 ) | \
+        (((unsigned short)(x) & (unsigned short)0xff00U) >> 8 ) ))
 
 
 typedef struct comm_ts_head{
@@ -70,27 +68,30 @@ typedef struct nstar_ts_parm{
 
 typedef struct nstar_ts_text{
 	COMM_TS_HEAD_TYPE head;
-	unsigned int ser_id;
-	unsigned char phyid[6];
-	unsigned char type;
-	unsigned char program_search:1;
-	unsigned char vol:7;
-	unsigned char work_freq[3];
-	unsigned char logid[6];
-	unsigned char remain_cycle;
-	unsigned char sys_ctl_update:1;
-	unsigned char sys_ctl_restore:1;
-	unsigned char sys_ctl_reboot:1;
-	unsigned char sys_ctl_pri:1;
-	unsigned char sys_ctl_reserve:4;
-	unsigned short update_road;
-	unsigned short sign_rate:14;
-	unsigned short work_mode:2;
-	unsigned char t_fft:2;
-	unsigned char t_workmode:3;
-	unsigned char t_fmkmode:3;
-	unsigned char t_parm[3];
-}__attribute__((packed))NSTAR_PARM_TYPE;
+	unsigned char sendflag;
+	unsigned short act_id;
+	unsigned char act_em;
+	unsigned char act_emsta;
+	unsigned char pack_id;
+	unsigned char pack_cnt;
+	unsigned char pack_len;
+	unsigned char play_mode;
+	unsigned char play_speed;
+	unsigned char play_effect;
+	unsigned char act_font;
+	unsigned char line_gaps;
+	unsigned char content[140];
+	unsigned char start_h;
+	unsigned char start_m;
+	unsigned char start_s;
+	unsigned char end_h;
+	unsigned char end_m;
+	unsigned char end_s;
+	unsigned char repet_cnt;
+	unsigned char show_act;
+	unsigned char audio_cnt;
+	unsigned char color;
+}__attribute__((packed))NSTAR_TEXT_TYPE;
 
 
 
@@ -104,6 +105,7 @@ typedef struct nstar_ts_other{
 
 #define NSTAR_MSG_TITILE_LEN (9)
 #define NSTAR_PARM_LEN  (sizeof(NSTAR_PARM_TYPE)-sizeof(COMM_TS_HEAD_TYPE))
+#define NSTAR_TEXT_LEN  (sizeof(NSTAR_TEXT_TYPE)-sizeof(COMM_TS_HEAD_TYPE))
 #define NSTAR_OTHER_CTL_LEN  (sizeof(NSTAR_OTHER_CTL_TYPE)-sizeof(COMM_TS_HEAD_TYPE))
 
 
@@ -113,6 +115,7 @@ typedef struct nstar_ts_other{
 
 
 const char* webmsg_nstar_msg_parm(unsigned char* data);
+const char* webmsg_nstar_msg_text(unsigned char* data);
 const char* webmsg_nstar_msg_other_ctl(unsigned char* data);
 
 

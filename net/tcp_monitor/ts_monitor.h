@@ -12,7 +12,7 @@ struct rds_buf_t
 	 unsigned char *head;
 	 unsigned char *tail;
 	 unsigned char *ptr;
-	 int   size;
+	 int size;
 	 unsigned char send;
 	 unsigned short pid;
 	 unsigned char ts_cc;
