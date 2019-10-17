@@ -6,7 +6,7 @@ OBJ = test
 #CFLAGS=-Wall -O2
 CFLAGS= -Wall
 LIBS=-lpthread
-OBJS = tcp_server2.c
+OBJS =  tcp_client.c
 $(OBJ):$(OBJS)
 	$(CC) -o $@ $(CFLAGS) $^ $(LIBS)
 

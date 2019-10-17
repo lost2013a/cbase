@@ -13,6 +13,7 @@
 #include <sys/wait.h>
 #include <time.h>  
 #include <sys/time.h>
+#include <pthread.h>
 
 #include "write_log.h"
 #include "ts_monitor.h"
@@ -70,6 +71,21 @@ void sig_child(int signo)
 
 
 
+void creat_timer(void)
+{
+	pthread_t threads;
+	int rc;
+	long t;
+	rc = pthread_create(&threads, NULL, nstar_loop_check_sta, (void *)t);
+	if (rc){
+		printf("ERROR; return code from pthread_create() is %d\n", rc);
+		exit(-1);
+	}
+}
+
+
+
+
 int main(int argc, char** argv)
 {
 	int listen_fd;
@@ -99,7 +115,9 @@ int main(int argc, char** argv)
 		printf("accpet ok\n");
 		if(fork() == 0)
 		{
+		
 			close(listen_fd);
+			//creat_timer();
 			pthred_func();
 			close(real_fd);
 			exit(0);			
@@ -189,10 +207,23 @@ static void log_ts_data(unsigned char *src_ts)
 	log_data= src_ts + sizeof(COMM_TS_HEAD_TYPE);
 	for(i=0; i< len; i++){
 		printf("%02x ", log_data[i]);
-		if(len > 0 && (len%32) == 0)
+		if(i > 0 && (i%32) == 0)
 			printf("\r\n");
 	}
 	printf("\r\n");
+}
+#endif
+#if 0
+{
+	int i, len;
+	len= 32;
+	unsigned char *log_data;
+	for(i=0; i< len; i++){
+		printf("%02x ", src_ts[i]);
+		if(i > 0 && (i%32) == 0)
+			printf("\r\n");
+	}
+	printf("\r\n\r\n");
 }
 #endif
 	date_len-= NSTAR_MSG_TITILE_LEN+4 ;
@@ -206,6 +237,40 @@ static void log_ts_data(unsigned char *src_ts)
 	cnt= p_ts->cnt;
 	l_id= p_ts->log_addr;
 	switch(p_ts->type){
+
+		case 0:
+#define HEART_DBG 0	
+
+
+#if 1
+			{
+				int i, len;
+				unsigned char *log_data;
+				len= date_len;
+				log_data= src_ts + sizeof(COMM_TS_HEAD_TYPE);
+				mylog("rec:\r\n");
+				for(i=0; i< len; i++){
+					printf("%02x ", log_data[i]);
+					if(i > 0 && (i%32) == 0)
+						printf("\r\n");
+				}
+				printf("\r\n");
+			}
+#endif
+
+
+			if(cnt == 0 && (*(&p_ts->cnt+ 1) == 0)){
+				if(HEART_DBG && date_len == 60)
+					mylog("%s\n", webmsg_nstar_msg_heartick(src_ts, date_len));
+			}
+			else{
+				
+				mylog("%s\n", webmsg_nstar_msg_onoff(src_ts, date_len, cnt));
+			}
+			
+
+			
+			break;
 		case 1:
 			while(date_len >=  NSTAR_PARM_LEN && cnt >0){
 				mylog("[%s(%s)]%04d, %02x%02x%02x%02x%02x%02x, %02d, %s\n", str_operate_type[p_ts->type],str_operate_lv[p_ts->lv],
@@ -224,6 +289,7 @@ static void log_ts_data(unsigned char *src_ts)
 			}	
 			break;
 		case 3:
+			//if(cnt == 0)mylog("len =%d\n", date_len);
 			while(date_len >=  NSTAR_OTHER_CTL_LEN && cnt >0){
 				const char *pstr= webmsg_nstar_msg_other_ctl((unsigned char*)p_ts);
 				if(pstr != NULL){
@@ -236,6 +302,22 @@ static void log_ts_data(unsigned char *src_ts)
 			}
 			break;	
 		default:
+#if 0
+{
+	int i, len;
+	unsigned char *log_data;
+	len= date_len;
+	log_data= src_ts + sizeof(COMM_TS_HEAD_TYPE);
+	mylog("rec:\r\n");
+	for(i=0; i< len; i++){
+		printf("%02x ", log_data[i]);
+		if(i > 0 && (i%32) == 0)
+			printf("\r\n");
+	}
+	printf("\r\n");
+}
+#endif
+
 			break;	
 
 	}

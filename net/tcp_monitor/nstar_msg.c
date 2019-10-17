@@ -99,6 +99,21 @@ const char* str_nstar_text_em[]={
 };
 
 
+#define SW_EM_MAX_TYPE 2
+const char* str_nstar_sw_em[]={
+	"普通",
+	"应急",
+};
+
+#define SW_STA_MAX_TYPE 4
+const char* str_nstar_sw_sta[]={
+	"维持",
+	"开启",
+	"关闭",
+	"演练",
+};
+
+
 const char* webmsg_nstar_msg_parm(unsigned char* data)
 {
 #define MAX_LEN 60
@@ -173,6 +188,87 @@ const char* webmsg_nstar_msg_text(unsigned char* data)
 
 
 
+#include "app_delay.h"
+
+
+
+
+unsigned char app_capture_interval(volatile unsigned int *ptcnt, unsigned int u_ms);
+void app_update_interval(volatile unsigned int *ptcnt);
+
+static volatile unsigned int hear_tcnt=0;
+#define REC_HEAR_TICK 1
+#define HEART_FLOW_TIME 3000
+#define TIMER_UPDATE_HEART_TCIK() app_update_interval(&hear_tcnt)
+#define TIMER_GET_FLOW_HEART_TCIK() app_capture_interval(&hear_tcnt, HEART_FLOW_TIME)
+
+
+const char* webmsg_nstar_msg_onoff(unsigned char* data, unsigned short len, unsigned char cnt)
+{
+#define MAX_STA_LEN 1000
+	static char buf[MAX_STA_LEN];	
+	unsigned char*p_aid;
+	int idx=0, reman_len;
+	NSTAR_SWITCH_BODY_TYPE *pmsg;
+	/*cut the head*/
+	data+= 10;
+	len+=7;
+	while(cnt>0  && len>= sizeof(NSTAR_SWITCH_BODY_TYPE))
+	{
+		pmsg= (NSTAR_SWITCH_BODY_TYPE*)data;
+		p_aid= pmsg->log_addr;
+		reman_len= MAX_STA_LEN-idx;
+		if(reman_len > 1){
+			idx+= snprintf(buf+idx, reman_len, "%02x%02x-%02x%02x-%02x%02x, %03d[%s]",
+				p_aid[0], p_aid[1], p_aid[2], p_aid[3], p_aid[4], p_aid[5], 
+				sw16(pmsg->server_id), str_nstar_sw_em[pmsg->em_flag]);
+		}
+		cnt--;
+		len-= sizeof(NSTAR_SWITCH_BODY_TYPE);
+		data+= sizeof(NSTAR_SWITCH_BODY_TYPE);
+	}
+	reman_len= MAX_STA_LEN-idx;
+	if(reman_len > 1){
+		idx+= snprintf(buf+idx, reman_len, "\r\n" );
+	}
+	return buf;
+}
+
+
+
+void *nstar_loop_check_sta(void *parm)
+{
+	while(1)
+	{
+		if(TIMER_GET_FLOW_HEART_TCIK()){
+			
+			printf("time out\r\n");
+		}
+		usleep(500*1000);
+	}
+}
+
+
+const char* webmsg_nstar_msg_heartick(unsigned char* data, unsigned short len)
+{
+#define MAX_TEXT_LEN 100
+	static char buf[MAX_TEXT_LEN];	
+	if(len == 60){
+		unsigned char*p_aid;
+		NSTAR_HEART_TICK_TYPE *pmsg;
+		pmsg= (NSTAR_HEART_TICK_TYPE*)data;
+		p_aid= pmsg->area_info;
+		snprintf(buf, MAX_TEXT_LEN, "锁频地址：%02x%02x-%02x%02x-%02x%02x， 心跳版本:%d",
+			p_aid[0], p_aid[1], p_aid[2], p_aid[3], p_aid[4], p_aid[5], pmsg->version);
+
+	}
+	else{
+
+		snprintf(buf, MAX_TEXT_LEN, "心跳无");
+			
+	}
+	return buf;
+}
 
 
 

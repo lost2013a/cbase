@@ -41,6 +41,51 @@ typedef struct comm_ts_head{
 }__attribute__((packed))COMM_TS_HEAD_TYPE;
 
 
+
+typedef struct comm_ts_heart_tick{
+	unsigned char sync_byte;
+	unsigned short pid;	/*mask :0x1FFF*/
+	unsigned char order:4;	
+	unsigned char unused1:4;
+	unsigned char unused2;
+	unsigned char table_id;
+	unsigned short section_len;/*数据长度 包含CRC， mask :0x0FFF*/
+	unsigned char check_byte;  /*h+l= 24*/
+	unsigned char cnt; 		   /*指令次数*/
+	unsigned char byte_lv;     /*指令等级*/	
+	unsigned char area_info[6];
+	unsigned char reserve1;
+	unsigned short reserve2;
+	unsigned char version;      /*心跳版本*/
+}__attribute__((packed))NSTAR_HEART_TICK_TYPE;
+
+
+
+typedef struct nstar_ts_switch_head{
+	unsigned char sync_byte;
+	unsigned short pid;	/*mask :0x1FFF*/
+	unsigned char order:4;	
+	unsigned char unused1:4;
+	unsigned char unused2;
+	unsigned char table_id;
+	unsigned short section_len;/*数据长度 包含CRC， mask :0x0FFF*/
+	unsigned char check_byte;  /*h+l= 24*/
+	unsigned char cnt; 		/*指令次数*/
+}__attribute__((packed))NSTAR_SWITCH_HEAD_TYPE;
+
+typedef struct nstar_ts_switch_body{
+	unsigned char lv:3;		/*指令等级*/
+	unsigned char bit:3;	/*指令位移*/
+	unsigned char type:2;	/*指令类型*/
+	unsigned char log_addr[6];
+	unsigned char reserved:2;
+	unsigned char vol_ch:3;
+	unsigned char em_flag:1;
+	unsigned char sw_sta:2;
+	unsigned short server_id;
+}__attribute__((packed))NSTAR_SWITCH_BODY_TYPE;
+
+
 typedef struct nstar_ts_parm{
 	COMM_TS_HEAD_TYPE head;
 	unsigned int ser_id;
@@ -110,13 +155,12 @@ typedef struct nstar_ts_other{
 
 
 
-
-
-
-
+const char* webmsg_nstar_msg_heartick(unsigned char* data, unsigned short len);
+const char* webmsg_nstar_msg_onoff(unsigned char* data, unsigned short len, unsigned char cnt);
 const char* webmsg_nstar_msg_parm(unsigned char* data);
 const char* webmsg_nstar_msg_text(unsigned char* data);
 const char* webmsg_nstar_msg_other_ctl(unsigned char* data);
 
+void *nstar_loop_check_sta(void *parm);
 
 

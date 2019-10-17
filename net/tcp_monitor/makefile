@@ -6,7 +6,7 @@ OBJ = test
 #CFLAGS=-Wall -O2
 CFLAGS= -Wall
 LIBS=-lpthread
-OBJS = ts_monitor.c  nstar_msg.c
+OBJS = ts_monitor.c  nstar_msg.c app_delay.c
 $(OBJ):$(OBJS)
 	$(CC) -o $@ $(CFLAGS) $^ $(LIBS)
 
