@@ -146,9 +146,12 @@ const char* webmsg_nstar_msg_other_ctl(unsigned char* data)
 	switch(type){
 		case 13:
 			if(pmsg->content[0] == 0){
-				snprintf(buf, MAX_LEN, "指令：LED关屏, 指令长度：%02d", pmsg->content_len);
+				snprintf(buf, MAX_LEN, "指令：LED关屏", pmsg->content_len);
 			}			
-			else if(pmsg->content[0] == 1){
+			else if(pmsg->content[0] == 2){
+				snprintf(buf, MAX_LEN, "指令：LED清除节目", pmsg->content_len);
+			}
+			else {
 				#if 0				
 					snprintf(buf, MAX_LEN, "指令：LED节目列表发送%s, 指令长度：%02d",  
 						pmsg->content[1] == 0?"开始":"结束", pmsg->content_len);
@@ -170,6 +173,7 @@ const char* webmsg_nstar_msg_text(unsigned char* data)
 {
 #define MAX_TEXT_LEN 100
 	static char buf[MAX_TEXT_LEN];
+	char tmp[20];
 	unsigned char type;
 	NSTAR_TEXT_TYPE *pmsg;
 	pmsg= (NSTAR_TEXT_TYPE*)data;
@@ -178,9 +182,14 @@ const char* webmsg_nstar_msg_text(unsigned char* data)
 		type= TEXT_EM_MAX_TYPE+1;
 	switch(type){
 		default:
-			snprintf(buf, MAX_TEXT_LEN, "节目%d[%s], 帧序%d/%d, 帧长%02d, 时间%02d:%02d:%02d-%02d:%02d:%02d",    
+			if(pmsg->repet_cnt == 0)
+				snprintf(tmp, 20, "定时播放");
+			else
+				snprintf(tmp, 20, "播放%d次", pmsg->repet_cnt);
+			
+			snprintf(buf, MAX_TEXT_LEN, "节目%d[%s], 帧序%d/%d, 帧长%02d, 时间%02d:%02d:%02d-%02d:%02d:%02d, %s",    
 				sw16(pmsg->act_id), str_nstar_text_em[type], pmsg->pack_id+1, pmsg->pack_cnt, pmsg->pack_len,
-				pmsg->start_h, pmsg->start_m, pmsg->start_s, pmsg->end_h, pmsg->end_m, pmsg->end_s );
+				pmsg->start_h, pmsg->start_m, pmsg->start_s, pmsg->end_h, pmsg->end_m, pmsg->end_s, tmp);
 			break;
 	}
 	return buf;
@@ -189,8 +198,6 @@ const char* webmsg_nstar_msg_text(unsigned char* data)
 
 
 #include "app_delay.h"
-
-
 
 
 unsigned char app_capture_interval(volatile unsigned int *ptcnt, unsigned int u_ms);
@@ -203,11 +210,32 @@ static volatile unsigned int hear_tcnt=0;
 #define TIMER_GET_FLOW_HEART_TCIK() app_capture_interval(&hear_tcnt, HEART_FLOW_TIME)
 
 
+static unsigned char s_nb_program_vaild=0,s_last_nb=0,s_refresh_flag=0;
+unsigned char get_ts_program(void)
+{
+	return s_nb_program_vaild;
+}
+void reduce_ts_refresh_flag(void)
+{
+	if(s_refresh_flag > 0)
+		s_refresh_flag-=1;
+}
+unsigned char get_ts_refresh_flag(void)
+{
+	return s_refresh_flag;
+}
+static void set_ts_refresh_flag(void)
+{
+	s_refresh_flag= 5;
+}
+
+
+
 const char* webmsg_nstar_msg_onoff(unsigned char* data, unsigned short len, unsigned char cnt)
 {
 #define MAX_STA_LEN 1000
 	static char buf[MAX_STA_LEN];	
-	unsigned char*p_aid;
+	unsigned char*p_aid, nb=0;
 	int idx=0, reman_len;
 	NSTAR_SWITCH_BODY_TYPE *pmsg;
 	/*cut the head*/
@@ -219,18 +247,29 @@ const char* webmsg_nstar_msg_onoff(unsigned char* data, unsigned short len, unsi
 		p_aid= pmsg->log_addr;
 		reman_len= MAX_STA_LEN-idx;
 		if(reman_len > 1){
-			idx+= snprintf(buf+idx, reman_len, "%02x%02x-%02x%02x-%02x%02x, %03d[%s]",
-				p_aid[0], p_aid[1], p_aid[2], p_aid[3], p_aid[4], p_aid[5], 
-				sw16(pmsg->server_id), str_nstar_sw_em[pmsg->em_flag]);
+			if(nb > 12)
+				break;
+			idx+= snprintf(buf+idx, reman_len, "%02d.[%s]节目地址%02x%02x-%02x%02x-%02x%02x,节目号%03d%s",
+				nb+1, str_nstar_sw_em[pmsg->em_flag],p_aid[0], p_aid[1], p_aid[2], p_aid[3], p_aid[4], p_aid[5], 
+				sw16(pmsg->server_id),  ((nb%2)==1)? "\r\n": "\t\t");
+			nb++;
 		}
 		cnt--;
 		len-= sizeof(NSTAR_SWITCH_BODY_TYPE);
 		data+= sizeof(NSTAR_SWITCH_BODY_TYPE);
 	}
+	if(nb < s_last_nb)
+		s_nb_program_vaild= s_last_nb;
+	else
+		s_nb_program_vaild=nb;
+	s_last_nb= nb;
+	if(nb==0)
+		return "暂无节目\r\n";
 	reman_len= MAX_STA_LEN-idx;
 	if(reman_len > 1){
 		idx+= snprintf(buf+idx, reman_len, "\r\n" );
 	}
+	set_ts_refresh_flag();
 	return buf;
 }
 

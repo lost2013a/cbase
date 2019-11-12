@@ -25,5 +25,7 @@ struct rds_buf_t
 
 void parse_ts_msg(unsigned char *data, unsigned char type, unsigned short cnt, unsigned short len);
 
+const char* webmsg_nstar_msg_onoff(unsigned char* data, unsigned short len, unsigned char cnt);
+
 
 #endif

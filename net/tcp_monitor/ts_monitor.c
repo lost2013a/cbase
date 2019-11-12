@@ -28,6 +28,9 @@
 
 #define RDS_DATA_BUF_SIZE     (1024 * 40)
 
+char* gettime_str(void);
+
+
 #define mylog(fmt,...) do{\
 printf("[%s] ", gettime_str());\
 printf(""fmt"", ##__VA_ARGS__);\
@@ -84,10 +87,44 @@ void creat_timer(void)
 }
 
 
+static char* p_info=NULL;
+const char* get_ts_program_info(void)
+{
+	return p_info;
+}
+
+void *nstar_printsta(void *parm)
+{
+	unsigned char current_refresh_flag=0;
+	while(1)
+	{
+		current_refresh_flag= get_ts_refresh_flag();
+		if(current_refresh_flag == 0)
+			mylog("暂无节目\n");
+		else
+			mylog("%s",get_ts_program_info());
+		reduce_ts_refresh_flag();
+		sleep(1);
+	}
+}
+
+void creat_timer_program(void)
+{
+	pthread_t threads;
+	int rc;
+	long t;
+	rc = pthread_create(&threads, NULL, nstar_printsta, (void *)t);
+	if (rc){
+		printf("ERROR; return code from pthread_create() is %d\n", rc);
+		exit(-1);
+	}
+}
+
 
 
 int main(int argc, char** argv)
 {
+
 	int listen_fd;
 	struct sockaddr_in listen_addr, client_addr;
 	socklen_t len = sizeof(struct sockaddr_in);
@@ -104,6 +141,7 @@ int main(int argc, char** argv)
 	listen_addr.sin_port = htons(LISTEN_PORT);
 	bind(listen_fd,(struct sockaddr *)&listen_addr, len);
 	listen(listen_fd, WAIT_COUNT);
+	//creat_timer_program();
     while(1)
 	{
 		real_fd = accept(listen_fd, (struct sockaddr*)&client_addr, &len);
@@ -113,15 +151,9 @@ int main(int argc, char** argv)
 			return -1;
 		}
 		printf("accpet ok\n");
-		if(fork() == 0)
-		{
-		
-			close(listen_fd);
-			//creat_timer();
-			pthred_func();
-			close(real_fd);
-			exit(0);			
-		}
+
+		pthred_func();
+
 		close(real_fd);
 	}	
 	return 0;
@@ -189,6 +221,9 @@ static void searchRdsSync(struct rds_buf_t *rds)
 }
 
 
+
+
+
 static void log_ts_data(unsigned char *src_ts)
 {
 	static unsigned int err_cnt=0;
@@ -213,7 +248,7 @@ static void log_ts_data(unsigned char *src_ts)
 	printf("\r\n");
 }
 #endif
-#if 0
+#if 1
 {
 	int i, len;
 	len= 32;
@@ -236,13 +271,15 @@ static void log_ts_data(unsigned char *src_ts)
 	}
 	cnt= p_ts->cnt;
 	l_id= p_ts->log_addr;
+	p_ts->pid= sw16(p_ts->pid);
+	p_ts->pid&= 0x1fff;
 	switch(p_ts->type){
 
 		case 0:
 #define HEART_DBG 0	
 
 
-#if 1
+#if 0
 			{
 				int i, len;
 				unsigned char *log_data;
@@ -265,7 +302,10 @@ static void log_ts_data(unsigned char *src_ts)
 			}
 			else{
 				
-				mylog("%s\n", webmsg_nstar_msg_onoff(src_ts, date_len, cnt));
+				//mylog("%s\n", webmsg_nstar_msg_onoff(src_ts, date_len, cnt));
+				//mylog("节目数量%d\n", get_ts_program());
+				//mylog("%s\n", webmsg_nstar_msg_onoff(src_ts, date_len, cnt));
+				p_info= webmsg_nstar_msg_onoff(src_ts, date_len, cnt);
 			}
 			
 
@@ -289,7 +329,7 @@ static void log_ts_data(unsigned char *src_ts)
 			}	
 			break;
 		case 3:
-			//if(cnt == 0)mylog("len =%d\n", date_len);
+			
 			while(date_len >=  NSTAR_OTHER_CTL_LEN && cnt >0){
 				const char *pstr= webmsg_nstar_msg_other_ctl((unsigned char*)p_ts);
 				if(pstr != NULL){
@@ -369,7 +409,7 @@ int func_parse_ts(int fd)
 {
 	unsigned char i=0;
 	unsigned char *end_ptr = user_rds[i].ptr + user_rds[i].size;
-#if 1
+#if 0
 	static unsigned int tcnt=0;
 	int depth= user_rds[i].tail - end_ptr;
 	if((tcnt++)%10==0 && depth!= 40960)

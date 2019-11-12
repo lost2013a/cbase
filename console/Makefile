@@ -6,7 +6,7 @@ OBJ = test
 #CFLAGS=-Wall -O2
 CFLAGS= -Wall
 LIBS=-lpthread
-OBJS = console.c
+OBJS = chartest.c
 $(OBJ):$(OBJS)
 	$(CC) -o $@ $(CFLAGS) $^ $(LIBS)
 

@@ -163,4 +163,9 @@ const char* webmsg_nstar_msg_other_ctl(unsigned char* data);
 
 void *nstar_loop_check_sta(void *parm);
 
+unsigned char get_ts_program(void);
+void reduce_ts_refresh_flag(void);
+unsigned char get_ts_refresh_flag(void);
+
+
 
