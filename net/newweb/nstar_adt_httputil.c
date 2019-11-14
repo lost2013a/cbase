@@ -13,10 +13,11 @@ extern int conn_sock;
 #define SOCKET_REC_FLAG MSG_DONTWAIT
 
 volatile static unsigned int http_data_len;
+static int raw_content_len;
 #define HTTP_SPRINTF_MAXLEN (1024*100)
 static unsigned char http_data_buf[HTTP_SPRINTF_MAXLEN];
 
-static int http_send(unsigned char *data, unsigned int len)
+int http_send(unsigned char *data, unsigned int len)
 {
 #if 1
 #include "write_log.h"
@@ -113,6 +114,8 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 		parm3_pos_htm(mode);
 	else if((mode= GET_comp_uri(name, HTML_PAGE4_NAME) ) > 0)
 		parm4_pos_htm(mode);
+	else if((mode= GET_comp_uri(name, HTML_PAGE5_NAME) ) > 0)
+		parm5_pos_htm(mode);
 	else if(_comp_uri(name,"/favicon.ico")){
 		/*nothing need to do*/
 	}
@@ -141,6 +144,8 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 		parm3_rpos_cgi(uri);
 	else if(strcmp(req_name,""HTML_PAGE4_NAME".cgi")==0)							  	
 		parm4_rpos_cgi(uri);
+	else if(strcmp(req_name,""HTML_PAGE5_NAME".cgi")==0)							  	
+		parm5_rpos_cgi(uri);
 
 }
 
@@ -173,11 +178,12 @@ static void proc_http(void)
 
 int do_https(void)
 {			
-	int len;									
+	int len;	
 	len	= http_rec((unsigned char*)nstar_web_rx_buf, MAX_URI_SIZE);
 	if(len < 1)
 		return 0;
 	nstar_web_rx_buf[len] = 0;
+	raw_content_len= len;
 	proc_http();	
 	return len; 
 }
@@ -211,6 +217,18 @@ void http_handle_parm(char *p_content, char *name, void(fun_set_parm)(char*))
 	}
 }
 
+/*仅供web file计算file第一帧包内容长度时使用*/
+char* web_file_frame1_content_len(unsigned int *content_len)
+{
+	char *p_content= (char*)my_get_param_url(nstar_web_rx_buf + 10);
+	if(NULL == p_content){
+		*content_len= 0;
+	}
+	else{
+		*content_len= raw_content_len- (p_content- nstar_web_rx_buf);
+	}
+	return p_content;
+}
 
 
 

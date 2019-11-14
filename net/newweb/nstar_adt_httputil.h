@@ -68,6 +68,9 @@ void http_page_json(const char *name, void (fun_add_elemnet)(unsigned char));
 void http_page_htm(const char *name, const char *body, void (fun_add_elemnet)(unsigned char));
 void http_handle_parm(char *p_content, char *name, void(fun_set_parm)(char*));
 
+
+char* web_file_frame1_content_len(unsigned int *content_len);
+
 #endif
 
 
