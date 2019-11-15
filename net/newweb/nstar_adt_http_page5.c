@@ -52,6 +52,9 @@
 "<span id='percentage'></span><span id='time' style='color: #FF2222;font-size: 14px;'></span>"\
 "<p style='color: #FF2222;font-size: 14px;'> 注意：用于面板程序升级，请在厂家技术指导下进行升级操作</a></p>"\
 "</form>"\
+"<form id='frmSetting' method='POST' action='"C_PAGE_NAME".cgi'>"\
+"<p><label>烧写进度:</label><input type='text' size='16' disabled='disabled' id='"JS_P1_E1"' name='"JS_P1_E1"'/></p>"\
+"</form>"\
 "</body>"\
 "</html>"\
 "</script>"\
@@ -82,6 +85,27 @@
 "}"\
 "</script>"\
 
+#define STA_REFRESH_HTML_START "<script>function $(id) { return document.getElementById(id); };"\
+"function myrefresh()"\
+"{"\
+"	var xmlHttp = new XMLHttpRequest();"\
+"	xmlHttp.open('GET', '/firmware.js', true);"\
+"	xmlHttp.send(null);"\
+"	xmlHttp.onreadystatechange=function()"\
+"	{"\
+"		if(xmlHttp.readyState == 4 && xmlHttp.status == 200) "\
+"		{"\
+		"var json=xmlHttp.responseText;"\
+		"var o=eval(\'(\'+json+\')\');"\
+
+#define STA_REFRESH_HTML_END  "}"\
+"	}"\
+"}</script>	"\
+"<script language='JavaScript'>setInterval('myrefresh()',1000);</script>"\
+"<script>myrefresh();</script>"
+
+
+
 extern int test_http_rec(unsigned char *data, unsigned int rmax_len);
 
 #define MAX_FILE_LEN (1024*1024)
@@ -100,18 +124,82 @@ typedef struct __webfile{
 
 WEB_FILE h_webfile;
 
+static unsigned char file_rate=0;
+static void file_rate_add(void)
+{
+	if(file_rate < 100 && file_rate >= 10)
+		file_rate++;
+}
+static void file_rate_init(void)
+{
+	file_rate=10;
+}
+static void file_rate_100(void)
+{
+	file_rate=100;
+}
+static unsigned char read_file_rate(void)
+{
+	return file_rate;
+}
+
+
 static void _add_htm_element(unsigned char mode)
 {
-	
+	if(mode == URI_REPOS_HTML){
+		REQUST_JSCRIPT_ELEMENT(JS_P1_E1);
+		
+	}
+	else if(mode == URI_REPOS_JSON){
+		http_sprintf("'%s':'%02d\%',",JS_P1_E1, read_file_rate() );
+	}
+	file_rate_add();
 }
+
+void http_html5_sta(const char* name, void (fun_add_elemnet)(unsigned char))
+{
+	http_sprintf_init();
+	http_sprintf("%s%s", HTML_PARM_HEAD, C_PAGE_BODY);
+	http_sprintf(STA_REFRESH_HTML_START);
+	fun_add_elemnet(URI_REPOS_HTML);
+	http_sprintf(STA_REFRESH_HTML_END);
+	http_sprintf_send();
+}
+
+void http_json5_sta(void (fun_add_elemnet)(unsigned char))
+{
+
+	http_sprintf_init();
+	http_sprintf("{");
+	fun_add_elemnet(URI_REPOS_JSON);
+	http_sprintf("}");
+	http_sprintf_send();
+}
+
+
 
 void parm5_pos_htm(unsigned char mode)
 {
-	if(mode == URI_REPOS_HTML)
-		http_page_htm(C_PAGE_NAME, C_PAGE_BODY, _add_htm_element);
-	else if(mode == URI_REPOS_JSON)
-		http_page_json(C_PAGE_NAME, _add_htm_element);
+	if(mode == URI_REPOS_HTML){
+		http_html5_sta(HTML_PAGE5_NAME, _add_htm_element);
+	}
+	else{
+	
+		http_json5_sta(_add_htm_element);
+	
+	}
+	
 }
+
+
+
+//void parm5_pos_htm(unsigned char mode)
+//{
+//	if(mode == URI_REPOS_HTML)
+//		http_page_htm(C_PAGE_NAME, C_PAGE_BODY, _add_htm_element);
+//	else if(mode == URI_REPOS_JSON)
+//		http_page_json(C_PAGE_NAME, _add_htm_element);
+//}
 
 static unsigned char webfile_call_back(unsigned char *data, unsigned int datalen)
 {
@@ -190,10 +278,6 @@ static int file_handle(unsigned char *data)
 
 
 
-
-
-
-
 void parm5_rpos_cgi(char *url)
 { 
 	extern int http_send(unsigned char *data, unsigned int len);
@@ -201,6 +285,7 @@ void parm5_rpos_cgi(char *url)
 	int wcnt= TIME_OUT_CNT;
 	WEB_FILE *p_webfile= &h_webfile;
 	const char ack[]="HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:15\r\n\r\n{\"ver\":\"1\"}";
+	file_rate_init();
 	if(0 != parse_head(url)){
 		printf("err: bad response, close now\r\n");
 		return;
