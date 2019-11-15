@@ -226,7 +226,6 @@ char* http_mid(char* src, char* s1, char* s2, char* sub)
 	char* sub1;
 	char* sub2;
 	unsigned short n;
-	unsigned char res=0 ;
 	sub1=strstr(src,s1);
 	if(sub1 == NULL)
 		return NULL;

@@ -1,5 +1,6 @@
 #include "nstar_adt_httputil.h"
 #include "nstar_adt_http_page.h"
+#include "unistd.h"
 
 
 #define UPDATE_FILE 	"firmware"
@@ -9,11 +10,6 @@
 #define myprintf printf
 
 #define JS_P1_E1 		"CmdPid"
-
-#define JS_P1_E1 		"sip"
-#define JS_P1_E2 		"dip"
-
-
 #define C_PAGE_BODY "<style>"\
 "progress{"\
 "width: 468px;"\
@@ -48,8 +44,6 @@
 "<h3>面板固件升级</h3>"\
 "<div style='background:snow; display:block; padding:10px 10%;'>"\
 "<form id='frmFirmware' method='post' action='firmware.cgi' enctype='multipart/form-data'>"\
-"<p><label>指令PID:</label><input type='text' size='16' id='"JS_P1_E1"' name='"JS_P1_E1"'/></p>"\
-"<p><label>节目号:</label><input type='text' size='16' id='"JS_P1_E2"' name='"JS_P1_E2"'/></p>"\
 "<input type='text' id='textfield' class='txt'/>"\
 "<label class='ui-upload'>选择升级文件<input type='file' id='file' name='myfile' value='' accept='.bin'style='display: none;'onchange=\"document.getElementById('textfield').value=this.files[0].name\"></label>"\
 "<input type='button' onclick ='UpladFile();' value='开始升级' id='rcorners1' style='background: #ff6300'/>"\
@@ -88,63 +82,11 @@
 "}"\
 "</script>"\
 
-
-static void _add_htm_element(unsigned char mode)
-{
-	static unsigned int t=0;
-	if(mode == URI_REPOS_HTML){
-		REQUST_JSCRIPT_ELEMENT(JS_P1_E1);
-		REQUST_JSCRIPT_ELEMENT(JS_P1_E2);
-	}
-	else if(mode == URI_REPOS_JSON){
-		http_sprintf("'%s':'%d',",JS_P1_E1, t++ );
-		http_sprintf("'%s':'%d',",JS_P1_E2, 12);
-	}
-}
-
-
-void parm5_pos_htm(unsigned char mode)
-{
-	if(mode == URI_REPOS_HTML)
-		http_page_htm(C_PAGE_NAME, C_PAGE_BODY, _add_htm_element);
-	else if(mode == URI_REPOS_JSON)
-		http_page_json(C_PAGE_NAME, _add_htm_element);
-}
-
-
-
-static unsigned char set_sip(char* sip)
-{
-	printf("sip=%s\n", sip);	
-	return 0;
-}
-
 extern int test_http_rec(unsigned char *data, unsigned int rmax_len);
-
 
 #define MAX_FILE_LEN (1024*1024)
 unsigned char tmp_buf[1464]={0xff,};
 unsigned char web_file_buf[MAX_FILE_LEN];
-
-
-typedef struct __firmware{
-	unsigned int fw_offset ;			//写FLASH地址
-	unsigned int current_rxlen;			//当前接收长度
-	unsigned int total_rxlen; 			//总的接收长度
-	unsigned int total_w_len ;			//已写长度
-	unsigned int hdr_len; 				//Content中，数据区的头部长度
-	unsigned int data_len;				//Content中，数据区的长度
-	unsigned int tail_len;				//Content中，数据区的尾部
-	unsigned int real_wl; 				//真正写入FLASH的长度，需要4字节对齐
-	unsigned char  remain_buf[3];		//未4字节对齐的数据保存位置
-	unsigned char  remain_len ; 		//未4字节对齐的数据长度
-	unsigned char  head_flag;			//找到数据起始位置的标志
-	char *pos1;
-	char *pos2;
-	unsigned char *pdata;
-}WEB_FIRMWARE;
-
-WEB_FIRMWARE gwebfw;
 
 typedef struct __webfile{
 	/*把file的中间量做出外部变量，便于file过程中，做其他事情，比如写入FLASH*/
@@ -158,38 +100,20 @@ typedef struct __webfile{
 
 WEB_FILE h_webfile;
 
-
-
-
-
-
-static char parse_head(const char* url)
+static void _add_htm_element(unsigned char mode)
 {
-						//异常计数
-	unsigned int content_len=0;		
-	char *pstr, *p_bound, str_buf[20];
-	WEB_FILE *p_webfile= &h_webfile;
-	pstr= http_mid((char*)url,"Content-Length: ","\r\n",str_buf);
-	if(pstr == NULL)
-		return 0;
-	content_len=atoi(str_buf);
-	mydbg("content_len=%ld \r\n", content_len);
-	if(content_len > MAX_FILE_LEN){
-		printf("固件长度不正常\r\n");
-		return NULL;
-	}
-	p_webfile->content_len= content_len;
-	p_bound= p_webfile->boundary;
-	pstr= http_mid(pstr,"boundary=", "\r\n", p_bound);//找分割符
-	if(pstr == NULL)
-		return 0;
-	mydbg("分割符boundary=%s\r\n", p_bound); 
-
-	return 1;
+	
 }
 
+void parm5_pos_htm(unsigned char mode)
+{
+	if(mode == URI_REPOS_HTML)
+		http_page_htm(C_PAGE_NAME, C_PAGE_BODY, _add_htm_element);
+	else if(mode == URI_REPOS_JSON)
+		http_page_json(C_PAGE_NAME, _add_htm_element);
+}
 
-unsigned char webfile_call_back(unsigned char *data, unsigned int datalen)
+static unsigned char webfile_call_back(unsigned char *data, unsigned int datalen)
 {
 	WEB_FILE *p_webfile= &h_webfile;
 	unsigned char *idx= web_file_buf+ p_webfile->current_rxlen;
@@ -198,7 +122,47 @@ unsigned char webfile_call_back(unsigned char *data, unsigned int datalen)
 	return 1;
 }
 
-unsigned char file_handle(unsigned char *data)
+static int _file_head_handle(void)
+{
+	WEB_FILE *p_webfile= &h_webfile;
+	unsigned int len;
+	char *data;
+	data= web_file_frame1_content_len(&len);
+	if(len == 0){
+		printf("err: can't get file info\n");
+		return -4;
+	}
+	p_webfile->current_rxlen= 0;
+	webfile_call_back((unsigned char*)data, len);
+	return 0;
+}
+
+static int parse_head(const char* url)
+{
+	unsigned int content_len=0;		
+	char *pstr, *p_bound, str_buf[20];
+	WEB_FILE *p_webfile= &h_webfile;
+	pstr= http_mid((char*)url,"Content-Length: ","\r\n",str_buf);
+	if(pstr == NULL){
+		printf("err: Content-Length can't find\r\n");
+		return -1;
+	}
+	content_len=atoi(str_buf);
+	if(content_len > MAX_FILE_LEN){
+		printf("err: Content-Length too long\r\n");
+		return -2;
+	}
+	p_webfile->content_len= content_len;
+	p_bound= p_webfile->boundary;
+	pstr= http_mid((char*)url,"boundary=", "\r\n", p_bound);//找分割符
+	if(pstr == NULL){
+		printf("err: boundary can't find\r\n"); 
+		return -3;
+	}
+	return _file_head_handle();
+}
+
+static int file_handle(unsigned char *data)
 {
 	WEB_FILE *p_webfile= &h_webfile;
 	unsigned int hdr_len, tail_len;
@@ -206,12 +170,12 @@ unsigned char file_handle(unsigned char *data)
 
 	pos1= strstr((char*)data, (char*)p_webfile->boundary);
 	if(pos1 == NULL){
-		myprintf("没有找到分隔线\r\n");
+		printf("err: boundary can't find\r\n"); 
 		return -1;
 	}
 	pos2= strstr(pos1+strlen((char*)p_webfile->boundary), "\r\n\r\n");
 	if(pos2 == NULL){
-		myprintf("没有找到文件起始标志\r\n");
+		printf("err: file head can't find\r\n");
 		return -1;
 	}
 	pos2+=4;
@@ -220,68 +184,43 @@ unsigned char file_handle(unsigned char *data)
 	tail_len= strlen((char*)p_webfile->boundary)+4+4; //多了2个"--"再加上2个"\r\n"
 	p_webfile->file_len= p_webfile->content_len-hdr_len-tail_len;
 	
-	myprintf("数据长度:%ld= %d-%ld-%ld\r\n", p_webfile->file_len, p_webfile->content_len, hdr_len, tail_len);
+	myprintf("file len:%u= %u-%u-%u\r\n", p_webfile->file_len, p_webfile->content_len, hdr_len, tail_len);
+	return 0;
 }
 
 
 
-static void file_head_handle(void)
-{
-	WEB_FILE *p_webfile= &h_webfile;
-	unsigned int len;
-	char *data;
-	data= web_file_frame1_content_len(&len);
-	if(len == 0){
-		printf("can't get file info\n");
-		return;
-	}
-	p_webfile->current_rxlen= 0;
-	webfile_call_back(data, len);
-}
 
-
-void http_json_back(void)
-{
-
-	http_sprintf_init();
-	http_sprintf("{");
-	_add_htm_element(URI_REPOS_JSON);
-	http_sprintf("}");
-	http_sprintf_send();
-}
 
 
 
 void parm5_rpos_cgi(char *url)
 { 
-#define TIME_OUT_CNT 40
+	extern int http_send(unsigned char *data, unsigned int len);
+#define TIME_OUT_CNT 100
 	int wcnt= TIME_OUT_CNT;
 	WEB_FILE *p_webfile= &h_webfile;
-	unsigned int frame1_len;
-	const char vv[]="HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:15\r\n\r\n{\"ver\":\"1\"}";
-
-	if(0 == parse_head(url)){
-		printf("bad file\n");
+	const char ack[]="HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length:15\r\n\r\n{\"ver\":\"1\"}";
+	if(0 != parse_head(url)){
+		printf("err: bad response, close now\r\n");
 		return;
 	}
-	file_head_handle();
+	
 	while(wcnt && p_webfile->current_rxlen < p_webfile->content_len){
 		int len= test_http_rec((unsigned char*)nstar_web_rx_buf, MAX_URI_SIZE);
 		if(len > 0){
-			webfile_call_back(nstar_web_rx_buf, len);
-			//http_page_json(C_PAGE_NAME, _add_htm_element);
-			http_json_back();
+			webfile_call_back((unsigned char*)nstar_web_rx_buf, len);
 		}
 		else{
 			wcnt--;
 		}
-		mydbg("%d/%d\n", p_webfile->current_rxlen, p_webfile->content_len);
-		usleep(50*1000);
+		mydbg("file rec: %d/%d\n", p_webfile->current_rxlen, p_webfile->content_len);
+		usleep(10*1000);
 	}
 	if(wcnt!=0){
 		file_handle(web_file_buf);
 	}
-	http_send((unsigned char *)vv, strlen(vv));
+	http_send((unsigned char *)ack, strlen(ack));
 	return;
 }
 
