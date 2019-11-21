@@ -1,5 +1,3 @@
-
-/* ntpclient.c */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,24 +14,14 @@
 
 #include "sntp.h"
 
-#define NTP_SERVER          "148.70.110.182"
+#if 1
+#define dbg printf
+#else
+#define dbg(...) 
+#endif
+#define NTP_SERVER      "120.25.115.20"
+#define NTP_LOOP_TIME   (10)	/*单位：秒*/
 #define K_MS 1		
-
-
-in_addr_t inet_host(const char *host)
-{
-    in_addr_t saddr;
-    struct hostent *hostent;
-
-    if ((saddr = inet_addr(host)) == INADDR_NONE) {
-        if ((hostent = gethostbyname(host)) == NULL)
-            return INADDR_NONE;
-
-        memmove(&saddr, hostent->h_addr, hostent->h_length);
-    }
-
-    return saddr;
-}
 
 int get_ntp_packet(void *buf, size_t *size)
 {
@@ -79,29 +67,93 @@ double get_offset(const struct ntphdr *ntp, const struct timeval *recvtv)
     t2 = NTP_LFIXED2DOUBLE(&ntp->ntp_recvts);
     t3 = NTP_LFIXED2DOUBLE(&ntp->ntp_transts);
     t4 = recvtv->tv_sec + recvtv->tv_usec / 1000000.0;
-	if(0)
-		printf("t1: %lf\nt2: %lf\nt3: %lf\nt4: %lf\n", t1, t2, t3, t4);
+	//dbg("t1: %lf\nt2: %lf\nt3: %lf\nt4: %lf\n", t1, t2, t3, t4);
 	return ((t2 - t1) + (t3 - t4)) / 2;
 }
 
+static char filter_sntp_b=0,filter_sntp_i=0;
+static int myfilter(int *off,int d,char *b,char *i)
+{
+#define RANK_B 3	
+#define RANK_I 3	
+	int ret = 0;
+	int absoff ;
+	absoff = abs(*off);
+	if(*b < RANK_B){
+		if(*i < RANK_I){ 			
+			if(absoff < d)
+				(*i)++;	
+			else if((*i)>0)
+				(*i)--;
+		}
+		else {					
+			if(absoff<(d)){
+				if(*b>0){
+					(*b)--;
+				}
+			}
+			else {
+				(*b)++; 		
+				*off = 0; 		
+			}
+			ret=1;
+		}
+	}
+	else{  						
+		*i = 0;
+		*b = 0;
+	}
+	dbg("off=%d, *i=%d, *b=%d\n",*off,*i,*b);
+	return ret;
+}
 
+#define ADJUST_OFF 500 //ms
+#define NSATR_SNTP_FILTER(off)	myfilter(off, ADJUST_OFF, &filter_sntp_b, &filter_sntp_i)
+
+static void adjust_time(double off)
+{
+	struct timeval tv;
+	int ret;
+	int off_sec= (int) off;
+	int off_usec= (off)*1000000;
+	int cal_off= off_sec*1000+ off_usec/1000;
+	dbg("raw off=%lf, cal off= %dms\n", off, cal_off);	
+	NSATR_SNTP_FILTER(&cal_off);
+#if 0
+	/*尽可能减少系统时间修改*/
+	if(cal_off > ADJUST_OFF || cal_off < -ADJUST_OFF)
+#else
+	/*尽可能对准*/
+	if(cal_off != 0)
+#endif		
+	{
+		gettimeofday(&tv, NULL);
+		tv.tv_sec += (int) off;
+		int off_u= (off)*1000000;
+		tv.tv_usec += off_u;
+		//dbg("sntp: adjust time %d.%d\n", tv.tv_sec, tv.tv_usec);
+		ret= settimeofday(&tv, NULL);
+        if (ret != 0) {
+            printf("sntp: adjust time %ld.%ld error #%d ", tv.tv_sec, tv.tv_usec ,ret);
+        }
+	}
+
+}
 
 int main(int argc, char *argv[])
 {
-
-	static double last_time;
 	char buf[BUFSIZE];
     size_t nbytes;
     int sockfd, maxfd1;
     struct sockaddr_in servaddr;
     fd_set readfds;
-    struct timeval timeout, recvtv, tv;
+    struct timeval timeout, recvtv;
     double offset;
 	
 	
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(NTP_PORT);
-    servaddr.sin_addr.s_addr = inet_host(NTP_SERVER);
+    servaddr.sin_addr.s_addr = inet_addr(NTP_SERVER);
 
     if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         perror("socket error");
@@ -146,21 +198,11 @@ int main(int argc, char *argv[])
 		            }
 		            gettimeofday(&recvtv, NULL);
 		            offset = get_offset((struct ntphdr *) buf, &recvtv);
-					//double jitter= offset- last_time;
-					printf("off= %lf,  jitter= %lf\n\n", offset, (offset- last_time));
-					last_time= offset;
-					gettimeofday(&tv, NULL);
-					tv.tv_sec += (int) offset;
-					int off_u= (offset)*1000000;
-					tv.tv_usec += off_u;
-		            if (settimeofday(&tv, NULL) != 0) {
-		                perror("settimeofday error");
-		                exit(-1);
-		            }
+					adjust_time(offset);				
 		        }
 				break;
 	    }
-		sleep(2*60);
+		sleep(NTP_LOOP_TIME);
 	}
     close(sockfd);
     return 0;
