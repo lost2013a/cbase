@@ -3,7 +3,7 @@
 * Author             : WCH
 * Version            : V1.0
 * Date               : 2013/11/15
-* Description        : CH563NET¿â-HTTPS
+* Description        : CH563NETåº“-HTTPS
 *                    : MDK3.36@ARM966E-S,Thumb
 **********************************************************************************/
 #ifndef	__HTTPS_H__
@@ -18,20 +18,20 @@
 
 #define HTTP_SERVER_PORT		80		
 
-/* httpÇëÇó·½·¨ */
+/* httpè¯·æ±‚æ–¹æ³• */
 #define		METHOD_ERR		0		
 #define		METHOD_GET		1		
 #define		METHOD_HEAD		2		
 #define		METHOD_POST		3		
 
-/* httpÇëÇóÀàĞÍ */
+/* httpè¯·æ±‚ç±»å‹ */
 #define		PTYPE_ERR		  0		
 #define		PTYPE_HTML	  1		
 #define		PTYPE_PNG		  2				
 #define		PTYPE_CSS		  3	
 #define   PTYPE_GIF     4
 
-/*563ÍøÒ³Í¨ĞÅĞ­Òé¶¨Òå*/
+/*563ç½‘é¡µé€šä¿¡åè®®å®šä¹‰*/
 #define MODE_TcpServer  0
 #define MODE_TcpClient  1
 
@@ -40,13 +40,13 @@
 
 /* HTML Doc. for ERROR */
      
-#define RES_HTMLHEAD_OK	"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"      /*HTMLÀàĞÍµÄÏìÓ¦±¨ÎÄ£¬×îºóÁ½¸ö\r\n±ØĞëÒªÓĞ*/
+#define RES_HTMLHEAD_OK	"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n"      /*HTMLç±»å‹çš„å“åº”æŠ¥æ–‡ï¼Œæœ€åä¸¤ä¸ª\r\nå¿…é¡»è¦æœ‰*/
 
-#define RES_PNGHEAD_OK	"HTTP/1.1 200 OK\r\nContent-Type: image/png\r\n\r\n"      /*PNGÀàĞÍµÄÏìÓ¦±¨ÎÄ£¬×îºóÁ½¸ö\r\n±ØĞëÒªÓĞ*/
+#define RES_PNGHEAD_OK	"HTTP/1.1 200 OK\r\nContent-Type: image/png\r\n\r\n"      /*PNGç±»å‹çš„å“åº”æŠ¥æ–‡ï¼Œæœ€åä¸¤ä¸ª\r\nå¿…é¡»è¦æœ‰*/
   
-#define RES_CSSHEAD_OK  "HTTP/1.1 200 OK\r\nContent-Type: text/css\r\n\r\n"       /*CSSÀàĞÍµÄÏìÓ¦±¨ÎÄ£¬×îºóÁ½¸ö\r\n±ØĞëÒªÓĞ*/
+#define RES_CSSHEAD_OK  "HTTP/1.1 200 OK\r\nContent-Type: text/css\r\n\r\n"       /*CSSç±»å‹çš„å“åº”æŠ¥æ–‡ï¼Œæœ€åä¸¤ä¸ª\r\nå¿…é¡»è¦æœ‰*/
 
-#define RES_GIFHEAD_OK  "HTTP/1.1 200 OK\r\nContent-Type: image/gif\r\n\r\n"      /*GIFÀàĞÍµÄÏìÓ¦±¨ÎÄ£¬×îºóÁ½¸ö\r\n±ØĞëÒªÓĞ*/
+#define RES_GIFHEAD_OK  "HTTP/1.1 200 OK\r\nContent-Type: image/gif\r\n\r\n"      /*GIFç±»å‹çš„å“åº”æŠ¥æ–‡ï¼Œæœ€åä¸¤ä¸ª\r\nå¿…é¡»è¦æœ‰*/
  /*-----------------*/
 
 
@@ -59,9 +59,9 @@
 #define Port_Cfg_Len   40    
 #define Login_Cfg_Len  40
 
-typedef struct Basic_Cfg        //»ù´¡ÉèÖÃÅäÖÃ²ÎÊı
+typedef struct Basic_Cfg        //åŸºç¡€è®¾ç½®é…ç½®å‚æ•°
 {
-	UINT8 flag[2];                //ÅäÖÃĞÅÏ¢ÑéÖ¤Âë0x57,0xab
+	UINT8 flag[2];                //é…ç½®ä¿¡æ¯éªŒè¯ç 0x57,0xab
 	UINT8 mac[6];
   UINT8 ip[4];
 	UINT8 mask[4];
@@ -69,9 +69,9 @@ typedef struct Basic_Cfg        //»ù´¡ÉèÖÃÅäÖÃ²ÎÊı
 } *Basic_Cfg;
 
 
-typedef struct Port_Cfg        //¶Ë¿ÚÉèÖÃÅäÖÃ²ÎÊı
+typedef struct Port_Cfg        //ç«¯å£è®¾ç½®é…ç½®å‚æ•°
 {
-	UINT8 flag[2];               //ÅäÖÃĞÅÏ¢ÑéÖ¤Âë0x57,0xab
+	UINT8 flag[2];               //é…ç½®ä¿¡æ¯éªŒè¯ç 0x57,0xab
 	UINT8 mode;
   UINT8 src_port[2];
 	UINT8 des_ip[4];
@@ -79,32 +79,32 @@ typedef struct Port_Cfg        //¶Ë¿ÚÉèÖÃÅäÖÃ²ÎÊı
 } *Port_Cfg;
 
 
-typedef struct Login_Cfg        //µÇÂ¼ÉèÖÃÅäÖÃ²ÎÊı
+typedef struct Login_Cfg        //ç™»å½•è®¾ç½®é…ç½®å‚æ•°
 {
-	UINT8  flag[2];               //ÅäÖÃĞÅÏ¢ÑéÖ¤Âë0x57,0xab
+	UINT8  flag[2];               //é…ç½®ä¿¡æ¯éªŒè¯ç 0x57,0xab
 	UINT8  user[10];
 	UINT8  pass[10];
 } *Login_Cfg;
 
 
-typedef struct _st_http_request  //ä¯ÀÀÆ÷ÇëÇóĞÅÏ¢
+typedef struct _st_http_request  //æµè§ˆå™¨è¯·æ±‚ä¿¡æ¯
 {
 	char	METHOD;					
 	char	TYPE;					
 	char	URI[MAX_URI_SIZE];			
 } st_http_request;
 
-typedef struct Para_Tab          //ÅäÖÃĞÅÏ¢²ÎÊı±í
+typedef struct Para_Tab          //é…ç½®ä¿¡æ¯å‚æ•°è¡¨
 {
-	char *para;                    //ÅäÖÃÏîÃû³Æ
-	char value[20];                //ÅäÖÃÏîÊıÖµ
+	char *para;                    //é…ç½®é¡¹åç§°
+	char value[20];                //é…ç½®é¡¹æ•°å€¼
 }Parameter;
 	
 extern UINT8  basicbuf[Basic_Cfg_Len],portbuf[Port_Cfg_Len],loginbuf[Login_Cfg_Len];
 
 extern st_http_request *http_request;
   
-extern UINT8 httpweb[200] ;                                                               /*ÓÃÀ´±£´æhttpÏìÓ¦±¨ÎÄ*/
+extern UINT8 httpweb[200] ;                                                               /*ç”¨æ¥ä¿å­˜httpå“åº”æŠ¥æ–‡*/
 
 extern UINT8 Basic_Default[Basic_Cfg_Len];
 extern UINT8 Login_Default[Login_Cfg_Len];

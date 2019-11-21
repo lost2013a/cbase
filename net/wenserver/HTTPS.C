@@ -3,29 +3,26 @@
 * Author             : WCH
 * Version            : V1.0
 * Date               : 2013/11/15
-* Description        : CH563NET¿â-HTTPS
+* Description        : CH563NETåº“-HTTPS
 *                    : MDK3.36@ARM966E-S,Thumb
 *******************************************************************************/
   
 
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>    
-#include "SYSFREQ.H"
 #include "HTTPS.H"
-#include "CH563NET.H"
-#include "SYSFREQ.H"
-#include  "ISPXT56X.H"   
-#define html_len 1024*8                                                                       /*µ¥¸öÍøÒ³µÄ×î´ó´óĞ¡*/
-/* ±äÁ¿¶¨Òå */
-char tempURI[MAX_URI_SIZE];                                                                   /*±£´æä¯ÀÀÆ÷ÇëÇóµÄ×ÊÔ´Ãû*/
+
+#define html_len 1024*8                                                                       /*å•ä¸ªç½‘é¡µçš„æœ€å¤§å¤§å°*/
+/* å˜é‡å®šä¹‰ */
+char tempURI[MAX_URI_SIZE];                                                                   /*ä¿å­˜æµè§ˆå™¨è¯·æ±‚çš„èµ„æºå*/
 
 st_http_request *http_request;
 
-Parameter Para_Basic[4],Para_Port[4],Para_Login[2];                                           /*¶¨ÒåÈı¸ö½á¹¹ÌåÊı×é£¬·Ö±ğÓÃÓÚ±£´æ»ù´¡ÉèÖÃ£¬¶Ë¿ÚÉèÖÃ£¬ÃÜÂëÉèÖÃµÄÍøÒ³Ìá½»ĞÅÏ¢*/
+Parameter Para_Basic[4],Para_Port[4],Para_Login[2];                                           /*å®šä¹‰ä¸‰ä¸ªç»“æ„ä½“æ•°ç»„ï¼Œåˆ†åˆ«ç”¨äºä¿å­˜åŸºç¡€è®¾ç½®ï¼Œç«¯å£è®¾ç½®ï¼Œå¯†ç è®¾ç½®çš„ç½‘é¡µæäº¤ä¿¡æ¯*/
 
 UINT8  basicbuf[Basic_Cfg_Len],portbuf[Port_Cfg_Len],loginbuf[Login_Cfg_Len];
 
@@ -34,20 +31,20 @@ Port_Cfg   Port_CfgBuf=(Port_Cfg)portbuf;
 Login_Cfg Login_CfgBuf=(Login_Cfg)loginbuf;
 
 
- UINT8 Basic_Default[Basic_Cfg_Len]={                                                      /*563ÍøÂç²ÎÊıÄ¬ÈÏÅäÖÃ*/                          
-  0x57,0xAB,                                                                                /*57 AB ÊÇ¿ªÍ·µÄĞ£ÑéÂë*/
+ UINT8 Basic_Default[Basic_Cfg_Len]={                                                      /*563ç½‘ç»œå‚æ•°é»˜è®¤é…ç½®*/                          
+  0x57,0xAB,                                                                                /*57 AB æ˜¯å¼€å¤´çš„æ ¡éªŒç */
   01,02,03,04,05,06,
   192,168,1,10,
   255,255,255,0,
   192,168,1,1,
 };
- UINT8 Login_Default[Login_Cfg_Len]={                                                      /*563µÇÂ¼Ä¬ÈÏÓÃ»§ÃûÓëÃÜÂë*/
+ UINT8 Login_Default[Login_Cfg_Len]={                                                      /*563ç™»å½•é»˜è®¤ç”¨æˆ·åä¸å¯†ç */
   0x57,0xAB,
   '1','2','3',0,0,0,0,0,0,0,
   '1','2','3',0,0,0,0,0,0,0
 };
 
- UINT8 Port_Default[Port_Cfg_Len]={                                                        /*563Ä¬ÈÏ¶Ë¿ÚÅäÖÃ*/
+ UINT8 Port_Default[Port_Cfg_Len]={                                                        /*563é»˜è®¤ç«¯å£é…ç½®*/
   0x57,0xAB,
   MODE_TcpClient,
   1000/256,1000%256,
@@ -56,11 +53,20 @@ Login_Cfg Login_CfgBuf=(Login_Cfg)loginbuf;
 };
 
 
-UINT8   *name;                                                                             /*httpÇëÇóµÄÍøÒ³Ãû×Ö*/
-UINT8 httpweb[200];                                                                        /*Êı×éÓÃÓÚ±£´æhttpÏìÓ¦±¨ÎÄ*/
-char HtmlBuffer[html_len];                                                                 /*ÍøÒ³µÄ·¢ËÍ»º³åÇø*/
-UINT8 socket;                                                                              /*ÍøÒ³Í¨Ñ¶ÖĞ½¨Á¢µÄsocketË÷ÒıºÅ*/
-UINT8 png=0;                                                                               /*°´Å¥Í¼±êĞòºÅ*/
+UINT8   *name;                                                                             /*httpè¯·æ±‚çš„ç½‘é¡µåå­—*/
+UINT8 httpweb[200];                                                                        /*æ•°ç»„ç”¨äºä¿å­˜httpå“åº”æŠ¥æ–‡*/
+char HtmlBuffer[html_len];                                                                 /*ç½‘é¡µçš„å‘é€ç¼“å†²åŒº*/
+UINT8 socket;                                                                              /*ç½‘é¡µé€šè®¯ä¸­å»ºç«‹çš„socketç´¢å¼•å·*/
+UINT8 png=0;                                                                               /*æŒ‰é’®å›¾æ ‡åºå·*/
+
+/*****/
+#define CH563NET_SocketClose(sn, flag) close(sn)
+
+
+
+/****/
+
+
 
 const char Html_login[]={
   "<!DOCTYPE html>\r\n"                                                                                                       
@@ -141,7 +147,7 @@ const char Html_login[]={
 "return true;\r\n"                                                                                                          
 "else\r\n"                                                                                                                  
 "{\r\n"                                                                                                                     
-"alert(\"ÓÃ»§Ãû»òÃÜÂë´íÎó\");\r\n"                                                                                          
+"alert(\"ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯\");\r\n"                                                                                          
 "return false;\r\n"                                                                                                         
 "}\r\n"                                                                                                                     
 "\r\n"                                                                                                                      
@@ -162,9 +168,9 @@ const char Html_login[]={
 "</div>\r\n"                                                                                                                
 "<h1>User Login</h1>\r\n"                                                                                                   
 "<div align=\"center\" >\r\n"                                                                                               
-"<input   type=\"text\" name=\"__PUSE\" placeholder=\"ÇëÊäÈëÓÃ»§Ãû\" ><br>\r\n"                                             
-"<input   type=\"password\" name=\"__PPAS\" placeholder=\"ÇëÊäÈëÃÜÂë\"><br>\r\n"                                            
-"<button  id=\"but\" type=\"submit\"  ><b>µÇÂ¼</b></button>\r\n"                                                            
+"<input   type=\"text\" name=\"__PUSE\" placeholder=\"è¯·è¾“å…¥ç”¨æˆ·å\" ><br>\r\n"                                             
+"<input   type=\"password\" name=\"__PPAS\" placeholder=\"è¯·è¾“å…¥å¯†ç \"><br>\r\n"                                            
+"<button  id=\"but\" type=\"submit\"  ><b>ç™»å½•</b></button>\r\n"                                                            
 "</div>\r\n"                                                                                                                
 "</form>\r\n"                                                                                                               
 "</div>\r\n"                                                                                                                
@@ -318,40 +324,40 @@ const char Html_main[]={
 "\r\n"                                                                                                                     
 "</div>\r\n"                                                                                                               
 "\r\n"                                                                                                                     
-"<!--ÕâÊÇ×ó²àÄ¿Â¼À¸ -->\r\n"                                                                                               
+"<!--è¿™æ˜¯å·¦ä¾§ç›®å½•æ  -->\r\n"                                                                                               
 "<div id=\"basicContent\">\r\n"                                                                                          
 "<ul id=\"bConFun\" >\r\n"                                                                                               
-"<!--Ä¿Â¼µÚÒ»ĞĞ -->\r\n"                                                                                                   
+"<!--ç›®å½•ç¬¬ä¸€è¡Œ -->\r\n"                                                                                                   
 "<li  id=\"1\">\r\n"                                                                                                     
 "<a href=\"basic.html\" target=\"ifrPage\" onclick=\"changeCss('1')\">\r\n"                                          
-"<img  class=\"tubiao\" src=\"png1.png\"/><h2 >»ù´¡ÉèÖÃ</h2>\r\n"                                                      
+"<img  class=\"tubiao\" src=\"png1.png\"/><h2 >åŸºç¡€è®¾ç½®</h2>\r\n"                                                      
 "</a>\r\n"                                                                                                                 
 "</li>\r\n"                                                                                                                
-"<!--Ä¿Â¼µÚ¶şĞĞ -->\r\n"                                                                                                   
+"<!--ç›®å½•ç¬¬äºŒè¡Œ -->\r\n"                                                                                                   
 "<li   id=\"2\">\r\n"                                                                                                    
 "<a href=\"port.html\" target=\"ifrPage\"onclick=\"changeCss('2')\" >\r\n"                                           
-"<img class=\"tubiao\" src=\"png2.png\"/> <h2>¶Ë¿ÚÉèÖÃ</h2>\r\n"                                                       
+"<img class=\"tubiao\" src=\"png2.png\"/> <h2>ç«¯å£è®¾ç½®</h2>\r\n"                                                       
 "</a>\r\n"                                                                                                                 
 "</li>\r\n"                                                                                                                
-"<!--Ä¿Â¼µÚÈıĞĞ -->\r\n"                                                                                                   
+"<!--ç›®å½•ç¬¬ä¸‰è¡Œ -->\r\n"                                                                                                   
 "\r\n"                                                                                                                     
 "<li id=\"3\">\r\n"                                                                                                      
 "<a href=\"user.html\" target=\"ifrPage\"onclick=\"changeCss('3')\" >\r\n"                                           
-"<img class=\"tubiao\" src=\"png3.png\"/><h2>ÃÜÂë¹ÜÀí</h2>\r\n"                                                        
+"<img class=\"tubiao\" src=\"png3.png\"/><h2>å¯†ç ç®¡ç†</h2>\r\n"                                                        
 "</a>\r\n"                                                                                                                 
 "</li>\r\n"                                                                                                                
-"<!--Ä¿Â¼µÚËÄĞĞ -->\r\n"                                                                                                   
+"<!--ç›®å½•ç¬¬å››è¡Œ -->\r\n"                                                                                                   
 "<li id=\"4\" >\r\n"                                                                                                     
 "<a href=\"about.html\" target=\"ifrPage\" onclick=\"changeCss('4')\" >\r\n"                                         
-"<img class=\"tubiao\" src=\"png4.png\"/><h2>¹ØÓÚÇßºã</h2>\r\n"                                                        
+"<img class=\"tubiao\" src=\"png4.png\"/><h2>å…³äºæ²æ’</h2>\r\n"                                                        
 "</a>\r\n"                                                                                                                 
 "</li>\r\n"                                                                                                                
 "</ul>\r\n"                                                                                                                
 "<iframe id=\"ifrPage\" name=\"ifrPage\" src=\"basic.html\" frameborder=\"no\"></iframe>\r\n"                      
 "\r\n"                                                                                                                     
 "<div id=\"foot\">\r\n"                                                                                                  
-"<p>Copyright:@2002-2017 ½­ËÕÇßºã¹É·İÓĞÏŞ¹«Ë¾.All Rights Reserved</p>\r\n"                                                 
-"<div id=\"left\">¹ÙÍø£º<a href=\"http://www.wch.cn\">www.wch.cn</a></div>\r\n"                                        
+"<p>Copyright:@2002-2017 æ±Ÿè‹æ²æ’è‚¡ä»½æœ‰é™å…¬å¸.All Rights Reserved</p>\r\n"                                                 
+"<div id=\"left\">å®˜ç½‘ï¼š<a href=\"http://www.wch.cn\">www.wch.cn</a></div>\r\n"                                        
 "</div>\r\n"                                                                                                               
 "</body>\r\n"                                                                                                              
 "</html>\r\n"                                                                                                              
@@ -362,7 +368,7 @@ const char Html_main[]={
 const char Html_basic[]={
 "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" >\r\n"                                                                         
 "<head>\r\n"                                                                                                                                     
-"<title>»ù´¡ÉèÖÃ</title>\r\n"                                                                                                                    
+"<title>åŸºç¡€è®¾ç½®</title>\r\n"                                                                                                                    
 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=gb2312\" />\r\n"                                                                 
 "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\r\n"                                                                           
 "</head>\r\n"                                                                                                                                    
@@ -380,22 +386,22 @@ const char Html_basic[]={
 "<body onLoad=\"init_main()\">\r\n"                                                                                                              
 "<form name= \"basic\" method=\"post\" action=\"success.html\">\r\n"                                                                             
 "<div>\r\n"                                                                                                                                      
-"<h2>»ù´¡ÉèÖÃ</h2>\r\n"                                                                                                                          
+"<h2>åŸºç¡€è®¾ç½®</h2>\r\n"                                                                                                                          
 "<ul >\r\n"                                                                                                                                      
 "<li class=\"config\">\r\n"                                                                                                                      
-"<label >Éè±¸MAC</label><input name=\"__PMAC\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                            
+"<label >è®¾å¤‡MAC</label><input name=\"__PMAC\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                            
 "</li>\r\n"                                                                                                                                      
 "<li class=\"config\">\r\n"                                                                                                                      
-"<label >Éè±¸IP</label><input name=\"__PSIP\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                            
+"<label >è®¾å¤‡IP</label><input name=\"__PSIP\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                            
 "</li>\r\n"                                                                                                                                      
 "<li class=\"config\">\r\n"                                                                                                                      
-"<label >×ÓÍøÑÚÂë</label><input name=\"__PMSK\"class=\"shuru\" maxlength=\"32\"/>\r\n"                                                           
+"<label >å­ç½‘æ©ç </label><input name=\"__PMSK\"class=\"shuru\" maxlength=\"32\"/>\r\n"                                                           
 "</li>\r\n"                                                                                                                                      
 "<li class=\"config\">\r\n"                                                                                                                      
-"<label >Íø¹Ø</label><input name=\"__PGAT\"class=\"shuru\" maxlength=\"32\"/>\r\n"                                                               
+"<label >ç½‘å…³</label><input name=\"__PGAT\"class=\"shuru\" maxlength=\"32\"/>\r\n"                                                               
 "</li>\r\n"                                                                                                                                                                                                                                                                                                                                                                                                         
 "</ul>\r\n"                                                                                                                                      
-"<button  class=\"but\" type=\"submit\"  ><b>±£´æÅäÖÃ</b></button>\r\n"                                                                          
+"<button  class=\"but\" type=\"submit\"  ><b>ä¿å­˜é…ç½®</b></button>\r\n"                                                                          
 "</div>\r\n"                                                                                                                                     
 "</form>\r\n"                                                                                                                                                                                                                                                                
 "</body>\r\n"                                                                                                                                    
@@ -404,7 +410,7 @@ const char Html_basic[]={
 const char Html_port[]={
   "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" >\r\n"                                                                                                                                            
 "<head>\r\n"                                                                                                                                                                                                         
-"<title>¶Ë¿ÚÉèÖÃ</title>\r\n"                                                                                                                                                                                        
+"<title>ç«¯å£è®¾ç½®</title>\r\n"                                                                                                                                                                                        
 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=gb2312\" />\r\n"                                                                                                                                     
 "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\r\n"                                                                                                                                               
 "</head>\r\n"                                                                                                                                                                                                        
@@ -428,25 +434,25 @@ const char Html_port[]={
 "<body onLoad=\"init_main()\">\r\n"                                                                                                                                                                                  
 "<form name= \"port\" method=\"post\" action=\"success.html\">\r\n"                                                                                                                                                  
 "<div>\r\n"                                                                                                                                                                                                          
-"<h2 >¶Ë¿ÚÉèÖÃ</h2>\r\n"                                                                                                                                                                                             
+"<h2 >ç«¯å£è®¾ç½®</h2>\r\n"                                                                                                                                                                                             
 "<ul  >\r\n"                                                                                                                                                                                                         
 "<li class=\"config\">\r\n"                                                                                                                                                                                          
-"<label >ÍøÂçÄ£Ê½</label><select class=\"fuxuan\" name=\"__PMOD\">\r\n"                                                                                                                                              
+"<label >ç½‘ç»œæ¨¡å¼</label><select class=\"fuxuan\" name=\"__PMOD\">\r\n"                                                                                                                                              
 "<option  value=\"0\">TCP-Server</option>\r\n"                                                                                                                                                                    
 "<option value=\"1\">TCP-Client</option>\r\n"                                                                                                                                                                                                                                                                                                                                         
 "</select>\r\n"                                                                                                                                                                                                      
 "</li>\r\n"                                                                                                                                                                                                          
 "<li class=\"config\">\r\n"                                                                                                                                                                                          
-"<label >±¾µØ¶Ë¿Ú</label><input name=\"__PSPT\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                                                                                              
+"<label >æœ¬åœ°ç«¯å£</label><input name=\"__PSPT\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                                                                                              
 "</li>\r\n"                                                                                                                                                                                                          
 "<li class=\"config\">\r\n"                                                                                                                                                                                          
-"<label >Ä¿µÄIP</label><input name=\"__PDIP\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                                                                                                
+"<label >ç›®çš„IP</label><input name=\"__PDIP\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                                                                                                
 "</li>\r\n"                                                                                                                                                                                                          
 "<li class=\"config\">\r\n"                                                                                                                                                                                          
-"<label >Ä¿µÄ¶Ë¿ÚºÅ</label><input name=\"__PDPT\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                                                                                            
+"<label >ç›®çš„ç«¯å£å·</label><input name=\"__PDPT\" class=\"shuru\" maxlength=\"32\"/>\r\n"                                                                                                                            
 "</li>\r\n"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 "</ul>\r\n"                                                                                                                                                                                                          
-"<button  class=\"but\" type=\"submit\"  ><b>±£´æÅäÖÃ</b></button>\r\n"                                                                                                                                              
+"<button  class=\"but\" type=\"submit\"  ><b>ä¿å­˜é…ç½®</b></button>\r\n"                                                                                                                                              
 "</div>\r\n"                                                                                                                                                                                                         
 "</form>\r\n"                                                                                                                                                                                                                                                                                                                                                                                                                      
 "</body>\r\n"                                                                                                                                                                                                        
@@ -473,16 +479,16 @@ const char Html_user[]={
 "<body onLoad=\"init_main()\">\r\n"                                                               
 "<form name= \"user\" method=\"post\" action=\"success.html\">\r\n"                               
 "<div>\r\n"                                                                                       
-"<h2>ÃÜÂë¹ÜÀí</h2>\r\n"                                                                           
+"<h2>å¯†ç ç®¡ç†</h2>\r\n"                                                                           
 "<ul >\r\n"                                                                                       
 "<li class=\"config\">\r\n"                                                                       
-"<label >ÓÃ»§Ãû</label><input name=\"__PUSE\" class=\"shuru\" maxlength=\"10\"/>\r\n"             
+"<label >ç”¨æˆ·å</label><input name=\"__PUSE\" class=\"shuru\" maxlength=\"10\"/>\r\n"             
 "</li>\r\n"                                                                                       
 "<li class=\"config\">\r\n"                                                                       
-"<label >ÃÜÂë</label><input name=\"__PPAS\" class=\"shuru\" maxlength=\"10\"/>\r\n"               
+"<label >å¯†ç </label><input name=\"__PPAS\" class=\"shuru\" maxlength=\"10\"/>\r\n"               
 "</li>\r\n"                                                                                       
 "</ul>\r\n"                                                                                       
-"<button  class=\"but\" type=\"submit\"  ><b>±£´æÅäÖÃ</b></button>\r\n"                           
+"<button  class=\"but\" type=\"submit\"  ><b>ä¿å­˜é…ç½®</b></button>\r\n"                           
 "\r\n"                                                                                            
 "</div>\r\n"                                                                                      
 "</form>\r\n"                                                                                     
@@ -517,25 +523,25 @@ const char Html_about[]={
 "\r\n"                                                                                                                                                                                                                                                                          
 "<div class=\"top_content\" style=\"height:600px\">\r\n"                                                                                                                                                                                                                        
 "<div class=\"top\">\r\n"                                                                                                                                                                                                                                                       
-"<h2 >¹ØÓÚÇßºã</h2>\r\n"                                                                                                                                                                                                                                                        
+"<h2 >å…³äºæ²æ’</h2>\r\n"                                                                                                                                                                                                                                                        
 "</div>\r\n"                                                                                                                                                                                                                                                                    
-"<div class=\"div_c\"  style=\"font-family:Î¢ÈíÑÅºÚ;margin-top:30px;\">\r\n"                                                                                                                                                                                                    
+"<div class=\"div_c\"  style=\"font-family:å¾®è½¯é›…é»‘;margin-top:30px;\">\r\n"                                                                                                                                                                                                    
 "\r\n"                                                                                                                                                                                                                                                                          
-"<div class=\"lab_4 STYLE4\"><span class=\"STYLE2\">¹«Ë¾¼ò½é</span><br />\r\n"                                                                                                                                                                                                  
-"<p style=\"text-indent: 2em\" align=\"left\">½­ËÕÇßºã¹É·İÓĞÏŞ¹«Ë¾Î»ÓÚÄÏ¾©Èí¼ş¹ÈºËĞÄµØ¶Î£¬ÊÇ¼¼ÊõÖ÷µ¼ĞÍµÄ¸ßĞÂ¼¼ÊõÆóÒµ£¬ºËĞÄÒµÎñÊÇ½Ó¿ÚÀà¼¯³ÉµçÂ·¡¢SOC/MCUÀà¼¯³ÉµçÂ·ÒÔ¼°Ç¶ÈëÊ½Èí¼şµÄÑĞ·¢ÓëÏúÊÛ£¬Ìá¹©¾ßÓĞ×ÔÖ÷ÖªÊ¶²úÈ¨µÄ¼¯³ÉµçÂ·¼°ÕûÌåÓ¦ÓÃ·½°¸¡£</p>\r\n"                            
-"<p style=\"text-indent: 2em\" align=\"left\">½­ËÕÇßºãµÄ¼¼Êõ·½°¸º­¸Çµç×ÓµçÂ·£¬µ¥Æ¬»ú£¬ºÍDSPÇ¶ÈëÈí¼ş¡¢¼ÆËã»úÌåÏµ¼Ü¹¹£¬ÓÈÆäÔÚµ¥Æ¬»úÏµÍ³ÁªÍø¡¢µç×Ó²úÆ·Óë¼ÆËã»úµÄ»¥Áª»¥Í¨¡¢¼ÆËã»úµ×²ãÈíÓ²¼ş·½Ãæ¾ßÓĞ×¨ÒµµÄ¼¼Êõ·şÎñ¡£</p>\r\n"                                                        
+"<div class=\"lab_4 STYLE4\"><span class=\"STYLE2\">å…¬å¸ç®€ä»‹</span><br />\r\n"                                                                                                                                                                                                  
+"<p style=\"text-indent: 2em\" align=\"left\">æ±Ÿè‹æ²æ’è‚¡ä»½æœ‰é™å…¬å¸ä½äºå—äº¬è½¯ä»¶è°·æ ¸å¿ƒåœ°æ®µï¼Œæ˜¯æŠ€æœ¯ä¸»å¯¼å‹çš„é«˜æ–°æŠ€æœ¯ä¼ä¸šï¼Œæ ¸å¿ƒä¸šåŠ¡æ˜¯æ¥å£ç±»é›†æˆç”µè·¯ã€SOC/MCUç±»é›†æˆç”µè·¯ä»¥åŠåµŒå…¥å¼è½¯ä»¶çš„ç ”å‘ä¸é”€å”®ï¼Œæä¾›å…·æœ‰è‡ªä¸»çŸ¥è¯†äº§æƒçš„é›†æˆç”µè·¯åŠæ•´ä½“åº”ç”¨æ–¹æ¡ˆã€‚</p>\r\n"                            
+"<p style=\"text-indent: 2em\" align=\"left\">æ±Ÿè‹æ²æ’çš„æŠ€æœ¯æ–¹æ¡ˆæ¶µç›–ç”µå­ç”µè·¯ï¼Œå•ç‰‡æœºï¼Œå’ŒDSPåµŒå…¥è½¯ä»¶ã€è®¡ç®—æœºä½“ç³»æ¶æ„ï¼Œå°¤å…¶åœ¨å•ç‰‡æœºç³»ç»Ÿè”ç½‘ã€ç”µå­äº§å“ä¸è®¡ç®—æœºçš„äº’è”äº’é€šã€è®¡ç®—æœºåº•å±‚è½¯ç¡¬ä»¶æ–¹é¢å…·æœ‰ä¸“ä¸šçš„æŠ€æœ¯æœåŠ¡ã€‚</p>\r\n"                                                        
 "</div>\r\n"                                                                                                                                                                                                                                                                    
 "<br>\r\n"                                                                                                                                                                                                                                                                      
-"<div class=\"lab_4 STYLE4\"><span class=\"STYLE2\">563×ÊÔ´ÏÂÔØ</span><br />\r\n"                                                                                                                                                                                              
-"<p class=\"STYLE4\">Ğ¾Æ¬ÊÖ²á£º<a href=\"http://www.wch.cn/download/CH563DS1_PDF.html\" target=\"_blank\">ÊÖ²áÏÂÔØ</a></p>\r\n"                                                                                                                                                
-"<p class=\"STYLE4\">Ó¦ÓÃÀı³Ì£º<a href=\"http://www.wch.cn/download/CH563EVT_ZIP.html\" target=\"_blank\">Ê¹ÓÃÖ¸ÄÏ</a></p>\r\n"                                                                                                                                                
-"<p class=\"STYLE4\">µçÂ·Éè¼Æ£º<a href=\"http://www.wch.cn/download/CH563PCB_ZIP.html\" target=\"_blank\">²Î¿¼µçÂ·</a></p>\r\n"                                                                                                                                                
+"<div class=\"lab_4 STYLE4\"><span class=\"STYLE2\">563èµ„æºä¸‹è½½</span><br />\r\n"                                                                                                                                                                                              
+"<p class=\"STYLE4\">èŠ¯ç‰‡æ‰‹å†Œï¼š<a href=\"http://www.wch.cn/download/CH563DS1_PDF.html\" target=\"_blank\">æ‰‹å†Œä¸‹è½½</a></p>\r\n"                                                                                                                                                
+"<p class=\"STYLE4\">åº”ç”¨ä¾‹ç¨‹ï¼š<a href=\"http://www.wch.cn/download/CH563EVT_ZIP.html\" target=\"_blank\">ä½¿ç”¨æŒ‡å—</a></p>\r\n"                                                                                                                                                
+"<p class=\"STYLE4\">ç”µè·¯è®¾è®¡ï¼š<a href=\"http://www.wch.cn/download/CH563PCB_ZIP.html\" target=\"_blank\">å‚è€ƒç”µè·¯</a></p>\r\n"                                                                                                                                                
 "</div>\r\n"                                                                                                                                                                                                                                                                    
 "<br>\r\n"                                                                                                                                                                                                                                                                      
-"<div class=\"lab_4 STYLE4\"><span class=\"STYLE2\">ÁªÏµÎÒÃÇ</span><br />\r\n"                                                                                                                                                                                                  
-"<p class=\"STYLE4\"><a>¼¼ÊõÓÊÏä£ºtech@wch.cn</a></p>\r\n"                                                                                                                                                                                                                      
-"<p class=\"STYLE4\">¼¼Êõµç»°£º025-52638370</p>\r\n"                                                                                                                                                                                                                            
-"<p class=\"STYLE4\">ÏúÊÛµç»°£º025-52638389</p>\r\n"                                                                                                                                                                                                                            
+"<div class=\"lab_4 STYLE4\"><span class=\"STYLE2\">è”ç³»æˆ‘ä»¬</span><br />\r\n"                                                                                                                                                                                                  
+"<p class=\"STYLE4\"><a>æŠ€æœ¯é‚®ç®±ï¼štech@wch.cn</a></p>\r\n"                                                                                                                                                                                                                      
+"<p class=\"STYLE4\">æŠ€æœ¯ç”µè¯ï¼š025-52638370</p>\r\n"                                                                                                                                                                                                                            
+"<p class=\"STYLE4\">é”€å”®ç”µè¯ï¼š025-52638389</p>\r\n"                                                                                                                                                                                                                            
 "</div>\r\n"                                                                                                                                                                                                                                                                    
 "<br>\r\n"                                                                                                                                                                                                                                                                      
 "</div>\r\n"                                                                                                                                                                                                                                                                    
@@ -555,12 +561,12 @@ const char Html_success[]={
 "</head>\r\n"                                                                          
 "<body >\r\n"                                                                    
 "<form name= \"success\" method=\"post\" action=\"success.html\">\r\n"                                     
-"<h2>ÉèÖÃ³É¹¦</h2>\r\n"                                                          
+"<h2>è®¾ç½®æˆåŠŸ</h2>\r\n"                                                          
 "<br />\r\n"                                                                     
 "<br />\r\n"                                                                     
-"ÉèÖÃ³É¹¦<br />\r\n"                                                             
+"è®¾ç½®æˆåŠŸ<br />\r\n"                                                             
 "<br />\r\n"                                                                     
-"ÇëÖØÆôµ¥Æ¬»ú»òÕß¼ÌĞøÉèÖÃ\r\n"                                                                                         
+"è¯·é‡å¯å•ç‰‡æœºæˆ–è€…ç»§ç»­è®¾ç½®\r\n"                                                                                         
 "</div>\r\n"                                                                     
 "</form>\r\n"                                                                                                                                                                      
 "</body>\r\n"                                                                    
@@ -1860,12 +1866,12 @@ const char Html_png4[]={
 
 
 
-/*º¯ÊıÃû£ºParseHttpRequest()
-  ÊäÈë£º  request£º½á¹¹Ìå£¬ÓÃÀ´±£´æpostÇëÇó¸÷²¿·ÖÄÚÈİ
-          buf£ºPOSTÇëÇó
+/*å‡½æ•°åï¼šParseHttpRequest()
+  è¾“å…¥ï¼š  requestï¼šç»“æ„ä½“ï¼Œç”¨æ¥ä¿å­˜postè¯·æ±‚å„éƒ¨åˆ†å†…å®¹
+          bufï¼šPOSTè¯·æ±‚
 
 */ 
-void ParseHttpRequest(st_http_request *request, char *buf)                      /*·ÖÎöÇëÇó±¨ÎÄ£¬È¡³öÆäÖĞµÄmethod¸³¸ørequest->method,URI¸³¸ørequest->URI(´ø'/')*/
+void ParseHttpRequest(st_http_request *request, char *buf)                      /*åˆ†æè¯·æ±‚æŠ¥æ–‡ï¼Œå–å‡ºå…¶ä¸­çš„methodèµ‹ç»™request->method,URIèµ‹ç»™request->URI(å¸¦'/')*/
 {
     char * nexttok;
   
@@ -1876,7 +1882,7 @@ void ParseHttpRequest(st_http_request *request, char *buf)                      
      // printf("REQUEST ERROR\n");
       return;
     }
-    if(!strcmp(nexttok,"GET") || !strcmp(nexttok,"get")){                       /*ä¯ÀÀÆ÷getÇëÇó*/      
+    if(!strcmp(nexttok,"GET") || !strcmp(nexttok,"get")){                       /*æµè§ˆå™¨getè¯·æ±‚*/      
       request->METHOD=METHOD_GET;
       nexttok=strtok(NULL," ");
       //printf("METHOD=GET\n");
@@ -1900,7 +1906,7 @@ void ParseHttpRequest(st_http_request *request, char *buf)                      
   }
       
      
-char* GetUriName(char* URI)                                                     /*·µ»ØURI×ÊÔ´Ãû(È¥µô¡®/')*/
+char* GetUriName(char* URI)                                                     /*è¿”å›URIèµ„æºå(å»æ‰â€˜/')*/
 {
   char* uri_name;
 
@@ -1914,26 +1920,26 @@ char* GetUriName(char* URI)                                                     
 
 
 
-void ParseUriType(char *type,char * buf)                                        /*·µ»ØURIÀàĞÍ*/
+void ParseUriType(char *type,char * buf)                                        /*è¿”å›URIç±»å‹*/
 {
-  if(strstr(buf,".html")||(strlen(name)==1))                                    /*htmlÀàĞÍ(°üº¬login½çÃæ£¬ÇëÇóloginÊ±£¬ä¯ÀÀÆ÷·¢³öµÄURIÃûÎª"/ ")*/
+  if(strstr(buf,".html")||(strlen(name)==1))                                    /*htmlç±»å‹(åŒ…å«loginç•Œé¢ï¼Œè¯·æ±‚loginæ—¶ï¼Œæµè§ˆå™¨å‘å‡ºçš„URIåä¸º"/ ")*/
      *type = PTYPE_HTML;
-  else if(strstr(buf,".png"))                                                   /*htmlÀàĞÍ*/
+  else if(strstr(buf,".png"))                                                   /*htmlç±»å‹*/
      *type = PTYPE_PNG;
-  else if(strstr(buf,".css"))                                                   /*htmlÀàĞÍ*/
+  else if(strstr(buf,".css"))                                                   /*htmlç±»å‹*/
      *type = PTYPE_CSS;
-  else if(strstr(buf,".gif"))                                                   /*htmlÀàĞÍ*/
+  else if(strstr(buf,".gif"))                                                   /*htmlç±»å‹*/
      *type = PTYPE_GIF;
   else
      *type = PTYPE_ERR;
 }
 
 
-/*º¯ÊıÃû£ºMakeHttpResponse()
-  ÊäÈë£º  buf£ºÏìÓ¦·¢ËÍ»º³åÇø
-          type:±»ÇëÇó×ÊÔ´µÄÀàĞÍ
+/*å‡½æ•°åï¼šMakeHttpResponse()
+  è¾“å…¥ï¼š  bufï¼šå“åº”å‘é€ç¼“å†²åŒº
+          type:è¢«è¯·æ±‚èµ„æºçš„ç±»å‹
 */ 
-void MakeHttpResponse(UINT8 *buf,char type)                                     /*¸ù¾İtpyeÑ¡ÔñÏàÓ¦µÄÏìÓ¦±¨ÎÄ¸³Öµ¸øbuf*/
+void MakeHttpResponse(UINT8 *buf,char type)                                     /*æ ¹æ®tpyeé€‰æ‹©ç›¸åº”çš„å“åº”æŠ¥æ–‡èµ‹å€¼ç»™buf*/
 {
   char *head=0;
   char tmp[10];
@@ -1949,16 +1955,16 @@ void MakeHttpResponse(UINT8 *buf,char type)                                     
      strcpy(buf,head);
 }
 
-char * DataLocate(char *buf,char *name)                                         /*¶¨Î»¡°name¡±ËùÔÚµÄÎ»ÖÃ£¬·µ»ØnameºóÒ»Î»µÄÖ¸Õë*/
+char * DataLocate(char *buf,char *name)                                         /*å®šä½â€œnameâ€æ‰€åœ¨çš„ä½ç½®ï¼Œè¿”å›nameåä¸€ä½çš„æŒ‡é’ˆ*/
 {
   char *p;
   p=strstr(buf,name);
-  if(p==NULL) return NULL;                                                      /*ÈôÃ»ÓĞÕÒµ½¡°name"£¬·µ»ØNULL*/
+  if(p==NULL) return NULL;                                                      /*è‹¥æ²¡æœ‰æ‰¾åˆ°â€œname"ï¼Œè¿”å›NULL*/
   p+=strlen(name);
-  return p;                                                                     /*ÕÒµ½¡±name¡°£¬·µ»ØnameºóÒ»Î»Ö¸Õë*/
+  return p;                                                                     /*æ‰¾åˆ°â€nameâ€œï¼Œè¿”å›nameåä¸€ä½æŒ‡é’ˆ*/
 }
 
-char * Para_DataLocate(char *buf)                                               /*¶¨Î»"__"ÔÚbufÖĞµÄÎ»ÖÃ£¬ÍøÒ³ÖĞËùÓĞµÄÅäÖÃÃû×Ö¶¼ÊÇÒÔ"__"¿ªÍ·*/
+char * Para_DataLocate(char *buf)                                               /*å®šä½"__"åœ¨bufä¸­çš„ä½ç½®ï¼Œç½‘é¡µä¸­æ‰€æœ‰çš„é…ç½®åå­—éƒ½æ˜¯ä»¥"__"å¼€å¤´*/
 {
   char *p=buf;
   UINT32 i;
@@ -1971,50 +1977,50 @@ char * Para_DataLocate(char *buf)                                               
     else
       p++;
   }
-      return p;                                                                  /*·µ»Ø"__"bufÖĞ³öÏÖµÄÎ»ÖÃ*/
+      return p;                                                                  /*è¿”å›"__"bufä¸­å‡ºç°çš„ä½ç½®*/
 }
   
 
-/*º¯ÊıÃû£ºRefresh_Basic()
-  ÊäÈë£º  buf£ºPOSTÇëÇóÀïµÄÍøÒ³±äÁ¿¸³Öµ×Ö·û´®
+/*å‡½æ•°åï¼šRefresh_Basic()
+  è¾“å…¥ï¼š  bufï¼šPOSTè¯·æ±‚é‡Œçš„ç½‘é¡µå˜é‡èµ‹å€¼å­—ç¬¦ä¸²
 */  
 
 void Refresh_Basic(UINT8 *buf )  
-{                                                                               /*´ÓpostÇëÇóÖĞ½âÎöbasic½çÃæÅäÖÃ²ÎÊı ²¢½«½âÎöºóµÄ²ÎÊıÒÔ½á¹¹ÌåµÄĞÎÊ½´æ·ÅÔÚEEPROMÖĞ*/
+{                                                                               /*ä»postè¯·æ±‚ä¸­è§£æbasicç•Œé¢é…ç½®å‚æ•° å¹¶å°†è§£æåçš„å‚æ•°ä»¥ç»“æ„ä½“çš„å½¢å¼å­˜æ”¾åœ¨EEPROMä¸­*/
   char *p,*q;                                                                   
-  char temp[30];                                                                /*×Ö·û´®µÄĞÎÊ½±£´æ¸÷ÏîÅäÖÃµÄÖµ*/      
+  char temp[30];                                                                /*å­—ç¬¦ä¸²çš„å½¢å¼ä¿å­˜å„é¡¹é…ç½®çš„å€¼*/      
   Basic_Cfg Basic_563;
   UINT8 i;
   UINT8 CFG_BUF[Basic_Cfg_Len];
   memset(Basic_563,0,Basic_Cfg_Len);
   memset(CFG_BUF,0,Basic_Cfg_Len);
   Basic_563=(Basic_Cfg)CFG_BUF;
-  Basic_563->flag[0]=0X57;                                                      /*ÑéÖ¤±êÖ¾Î»£¬0X57 ,0XAB ÈôÔÚEEPROMÀïÃ»ÓĞ¶Áµ½ÕâÁ½¸ö±êÖ¾Î»£¬ÔòÑéÖ¤Ê§°Ü£¬ĞèÒª»Ö¸´Ä¬ÈÏÉèÖÃ */
+  Basic_563->flag[0]=0X57;                                                      /*éªŒè¯æ ‡å¿—ä½ï¼Œ0X57 ,0XAB è‹¥åœ¨EEPROMé‡Œæ²¡æœ‰è¯»åˆ°è¿™ä¸¤ä¸ªæ ‡å¿—ä½ï¼Œåˆ™éªŒè¯å¤±è´¥ï¼Œéœ€è¦æ¢å¤é»˜è®¤è®¾ç½® */
   Basic_563->flag[1]=0XAB;
   
-  p=DataLocate(buf,"__PMAC=");                                                  /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PMAC=¡¯µÄÎ»ÖÃ,·µ»ØºóÒ»Î»Ö¸Õë£¬postÃüÁîÌá½»µÄ²ÎÊı¸ñÊ½Îª£º__PMAC="****"&__PSIP="****"&......*/
+  p=DataLocate(buf,"__PMAC=");                                                  /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PMAC=â€™çš„ä½ç½®,è¿”å›åä¸€ä½æŒ‡é’ˆï¼Œpostå‘½ä»¤æäº¤çš„å‚æ•°æ ¼å¼ä¸ºï¼š__PMAC="****"&__PSIP="****"&......*/
   if(p!=NULL)
 {  
    memset(temp,0,30);
-  for(i=0;*p!='&';i++){                                                         /*½«"__PMAC"µÄÖµÒÔ×Ö·û´®ĞÎÊ½±£´æÔÚtempÀï*/
+  for(i=0;*p!='&';i++){                                                         /*å°†"__PMAC"çš„å€¼ä»¥å­—ç¬¦ä¸²å½¢å¼ä¿å­˜åœ¨tempé‡Œ*/
     temp[i]=*p;
     p++;
   }
-   q=strtok(temp,".");                                                          /*½«MACµØÖ·ÒÔ¡®.'Îª¼ä¸ô·ÖÎª6¶Î£¬·Ö±ğ±£´æ*/
+   q=strtok(temp,".");                                                          /*å°†MACåœ°å€ä»¥â€˜.'ä¸ºé—´éš”åˆ†ä¸º6æ®µï¼Œåˆ†åˆ«ä¿å­˜*/
   Basic_563->mac[0]=atoi(q);  
   for(i=1;i<6;i++){
     q=strtok(NULL,".");
-    Basic_563->mac[i]=atoi(q);                                                   /*ÒÔÊıÖµµÄĞÎÊ½±£´æMACµØÖ·*/
+    Basic_563->mac[i]=atoi(q);                                                   /*ä»¥æ•°å€¼çš„å½¢å¼ä¿å­˜MACåœ°å€*/
     }
 
 
 }
 
-  p=DataLocate(buf,"__PSIP=");                                                  /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PSIP¡¯µÄÎ»ÖÃ*/
+  p=DataLocate(buf,"__PSIP=");                                                  /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PSIPâ€™çš„ä½ç½®*/
 if(p!=NULL)
 { 
   memset(temp,0,30);
-  for(i=0;*p!='&';i++){                                                         /*ÒÔ¡¯&¡®½áÎ²*/
+  for(i=0;*p!='&';i++){                                                         /*ä»¥â€™&â€˜ç»“å°¾*/
     temp[i]=*p;
     p++;
   }
@@ -2022,15 +2028,15 @@ if(p!=NULL)
   Basic_563->ip[0]=atoi(q);  
   for(i=1;i<4;i++){
     q=strtok(NULL,".");
-    Basic_563->ip[i]=atoi(q);                                                    /*±£´æipµØÖ·*/
+    Basic_563->ip[i]=atoi(q);                                                    /*ä¿å­˜ipåœ°å€*/
     }
 }
 
-  p=DataLocate(buf,"__PMSK=");                                                   /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PMSK¡¯µÄÎ»ÖÃ*/
+  p=DataLocate(buf,"__PMSK=");                                                   /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PMSKâ€™çš„ä½ç½®*/
 if(p!=NULL)
 {
   memset(temp,0,30);  
-  for(i=0;*p!='&';i++){                                                           /*ÒÔ¡¯&¡®½áÎ²*/
+  for(i=0;*p!='&';i++){                                                           /*ä»¥â€™&â€˜ç»“å°¾*/
     temp[i]=*p;
     p++;
   }
@@ -2038,17 +2044,17 @@ if(p!=NULL)
   Basic_563->mask[0]=atoi(q);  
   for(i=1;i<4;i++){
     q=strtok(NULL,".");
-    Basic_563->mask[i]=atoi(q);                                                   /*±£´æÑÚÂë*/
+    Basic_563->mask[i]=atoi(q);                                                   /*ä¿å­˜æ©ç */
 
     }
 }
  
-  p=DataLocate(buf,"__PGAT=");                                                   /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PGAT¡¯µÄÎ»ÖÃ*/
+  p=DataLocate(buf,"__PGAT=");                                                   /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PGATâ€™çš„ä½ç½®*/
 if(p!=NULL)
 {
 
   memset(temp,0,30);
-  for(i=0;*p!=0x00;i++){                                                         /*×îºóÒ»Î»µ½0X00ÎªÖ¹*/
+  for(i=0;*p!=0x00;i++){                                                         /*æœ€åä¸€ä½åˆ°0X00ä¸ºæ­¢*/
     temp[i]=*p;
     p++;
   }
@@ -2056,43 +2062,43 @@ if(p!=NULL)
   Basic_563->gateway[0]=atoi(q);  
   for(i=1;i<4;i++){
     q=strtok(NULL,".");
-    Basic_563->gateway[i]=atoi(q);                                                /*±£´æÍø¹Ø*/
+    Basic_563->gateway[i]=atoi(q);                                                /*ä¿å­˜ç½‘å…³*/
   }
 }
  
-  EEPROM_ERASE(Basic_Cfg_Address,4096);                                           /*½«BASIC½çÃæµÄÅäÖÃ²ÎÊı±£´æÔÚEEPROMÀï,ÆğÊ¼µØÖ·ÎªBasic_Cfg_Address*/
+  EEPROM_ERASE(Basic_Cfg_Address,4096);                                           /*å°†BASICç•Œé¢çš„é…ç½®å‚æ•°ä¿å­˜åœ¨EEPROMé‡Œ,èµ·å§‹åœ°å€ä¸ºBasic_Cfg_Address*/
   EEPROM_WRITE(Basic_Cfg_Address,CFG_BUF,Basic_Cfg_Len);
 
 
 }
 
 
-/*º¯ÊıÃû£ºRefresh_Port()
-  ÊäÈë£º  buf£ºPOSTÇëÇóÀïµÄÍøÒ³±äÁ¿¸³Öµ×Ö·û´®
+/*å‡½æ•°åï¼šRefresh_Port()
+  è¾“å…¥ï¼š  bufï¼šPOSTè¯·æ±‚é‡Œçš„ç½‘é¡µå˜é‡èµ‹å€¼å­—ç¬¦ä¸²
 */
-void Refresh_Port(char *buf)                                                      /*´ÓpostÇëÇóÖĞ½âÎöport²ÎÊı ²¢½«½âÎöºóµÄ²ÎÊıÒÔ½á¹¹ÌåµÄĞÎÊ½´æ·ÅÔÚEEPROMÖĞ*/
+void Refresh_Port(char *buf)                                                      /*ä»postè¯·æ±‚ä¸­è§£æportå‚æ•° å¹¶å°†è§£æåçš„å‚æ•°ä»¥ç»“æ„ä½“çš„å½¢å¼å­˜æ”¾åœ¨EEPROMä¸­*/
 {
   UINT8 i;
   char *p,*q;
-  char temp[30];                                                                  /*×Ö·û´®µÄĞÎÊ½±£´æ¸÷ÏîÅäÖÃµÄÖµ*/
+  char temp[30];                                                                  /*å­—ç¬¦ä¸²çš„å½¢å¼ä¿å­˜å„é¡¹é…ç½®çš„å€¼*/
   Port_Cfg Port_563;
   UINT8 CFG_BUF[Port_Cfg_Len];
   Port_563=(Port_Cfg)CFG_BUF;
   memset(Port_563,0,Port_Cfg_Len);
   memset(CFG_BUF,0,Port_Cfg_Len);
-  Port_563->flag[0]=0X57;                                                         /*ÑéÖ¤±êÖ¾Î»£¬0X57 ,0XAB ÈôÔÚEEPROMÀïÃ»ÓĞ¶Áµ½ÕâÁ½¸ö±êÖ¾Î»£¬ÔòÑéÖ¤Ê§°Ü£¬ĞèÒª»Ö¸´Ä¬ÈÏÉèÖÃ */
+  Port_563->flag[0]=0X57;                                                         /*éªŒè¯æ ‡å¿—ä½ï¼Œ0X57 ,0XAB è‹¥åœ¨EEPROMé‡Œæ²¡æœ‰è¯»åˆ°è¿™ä¸¤ä¸ªæ ‡å¿—ä½ï¼Œåˆ™éªŒè¯å¤±è´¥ï¼Œéœ€è¦æ¢å¤é»˜è®¤è®¾ç½® */
   Port_563->flag[1]=0XAB;
   
-  p=DataLocate(buf,"__PMOD=");                                                    /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PMOD¡¯µÄÎ»ÖÃ*/
+  p=DataLocate(buf,"__PMOD=");                                                    /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PMODâ€™çš„ä½ç½®*/
   if(p!=NULL)
    {
      memset(temp,0,30);  
-     for(i=0;*p!='&';i++){                                                        /*ÒÔ¡¯&¡®½áÎ²*/
+     for(i=0;*p!='&';i++){                                                        /*ä»¥â€™&â€˜ç»“å°¾*/
     temp[i]=*p;
     p++;
   }                               
    printf("mode==%s\n",temp);
-  if(strcmp(temp,"0")==0)                                                          /*±£´æ¶Ë¿ÚÄ£Ê½*/
+  if(strcmp(temp,"0")==0)                                                          /*ä¿å­˜ç«¯å£æ¨¡å¼*/
 	{
 		printf("mode 0\n");
    	Port_563->mode=MODE_TcpServer;
@@ -2105,25 +2111,25 @@ void Refresh_Port(char *buf)                                                    
 	
 }
 
-  p=DataLocate(buf,"__PSPT=");                                                   /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PSPT¡¯µÄÎ»ÖÃ*/
+  p=DataLocate(buf,"__PSPT=");                                                   /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PSPTâ€™çš„ä½ç½®*/
   if(p!=NULL)
    {
      memset(temp,0,30);  
-     for(i=0;*p!='&';i++){                                                       /*ÒÔ¡¯&¡®½áÎ²*/
+     for(i=0;*p!='&';i++){                                                       /*ä»¥â€™&â€˜ç»“å°¾*/
     temp[i]=*p;
     p++;
   }
 
-  Port_563->src_port[0]=atoi(temp)/256;                                           /*±£´æÔ´¶Ë¿ÚºÅ*/
+  Port_563->src_port[0]=atoi(temp)/256;                                           /*ä¿å­˜æºç«¯å£å·*/
   Port_563->src_port[1]=atoi(temp)%256;
 }
 
 
-  p=DataLocate(buf,"__PDIP=");                                                    /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PDIP¡¯µÄÎ»ÖÃ*/
+  p=DataLocate(buf,"__PDIP=");                                                    /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PDIPâ€™çš„ä½ç½®*/
   if(p!=NULL)
   { 
     memset(temp,0,30);
-    for(i=0;*p!='&';i++){                                                         /*ÒÔ¡¯&¡®½áÎ²*/
+    for(i=0;*p!='&';i++){                                                         /*ä»¥â€™&â€˜ç»“å°¾*/
       temp[i]=*p;
       p++;
     }
@@ -2132,35 +2138,35 @@ void Refresh_Port(char *buf)                                                    
     for(i=1;i<4;i++){
       q=strtok(NULL,".");
       Port_563->des_ip[i]=atoi(q);
-      }                                                                           /*±£´æÄ¿µÄip*/
+      }                                                                           /*ä¿å­˜ç›®çš„ip*/
   }
   
   
-  p=DataLocate(buf,"__PDPT=");                                                    /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PDPT¡¯µÄÎ»ÖÃ*/
+  p=DataLocate(buf,"__PDPT=");                                                    /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PDPTâ€™çš„ä½ç½®*/
   if(p!=NULL)
    {
      memset(temp,0,30);  
-     for(i=0;*p!=0x00;i++){                                                       /*ÒÔ0½áÎ²*/
+     for(i=0;*p!=0x00;i++){                                                       /*ä»¥0ç»“å°¾*/
     temp[i]=*p;
     p++;
   }
 
-  Port_563->des_port[0]=atoi(temp)/256;                                           /*±£´æÄ¿µÄ¶Ë¿ÚºÅ*/
+  Port_563->des_port[0]=atoi(temp)/256;                                           /*ä¿å­˜ç›®çš„ç«¯å£å·*/
   Port_563->des_port[1]=atoi(temp)%256;
 }
 
 
   EEPROM_ERASE(Port_Cfg_Address,4096);                                              
-  EEPROM_WRITE(Port_Cfg_Address,CFG_BUF,Port_Cfg_Len);                            /*½«PORT½çÃæµÄÅäÖÃ²ÎÊı±£´æÔÚEEPROMÀï,ÆğÊ¼µØÖ·ÎªPort_Cfg_Address*/
+  EEPROM_WRITE(Port_Cfg_Address,CFG_BUF,Port_Cfg_Len);                            /*å°†PORTç•Œé¢çš„é…ç½®å‚æ•°ä¿å­˜åœ¨EEPROMé‡Œ,èµ·å§‹åœ°å€ä¸ºPort_Cfg_Address*/
 
 
 }
 
 
-/*º¯ÊıÃû£ºRefresh_Login()
-  ÊäÈë£º  buf£ºPOSTÇëÇóÀïµÄÍøÒ³±äÁ¿¸³Öµ×Ö·û´®
+/*å‡½æ•°åï¼šRefresh_Login()
+  è¾“å…¥ï¼š  bufï¼šPOSTè¯·æ±‚é‡Œçš„ç½‘é¡µå˜é‡èµ‹å€¼å­—ç¬¦ä¸²
 */
-void Refresh_Login(char *buf)                                                   /*´ÓpostÇëÇóÖĞ½âÎölogint²ÎÊı ²¢½«½âÎöºóµÄ²ÎÊıÒÔ½á¹¹ÌåµÄĞÎÊ½´æ·ÅÔÚEEPROMÖĞ*/
+void Refresh_Login(char *buf)                                                   /*ä»postè¯·æ±‚ä¸­è§£ælogintå‚æ•° å¹¶å°†è§£æåçš„å‚æ•°ä»¥ç»“æ„ä½“çš„å½¢å¼å­˜æ”¾åœ¨EEPROMä¸­*/
 {
   char *p;
   UINT8 i;
@@ -2170,22 +2176,22 @@ void Refresh_Login(char *buf)                                                   
   Login_563=(Login_Cfg)CFG_BUF;
   memset(Login_563,0,Login_Cfg_Len);
   memset(CFG_BUF,0,Login_Cfg_Len);
-  Login_563->flag[0]=0X57;                                                      /*ÑéÖ¤±êÖ¾Î»£¬0X57 ,0XAB ÈôÔÚEEPROMÀïÃ»ÓĞ¶Áµ½ÕâÁ½¸ö±êÖ¾Î»£¬ÔòÑéÖ¤Ê§°Ü£¬ĞèÒª»Ö¸´Ä¬ÈÏÉèÖÃ */
+  Login_563->flag[0]=0X57;                                                      /*éªŒè¯æ ‡å¿—ä½ï¼Œ0X57 ,0XAB è‹¥åœ¨EEPROMé‡Œæ²¡æœ‰è¯»åˆ°è¿™ä¸¤ä¸ªæ ‡å¿—ä½ï¼Œåˆ™éªŒè¯å¤±è´¥ï¼Œéœ€è¦æ¢å¤é»˜è®¤è®¾ç½® */
   Login_563->flag[1]=0XAB;
   
-    p=DataLocate(buf,"__PUSE=");                                                /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PUSE¡¯µÄÎ»ÖÃ*/
+    p=DataLocate(buf,"__PUSE=");                                                /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PUSEâ€™çš„ä½ç½®*/
   if(p!=NULL)
     if(p!=NULL)
   { 
     for(i=0;*p!='&';i++){
-      Login_563->user[i]=*p;                                                    /*ÒÔ¡¯&¡®½áÎ²*/
+      Login_563->user[i]=*p;                                                    /*ä»¥â€™&â€˜ç»“å°¾*/
       p++;
     }
   }
 		
   
 
-    p=DataLocate(buf,"__PPAS=");                                                 /*Ñ°ÕÒPOSTÃüÁîÖĞµÄ'__PUSE¡¯µÄÎ»ÖÃ*/
+    p=DataLocate(buf,"__PPAS=");                                                 /*å¯»æ‰¾POSTå‘½ä»¤ä¸­çš„'__PUSEâ€™çš„ä½ç½®*/
     if(p!=NULL)
   { 
     for(i=0;*p!=0x00;i++){
@@ -2195,18 +2201,18 @@ void Refresh_Login(char *buf)                                                   
     
   }
   
-  EEPROM_ERASE(Login_Cfg_Address,4096);                                          /*½«µÇÂ¼½çÃæÅäÖÃ²ÎÊı±£´æÔÚEEPROMÖĞ£¬ÆğÊ¼µØÖ·ÎªLogin_Cfg_Address*/
+  EEPROM_ERASE(Login_Cfg_Address,4096);                                          /*å°†ç™»å½•ç•Œé¢é…ç½®å‚æ•°ä¿å­˜åœ¨EEPROMä¸­ï¼Œèµ·å§‹åœ°å€ä¸ºLogin_Cfg_Address*/
   EEPROM_WRITE(Login_Cfg_Address,CFG_BUF,Login_Cfg_Len);  
 
 }
 
 
-/*º¯ÊıÃû£ºRefresh_Html()
-  ÊäÈë£º  *html£º¶¨ÒåµÄHTMLÊı×é³£Á¿
-          *buf£º ¶¨ÒåµÄ²ÎÊı½á¹¹Ìå
-          paranum£ºÅäÖÃ²ÎÊı²ÎÊıµÄ¸öÊı
+/*å‡½æ•°åï¼šRefresh_Html()
+  è¾“å…¥ï¼š  *htmlï¼šå®šä¹‰çš„HTMLæ•°ç»„å¸¸é‡
+          *bufï¼š å®šä¹‰çš„å‚æ•°ç»“æ„ä½“
+          paranumï¼šé…ç½®å‚æ•°å‚æ•°çš„ä¸ªæ•°
 */
-void Refresh_Html( const char *html,Parameter *buf,UINT8 paranum)               /*Ñ¡ÔñflashÀïµÄÒ»¸öhtmlÎÄ¼ş£¬½«ËüÓë²ÎÊı±í¶ÔÕÕÌæ»»£¬²¢±£´æµ½HtmlBuffer[]Àï*/
+void Refresh_Html( const char *html,Parameter *buf,UINT8 paranum)               /*é€‰æ‹©flashé‡Œçš„ä¸€ä¸ªhtmlæ–‡ä»¶ï¼Œå°†å®ƒä¸å‚æ•°è¡¨å¯¹ç…§æ›¿æ¢ï¼Œå¹¶ä¿å­˜åˆ°HtmlBuffer[]é‡Œ*/
    {
   const char *p1;
   char *p2,*q;                     
@@ -2214,24 +2220,24 @@ void Refresh_Html( const char *html,Parameter *buf,UINT8 paranum)               
   Parameter *tab;
   UINT32 i,k,valuelen,htmllen;
   UINT8 j;
-  memset(HtmlBuffer,0,1024*8);                                                  /*ÏÈÇå¿ÕHtmlBuffer*/
+  memset(HtmlBuffer,0,1024*8);                                                  /*å…ˆæ¸…ç©ºHtmlBuffer*/
   p1=html;
   p2=HtmlBuffer;
   htmllen=strlen(html);
   for(k=0;k<htmllen;k++)
 {
-     if((*p1)=='_' && *((p1+1))=='_' && (*(p1+2))=='A'){                         /*ËùÓĞÒªÌæ»»µÄ±äÁ¿¶¼ÊÇÒÔ"__A"¿ªÍ·*/
-      for(i=0;i<6;i++){                                                          /*´ÓhtmlÎÄ¼şÀïÌáÈ¡³ö"__A"¿ªÍ·µÄ±äÁ¿£¬±£´æÔÚparaÊı×éÖĞ*/
+     if((*p1)=='_' && *((p1+1))=='_' && (*(p1+2))=='A'){                         /*æ‰€æœ‰è¦æ›¿æ¢çš„å˜é‡éƒ½æ˜¯ä»¥"__A"å¼€å¤´*/
+      for(i=0;i<6;i++){                                                          /*ä»htmlæ–‡ä»¶é‡Œæå–å‡º"__A"å¼€å¤´çš„å˜é‡ï¼Œä¿å­˜åœ¨paraæ•°ç»„ä¸­*/
          para[i]=*p1;
          p1++;
        }
      
        tab=buf;
       for(i=0;i<paranum;i++){                           
-        if(strstr(para,tab->para)!=NULL){                                         /*½«ÉÏÃæ±£´æµÄ±äÁ¿Óë²ÎÊı±í½øĞĞ¶ÔÕÕ*/
+        if(strstr(para,tab->para)!=NULL){                                         /*å°†ä¸Šé¢ä¿å­˜çš„å˜é‡ä¸å‚æ•°è¡¨è¿›è¡Œå¯¹ç…§*/
            q=tab->value;  
              valuelen=strlen(tab->value);                   
-           for(j=0;j<valuelen;j++){                                               /*²ÎÊı±íÖĞÕÒµ½ÏàÓ¦µÄ±äÁ¿ºóÖ®ºó½øĞĞÌæ»»*/
+           for(j=0;j<valuelen;j++){                                               /*å‚æ•°è¡¨ä¸­æ‰¾åˆ°ç›¸åº”çš„å˜é‡åä¹‹åè¿›è¡Œæ›¿æ¢*/
             *p2=*q;
             p2++;
             q++;
@@ -2241,7 +2247,7 @@ void Refresh_Html( const char *html,Parameter *buf,UINT8 paranum)               
       }
 
     }
-    else{                                                                         /*ÈôÃ»ÓĞÕÒµ½"__A"¿ªÍ·µÄ±äÁ¿£¬Ôò½«htmlÖ±½Ó¸´ÖÆµ½htmlbuffer*/
+    else{                                                                         /*è‹¥æ²¡æœ‰æ‰¾åˆ°"__A"å¼€å¤´çš„å˜é‡ï¼Œåˆ™å°†htmlç›´æ¥å¤åˆ¶åˆ°htmlbuffer*/
       *p2=*p1;
        p1++;
        p2++;
@@ -2249,10 +2255,10 @@ void Refresh_Html( const char *html,Parameter *buf,UINT8 paranum)               
   }               
 }     
 
-/*º¯ÊıÃû£ºcopy_flash()
-  ÊäÈë£º  *html£º¶¨ÒåµÄHTMLÊı×é³£Á¿
+/*å‡½æ•°åï¼šcopy_flash()
+  è¾“å…¥ï¼š  *htmlï¼šå®šä¹‰çš„HTMLæ•°ç»„å¸¸é‡
 */
-void copy_flash( const char *html)                                              /*Ñ¡ÔñflashÀïµÄhtmlÎÄ¼ş£¬Ö±½Ó¸´ÖÆµ½HtmlBufferÖĞ£¨½öÕë¶Ô²¿·ÖÃ»ÓĞ±äÁ¿µÄÍøÒ³£©*/
+void copy_flash( const char *html)                                              /*é€‰æ‹©flashé‡Œçš„htmlæ–‡ä»¶ï¼Œç›´æ¥å¤åˆ¶åˆ°HtmlBufferä¸­ï¼ˆä»…é’ˆå¯¹éƒ¨åˆ†æ²¡æœ‰å˜é‡çš„ç½‘é¡µï¼‰*/
  {
   const char *p1;
   char *p2;
@@ -2264,7 +2270,7 @@ void copy_flash( const char *html)                                              
  
   if(http_request->TYPE==PTYPE_PNG)  
   {                                                                             
-    if(png==1)                                                                   /*Í¼Æ¬ÎÄ¼ş»ñÈ¡³¤¶ÈÒªÓÃsizeof£¨£©£¬ÆäËûhtmlÎÄ¼ş»ñÈ¡³¤¶ÈÓÃstrlen£¨£©*/
+    if(png==1)                                                                   /*å›¾ç‰‡æ–‡ä»¶è·å–é•¿åº¦è¦ç”¨sizeofï¼ˆï¼‰ï¼Œå…¶ä»–htmlæ–‡ä»¶è·å–é•¿åº¦ç”¨strlenï¼ˆï¼‰*/
        htmllen=sizeof(Html_logo);
     else if(png==2)
        htmllen=sizeof(Html_png1);
@@ -2296,7 +2302,7 @@ void copy_flash( const char *html)                                              
 
 
 
-void Init_Para_Tab()                                                          /*³õÊ¼»¯²ÎÊı±í*/
+void Init_Para_Tab()                                                          /*åˆå§‹åŒ–å‚æ•°è¡¨*/
  { 
   UINT8 s[20];
   
@@ -2358,7 +2364,7 @@ void Init_Para_Tab()                                                          /*
 
 }
 
-void Web_Server(void)                                                        /*web´¦Àíº¯Êı*/
+void Web_Server(void)                                                        /*webå¤„ç†å‡½æ•°*/
 {
   char i;
   char *para_p;
@@ -2369,59 +2375,59 @@ void Web_Server(void)                                                        /*w
   
   if(flag){
     flag=0;
-    ParseHttpRequest(http_request,RecvBuffer);                              /*·ÖÎöä¯ÀÀÆ÷ÇëÇó£¬»ñÈ¡ÇëÇó·½·¨£¬×ÊÔ´Ãû,ÀàĞÍ*/
-    switch(http_request->METHOD)                                            /*ÅĞ¶ÏÇëÇó·½·¨*/
+    ParseHttpRequest(http_request,RecvBuffer);                              /*åˆ†ææµè§ˆå™¨è¯·æ±‚ï¼Œè·å–è¯·æ±‚æ–¹æ³•ï¼Œèµ„æºå,ç±»å‹*/
+    switch(http_request->METHOD)                                            /*åˆ¤æ–­è¯·æ±‚æ–¹æ³•*/
     {
       case METHOD_ERR:
            break;
-      case METHOD_POST:                                                     /*postÇëÇó*/
+      case METHOD_POST:                                                     /*postè¯·æ±‚*/
            name=(char*)GetUriName(http_request->URI);
            //printf("URI name: %s\n",name);
            ParseUriType(&http_request->TYPE,name);
         
-           MakeHttpResponse(httpweb,http_request->TYPE);                    /*·ÖÎöÇëÇó×ÊÔ´ÀàĞÍ£¬563»ØÏìÓ¦*/
+           MakeHttpResponse(httpweb,http_request->TYPE);                    /*åˆ†æè¯·æ±‚èµ„æºç±»å‹ï¼Œ563å›å“åº”*/
            len=strlen(httpweb);         
            i=CH563NET_SocketSend(socket,httpweb,&len);
-           if(strstr(name,"main")!=NULL   ){                                /*ÇëÇó¡°main¡±ÍøÒ³*/
+           if(strstr(name,"main")!=NULL   ){                                /*è¯·æ±‚â€œmainâ€ç½‘é¡µ*/
               copy_flash(Html_main);
               len=strlen(HtmlBuffer);
-              CH563NET_SocketSend(socket,HtmlBuffer,&len);                  /*Ö±½Ó¸´ÖÆHtml_main[],·¢ËÍ*/
+              CH563NET_SocketSend(socket,HtmlBuffer,&len);                  /*ç›´æ¥å¤åˆ¶Html_main[],å‘é€*/
             }     
-            else if(strstr(name,"success")!=NULL   ){                       /*ÇëÇó¡°success¡±ÍøÒ³*/
+            else if(strstr(name,"success")!=NULL   ){                       /*è¯·æ±‚â€œsuccessâ€ç½‘é¡µ*/
             copy_flash(Html_success);
             len=strlen(HtmlBuffer);
-            CH563NET_SocketSend(socket,HtmlBuffer,&len);                    /*Ö±½Ó¸´ÖÆHtml_success[],·¢ËÍ*/
+            CH563NET_SocketSend(socket,HtmlBuffer,&len);                    /*ç›´æ¥å¤åˆ¶Html_success[],å‘é€*/
 
             }
 
           
-            CH563NET_SocketClose(socket,TCP_CLOSE_NORMAL);                  /*ÇëÇó´¦ÀíÍê±Ïºó¹Ø±Õµ±Ç°socketÁ¬½Ó£¬ä¯ÀÀÆ÷·¢ÏÂÒ»ÇëÇóÊ±»áĞÂ½¨Á¢Ò»¸öÁ¬½Ó*/
+            CH563NET_SocketClose(socket,TCP_CLOSE_NORMAL);                  /*è¯·æ±‚å¤„ç†å®Œæ¯•åå…³é—­å½“å‰socketè¿æ¥ï¼Œæµè§ˆå™¨å‘ä¸‹ä¸€è¯·æ±‚æ—¶ä¼šæ–°å»ºç«‹ä¸€ä¸ªè¿æ¥*/
  
-            para_p=Para_DataLocate((char *)RecvBuffer);                     /*»ñÈ¡POSTÇëÇóÀïµÄÍøÒ³±äÁ¿¸³Öµ*/
+            para_p=Para_DataLocate((char *)RecvBuffer);                     /*è·å–POSTè¯·æ±‚é‡Œçš„ç½‘é¡µå˜é‡èµ‹å€¼*/
            
           
-           if(strstr(para_p,"__PMAC")!=NULL){                               /*¼ì²âµ½POSTÇëÇó±¨ÎÄÀïº¬ÓĞ"Basic"ÍøÒ³µÄÅäÖÃĞÅÏ¢*/
+           if(strstr(para_p,"__PMAC")!=NULL){                               /*æ£€æµ‹åˆ°POSTè¯·æ±‚æŠ¥æ–‡é‡Œå«æœ‰"Basic"ç½‘é¡µçš„é…ç½®ä¿¡æ¯*/
             Refresh_Basic(para_p);                                             
              memset(para_p,0,strlen(para_p));
            }
            
-           if(strstr(para_p,"__PMOD")!=NULL){                               /*¼ì²âµ½POSTÇëÇó±¨ÎÄÀïº¬ÓĞ"Port"ÍøÒ³µÄÅäÖÃĞÅÏ¢*/
+           if(strstr(para_p,"__PMOD")!=NULL){                               /*æ£€æµ‹åˆ°POSTè¯·æ±‚æŠ¥æ–‡é‡Œå«æœ‰"Port"ç½‘é¡µçš„é…ç½®ä¿¡æ¯*/
             Refresh_Port(para_p);      
             memset(para_p,0,strlen(para_p));
            }
            
-           if(strstr(para_p,"__PUSE")!=NULL){                               /*¼ì²âµ½POSTÇëÇó±¨ÎÄÀïº¬ÓĞ"User"ÍøÒ³µÄÅäÖÃĞÅÏ¢*/
+           if(strstr(para_p,"__PUSE")!=NULL){                               /*æ£€æµ‹åˆ°POSTè¯·æ±‚æŠ¥æ–‡é‡Œå«æœ‰"User"ç½‘é¡µçš„é…ç½®ä¿¡æ¯*/
              Refresh_Login(para_p);      
                 memset(para_p,0,strlen(para_p));
            }
     
              
              break;           
-      case METHOD_GET:                                                       /*getÇëÇó*/
+      case METHOD_GET:                                                       /*getè¯·æ±‚*/
            name=(char*)GetUriName(http_request->URI);
           // printf("URI name: %s\n",name);                                  
            ParseUriType(&http_request->TYPE,name);                           
-           MakeHttpResponse(httpweb,http_request->TYPE);                     /*·ÖÎöÇëÇó×ÊÔ´ÀàĞÍ£¬563»ØÏìÓ¦*/
+           MakeHttpResponse(httpweb,http_request->TYPE);                     /*åˆ†æè¯·æ±‚èµ„æºç±»å‹ï¼Œ563å›å“åº”*/
            len=strlen(httpweb);
            CH563NET_SocketSend(socket,httpweb,&len);
             if(strlen(name)==1){
@@ -2430,59 +2436,59 @@ void Web_Server(void)                                                        /*w
               CH563NET_SocketSend(socket,HtmlBuffer,&len);
 
             }
-            else if(strstr(name,"main")!=NULL){                              /*ÇëÇó»ñÈ¡¡°main¡±ÍøÒ³*/
+            else if(strstr(name,"main")!=NULL){                              /*è¯·æ±‚è·å–â€œmainâ€ç½‘é¡µ*/
               copy_flash(Html_main);
               len=strlen(HtmlBuffer);
               CH563NET_SocketSend(socket,HtmlBuffer,&len);
             }
               
-            else if(strstr(name,"basic")!=NULL){                             /*ÇëÇó»ñÈ¡¡°basic¡±ÍøÒ³*/
+            else if(strstr(name,"basic")!=NULL){                             /*è¯·æ±‚è·å–â€œbasicâ€ç½‘é¡µ*/
               Refresh_Html(Html_basic,Para_Basic,4);
               len=strlen(HtmlBuffer);
               CH563NET_SocketSend(socket,HtmlBuffer,&len);
             }
             
-            else if(strstr(name,"port")!=NULL){                              /*ÇëÇó»ñÈ¡¡°port¡±ÍøÒ³*/
+            else if(strstr(name,"port")!=NULL){                              /*è¯·æ±‚è·å–â€œportâ€ç½‘é¡µ*/
               Refresh_Html(Html_port,Para_Port,4);
               len=strlen(HtmlBuffer);
               CH563NET_SocketSend(socket,HtmlBuffer,&len);
             }
-            else if(strstr(name,"user")!=NULL){                              /*ÇëÇó»ñÈ¡¡°user¡±ÍøÒ³*/
+            else if(strstr(name,"user")!=NULL){                              /*è¯·æ±‚è·å–â€œuserâ€ç½‘é¡µ*/
               Refresh_Html(Html_user,Para_Login,2);
               len=strlen(HtmlBuffer);
               CH563NET_SocketSend(socket,HtmlBuffer,&len);
             }
-            else if(strstr(name,"about")!=NULL){                             /*ÇëÇó»ñÈ¡¡°about¡±ÍøÒ³*/
+            else if(strstr(name,"about")!=NULL){                             /*è¯·æ±‚è·å–â€œaboutâ€ç½‘é¡µ*/
               copy_flash(Html_about);
               len=strlen(HtmlBuffer);
               CH563NET_SocketSend(socket,HtmlBuffer,&len);
             }
 
-            else if(strstr(name,"logo")!=NULL){                              /*ÇëÇó»ñÈ¡¡°logo¡±Í¼Æ¬*/
+            else if(strstr(name,"logo")!=NULL){                              /*è¯·æ±‚è·å–â€œlogoâ€å›¾ç‰‡*/
               png=1;
               copy_flash(Html_logo);
               len=sizeof(Html_logo);            
               CH563NET_SocketSend(socket,HtmlBuffer,&len);            
             }
             
-            else if(strstr(name,"png1")!=NULL){                               /*ÇëÇó»ñÈ¡¡°png1¡±Í¼Æ¬*/
+            else if(strstr(name,"png1")!=NULL){                               /*è¯·æ±‚è·å–â€œpng1â€å›¾ç‰‡*/
               png=2;
               copy_flash(Html_png1);
               len=sizeof(Html_png1);            
               CH563NET_SocketSend(socket,HtmlBuffer,&len);                          
             }
 						
-            else if(strstr(name,"png2")!=NULL){                               /*ÇëÇó»ñÈ¡¡°png2¡±Í¼Æ¬*/ 
+            else if(strstr(name,"png2")!=NULL){                               /*è¯·æ±‚è·å–â€œpng2â€å›¾ç‰‡*/ 
               png=3;
               copy_flash(Html_png2);
               len=sizeof(Html_png2);          
               CH563NET_SocketSend(socket,HtmlBuffer,&len);            
             }
-            else if(strstr(name,"png3")!=NULL){                               /*ÇëÇó»ñÈ¡¡°png3¡±Í¼Æ¬*/
+            else if(strstr(name,"png3")!=NULL){                               /*è¯·æ±‚è·å–â€œpng3â€å›¾ç‰‡*/
               png=4;
               copy_flash(Html_png3);
               len=sizeof(Html_png3);            
-              CH563NET_SocketSend(socket,HtmlBuffer,&len);                    /*ÇëÇó»ñÈ¡¡°png4¡±Í¼Æ¬*/           
+              CH563NET_SocketSend(socket,HtmlBuffer,&len);                    /*è¯·æ±‚è·å–â€œpng4â€å›¾ç‰‡*/           
             }
             else if(strstr(name,"png4")!=NULL){
               png=5;
@@ -2490,18 +2496,18 @@ void Web_Server(void)                                                        /*w
               len=sizeof(Html_png4);          
               CH563NET_SocketSend(socket,HtmlBuffer,&len);              
             }
-            else if(strstr(name,"weixin")!=NULL){                             /*ÇëÇó»ñÈ¡¡°weixin¡±Í¼Æ¬*/ 
+            else if(strstr(name,"weixin")!=NULL){                             /*è¯·æ±‚è·å–â€œweixinâ€å›¾ç‰‡*/ 
               copy_flash(Html_weixin);
               len=sizeof(Html_weixin);            
               CH563NET_SocketSend(socket,HtmlBuffer,&len);             
             }            
 
-            else if(strstr(name,"style")!=NULL){                              /*ÇëÇó»ñÈ¡"style"cssÑùÊ½±íÎÄ¼ş*/ 
+            else if(strstr(name,"style")!=NULL){                              /*è¯·æ±‚è·å–"style"cssæ ·å¼è¡¨æ–‡ä»¶*/ 
               copy_flash(Html_style);
               len=strlen(HtmlBuffer);
               CH563NET_SocketSend(socket,HtmlBuffer,&len);
             }  
-            CH563NET_SocketClose(socket,TCP_CLOSE_NORMAL);                    /*ÇëÇó´¦ÀíÍê±Ïºó¹Ø±Õµ±Ç°socketÁ¬½Ó£¬ä¯ÀÀÆ÷·¢ÏÂÒ»ÇëÇóÊ±»áĞÂ½¨Á¢Ò»¸öÁ¬½Ó*/
+            CH563NET_SocketClose(socket,TCP_CLOSE_NORMAL);                    /*è¯·æ±‚å¤„ç†å®Œæ¯•åå…³é—­å½“å‰socketè¿æ¥ï¼Œæµè§ˆå™¨å‘ä¸‹ä¸€è¯·æ±‚æ—¶ä¼šæ–°å»ºç«‹ä¸€ä¸ªè¿æ¥*/
         break;            
     }  
     
