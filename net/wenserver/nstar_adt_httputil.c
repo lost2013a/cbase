@@ -139,7 +139,7 @@ static void _repos_method_get(st_http_request     *http_request, unsigned char* 
 		parm5_pos_pic(1);
 	}
 	else if(_comp_uri(name, "/png1.png")){
-		printf("get weixin\n");
+		printf("get png1.png\n");
 		parm5_pos_pic(2);
 	}
 	else if(_comp_uri(name, "/png2.png")){

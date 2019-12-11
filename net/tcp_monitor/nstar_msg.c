@@ -146,10 +146,10 @@ const char* webmsg_nstar_msg_other_ctl(unsigned char* data)
 	switch(type){
 		case 13:
 			if(pmsg->content[0] == 0){
-				snprintf(buf, MAX_LEN, "指令：LED关屏", pmsg->content_len);
+				snprintf(buf, MAX_LEN, "指令：LED关屏");
 			}			
 			else if(pmsg->content[0] == 2){
-				snprintf(buf, MAX_LEN, "指令：LED清除节目", pmsg->content_len);
+				snprintf(buf, MAX_LEN, "指令：LED清除节目");
 			}
 			else {
 				#if 0				
@@ -180,6 +180,11 @@ const char* webmsg_nstar_msg_text(unsigned char* data)
 	type= pmsg->act_em;
 	if(type > TEXT_EM_MAX_TYPE)
 		type= TEXT_EM_MAX_TYPE+1;
+#if 1
+	if(pmsg->pack_id != pmsg->pack_cnt-1 || pmsg->pack_cnt == 0){
+		return NULL;
+	}
+#endif
 	switch(type){
 		default:
 			if(pmsg->repet_cnt == 0)
@@ -187,8 +192,8 @@ const char* webmsg_nstar_msg_text(unsigned char* data)
 			else
 				snprintf(tmp, 20, "播放%d次", pmsg->repet_cnt);
 			
-			snprintf(buf, MAX_TEXT_LEN, "节目%d[%s], 帧序%d/%d, 帧长%02d, 时间%02d:%02d:%02d-%02d:%02d:%02d, %s",    
-				sw16(pmsg->act_id), str_nstar_text_em[type], pmsg->pack_id+1, pmsg->pack_cnt, pmsg->pack_len,
+			snprintf(buf, MAX_TEXT_LEN, "节目%d[%s], 长度%d, 时间%02d:%02d:%02d-%02d:%02d:%02d, %s",    
+				sw16(pmsg->act_id), str_nstar_text_em[type], (pmsg->pack_cnt-1)*140+ pmsg->pack_len,
 				pmsg->start_h, pmsg->start_m, pmsg->start_s, pmsg->end_h, pmsg->end_m, pmsg->end_s, tmp);
 			break;
 	}

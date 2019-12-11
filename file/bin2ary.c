@@ -25,7 +25,7 @@ unsigned int read_bin(char *path, u8 *buf, u32 size)
 	unsigned char tmp;
 	for(i=0; i< size; i++){
 		 fread(&tmp, sizeof(u8), 1, infile);
-		 if(i%30 ==29){
+		 if(i%10 ==9){
 			addlen= sprintf((char*)(buf+ idx), "0x%02X,\r\n", tmp);
 		 }
 		 else{

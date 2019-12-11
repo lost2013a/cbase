@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <errno.h>
@@ -321,10 +321,14 @@ static void log_ts_data(unsigned char *src_ts)
 			}
 			break;
 		case 2:
+			
 			if(date_len >=  NSTAR_TEXT_LEN && cnt >0){
-				mylog("[%s(%s)]%04d, %02x%02x%02x%02x%02x%02x, %02d, %s\n", str_operate_type[p_ts->type],str_operate_lv[p_ts->lv],
-					 p_ts->pid, l_id[0], l_id[1], l_id[2], l_id[3], l_id[4], l_id[5],
-					 date_len, webmsg_nstar_msg_text((unsigned char*)p_ts));
+				char *p_text= webmsg_nstar_msg_text((unsigned char*)p_ts);
+				if(p_text != NULL){
+					mylog("[%s(%s)]%04d, %02x%02x%02x%02x%02x%02x, %02d, %s\n", str_operate_type[p_ts->type],str_operate_lv[p_ts->lv],
+						 p_ts->pid, l_id[0], l_id[1], l_id[2], l_id[3], l_id[4], l_id[5],
+						 date_len, p_text);
+				}
 				
 			}	
 			break;

@@ -45,7 +45,7 @@ extern char *nstar_web_rx_buf;
 "ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;"\
 "background-color: #f3f3f3;}"\
 "li { float: left;}"\
-"li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}"\
+"li a {display: block;color: #666;text-align: center;padding: 20px 20px;text-decoration: none;}"\
 "li a:hover:not(.active) {background-color: #CCCCCC;}"\
 "li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}"\
 "li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}"\

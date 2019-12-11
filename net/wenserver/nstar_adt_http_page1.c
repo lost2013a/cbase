@@ -43,8 +43,8 @@
 "	{"\
 "		if(xmlHttp.readyState == 4 && xmlHttp.status == 200) "\
 "		{"\
-		"var json=xmlHttp.responseText;"\
-		"var o=eval(\'(\'+json+\')\');"\
+"var json=xmlHttp.responseText;"\
+"var o=eval(\'(\'+json+\')\');"\
 
 #define STA_REFRESH_HTML_END  "}"\
 "	}"\
@@ -107,7 +107,6 @@ void parm1_pos_htm(unsigned char mode)
 		http_json_sta(_add_htm_element);
 	
 	}
-	
 }
 
 

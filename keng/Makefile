@@ -1,18 +1,14 @@
 .PHONY:clean
-#CC =csky-linux-gcc
-CC =gcc
+#CC =powerpc-fsl-linux-gnuspe-gcc
 #CFLAGS=-Wall  -O2
 OBJ = test
 #OBJ = test
 #CFLAGS=-Wall -O2
-CFLAGS= -Wall -static 
+CFLAGS= -Wall
 LIBS=-lpthread
-OBJS = sntp.c
-all:$(OBJ) 
+OBJS = keng.c
 $(OBJ):$(OBJS)
 	$(CC) -o $@ $(CFLAGS) $^ $(LIBS)
 
 clean:
 	rm  $(OBJ) 
-	rm  $(OBJ2) 
-

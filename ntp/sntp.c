@@ -19,8 +19,12 @@
 #else
 #define dbg(...) 
 #endif
-#define NTP_SERVER      "120.25.115.20"
-#define NTP_LOOP_TIME   (10)	/*单位：秒*/
+
+
+//#define NTP_SERVER      "120.25.115.20"
+#define NTP_SERVER      "192.168.251.5"
+
+#define NTP_LOOP_TIME   (1)	/*单位：秒*/
 #define K_MS 1		
 
 int get_ntp_packet(void *buf, size_t *size)
@@ -140,11 +144,25 @@ static void adjust_time(double off)
 
 }
 
+static unsigned char simple_checkout(char *data, unsigned int len)
+{
+/*长度>=48 , NTP版本3 /4*/
+	char ret=0;
+	if(len >= sizeof(struct ntphdr)){
+		struct ntphdr *phead= (struct ntphdr*)data;
+		if(phead->ntp_vn == 3 || phead->ntp_vn ==4){
+			ret= 1;
+		}
+	}
+	return ret;
+}
+
 int main(int argc, char *argv[])
 {
-	char buf[BUFSIZE];
+	unsigned char errcnt=0;
+	char buf[BUFSIZE];/*注意内存，裸机栈空间和OS下线程空间*/
     size_t nbytes;
-    int sockfd, maxfd1;
+    int sockfd, maxfd1 ,rlen;
     struct sockaddr_in servaddr;
     fd_set readfds;
     struct timeval timeout, recvtv;
@@ -164,17 +182,14 @@ int main(int argc, char *argv[])
         perror("connect error");
         exit(-1);
     }
-
-    nbytes = BUFSIZE;
-	
 	while(1)
 	{
+		nbytes = BUFSIZE;
 	    if (get_ntp_packet(buf, &nbytes) != 0) {
 	        fprintf(stderr, "construct ntp request error \n");
 	        exit(-1);
 	    }
 	    send(sockfd, buf, nbytes, 0);
-	
 	    FD_ZERO(&readfds);
 	    FD_SET(sockfd, &readfds);
 	    maxfd1 = sockfd + 1;
@@ -192,10 +207,15 @@ int main(int argc, char *argv[])
 				break;
 			default:	
 		        if (FD_ISSET(sockfd, &readfds)) {
-		            if ((nbytes = recv(sockfd, buf, BUFSIZE, 0)) < 0) {
+					rlen = recv(sockfd, buf, BUFSIZE, 0);
+		            if (rlen < 0) {
 		                perror("recv error");
-		                exit(-1);
+						if(errcnt++ >= 5)
+		                	goto err;
 		            }
+					if(1 != simple_checkout(buf, rlen))
+						break;
+					
 		            gettimeofday(&recvtv, NULL);
 		            offset = get_offset((struct ntphdr *) buf, &recvtv);
 					adjust_time(offset);				
@@ -204,6 +224,8 @@ int main(int argc, char *argv[])
 	    }
 		sleep(NTP_LOOP_TIME);
 	}
+err:
+	printf("err: sntp stop\n");
     close(sockfd);
     return 0;
 }
