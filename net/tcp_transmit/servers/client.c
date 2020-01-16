@@ -18,38 +18,7 @@
 #define TRANSMIT_PORT	50003
 #define TRANSMIT_IP	"192.168.251.181"
 
-int creat_connect(void)
-{
-    int conn_sock, rlen;
-    struct sockaddr_in	server_addr;
 
-    conn_sock	= socket(AF_INET, SOCK_STREAM, 0);
-    if (conn_sock < 0) {
-        perror("socket(2) error");
-        return  -1;
-    }
-
-    (void)memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family		= AF_INET;
-    server_addr.sin_port		= htons(TRANSMIT_PORT);
-    server_addr.sin_addr.s_addr	= inet_addr(TRANSMIT_IP);
-    
-    printf("wait connect to transmit addr......\n");
-	while(1){
-
-		if (connect(conn_sock,
-                (struct sockaddr *)&server_addr,
-                sizeof(server_addr)) >= 0) {
-	        perror("connect(2) ok");
-	        break;
-   		 }
-		else
-			sleep(2);		
-	}
-	printf("connect ok\n");
-	return conn_sock;
-}
- 
 
 
 
@@ -82,7 +51,7 @@ typedef struct _MSG_FIXED_HEADER MSG_FIXED_HEADER;
 #define swap16(value) \
 ( (value & 0x00FFU) << 8 | (value & 0xFF00U) >> 8 )
 
-const char* type_str[10]={
+const char* type_str[]={
 "NULL",
 "开始播发",
 "停止播发",
@@ -154,11 +123,13 @@ struct _CMD_ASSIST{
 	char assist_url;
 }__PACKED__;
 
-#define SID_EMBID_TYPE 0x1403 /*大端：0x0314*/
+
 
 
 static void visit_source_id(unsigned char *id)
 {
+#define SID_EMBID_TYPE 0x1403 /*大端：0x0314*/
+
 	int i;
 	printf("sid= ");
 	for(i=0; i<18; i++){
@@ -278,6 +249,8 @@ void msg_pritf(MSG_FIXED_HEADER *msg)
 	//dbg("data_len= %d\n", swap16(msg->data_len));
 	//dbg("business_len= %d\n", swap16(msg->business_len));
 	dbg("\n[%04d] #%d[%02d]%s\n", swap32(msg->session_id), msg->type, swap16(msg->business_len), type_str[type]);
+
+	
 	switch(type){
 		case 0x1:
 			if(0)
@@ -294,6 +267,39 @@ void msg_pritf(MSG_FIXED_HEADER *msg)
 
 
 }
+
+static int creat_connect(void)
+{
+    int conn_sock, rlen;
+    struct sockaddr_in	server_addr;
+
+    conn_sock	= socket(AF_INET, SOCK_DGRAM, 0);
+    if (conn_sock < 0) {
+        perror("socket(2) error");
+        return  -1;
+    }
+
+    (void)memset(&server_addr, 0, sizeof(server_addr));
+    server_addr.sin_family		= AF_INET;
+    server_addr.sin_port		= htons(TRANSMIT_PORT);
+    server_addr.sin_addr.s_addr	= inet_addr(TRANSMIT_IP);
+    
+    printf("wait connect to transmit addr......\n");
+	while(1){
+
+		if (connect(conn_sock,
+                (struct sockaddr *)&server_addr,
+                sizeof(server_addr)) >= 0) {
+	        perror("connect(2) ok");
+	        break;
+   		 }
+		else
+			sleep(2);		
+	}
+	printf("connect ok\n");
+	return conn_sock;
+}
+ 
 
 int main(int argc, char** argv)
 {
@@ -317,19 +323,4 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-//void send_mp3(void)
-//{
-//	unsigned char rbuf[1460];
-//	int len;
-//	printf("connect ok\n");
-//	MSG_FIXED_HEADER *msg;
-//	while(1)
-//	{
-//		len= recv(real_fd, rbuf, 1460, 0);
-//		msg= (MSG_FIXED_HEADER *)rbuf;
-//		printf("read len =%d\n", len);
-//		msg_pritf(msg);
-//		
-//		usleep(1000*1000);
-//	}
-//}
+

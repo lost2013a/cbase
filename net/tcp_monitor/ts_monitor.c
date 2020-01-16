@@ -305,7 +305,7 @@ static void log_ts_data(unsigned char *src_ts)
 				//mylog("%s\n", webmsg_nstar_msg_onoff(src_ts, date_len, cnt));
 				//mylog("节目数量%d\n", get_ts_program());
 				//mylog("%s\n", webmsg_nstar_msg_onoff(src_ts, date_len, cnt));
-				p_info= webmsg_nstar_msg_onoff(src_ts, date_len, cnt);
+				p_info= (char*)webmsg_nstar_msg_onoff(src_ts, date_len, cnt);
 			}
 			
 
@@ -323,7 +323,7 @@ static void log_ts_data(unsigned char *src_ts)
 		case 2:
 			
 			if(date_len >=  NSTAR_TEXT_LEN && cnt >0){
-				char *p_text= webmsg_nstar_msg_text((unsigned char*)p_ts);
+				char *p_text= (char*)webmsg_nstar_msg_text((unsigned char*)p_ts);
 				if(p_text != NULL){
 					mylog("[%s(%s)]%04d, %02x%02x%02x%02x%02x%02x, %02d, %s\n", str_operate_type[p_ts->type],str_operate_lv[p_ts->lv],
 						 p_ts->pid, l_id[0], l_id[1], l_id[2], l_id[3], l_id[4], l_id[5],

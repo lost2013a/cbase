@@ -21,10 +21,6 @@ static int write_file(unsigned char *buf, unsigned int len)
 		printf("erro, log write failed\n");	
 		return -1;
 	}
-	if(fwrite("\n\n", 1, 2 ,file_p) < 0){
-		printf("erro, log write failed\n");	
-		return -1;
-	}
 	return 0;
 }
 
@@ -64,17 +60,6 @@ void log_printf(char* fmt,...)
 	write_flush();
 }
 
-void log_write(unsigned char *p_dta, unsigned int dtalen , char* head)
-{  	
-	if(head){
-		if(fwrite((unsigned char *)head, 1, strlen(head) ,file_p) < 0){
-			printf("erro, log write failed\n");	
-			return;
-		}
-	}	
-	write_file(p_dta, dtalen);
-	write_flush();
-}
 
 
 

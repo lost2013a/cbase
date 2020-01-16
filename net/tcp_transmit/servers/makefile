@@ -1,13 +1,11 @@
 .PHONY:clean
-#CC =powerpc-fsl-linux-gnuspe-gcc
-#CFLAGS=-Wall  -O2
+
 OBJ = test
-#OBJ = test
-#CFLAGS=-Wall -O2
 CFLAGS= -Wall
+CFLAGS+= -I ./include
 LIBS=-lpthread
-OBJS =  client.c
-$(OBJ):$(OBJS)
+SRC =  main.c ebm_net.c ebm_env.c ebm_msg.c
+$(OBJ):$(SRC)
 	$(CC) -o $@ $(CFLAGS) $^ $(LIBS)
 
 clean:
