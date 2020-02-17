@@ -32,6 +32,7 @@ int main(int argc, char** argv)
 	ebm_env_init(0);
 	command_net_start(h_env->plat_ip, h_env->plat_port);
 	creat_rtp_pthread();
+	func_send_hearttick();
 	while(1)
 	{
 		command_net_loop();

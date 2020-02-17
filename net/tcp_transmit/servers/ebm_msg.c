@@ -223,7 +223,7 @@ static void cmd_para_printf(CMD_PARM_HEADER *cmd)
 
 }
 
-static void _parse_parm(struct cmd_param* p_data, unsigned int parm_len)
+static void _parse_parm(struct cmd_param* p_data)
 {
 	unsigned char type= p_data->type;
 	printf("type= #%d %s, len=%d\n", type, PARA_CMD_STR[type], p_data->len);
@@ -287,6 +287,7 @@ static void do_parse_parm(CMD_PARM_HEADER *cmd, unsigned int date_len)
 	
 		if(date_len-2 <= parm->len){
 			date_len-= (2+ parm->len);
+			_parse_parm(parm);
 		}
 		else{
 			printf("#%s parm len not match\n", __func__);
@@ -416,6 +417,10 @@ void handle_ebm_msg(unsigned char *buf ,unsigned int len)
 		parse_msg(msg, len);
 }
 
+/*
+FE FD 01 00 00 00 03 8F 01 00 35 F6 52 04 25 00 00 00 03 14 01 02 01 00 01 00 00 00 00 00 00 00 00 00 00 00 00 10 00 09 01 02 06 12 34 56 78 90 02 F0 70 A9 7E 
 
+
+*/
 
 
