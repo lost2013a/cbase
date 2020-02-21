@@ -5,6 +5,7 @@ static volatile unsigned short port;
 static volatile unsigned int ipaddr;
 static struct bsockt command_net_handle = {FD_INVALID,0,0};
 
+#if 0
 unsigned int app_get_systime(void)
 {	
 #include <sys/time.h>
@@ -17,7 +18,7 @@ unsigned int app_get_systime(void)
 	return (unsigned int)(tv.tv_sec);
 #endif
 }
-
+#endif
 
 static void _socket_close(int *fd)
 {
@@ -81,6 +82,14 @@ static unsigned char _creat_connect_socket(struct bsockt *h_net)
 }
 
 
+unsigned char command_net_send(unsigned char *data, unsigned int len)
+{
+	int ret= write(command_net_handle.fd, data, len);
+	if(ret < 0){
+		printf("net wrtie err=%d\n", ret);
+		command_net_restart();
+	}
+}
 
 static void block_rec(unsigned int fd)
 {
@@ -114,6 +123,76 @@ static void data_process(void)
 {
 	block_rec(command_net_handle.fd);
 }
+
+/*
+FE FD 01 00 00 00 61 BE 01 00 00 3A F4 52 94 25 00 00 00 03 14 01 02 01 00 01 F6 52 04 25 00 00 00 03 14 01 02 01 11 00 0B 0A 01 06 0B 0C 0D 0E 0F 10 11 12 00 00 31 29 CC 3D 
+FE FD 01 00 00 00 61 BF 01 00 00 3A F4 52 94 25 00 00 00 03 14 01 02 01 00 01 F6 52 04 25 00 00 00 03 14 01 02 01 11 00 0B 0A 01 06 0B 0C 0D 0E 0F 10 11 12 00 00 A6 5B F6 76 
+
+*/
+/*
+FE FD 01 00 00 00 00 AC 01 00 00 82 F6 52 04 25 00 00 00 03 14 01 02 01 00 01 00 00 00 00 00 00 00 00 00 00 00 00 
+10 00 09 01 02 06 12 34 56 78 90 02 00 4A 
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+28 6A 70 18
+*/
+
+
+void command_send_hearttick(void)
+{
+	
+	unsigned char data[100];
+	unsigned char *pdata;
+	PASSBACK_FIXED_HEADER *msg;
+	HEART_TICK_CONTENT* business;
+	msg= (PASSBACK_FIXED_HEADER*)data;
+
+	msg->head_flag= 0xFDFE;
+	msg->version= 0x0001;
+	msg->session_id= swap32(last_session_id);
+	last_session_id++;
+	msg->type= UNPASSIVE;
+	msg->data_len= swap16(0x35);
+	pdata= ebm_env_get_sourceid();
+
+
+	memcpy(msg->src_socde, pdata, 12);
+	
+	msg->items=swap16(1);
+	memset(msg->items_arry, 0, 12);
+	msg->business_type= PASSBACK_HEARTTICK;
+	msg->business_len= swap16(0x09);
+	business= (HEART_TICK_CONTENT*)&msg->business_data;
+
+	business->sta= 1;
+	business->register_1st_time= ebm_env_get_register_1st_time();
+	business->phyid_len=6;
+
+	pdata= ebm_env_get_sourceid();
+	
+	memcpy(msg->src_socde, pdata, 12);
+	
+	pdata= ebm_env_get_phyid();
+	
+	memcpy(business->phyid, pdata, 6);
+
+	unsigned int *p_crc= (unsigned int*) (data+49);
+
+	unsigned int crc_val= nstar_crc32_ts(data, 49);
+	*p_crc= swap32(crc_val);
+
+	passback_net_send(data, 53);
+if(0)
+{
+	int i;
+	for(i=0; i< 53;i++){
+		printf("%02X ", data[i]);
+		if(i%16 == 15)
+			printf("\n");
+	}
+	printf("\n");
+}
+}
+
 
 
 static void command_net_machine(void *parm)

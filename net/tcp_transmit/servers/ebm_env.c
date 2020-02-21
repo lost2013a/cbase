@@ -7,20 +7,21 @@ static struct ebm_env s_env;
 struct ebm_env *h_env;
 
 static unsigned char test_soucrceid[12]= {0xf6, 0x52, 0x04, 0x25, 0x00, 0x00,\
-	0x00, 0x03, 0x14, 0x01 , 0x02 ,0x01};
+	0x00, 0x03, 0x14, 0x01 , 0x02 ,0x02};
 
+static unsigned char test_phyid[6]= {0x12, 0x34, 0x56, 0x78, 0x90, 0x09};
 
 unsigned char ebm_env_init(unsigned char *input)
 {
-static const unsigned int test_ip= 192 << 24 | 168 << 16 | 251 << 8 | 181;
-#define TRANSMIT_PORT	50003
-#if 1
+static const unsigned int test_ip= 192 << 24 | 168 << 16 | 251 << 8 | 7;
+#define TRANSMIT_PORT	4443
+
 static const unsigned int test_mrtp_ip= 192 << 24 | 168 << 16 | 251 << 8 | 170;
-#define TRANSMIT_MRTP_PORT	5678
-#else
-static const unsigned int test_mrtp_ip= 237 << 24 | 12 << 16 | 12 << 8 | 12;
-#define TRANSMIT_MRTP_PORT	1212
-#endif
+#define TRANSMIT_MRTP_PORT	1234
+
+static const unsigned int passback_ip= 192 << 24 | 168 << 16 | 251 << 8 | 7;
+#define PASSBACK_PORT	8889
+
 
 	h_env= &s_env;
 	h_env->plat_ip= test_ip;
@@ -29,10 +30,13 @@ static const unsigned int test_mrtp_ip= 237 << 24 | 12 << 16 | 12 << 8 | 12;
 	h_env->rtp_ip= test_mrtp_ip;
 	h_env->rtp_port= TRANSMIT_MRTP_PORT;
 
+	h_env->passback_ip= passback_ip;
+	h_env->passback_port= PASSBACK_PORT;
+
 	h_env->register_1st_time= 0;
 
-	memcpy();
-	
+	memcpy(h_env->source_id, test_soucrceid, 12);
+	memcpy(h_env->phy_id, test_phyid, 6);
 	
 
 	
@@ -103,7 +107,8 @@ unsigned char ebm_env_get_register_1st_time(void)
 {
 	if(h_env->register_1st_time == 0)
 		h_env->register_1st_time= 1;
-		
+	else
+		h_env->register_1st_time= 2;
 	return h_env->register_1st_time;
 }
 

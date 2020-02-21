@@ -81,6 +81,14 @@ FE FD 01 00 00 00 02 93 01 00 35 F6 52 04 25 00 00 00 03 14 01 02 01 00 01 00 00
 */
 
 
+void passback_net_start(unsigned int remote_ip, unsigned short remote_port);
+
+void passback_net_stop(void);
+
+void passback_net_restart(void);
+
+void passback_net_loop(void);
+
 
 
 #endif

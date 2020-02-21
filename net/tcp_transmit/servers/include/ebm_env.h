@@ -3,6 +3,7 @@
 #include "ebm_sys.h"
 #include "ebm_msg.h"
 #include "ebm_net.h"
+#include "app_delay.h"
 
 
 struct ebm_env{
@@ -10,6 +11,8 @@ struct ebm_env{
 	unsigned short plat_port;
 	unsigned int rtp_ip;
 	unsigned short rtp_port;
+	unsigned int passback_ip;
+	unsigned short passback_port;
 	unsigned char phy_id[6];
 	unsigned char source_id[12];
 	unsigned char register_1st_time;
