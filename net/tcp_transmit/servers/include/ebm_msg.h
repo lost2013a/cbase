@@ -95,7 +95,7 @@ struct _CMD_ASSIST{
 struct cmd_param{
 unsigned char type;
 unsigned char len;
-unsigned char *data;
+unsigned char data;
 }__PACKED__;
 
 struct _CMD_TERMINAL_SETUP{
@@ -107,7 +107,16 @@ typedef struct _CMD_TERMINAL_SETUP CMD_PARM_HEADER;
 
 
 
-void handle_ebm_msg(unsigned char *buf ,unsigned int len);
+
+enum {
+	MSG_TYPE_REQ= 1,
+	MSG_TYPE_ACK= 2,
+};
+
+
+
+
+void handle_ebm_msg(unsigned char *buf , int len);
 
 
 #endif

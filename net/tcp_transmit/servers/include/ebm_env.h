@@ -3,6 +3,8 @@
 #include "ebm_sys.h"
 #include "ebm_msg.h"
 #include "ebm_net.h"
+#include "ebm_passback.h"
+
 #include "app_delay.h"
 
 

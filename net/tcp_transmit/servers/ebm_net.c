@@ -91,6 +91,8 @@ unsigned char command_net_send(unsigned char *data, unsigned int len)
 	}
 }
 
+
+
 static void block_rec(unsigned int fd)
 {
 	static unsigned char rbuf[1460];
@@ -111,7 +113,7 @@ static void block_rec(unsigned int fd)
 				command_net_restart();
 			}
 			else{
-				printf("rlen %d bytes\n", rlen);
+				//printf("rlen %d bytes\n", rlen);
 				handle_ebm_msg(rbuf, rlen);
 			}
 				
@@ -139,27 +141,29 @@ FE FD 01 00 00 00 00 AC 01 00 00 82 F6 52 04 25 00 00 00 03 14 01 02 01 00 01 00
 
 void command_send_hearttick(void)
 {
-	
-	unsigned char data[100];
+static unsigned int last_session_id= 1;
+
+	unsigned char data[200];
 	unsigned char *pdata;
-	PASSBACK_FIXED_HEADER *msg;
+	MSG_FIXED_HEADER *msg;
 	HEART_TICK_CONTENT* business;
-	msg= (PASSBACK_FIXED_HEADER*)data;
+	msg= (MSG_FIXED_HEADER*)data;
 
 	msg->head_flag= 0xFDFE;
 	msg->version= 0x0001;
 	msg->session_id= swap32(last_session_id);
 	last_session_id++;
-	msg->type= UNPASSIVE;
-	msg->data_len= swap16(0x35);
+	msg->type= MSG_TYPE_REQ;
+	msg->sign_flag= 0;
+	msg->data_len= swap16(0x82);
+	
 	pdata= ebm_env_get_sourceid();
-
-
 	memcpy(msg->src_socde, pdata, 12);
 	
 	msg->items=swap16(1);
 	memset(msg->items_arry, 0, 12);
-	msg->business_type= PASSBACK_HEARTTICK;
+	
+	msg->business_type= PASSBACK_HEARTTICK;/*需要更新*/
 	msg->business_len= swap16(0x09);
 	business= (HEART_TICK_CONTENT*)&msg->business_data;
 
@@ -175,16 +179,27 @@ void command_send_hearttick(void)
 	
 	memcpy(business->phyid, pdata, 6);
 
-	unsigned int *p_crc= (unsigned int*) (data+49);
+	pdata= &business->phyid;
+	pdata+=6;
+	pdata[0]= 0x00;
+	pdata[1]= 0x4a;
 
-	unsigned int crc_val= nstar_crc32_ts(data, 49);
+	memset(pdata+2, 0, 0x4a);
+
+	
+
+	unsigned int *p_crc= (unsigned int*) (data+ 126);
+
+	unsigned int crc_val= nstar_crc32_ts(data, 126);
 	*p_crc= swap32(crc_val);
 
-	passback_net_send(data, 53);
-if(0)
+	command_net_send(data, 130);
+
+	printf("send heart: ");
+if(1)
 {
 	int i;
-	for(i=0; i< 53;i++){
+	for(i=0; i< 130;i++){
 		printf("%02X ", data[i]);
 		if(i%16 == 15)
 			printf("\n");
@@ -245,11 +260,20 @@ void command_net_restart(void)
 }
 
 
+
+static volatile unsigned int command_heart_timer;
+#define HEART_TICK_SLEEP(n) app_sleep(&command_heart_timer, n*1000)
+#define HEART_TICK_PEND(n) app_pend_wake(command_heart_timer)
+
 void command_net_loop(void)
 {
 	command_net_machine(&command_net_handle);
 	if(command_net_handle.fd != FD_INVALID){
 		data_process();
+		if(HEART_TICK_PEND()){
+			command_send_hearttick();
+			HEART_TICK_SLEEP(10);
+		}
 	}
 	usleep(10*1000);
 }

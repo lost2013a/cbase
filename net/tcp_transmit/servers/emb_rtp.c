@@ -137,7 +137,7 @@ static int _socket_open_unicast(unsigned int server_ip, unsigned short server_po
 		goto release;
 	}
 	
-#if 1	
+#if 0	
 	/*test "0" byte */
 	server_addr.sin_addr.s_addr	= htonl(server_ip);
 	if (sendto(conn_sock, "0", 0 , 0, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
@@ -204,16 +204,21 @@ static unsigned char _creat_connect_socket(struct bsockt *h_net)
 	_socket_close(&h_net->fd);
 
 	ip = h_net->ipaddr;
-	port = h_net->port;	
+	port = h_net->port ;	
+#if 1
+	ip= h_env->rtp_ip;
+	port = h_env->rtp_port;	
+#endif
+
 	
 	if(ip > 0 && port > 0 ){
 		unsigned int tmpip= htonl(ip);
 		if(IS_MULTICAST(tmpip)){
-			printf("it's a muliticast ipaddr\n");
+			printf("it's a muliticast ipaddr: %x:%d\n", ip, port);
 			fd = _socket_open_multicast(ip, port);
 		}
 		else{
-			printf("it's a unicast ipaddr\n");
+			printf("it's a unicast ipaddr: %x:%d\n", ip, port);
 			fd = _socket_open_unicast(ip, port);
 		}
 		if(fd  != FD_INVALID ){
@@ -250,15 +255,48 @@ static void block_rec(unsigned int fd)
 			else{
 				printf("rlen %d bytes\n", rlen);
 				//handle_ebm_msg(rbuf, rlen);
+				if(0){
+					int i;
+					for(i=0;i<20;i++)
+						printf("%02x ", rbuf[i]);
+					printf("\n");
+			
+				}
 			}
 				
 		}
 	}			
 }
 
+static void new_block_rec(unsigned int fd)
+{
+#define BUFF_SIZE	(1024 * 4)
+
+	unsigned char 	buff[BUFF_SIZE] = {0};
+	ssize_t			   len			   = 0;
+	struct sockaddr_in  source_addr;
+	socklen_t   addr_len    = sizeof(source_addr);
+
+	(void)memset(&source_addr, 0, addr_len);
+	len = recvfrom(fd, buff, BUFF_SIZE, 0,
+				  (struct sockaddr *)&source_addr, &addr_len);
+
+	//printf("r %d , Served client %s:%hu\n",len, inet_ntoa(source_addr.sin_addr),ntohs(source_addr.sin_port));
+	if(0){
+		int i;
+		for(i=0;i<20;i++)
+			printf("%02x ", buff[i]);
+		printf("\n");
+
+	}
+
+}
+
+
+
 static void data_process(void)
 {
-	block_rec(rtp_net_handle.fd);
+	new_block_rec(rtp_net_handle.fd);
 }
 
 

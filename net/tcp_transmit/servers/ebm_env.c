@@ -6,18 +6,18 @@
 static struct ebm_env s_env;
 struct ebm_env *h_env;
 
-static unsigned char test_soucrceid[12]= {0xf6, 0x52, 0x04, 0x25, 0x00, 0x00,\
-	0x00, 0x03, 0x14, 0x01 , 0x02 ,0x02};
+static unsigned char test_soucrceid[12]= {0xf6, 0x52, 0x04, 0x25, 0x10, 0x22,\
+	0x01, 0x03, 0x14, 0x01 , 0x02 ,0x03};
 
-static unsigned char test_phyid[6]= {0x12, 0x34, 0x56, 0x78, 0x90, 0x09};
+static unsigned char test_phyid[6]= {0x12, 0x34, 0x56, 0x78, 0x90, 0x02};
 
 unsigned char ebm_env_init(unsigned char *input)
 {
 static const unsigned int test_ip= 192 << 24 | 168 << 16 | 251 << 8 | 7;
 #define TRANSMIT_PORT	4443
 
-static const unsigned int test_mrtp_ip= 192 << 24 | 168 << 16 | 251 << 8 | 170;
-#define TRANSMIT_MRTP_PORT	1234
+static const unsigned int test_mrtp_ip= 192 << 24 | 168 << 16 | 251 << 8 | 175;
+#define TRANSMIT_MRTP_PORT	24002
 
 static const unsigned int passback_ip= 192 << 24 | 168 << 16 | 251 << 8 | 7;
 #define PASSBACK_PORT	8889
@@ -105,6 +105,9 @@ unsigned char *ebm_env_get_sourceid(void)
 
 unsigned char ebm_env_get_register_1st_time(void)
 {
+	//debug
+		return 2;
+
 	if(h_env->register_1st_time == 0)
 		h_env->register_1st_time= 1;
 	else

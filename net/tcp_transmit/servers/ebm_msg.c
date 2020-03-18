@@ -25,7 +25,7 @@ static char* PARA_CMD_STR[]={
 
 
 
-
+#if 0
 unsigned char visit_type_sq(unsigned char type)
 {
 	unsigned char ret=0;
@@ -49,7 +49,7 @@ unsigned char visit_type_sq(unsigned char type)
 	return ret;
 }
 
-
+#endif
 
 static void vist_buf(const char* head, unsigned char *buf ,unsigned int len)
 {
@@ -111,6 +111,9 @@ static void cmd_play_printf(CMD_PLAY_HEADER *cmd)
 }
 
 #if 1
+
+
+
 static unsigned char parse_url(const char* url, unsigned int *ip, unsigned short *port)
 {
 	unsigned char ret=0, ipstr_len;
@@ -119,6 +122,16 @@ static unsigned char parse_url(const char* url, unsigned int *ip, unsigned short
 	char tmpbuf[50], ipbuf[20];
 	strncpy(tmpbuf, url, 50);
 	tmpbuf[49]=0;
+//	printf("url buf=%s\n", tmpbuf);
+/*url类型1 udp://@24002*/
+	p1= strstr(tmpbuf, "udp://@");
+	if(p1 != NULL){
+		*port= atoi(p1+ strlen("udp://@"));
+		//*ip= h_env->plat_ip;
+		*ip= swap32(h_env->plat_ip);
+		//printf("url port= %d, ip =%x\n", *port, *ip);
+		return 1;
+	}
 	p1= strstr(tmpbuf, "rtp://");
 	if(p1 == NULL){
 		p1= strstr(tmpbuf, "udp://");
@@ -147,6 +160,7 @@ static unsigned char parse_url(const char* url, unsigned int *ip, unsigned short
 
 	*ip= tmp_ip;
 	*port= tmp_port;
+	return 2;
 
 }
 #else
@@ -189,6 +203,10 @@ static unsigned char parse_url(const char* url, unsigned int *ip, unsigned short
 }
 
 #endif
+
+
+
+
 void parse_cmd_play(unsigned char *data)
 {
 	unsigned int ip; unsigned short port;
@@ -231,28 +249,31 @@ static void _parse_parm(struct cmd_param* p_data)
 	{
 		case 1:
 			if(p_data->len == 1)
-				ebm_env_set_vol(p_data->data[0]);
+				ebm_env_set_vol(p_data->data);
 			break;
 		case 2:
 			if(p_data->len == 12)
 				ebm_env_set_ip(p_data->data);	
 			break;	
 		case 3:
-			if(p_data->data[0] == 0x1 && p_data->len == 7){
-				ebm_env_set_backip(&p_data->data[1], (unsigned short)p_data->data[5]);
+			
+			if(p_data->data == 0x1 && p_data->len == 7){
+
+				unsigned short *port= (unsigned short*) (&p_data->data+5);
+				ebm_env_set_backip(&p_data->data +1, *port);
 			}
-			else if(p_data->data[0] == 0x2){
+			else if(p_data->data == 0x2){
 				printf("can't parse domain type ip addr\n");
 			}
 			break;
 		case 4:
 #define PHY_ID_LEN 12
-			if(p_data->data[0] == PHY_ID_LEN )
+			if(p_data->data== PHY_ID_LEN )
 				ebm_env_set_sourceid(p_data->data+1+ PHY_ID_LEN);
 			break;	
 		case 5:
-			if(p_data->data[0] == 0x1 || p_data->data[0] == 0x2)
-				ebm_env_set_trumpet(p_data->data[0]);
+			if(p_data->data== 0x1 || p_data->data == 0x2)
+				ebm_env_set_trumpet(p_data->data);
 			break;
 		case 6:
 			if(p_data->len == 4){
@@ -260,37 +281,46 @@ static void _parse_parm(struct cmd_param* p_data)
 			}
 			break;	
 		case 7:
-			ebm_env_set_back_period(p_data->data[0]);
+			ebm_env_set_back_period(p_data->data);
 			break;
 		default:
 			break;
 	}
-
 	
 
 }
 
 
 static void do_parse_parm(CMD_PARM_HEADER *cmd, unsigned int date_len)
-{	
+{
+#define FILL_LEN (1+2+4)
 	struct cmd_param *parm;
 	unsigned char *p_data, total_nb;
 	unsigned int idx=0;
 	total_nb= cmd->terminal_nb;
-	printf("total_nb=%x\n", total_nb);
-	p_data= &cmd->data;
-	if(date_len > 1)
-		date_len-=1;
+	
+	p_data= &cmd->terminal_nb +1;
+	//printf("total_nb=%x pdata=%x\n", total_nb, *p_data);
+	if(date_len > FILL_LEN)
+		date_len-=FILL_LEN;
+	else{
+		printf("%s parm len not match\n", __func__);
+		return;
+	}
+
 	while(total_nb && date_len >= 3)
 	{
 		parm= (struct cmd_param*)p_data;
-	
-		if(date_len-2 <= parm->len){
-			date_len-= (2+ parm->len);
+
+		//printf("date_len=%d, parm-len=%d\n", date_len, parm->len);
+		if(date_len-2 >= parm->len){
 			_parse_parm(parm);
+			total_nb--;
+			date_len-= (2+ parm->len);
+			p_data+= 2+ parm->len;
 		}
 		else{
-			printf("#%s parm len not match\n", __func__);
+			printf("%s parm len not match\n", __func__);
 			break;
 		}
 
@@ -304,7 +334,6 @@ void parse_cmd_parm(unsigned char *cmd, unsigned int len)
 
 	CMD_PARM_HEADER *head= (CMD_PARM_HEADER*)cmd;
 	//cmd_play_printf(head);
-	cmd_para_printf(head);
 	do_parse_parm(head, len);
 }
 
@@ -313,7 +342,6 @@ void parse_req_sta(unsigned char *cmd, unsigned int len)
 
 	CMD_PARM_HEADER *head= (CMD_PARM_HEADER*)cmd;
 	//cmd_play_printf(head);
-	cmd_para_printf(head);
 	do_parse_parm(head, len);
 }
 
@@ -321,25 +349,25 @@ void parse_req_sta(unsigned char *cmd, unsigned int len)
 void msg_pritf(MSG_FIXED_HEADER *msg)
 {
 
-	unsigned char type= visit_type_sq(msg->business_type);
-	
-	dbg("\n[%04d] #%d[%02d]%s\n", swap32(msg->session_id), msg->type, swap16(msg->business_len), type_str[type]);
-	//vist_buf(msg->resource_code, 12);
-	dbg("items=%d\n", msg->items);
-	//vist_buf(msg->items_arry, 12);
-	switch(type){
-		case 0x1:
-			if(0)
-				break;
-			parse_cmd_play(&msg->business_data);
-			break;
-		case 0x12:
-			//parse_cmd_parm(&msg->business_data);
-			break;
-		default:
-			break;
+//	unsigned char type= visit_type_sq(msg->business_type);
+//	
+//	dbg("\n[%04d] #%d[%02d]%s\n", swap32(msg->session_id), msg->type, swap16(msg->business_len), type_str[type]);
+//	//vist_buf(msg->resource_code, 12);
+//	dbg("items=%d\n", msg->items);
+//	//vist_buf(msg->items_arry, 12);
+//	switch(type){
+//		case 0x1:
+//			if(0)
+//				break;
+//			parse_cmd_play(&msg->business_data);
+//			break;
+//		case 0x12:
+//			//parse_cmd_parm(&msg->business_data);
+//			break;
+//		default:
+//			break;
 
-	}
+//	}
 }
 
 
@@ -363,9 +391,9 @@ void parse_msg(MSG_FIXED_HEADER *msg, unsigned int len)
 		return;
 	}
 
-	if(msg->type != 1){
+	if(msg->type != MSG_TYPE_REQ){
 		dbg("isn't a request frame\n");
-		return;
+		//return;
 	}
 		
 	TYPE_SCODE scode;
@@ -388,13 +416,39 @@ if(0){
 	dbg("sub_type_idx= %x\n", src->sub_type_idx);
 }
 	//vist_buf("items_arry", msg->items_arry, 12);
-	business_type= visit_type_sq(msg->business_type); 
+	//business_type= visit_type_sq(msg->business_type); 
+	business_type= msg->business_type; 
+	dbg("business type =%x\n", business_type);
+
+if(0)
+{
+	int i;
+	unsigned char *data= (unsigned char*)msg;
+	for(i=0; i< len;i++){
+		printf("%02X ", data[i]);
+		if(i%16 == 15)
+			printf("\n");
+	}
+	printf("\n");
+}
+
+/*
+0x01：开始播发
+0x02：停止播发
+0x10：终端心跳
+0x11：终端状态查询
+0x12：终端参数设置
+0x17：应急广播证书授权协议
+*/
+
 	switch(business_type){
 		case 0x1:
 			parse_cmd_play(&msg->business_data);
 			break;
 		case 0x2:
 			parse_cmd_stop(&msg->business_data);
+			break;	
+		case 0x11:
 			break;	
 		case 0x12:
 			
@@ -408,13 +462,28 @@ if(0){
 }
 
 
-void handle_ebm_msg(unsigned char *buf ,unsigned int len)
+void handle_ebm_msg(unsigned char *buf , int len)
 {
 	MSG_FIXED_HEADER *msg;
 	msg= (MSG_FIXED_HEADER *)buf;
 	//msg_pritf(msg);
-	if(len > (sizeof(MSG_FIXED_HEADER)))
-		parse_msg(msg, len);
+
+	//data_len
+	unsigned short msg_len;
+	while(len > sizeof(MSG_FIXED_HEADER))
+	{
+		msg= (MSG_FIXED_HEADER *)buf;
+		msg_len= swap16 (msg->data_len);
+		printf("msg len =%d %d\n", msg_len , len);
+		
+		if( len >= msg_len){
+			parse_msg(msg, msg_len);
+			len-= msg_len;
+			buf+= msg_len;
+		}
+		else
+			break;
+	}
 }
 
 /*

@@ -64,6 +64,7 @@ unsigned char passback_net_send(unsigned char *data, unsigned int len)
 		printf("net wrtie err=%d\n", ret);
 		command_net_restart();
 	}
+	return 0;
 }
 
 
@@ -93,7 +94,7 @@ void func_send_hearttick(void)
 	msg->business_len= swap16(0x09);
 	business= (HEART_TICK_CONTENT*)&msg->business_data;
 
-	business->sta= 1;
+	business->sta= 2;
 	business->register_1st_time= ebm_env_get_register_1st_time();
 	business->phyid_len=6;
 
@@ -111,16 +112,18 @@ void func_send_hearttick(void)
 	*p_crc= swap32(crc_val);
 
 	passback_net_send(data, 53);
-if(0)
-{
-	int i;
-	for(i=0; i< 53;i++){
-		printf("%02X ", data[i]);
-		if(i%16 == 15)
-			printf("\n");
+	
+	if(0)
+	{
+		int i;
+		for(i=0; i< 53;i++){
+			printf("%02X ", data[i]);
+			if(i%16 == 15)
+				printf("\n");
+		}
+		printf("\n");
 	}
-	printf("\n");
-}
+
 }
 
 
@@ -282,7 +285,7 @@ void passback_net_loop(void)
 	if(passback_net_handle.fd != FD_INVALID){
 		data_process();
 		if(HEART_TICK_PEND()){
-			func_send_hearttick();
+			//func_send_hearttick();
 			HEART_TICK_SLEEP(10);
 		}
 	}
