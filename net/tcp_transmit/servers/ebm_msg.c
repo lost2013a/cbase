@@ -127,9 +127,9 @@ static unsigned char parse_url(const char* url, unsigned int *ip, unsigned short
 	p1= strstr(tmpbuf, "udp://@");
 	if(p1 != NULL){
 		*port= atoi(p1+ strlen("udp://@"));
-		//*ip= h_env->plat_ip;
-		*ip= swap32(h_env->plat_ip);
-		//printf("url port= %d, ip =%x\n", *port, *ip);
+		*ip= h_env->plat_ip;
+		//*ip= swap32(h_env->plat_ip);
+		printf("url ip =%x\n, port= %d\n", *ip, *port);
 		return 1;
 	}
 	p1= strstr(tmpbuf, "rtp://");
@@ -209,17 +209,28 @@ static unsigned char parse_url(const char* url, unsigned int *ip, unsigned short
 
 void parse_cmd_play(unsigned char *data)
 {
+	static unsigned int last_ip=0;
+	static unsigned short last_port=0;
 	unsigned int ip; unsigned short port;
 	CMD_PLAY_HEADER *palyer= (CMD_PLAY_HEADER*)data;
 	//cmd_play_printf(palyer);
 	if(palyer->assist_type == VAILD_ASSIST_TYPE){
-		if(0 != parse_url(&palyer->assist_url, &ip,&port))
-			rtp_net_start(ip, port);
+		if(0 != parse_url(&palyer->assist_url, &ip,&port)){
+#if 1			
+			if(last_ip != ip || last_port != port){
+				printf("new mp3 play start\n");
+				rtp_net_start(ip, port);
+			}
+#endif			
+			last_ip= ip;
+			last_port= port;
+		}
 	}
 
 	
 	
 }
+
 
 void parse_cmd_stop(unsigned char *data)
 {

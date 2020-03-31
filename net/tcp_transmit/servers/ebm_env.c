@@ -16,7 +16,7 @@ unsigned char ebm_env_init(unsigned char *input)
 static const unsigned int test_ip= 192 << 24 | 168 << 16 | 251 << 8 | 7;
 #define TRANSMIT_PORT	4443
 
-static const unsigned int test_mrtp_ip= 192 << 24 | 168 << 16 | 251 << 8 | 175;
+static const unsigned int test_mrtp_ip= 192 << 24 | 168 << 16 | 251 << 8 | 7;
 #define TRANSMIT_MRTP_PORT	24002
 
 static const unsigned int passback_ip= 192 << 24 | 168 << 16 | 251 << 8 | 7;

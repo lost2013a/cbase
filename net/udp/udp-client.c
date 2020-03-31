@@ -11,14 +11,14 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define SERVER_IP	"192.168.251.170"
-#define SERVER_PORT	((uint16_t)6789)
+#define SERVER_IP	"192.168.251.182"
+#define SERVER_PORT	((uint16_t)24001)
 #define BUFF_SIZE	(1024 * 4)
 
 int main(int argc, char *argv[])
 {
     int conn_sock;
-    char test_str[BUFF_SIZE]	= "udp echo test";
+    char test_str[BUFF_SIZE]	= {0xbb,1,2,3,5};
     struct sockaddr_in	server_addr;
     socklen_t	addr_len	= sizeof(server_addr);
     fd_set	sockset;
@@ -31,23 +31,39 @@ int main(int argc, char *argv[])
         perror("socket(2) error");
         goto create_err;
     }
-
+	unsigned short port= SERVER_PORT;
+	 if (argc != 2) {
+		
+       
+    } else {
+		port= atoi(argv[1]);
+  
+    }
+	
     (void)memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family		= AF_INET;
-    server_addr.sin_port		= htons(SERVER_PORT);
+    server_addr.sin_port		= htons(port);
 
 	 if (bind(conn_sock, (struct sockaddr *)&server_addr, sizeof(server_addr))) {
         perror("bind(2) error");
         goto err;
     }
-	 
-    if (argc != 3) {
-        server_addr.sin_addr.s_addr	= inet_addr(SERVER_IP);
-    } else {
-        server_addr.sin_addr.s_addr	= inet_addr(argv[1]);
-        snprintf(test_str, BUFF_SIZE, "%s", argv[2]);
-    }
-
+	 server_addr.sin_addr.s_addr	= inet_addr(SERVER_IP); 
+   
+	 printf("port =%d\n", port);
+#if 1
+	while(1)
+	{
+		
+		if (sendto(conn_sock, test_str, 400, 0,
+				   (struct sockaddr *)&server_addr, addr_len) < 0) {
+			perror("send data error");
+			goto err;
+		}
+		test_str[5]++;
+		usleep(100);
+	}
+#endif
     if (sendto(conn_sock, test_str, strlen(test_str), 0,
                (struct sockaddr *)&server_addr, addr_len) < 0) {
         perror("send data error");

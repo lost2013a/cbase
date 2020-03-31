@@ -12,7 +12,7 @@
 #include <stdint.h>
 #include <signal.h>
 
-#define SERVER_PORT	((uint16_t)7007)
+#define SERVER_PORT	((uint16_t)8008)
 #define BUFF_SIZE	(1024 * 4)
 
 int udp_echo(int client_fd)
@@ -47,6 +47,36 @@ int udp_echo(int client_fd)
     return EXIT_FAILURE;
 }
 
+
+int udp_send(int client_fd)
+{
+    char				buff[BUFF_SIZE]	= {1,2,3,4};
+    ssize_t				len				= 0;
+	ssize_t				sendlen			= 100;
+    struct sockaddr_in	source_addr;
+    socklen_t	addr_len	= sizeof(source_addr);
+
+    (void)memset(&source_addr, 0, addr_len);
+  
+	
+    len	= sendto(client_fd, buff, sendlen, 0,
+                 (struct sockaddr *)&source_addr, addr_len);
+	buff[4]++;			 
+    if (len < 0) {
+       // perror("sendto(2) error");
+      //  goto err;
+    }
+	#if 0
+    printf("Served client %s:%hu\n",
+           inet_ntoa(source_addr.sin_addr),
+           ntohs(source_addr.sin_port));
+    fflush(stdout);
+	#endif
+    return EXIT_SUCCESS;
+ err:
+    return EXIT_FAILURE;
+}
+
 int main(void)
 {
     int server_sock;
@@ -70,9 +100,10 @@ int main(void)
     }
 
     while (true) {
-        if (udp_echo(server_sock) != EXIT_SUCCESS) {
+        if (udp_send(server_sock) != EXIT_SUCCESS) {
             goto err;
         }
+		usleep(10*1000);
     }
 
     perror("exit with:");

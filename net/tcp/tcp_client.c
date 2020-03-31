@@ -10,8 +10,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define SERVER_IP	"192.168.251.128"
-#define SERVER_PORT	((uint16_t)2010)
+#define SERVER_IP	"192.168.251.6"
+#define SERVER_PORT	((uint16_t)2011)
 #define BUFF_SIZE	(1024 * 4)
 
 int main(int argc, char *argv[])

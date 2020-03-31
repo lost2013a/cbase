@@ -6,7 +6,7 @@
 
 #include "serial.h"
 
-#define DEV_NAME  "/dev/ttyUSB0"
+#define DEV_NAME  "/dev/ttyS1"
 
 
 int main (int argc, char *argv[])
@@ -45,11 +45,11 @@ int main (int argc, char *argv[])
 			return -1;
 		}
 		
-//		len = read(fd, buf, sizeof(buf));
-//        if (len < 0) {
-//            printf("read error \n");
-//            return -1;
-//        }
+		len = read(fd, buf, sizeof(buf));
+        if (len < 0) {
+            printf("read error \n");
+            return -1;
+        }
 		usleep(10*1000);
 	}
 	return(0);

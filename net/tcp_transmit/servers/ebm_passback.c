@@ -209,7 +209,7 @@ static void block_rec(unsigned int fd)
 		if(FD_ISSET( fd, &rfd_set )){
 			int rlen = read(fd, rbuf, 1460);
 			if(rlen <= 0){
-				printf("socket unvaild\n");
+				printf("passback socket unvaild\n");
 				command_net_restart();
 			}
 			else{
@@ -285,7 +285,7 @@ void passback_net_loop(void)
 	if(passback_net_handle.fd != FD_INVALID){
 		data_process();
 		if(HEART_TICK_PEND()){
-			//func_send_hearttick();
+			func_send_hearttick();
 			HEART_TICK_SLEEP(10);
 		}
 	}

@@ -58,7 +58,7 @@ static int _socket_open(unsigned int ip, unsigned short port)
 }
 
 
-static unsigned char _creat_connect_socket(struct bsockt *h_net)
+static unsigned char command_creat_connect_socket(struct bsockt *h_net)
 {
 	int fd=0;
 	unsigned int ip;
@@ -69,6 +69,7 @@ static unsigned char _creat_connect_socket(struct bsockt *h_net)
 	ip = h_net->ipaddr;
 	port = h_net->port;	
 
+	printf("command ip:%x port:%d\n", ip, port);
 	if(ip > 0 && port > 0 ){
 		fd = _socket_open(ip, port);
 		if(fd  != FD_INVALID ){
@@ -93,7 +94,7 @@ unsigned char command_net_send(unsigned char *data, unsigned int len)
 
 
 
-static void block_rec(unsigned int fd)
+static void command_block_rec(unsigned int fd)
 {
 	static unsigned char rbuf[1460];
 	int	nsel;
@@ -109,7 +110,7 @@ static void block_rec(unsigned int fd)
 		if(FD_ISSET( fd, &rfd_set )){
 			int rlen = read(fd, rbuf, 1460);
 			if(rlen <= 0){
-				printf("socket unvaild\n");
+				printf("command socket unvaild\n");
 				command_net_restart();
 			}
 			else{
@@ -121,9 +122,9 @@ static void block_rec(unsigned int fd)
 	}			
 }
 
-static void data_process(void)
+static void command_data_process(void)
 {
-	block_rec(command_net_handle.fd);
+	command_block_rec(command_net_handle.fd);
 }
 
 /*
@@ -218,7 +219,7 @@ static void command_net_machine(void *parm)
 		_socket_close(&h_net->fd);
 	}
 	else if(h_net->isNeedCreat == 1){
-		if(1 == _creat_connect_socket(h_net)){
+		if(1 == command_creat_connect_socket(h_net)){
 			h_net->isNeedCreat = 0;
 		}
 		else{
@@ -228,7 +229,7 @@ static void command_net_machine(void *parm)
 	}
 	else if(h_net->isNeedCreat == 2){
 		if(h_net->lastTimeSec + 10 < app_get_systime()){
-			if(1 == _creat_connect_socket(h_net)){
+			if(1 == command_creat_connect_socket(h_net)){
 				h_net->isNeedCreat = 0;
 			}
 			else{
@@ -269,7 +270,7 @@ void command_net_loop(void)
 {
 	command_net_machine(&command_net_handle);
 	if(command_net_handle.fd != FD_INVALID){
-		data_process();
+		command_data_process();
 		if(HEART_TICK_PEND()){
 			command_send_hearttick();
 			HEART_TICK_SLEEP(10);

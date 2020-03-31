@@ -100,8 +100,6 @@ void _getLocalIpAddr(in_addr_t *addr, char* ifa_name)
 #define IS_MULTICAST(a)    ((((unsigned long)(a)) & 0x000000F0) == 0x000000E0)
 
 
-static volatile unsigned short port;
-static volatile unsigned int ipaddr;
 static struct bsockt rtp_net_handle = {FD_INVALID,0,0};
 
 
@@ -137,7 +135,7 @@ static int _socket_open_unicast(unsigned int server_ip, unsigned short server_po
 		goto release;
 	}
 	
-#if 0	
+#if 1	
 	/*test "0" byte */
 	server_addr.sin_addr.s_addr	= htonl(server_ip);
 	if (sendto(conn_sock, "0", 0 , 0, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
@@ -174,7 +172,7 @@ static int _socket_open_multicast(unsigned int macst_ip, unsigned short mcast_po
 		goto release;
 	}
 	mreq.imr_multiaddr.s_addr = htonl(macst_ip);
-#if 1	/*嵌入式*/
+#if 0	/*嵌入式*/
 #define PLAT_NET_IF_NAME "eth0"
 	_getLocalIpAddr(&(mreq.imr_interface.s_addr), PLAT_NET_IF_NAME);
 #else
@@ -205,10 +203,7 @@ static unsigned char _creat_connect_socket(struct bsockt *h_net)
 
 	ip = h_net->ipaddr;
 	port = h_net->port ;	
-#if 1
-	ip= h_env->rtp_ip;
-	port = h_env->rtp_port;	
-#endif
+
 
 	
 	if(ip > 0 && port > 0 ){
@@ -247,26 +242,38 @@ static void block_rec(unsigned int fd)
 	if ( nsel > 0 )
 	{
 		if(FD_ISSET( fd, &rfd_set )){
+#if 1
+
+			memset(rbuf, 0 , 20);
+#endif
+		
 			int rlen = read(fd, rbuf, 1460);
-			if(rlen <= 0){
-				printf("socket unvaild\n");
+			if(rlen < 0){
+				printf("rtp socket unvaild\n");
 				command_net_restart();
 			}
 			else{
-				printf("rlen %d bytes\n", rlen);
-				//handle_ebm_msg(rbuf, rlen);
-				if(0){
-					int i;
-					for(i=0;i<20;i++)
-						printf("%02x ", rbuf[i]);
-					printf("\n");
-			
+
+				static unsigned short last_sn=0;
+				unsigned short new_sn;
+				new_sn= (rbuf[2] << 8) | rbuf[3];
+
+				if(new_sn == last_sn)
+					printf("= sn %d\n", last_sn);
+				if(rlen == 400 && new_sn != last_sn){
+					plat_mp3_play(&rbuf[16], rlen-16);	
+					if(new_sn != last_sn+1)
+						printf("! sn= %03d / %03d\n", new_sn, last_sn);
+					last_sn= new_sn;
 				}
+				
+				
 			}
 				
 		}
 	}			
 }
+
 
 static void new_block_rec(unsigned int fd)
 {
@@ -281,7 +288,7 @@ static void new_block_rec(unsigned int fd)
 	len = recvfrom(fd, buff, BUFF_SIZE, 0,
 				  (struct sockaddr *)&source_addr, &addr_len);
 
-	//printf("r %d , Served client %s:%hu\n",len, inet_ntoa(source_addr.sin_addr),ntohs(source_addr.sin_port));
+	printf("r %d , Served client %s:%hu\n",len, inet_ntoa(source_addr.sin_addr),ntohs(source_addr.sin_port));
 	if(0){
 		int i;
 		for(i=0;i<20;i++)
@@ -296,7 +303,7 @@ static void new_block_rec(unsigned int fd)
 
 static void data_process(void)
 {
-	new_block_rec(rtp_net_handle.fd);
+	block_rec(rtp_net_handle.fd);
 }
 
 
