@@ -128,7 +128,7 @@ static unsigned char file_rate=0;
 static void file_rate_add(void)
 {
 	if(file_rate < 100 && file_rate >= 10)
-		file_rate++;
+		file_rate+=20;
 }
 static void file_rate_init(void)
 {

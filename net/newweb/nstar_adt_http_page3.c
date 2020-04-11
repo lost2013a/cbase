@@ -11,7 +11,10 @@
 
 #define C_PAGE_NAME HTML_PAGE3_NAME
 
-#define C_PAGE_BODY "<body>"\
+#define C_PAGE_BODY "<style>"\
+"label1{display: inline-block;color: #000000;}"\
+"</style>"\
+"<body>"\
 "<ul>"\
 "<li><a href='"HTML_PAGE1_NAME".html'>参数状态</a></li>"\
 "<li><a href='"HTML_PAGE2_NAME".html'>网络设置</a></li>"\
@@ -23,7 +26,12 @@
 "<h3> 音频设置</h3>"\
 "<div style='background:snow; display:block; padding:10px 10%;'>"\
 "<form id='frmSetting' method='POST' action='"C_PAGE_NAME".cgi'>"\
-"<p><label>指令PID:</label><input type='text' size='16' id='"JS_P1_E1"' name='"JS_P1_E1"'/></p>"\
+"<p>\
+<label>节目号:</label>\
+<label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='"JS_P1_E1"' name='"JS_P1_E1"'/>\
+<label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='"JS_P1_E1"' name='"JS_P1_E1"'/>\
+<label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='"JS_P1_E1"' name='"JS_P1_E1"'/>\
+</p>"\
 "<p><label>节目号:</label><input type='text' size='16' id='"JS_P1_E2"' name='"JS_P1_E2"'/></p>"\
 "<p><label>MP3音量:</label><input type='text' size='16' id='"JS_P1_E3"' name='"JS_P1_E3"'/></p>"\
 "<p><label>编码比特率:</label><input type='text' size='16' id='"JS_P1_E4"' name='"JS_P1_E4"'/></p>"\
