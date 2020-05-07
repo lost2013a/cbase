@@ -43,6 +43,10 @@ void parm5_rpos_cgi(char *url);
 
 
 
+#define HTML_REBOOT_CGI_NAME "sysreboot"
+void rpos_reboot_cgi(void);
+
+
 #endif
 
 

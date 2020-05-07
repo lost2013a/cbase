@@ -137,7 +137,6 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 		verify_time_out();			
 	else if(strcmp(req_name,""HTML_PAGE1_NAME".cgi") == 0)
 		;						  	
-		//parm1_rpos_cgi(uri);
 	else if(strcmp(req_name,""HTML_PAGE2_NAME".cgi")==0)							  	
 		parm2_rpos_cgi(uri);
 	else if(strcmp(req_name,""HTML_PAGE3_NAME".cgi")==0)							  	
@@ -146,6 +145,8 @@ static void _repos_method_post(st_http_request     *http_request, unsigned char*
 		parm4_rpos_cgi(uri);
 	else if(strcmp(req_name,""HTML_PAGE5_NAME".cgi")==0)							  	
 		parm5_rpos_cgi(uri);
+	else if(strcmp(req_name,""HTML_REBOOT_CGI_NAME".cgi")==0)						  	
+		rpos_reboot_cgi();
 
 }
 

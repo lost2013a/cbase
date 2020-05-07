@@ -38,6 +38,7 @@
 "<p><label>编码采样率:</label><input type='text' size='16' id='"JS_P1_E5"' name='"JS_P1_E5"'/></p>"\
 "<p><label>编码增益:</label><input type='text' size='16' id='"JS_P1_E6"' name='"JS_P1_E6"'/></p>"\
 "<p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/>"\
+"<input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p>"\
 "</form>"\
 "</div>"\
 "</body>"\

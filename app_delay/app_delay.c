@@ -7,23 +7,25 @@
 volatile unsigned int tcnt=0;
 
 
-unsigned int app_get_systime(void)
-{	
-	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	return (unsigned int)(tv.tv_sec*1000 + tv.tv_usec/1000);
+static unsigned int ticktime_get(void)
+{
+#define TICKS_PER_SEC 10
+#include<sys/times.h>
+	unsigned int ticks = (unsigned int)times( NULL);
+	return (unsigned int)ticks*TICKS_PER_SEC;
 }
 
+unsigned int app_get_systime(void)
+{
+	return ticktime_get();
+}
 
 #define getNowTime  app_get_systime
 #define K_MS 		1u
 
 void app_sleep(volatile unsigned int *ptcnt, unsigned int u_ms)
 {
-	if(*ptcnt< getNowTime()+ u_ms/K_MS)
-	{
-		*ptcnt= getNowTime()+ u_ms/K_MS;
-	}
+	*ptcnt= getNowTime()+ u_ms/K_MS;
 }
 
 unsigned char app_pend_wake(unsigned int tcnt)

@@ -158,6 +158,13 @@ void parm2_rpos_cgi(char *url)
 	http_sprintf_send();
 }
 
+void rpos_reboot_cgi(void)
+{ 
+	http_sprintf_init();
+	http_sprintf(HTML_CGI_JUMP, LOCAL_IP, C_PAGE_NAME);
+	http_sprintf_send();
+	printf("reboot \n");
+}
 
 
 

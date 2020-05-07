@@ -26,8 +26,11 @@ extern char *nstar_web_rx_buf;
 #define REQUST_JSCRIPT_ELEMENT_STR		"if ($('%s')) $('%s').value = o.%s;"
 #define REQUST_JSCRIPT_ELEMENT(element) http_sprintf(REQUST_JSCRIPT_ELEMENT_STR, element, element, element);
 
-#define REQUST_JSCRIPT_END_STR "};function commit(){document.getElementById('frmSetting').submit();}</script>"\
+
+#define REQUST_JSCRIPT_END_STR "};function commit(){document.getElementById('frmSetting').submit();}"\
+"function savereboot(){document.getElementById('frmSetting').action='"HTML_REBOOT_CGI_NAME".cgi'; document.getElementById('frmSetting').submit(); }</script>"\
 "<script type='text/javascript' src='%s.js'> </script>"\
+
 
 #define REQUST_JSCRIPT_END(name) 	http_sprintf(REQUST_JSCRIPT_END_STR, name);
 
