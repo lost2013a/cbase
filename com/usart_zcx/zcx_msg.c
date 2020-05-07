@@ -5,6 +5,7 @@
 #include "zcx_msg.h"
 
 extern void fm_uart_send(unsigned char *data, unsigned int len);
+extern void arrry_print(unsigned char *data, unsigned int len);
 
 #define zcx_dbg printf
 #define _fm_cmm_write 
@@ -87,6 +88,7 @@ void _zcx_data_parse(unsigned char data)
 			break;
 	}
 }
+
 
 static unsigned short parm_parse(unsigned char*p_data, unsigned short data_len)
 {
@@ -215,8 +217,6 @@ static void zxc_send_parm_phyid(void)
 	send_fram(buf, msg_len);
 }
 
-
-
 static void zxc_send_parm_fre(void)
 {
 	const unsigned char fre[3]={0,9,0x30};
@@ -232,8 +232,6 @@ static void zxc_send_parm_fre(void)
 	memcpy(&msg->data, fre, parm_len);
 	send_fram(buf, msg_len);
 }
-
-
 
 
 static void zxc_send_parm_logid(void)
@@ -254,7 +252,6 @@ static void zxc_send_parm_logid(void)
 	send_fram(buf, msg_len);
 }
 
-
 static void zxc_send_parm_vol(void)
 {
 	const unsigned char vol=88;
@@ -270,7 +267,6 @@ static void zxc_send_parm_vol(void)
 	memcpy(&msg->data, &vol, parm_len);
 	send_fram(buf, msg_len);
 }
-
 
 static void zxc_send_get_parm(void)
 {
@@ -293,9 +289,7 @@ void _fm_zcx_init()
 {
 	gp_zcxCmd = (struct _zcx_cmd*)malloc(sizeof(struct _zcx_cmd));
 	gp_zcxCmd->p_dta = malloc(_ZCX_DTA_MAX_LEN+1);
-	gp_zcxCmd->openStatus = _ZCX_OPEN_STATUS_GET_PARAM;
-	zcx_dbg(" _fm_zcx_init ok\n");
-
+	
 	zxc_send_parm_fre();
 	usleep(100*1000);
 	zxc_send_parm_logid();
@@ -303,6 +297,8 @@ void _fm_zcx_init()
 	zxc_send_parm_phyid();
 	usleep(100*1000);
 	zxc_send_get_parm();
+	
+	zcx_dbg(" _fm_zcx_init ok\n");
 }
 
 

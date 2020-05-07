@@ -10,17 +10,6 @@
 ( (value & 0x00FFU) << 8 | (value & 0xFF00U) >> 8 )
 
 
-#define  _BUF_LEN 120
-
-
-//NSTAR_FM_SET_GET_FRE
-//NSTAR_FM_SET_GET_LOGIC
-//NSTAR_FM_SET_GET_PHY
-//NSTAR_FM_SET_GET_VOLUME
-//NSTAR_FM_SET_GET_STRENGTH
-
-
-
 enum{
 	ANALOG_CMD_VOLUME = 0X03,
 	ANALOG_CMD_FRE=0X04,
@@ -33,11 +22,6 @@ enum{
 	ANALOG_CMD_SIGNAL_STRENGTH = 0XB3,
 };
 	
-enum{
-	BROADCAST_CONTRIL_OTHER_IP = 4,
-	BROADCAST_CONTRIL_OTHER_URL = 5,
-	BROADCAST_CONTRIL_OTHER_AISLE_SELECT = 18,
-};
 
 enum{
 	ZCX_SET_GET_PARM = 0xb0,
@@ -47,12 +31,6 @@ enum{
 	ZCX_SET_PARM_VOL = 0xb8,
 };
 
-struct zcx_msg_head{
-	unsigned char head;
-	unsigned short len;
-	unsigned char type;
-	unsigned char data;
-}__PACKED__;
 
 struct zcx_parm_one{
 	unsigned char head;
@@ -63,17 +41,6 @@ struct zcx_parm_one{
 }__PACKED__;
 
 
-
-#define ZXC_MSG_HEAD 0xA5
-#define ZXC_MSG_CRC_LEN 2
-#define ZXC_MSG_PACK_LEN 5
-
-#define PHYID_LEN 6
-#define FRE_LEN 3
-#define LOGIC_LEN 12
-#define VOL_LEN 1
-
-
 struct parm_head{
 	unsigned char type;
 	unsigned short parm_len;
@@ -81,6 +48,8 @@ struct parm_head{
 }__PACKED__;
 
 
+#define ZXC_MSG_HEAD 0xA5
+#define ZXC_MSG_PACK_LEN 5
 #define ZXC_PARM_HEAD_LEN 4
 #define ZXC_PARM_PACK_LEN 3
 
@@ -88,29 +57,17 @@ struct parm_head{
 //串口协议 
 struct _zcx_cmd{
 #define _ZCX_DTA_MAX_LEN	(255)
-#define _ZCX_OPEN_STATUS_CLOSE 	0
-#define _ZCX_OPEN_STATUS_OPEN  	1
-#define _ZCX_OPEN_STATUS_GET_PARAM	(2)
-#define _ZCX_OPEN_STATUS_WAITING	(3)
 
-	unsigned char openStatus;
-	unsigned char step;
-	unsigned char strength;
-	unsigned char volume;
-	unsigned char logic[6];
-	unsigned char phyaddr[6];
+	unsigned char step;;
 	unsigned short allLen;
 	unsigned short recvLen;
-	unsigned short fre;
-	unsigned int recvLastOpenSec;
 	unsigned char*p_dta;
 
 };
 
-extern void arrry_print(unsigned char *data, unsigned int len);
+
 
 void _fm_zcx_init();
-
 void _zcx_data_parse(unsigned char data);
 
 
