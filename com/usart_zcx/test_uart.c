@@ -31,13 +31,19 @@ void fm_uart_send(unsigned char *data, unsigned int len)
 		printf("%s write err\n", DEV_NAME);
 }
 
+int fm_uart_read(unsigned char *data, unsigned int len)
+{
+	int rlen= read(fm_uart_fd, data, len);
+	if(rlen < 0)
+		printf("%s read err\n", DEV_NAME);
+	return  rlen;
+	
+}
+
+
 int main (int argc, char *argv[])
 {
-	int fd;
-	int len, i,ret;
-	char buf[] = "hello ZLG!";
-	int bound=DEFAULT_USART_BOUND;
-
+	int fd,ret;
 	
 	printf("start uart test\n");
 	fd = open(DEV_NAME, O_RDWR | O_NOCTTY);
@@ -47,7 +53,7 @@ int main (int argc, char *argv[])
 		goto err;
 	}
 
-	ret = set_termios(fd, bound, 8, '1', 'N', UART_VTIME);	
+	ret = set_termios(fd, DEFAULT_USART_BOUND, 8, '1', 'N', UART_VTIME);	
 
 	if(ret < 0) {
 		printf("set %s faild\n", DEV_NAME);
@@ -59,20 +65,7 @@ int main (int argc, char *argv[])
 	printf("%s set ok\n", DEV_NAME);
 	
 	_fm_zcx_init();
-	while(1)
-	{	
-		len = read(fd, buf, sizeof(buf));
-		if (len < 0) {
-			printf("read error \n");
-			break;
-		}
-		else if(len >0){
-			for(i = 0; i<len; i++){
-				_zcx_data_parse(buf[i]);
-			}
-		}
-		usleep(10*1000);
-	}
+	zxc_fm_run_sevo();
 
 release:
 	close(fd);

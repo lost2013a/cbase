@@ -22,15 +22,22 @@ enum{
 	ANALOG_CMD_SIGNAL_STRENGTH = 0XB3,
 };
 	
+enum flag_bit_enum{
+	FLAG_BIT_FRE=0x0,
+	FLAG_BIT_VOL,	
+	FLAG_BIT_LOGID,
+	FLAG_BIT_PHYID,
+	FLAG_BIT_GETPARM,
+	FLAG_BIT_MAX,
+};
 
 enum{
 	ZCX_SET_GET_PARM = 0xb0,
-	ZCX_SET_PARM_PHYID = 0xb7,
 	ZCX_SET_PARM_FRI = 0xb5,
 	ZCX_SET_PARM_LOGID = 0xb6,
+	ZCX_SET_PARM_PHYID = 0xb7,
 	ZCX_SET_PARM_VOL = 0xb8,
 };
-
 
 struct zcx_parm_one{
 	unsigned char head;
@@ -40,13 +47,11 @@ struct zcx_parm_one{
 	unsigned char data;
 }__PACKED__;
 
-
 struct parm_head{
 	unsigned char type;
 	unsigned short parm_len;
 	unsigned char data;
 }__PACKED__;
-
 
 #define ZXC_MSG_HEAD 0xA5
 #define ZXC_MSG_PACK_LEN 5
@@ -67,8 +72,10 @@ struct _zcx_cmd{
 
 
 
+
 void _fm_zcx_init();
 void _zcx_data_parse(unsigned char data);
+void zxc_fm_run_sevo(void);
 
 
 

@@ -5,6 +5,7 @@
 #include "zcx_msg.h"
 
 extern void fm_uart_send(unsigned char *data, unsigned int len);
+extern int fm_uart_read(unsigned char *data, unsigned int len);
 extern void arrry_print(unsigned char *data, unsigned int len);
 
 #define zcx_dbg printf
@@ -198,8 +199,6 @@ static void send_fram(unsigned char *data, unsigned short len)
 	fm_uart_send(data, len);
 }
 
-
-
 static void zxc_send_parm_phyid(void)
 {
 	const unsigned char phyid[6]={0x90,1,2,3,4,5};
@@ -285,20 +284,78 @@ static void zxc_send_get_parm(void)
 }
 
 
+static unsigned int flag_send_parm=0;
+void flag_set_bit(unsigned char bit)
+{
+	if(bit < 32){
+		flag_send_parm|= 0x1 << bit;
+	}	
+}
+void flag_clear_bit(unsigned char bit)
+{
+	if(bit < 32){
+		flag_send_parm&= ~(0x1 << bit);
+	}	
+}
+
 void _fm_zcx_init()
 {
 	gp_zcxCmd = (struct _zcx_cmd*)malloc(sizeof(struct _zcx_cmd));
 	gp_zcxCmd->p_dta = malloc(_ZCX_DTA_MAX_LEN+1);
 	
-	zxc_send_parm_fre();
-	usleep(100*1000);
-	zxc_send_parm_logid();
-	usleep(100*1000);
-	zxc_send_parm_phyid();
-	usleep(100*1000);
-	zxc_send_get_parm();
+	flag_set_bit(FLAG_BIT_FRE);
+	flag_set_bit(FLAG_BIT_LOGID);
+	flag_set_bit(FLAG_BIT_PHYID);
 	
 	zcx_dbg(" _fm_zcx_init ok\n");
 }
+
+
+void fm_send_handle(void)
+{
+	void(*func_arry[])(void)={
+		zxc_send_parm_fre,
+		zxc_send_parm_vol,
+		zxc_send_parm_logid, 	
+		zxc_send_parm_phyid,
+		NULL,
+	};	
+
+	if(flag_send_parm != 0){
+		unsigned char i;
+		for(i=0; i< FLAG_BIT_MAX; i++){
+			if(flag_send_parm& (0x1 << i)){
+				
+				break;
+			}
+		}
+
+		if(i < FLAG_BIT_MAX){
+			printf("flag set %d\n", i);
+			if(func_arry[i] != NULL)
+				func_arry[i]();
+			flag_clear_bit(i);	
+		}
+	}
+}
+
+
+void zxc_fm_run_sevo(void)
+{
+	unsigned char buf[128];
+	int len, i;
+	while(1)
+	{
+		len= fm_uart_read(buf, 128);
+		if(len > 0){
+			for(i = 0; i<len; i++){
+				_zcx_data_parse(buf[i]);
+			}
+		}
+		fm_send_handle();
+		usleep(10*1000);
+	}
+}
+
 
 
