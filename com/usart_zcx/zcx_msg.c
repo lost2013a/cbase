@@ -49,17 +49,6 @@ static unsigned int ticktime_getsec(void)
 
 
 
-
-static void _zcx_gprs_ip_parse(unsigned char *pBuf,unsigned short length)
-{
-	
-}
-static void _zcx_gprs_url_parse(unsigned char *pBuf,unsigned short length)
-{
-	
-}
-
-
 static void _zcx_bc_control_others(unsigned char*p_data,unsigned short len)
 {
 	switch(p_data[0]<<8 | p_data[1])
@@ -96,26 +85,6 @@ static void _zcx_startup_get_param(void)
 
 	_zcx_cmd_get_param_buf_get(ANALOG_CMD_LOGIC_ADDR);
 
-}
-static void _zcx_bc_open_status_check(void)
-{
-
-	switch(gp_zcxCmd->openStatus){
-		case _ZCX_OPEN_STATUS_OPEN:
-			if( gp_zcxCmd->recvLastOpenSec + 16 < ticktime_getsec()){
-				zcx_dbg("zcx timeout close!\n");
-				_zcx_play_close();
-			}
-			break;
-		case _ZCX_OPEN_STATUS_GET_PARAM:
-			_zcx_startup_get_param();
-			break;
-		case _ZCX_OPEN_STATUS_WAITING:
-			if( gp_zcxCmd->recvLastOpenSec + 8 < ticktime_getsec()){
-				gp_zcxCmd->openStatus = _ZCX_OPEN_STATUS_GET_PARAM;
-			}
-			break;
-	}
 }
 
 
@@ -210,17 +179,22 @@ static void    ___zcx_data_parse(unsigned char*p_data,unsigned short len)
 }
 
 
-static void zcx_msg_parse(unsigned char*p_data, unsigned short data_len)
+static unsigned short zcx_parm_parse(unsigned char*p_data, unsigned short data_len)
 {
-	unsigned short len;
-	struct zcx_msg_head *msg= (struct zcx_msg_head*)p_data;
-	len= swap16(msg->len);
-//	if(data_len != len + ZXC_MSG_PACK_LEN){
-//		printf("zxc msg err: msg len can't match %d /%d \n", data_len, len + ZXC_MSG_PACK_LEN);
-//		return;
-//	}
-//	printf("msg type:0x%02x, len:%02d\n", msg->type, len);
-	switch(msg->type){
+	
+	struct parm_head *parm= (struct parm_head*)p_data;
+	unsigned short parm_len= swap16(parm->parm_len);
+	if(parm_len+3 > data_len){
+		printf("parm len too long %d / %d\n", parm_len+3, data_len);
+		return 0;
+	}
+	else if(parm_len == 0){
+		printf("parm len is 0\n");
+		//return 0;
+	}
+
+	printf("#%02x %d\n", parm->type, parm_len);
+	switch(parm->type){
 		case ANALOG_CMD_STATUS:
 			
 			break;
@@ -228,13 +202,21 @@ static void zcx_msg_parse(unsigned char*p_data, unsigned short data_len)
 						
 			break;
 		case ANALOG_CMD_VOLUME:
-			
+			if(parm->len == 1){
+				printf("ANALOG_CMD_VOLUME: %d\n", parm->data);
+			}
 			break;				
 		case ANALOG_CMD_FRE:
 			
 			break;
 		case ANALOG_CMD_LOGIC_ADDR:
-            
+            if(parm->len == 12){
+				unsigned char *id= &parm->data;
+				for(int i=0; i< 12; i++){
+
+				}
+				printf("ANALOG_CMD_VOLUME: %d\n", parm->data);
+			}
 			break;
 		case ANALOG_CMD_MAC_ADDR:
 		
@@ -250,8 +232,41 @@ static void zcx_msg_parse(unsigned char*p_data, unsigned short data_len)
 		default:
 			break;
 	}
+	return parm_len+3;
 }
 
+#if 0
+static void    ___zcx_data_parse(nstar_u8*p_data,nstar_u16 len)
+{
+	nstar_u8 i,cnt;
+	nstar_u8 packLen;
+	ANALOG_DEBUG_STR("zcx dta",p_data,len);
+	for(i=0,cnt= 0;i<len && cnt < 20 ; i += packLen,cnt++){//加CNT避免参数长度出错进入4死循环
+		 packLen = zcx_parm_parse(p_data+i);
+	}
+}
+#endif
+
+
+static void zcx_msg_parse(unsigned char*p_data, unsigned short data_len)
+{
+	unsigned short parm_len;
+	while(data_len >= ZXC_PARM_HEAD_LEN){
+		parm_len= zcx_parm_parse(p_data, data_len);
+		//printf("parm len %d\n", parm_len);
+		if(0 != parm_len){
+			p_data+= parm_len;
+			data_len-= parm_len;
+		}
+		else{
+			break;
+		}
+	}
+
+	if(data_len!=0){
+		printf("parm len is't 0 after parse %d\n", data_len);
+	}
+}
 
 void _zcx_data_parse(unsigned char data)
 {
@@ -271,7 +286,7 @@ void _zcx_data_parse(unsigned char data)
 		case 2:
 			gp_zcxCmd->allLen |= data;
 			gp_zcxCmd->allLen += ZXC_MSG_PACK_LEN;
-			if(gp_zcxCmd->allLen <= _ZCX_DTA_MAX_LEN || gp_zcxCmd->allLen < 5){			
+			if(gp_zcxCmd->allLen <= _ZCX_DTA_MAX_LEN || gp_zcxCmd->allLen > 5){			
 				_STEP_ADD_1();				
 			}
 			else{
@@ -295,7 +310,7 @@ void _zcx_data_parse(unsigned char data)
 						printf("zxc rec %02d/%02d: ", len, gp_zcxCmd->allLen);
 						arrry_print(gp_zcxCmd->p_dta, gp_zcxCmd->recvLen);
 					}
-					zcx_msg_parse(gp_zcxCmd->p_dta, gp_zcxCmd->recvLen);
+					zcx_msg_parse(gp_zcxCmd->p_dta+3, gp_zcxCmd->recvLen-5);
 				}	
 				_STEP_SET_0();
 			}	
@@ -372,13 +387,16 @@ static void zxc_send_get_parm(void)
 {
 	const unsigned char data=0xff;
 	unsigned char buf[30];
+	struct zcx_parm_one *msg= (struct zcx_parm_one*)buf;
+	
 	unsigned short parm_len= 1;
-	struct zcx_parm_head *msg= (struct zcx_parm_head*)buf;
-	msg->len= swap16(3+parm_len);
+	unsigned short msg_len= ZXC_PARM_PACK_LEN+parm_len;
+
 	msg->type= ZCX_SET_GET_PARM;
+	msg->len= swap16(msg_len);
 	msg->parm_len= swap16(parm_len);
 	memcpy(&msg->data, &data, 1);
-	send_fram(buf, 3+parm_len);
+	send_fram(buf, msg_len);
 }
 
 
@@ -393,81 +411,5 @@ void _fm_zcx_init()
 	zxc_send_get_parm();
 	//zxc_set_parm_phyid();
 }
-
-#if 0
-static void _printk(void)
-{
-	zcx_dbg("****  FM  *****\n");
-	zcx_dbg("status:%d step:%d fre:%d strength:%d volume:%d\n",
-		gp_zcxCmd->openStatus,
-		gp_zcxCmd->step,
-		gp_zcxCmd->fre,
-		gp_zcxCmd->strength,
-		gp_zcxCmd->volume);
-}
-static NSTAR_BOOL __fm_zcx_param_set(unsigned short cmd,unsigned short len,unsigned char*p_dta)
-{
-	NSTAR_BOOL ret = NSTAR_FALSE;
-
-	switch(cmd){
-		case NSTAR_FM_PRINTK:
-			_printk();
-			ret = NSTAR_TRUE;
-			break;
-	}
-	return ret;
-}
-static unsigned short _fm_zcx_param_set_get(unsigned short cmd,unsigned short len,unsigned char*p_dta)
-{
-	unsigned short ret = 0;
-	switch(cmd){
-		case NSTAR_FM_SET_GET_FRE:
-			if(len > 2){
-				unsigned int fre = gp_zcxCmd->fre*100;
-				p_dta[0] = fre>>16;
-				p_dta[1] = (fre>>8)&0xff;
-				p_dta[2] = fre&0xff;
-				ret = 3;
-			}
-			break;
-		case NSTAR_FM_SET_GET_LOGIC:
-			if(len > 5){
-				memcpy(p_dta,gp_zcxCmd->logic,6);
-				ret  = 6;
-			}
-			break;
-		case NSTAR_FM_SET_GET_PHY:
-			if(len > 5){
-				memcpy(p_dta,gp_zcxCmd->phyaddr,6);
-				ret  = 6;
-			}
-			break;
-		case NSTAR_FM_SET_GET_VOLUME:
-			if(len > 0){
-				p_dta[0] = gp_zcxCmd->volume;
-				ret  = 1;
-			}
-			break;
-		case NSTAR_FM_SET_GET_STRENGTH:
-			if(len > 0){
-				p_dta[0] = gp_zcxCmd->strength;
-				ret  = 1;
-			}
-			break;
-	}
-	return ret;
-}
-unsigned short _fm_zcx_param_set(unsigned short cmd,unsigned short len,unsigned char*p_dta)
-{
-	unsigned short ret = 0;
-	if(cmd < NSTAR_FM_SET_MAX){
-		ret = __fm_zcx_param_set(cmd, len,p_dta);
-	}else if(cmd < NSTAR_FM_SET_GET_MAX ){
-		ret = _fm_zcx_param_set_get(cmd, len,p_dta);
-	}
-	return ret;
-}
-
-#endif
 
 

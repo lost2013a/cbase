@@ -54,6 +54,16 @@ struct zcx_msg_head{
 	unsigned char data;
 }__PACKED__;
 
+struct zcx_parm_one{
+	unsigned char head;
+	unsigned short len;
+	unsigned char type;
+	unsigned short parm_len;
+	unsigned char data;
+}__PACKED__;
+
+
+
 #define ZXC_MSG_HEAD 0xA5
 #define ZXC_MSG_CRC_LEN 2
 #define ZXC_MSG_PACK_LEN 5
@@ -64,16 +74,15 @@ struct zcx_msg_head{
 #define VOL_LEN 1
 
 
-struct zcx_parm_head{
-	unsigned char head;
-	unsigned short len;
+struct parm_head{
 	unsigned char type;
 	unsigned short parm_len;
 	unsigned char data;
 }__PACKED__;
 
 
-
+#define ZXC_PARM_HEAD_LEN 4
+#define ZXC_PARM_PACK_LEN 3
 
 
 //串口协议 
