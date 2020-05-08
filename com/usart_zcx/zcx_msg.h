@@ -60,7 +60,7 @@ struct parm_head{
 
 
 //串口协议 
-struct _zcx_cmd{
+struct usart_machine{
 #define _ZCX_DTA_MAX_LEN	(255)
 
 	unsigned char step;;
@@ -70,12 +70,23 @@ struct _zcx_cmd{
 
 };
 
-
+struct zxc_env{
+	unsigned char phy_id[6];
+	unsigned char logic_id[12];
+	unsigned char vol;
+	unsigned int main_fq;
+	unsigned int scan_fq[3];
+};
 
 
 void _fm_zcx_init();
 void _zcx_data_parse(unsigned char data);
 void zxc_fm_run_sevo(void);
+
+void zxc_env_set_phyid(unsigned char *phyid, unsigned int len);
+void zxc_env_set_fre(unsigned int fre);
+void zxc_env_set_logid(unsigned char *logid, unsigned int len);
+void zxc_env_set_vol(unsigned char vol);
 
 
 

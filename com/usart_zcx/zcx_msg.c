@@ -11,8 +11,11 @@ extern void arrry_print(unsigned char *data, unsigned int len);
 #define zcx_dbg printf
 #define _fm_cmm_write 
 
-static struct _zcx_cmd *gp_zcxCmd;
+static struct usart_machine *gp_zcxCmd;
 static void zcx_msg_parse(unsigned char*p_data, unsigned short data_len);
+
+static struct zxc_env h_env;
+static struct zxc_env *p_env= &h_env;
 
 #define _STEP_SET_0()	do{gp_zcxCmd->step = gp_zcxCmd->recvLen = 0;}while(0)
 #define _STEP_ADD_1()	do{gp_zcxCmd->step++;}while(0)
@@ -201,7 +204,7 @@ static void send_fram(unsigned char *data, unsigned short len)
 
 static void zxc_send_parm_phyid(void)
 {
-	const unsigned char phyid[6]={0x90,1,2,3,4,5};
+	unsigned char *phyid= p_env->phy_id;
 	
 	unsigned char buf[30];
 	struct zcx_parm_one *msg= (struct zcx_parm_one*)buf;
@@ -218,8 +221,8 @@ static void zxc_send_parm_phyid(void)
 
 static void zxc_send_parm_fre(void)
 {
-	const unsigned char fre[3]={0,9,0x30};
-	unsigned char buf[30];
+	unsigned int fre;	
+	unsigned char buf[30], *p_fre;
 	struct zcx_parm_one *msg= (struct zcx_parm_one*)buf;
 	
 	unsigned short parm_len= 3;
@@ -228,16 +231,17 @@ static void zxc_send_parm_fre(void)
 	msg->type= ZCX_SET_PARM_FRI;
 	msg->len= swap16(msg_len);
 	msg->parm_len= swap16(parm_len);
-	memcpy(&msg->data, fre, parm_len);
+	fre= swap32(p_env->main_fq);	
+	p_fre= (unsigned char*)&fre;
+	p_fre+=1;
+	memcpy(&msg->data, p_fre, parm_len);
 	send_fram(buf, msg_len);
 }
 
 
 static void zxc_send_parm_logid(void)
 {
-	const unsigned char logid[12]={0xf6,0x52,0x04,0x25,\
-		0x10,0x22,0x12,\
-		0x03,0x14,0x01,0x04,0x07};
+	unsigned char *logid= p_env->logic_id;
 	unsigned char buf[30];
 	struct zcx_parm_one *msg= (struct zcx_parm_one*)buf;
 	
@@ -253,7 +257,7 @@ static void zxc_send_parm_logid(void)
 
 static void zxc_send_parm_vol(void)
 {
-	const unsigned char vol=88;
+	unsigned char vol=p_env->vol;
 	unsigned char buf[30];
 	struct zcx_parm_one *msg= (struct zcx_parm_one*)buf;
 	
@@ -300,13 +304,10 @@ void flag_clear_bit(unsigned char bit)
 
 void _fm_zcx_init()
 {
-	gp_zcxCmd = (struct _zcx_cmd*)malloc(sizeof(struct _zcx_cmd));
+	gp_zcxCmd = (struct usart_machine*)malloc(sizeof(struct usart_machine));
 	gp_zcxCmd->p_dta = malloc(_ZCX_DTA_MAX_LEN+1);
 	
-	flag_set_bit(FLAG_BIT_FRE);
-	flag_set_bit(FLAG_BIT_LOGID);
-	flag_set_bit(FLAG_BIT_PHYID);
-	
+	zxc_send_get_parm();
 	zcx_dbg(" _fm_zcx_init ok\n");
 }
 
@@ -320,21 +321,27 @@ void fm_send_handle(void)
 		zxc_send_parm_phyid,
 		NULL,
 	};	
-
-	if(flag_send_parm != 0){
-		unsigned char i;
-		for(i=0; i< FLAG_BIT_MAX; i++){
-			if(flag_send_parm& (0x1 << i)){
-				
-				break;
+#define MSG_GAPS 20 //单位10ms+
+	static unsigned char cnt=0;
+	if(cnt++ > MSG_GAPS){
+		cnt=MSG_GAPS/5;
+		if(flag_send_parm != 0){
+			unsigned char i;
+			for(i=0; i< FLAG_BIT_MAX; i++){
+				if(flag_send_parm& (0x1 << i)){
+					
+					break;
+				}
 			}
-		}
 
-		if(i < FLAG_BIT_MAX){
-			printf("flag set %d\n", i);
-			if(func_arry[i] != NULL)
-				func_arry[i]();
-			flag_clear_bit(i);	
+			if(i < FLAG_BIT_MAX){
+				printf("flag set %d\n", i);
+				if(func_arry[i] != NULL){
+					func_arry[i]();
+					cnt=0;
+				}
+				flag_clear_bit(i);	
+			}
 		}
 	}
 }
@@ -354,6 +361,42 @@ void zxc_fm_run_sevo(void)
 		}
 		fm_send_handle();
 		usleep(10*1000);
+	}
+}
+
+
+void zxc_env_set_phyid(unsigned char *phyid, unsigned int len)
+{
+	if(len == 6 && 0!=memcmp(p_env->phy_id, phyid, 6)){
+		memcpy(p_env->phy_id, phyid, len);
+		flag_set_bit(FLAG_BIT_PHYID);
+	}
+}
+
+void zxc_env_set_fre(unsigned int fre)
+{
+	if(fre != p_env->main_fq){
+		p_env->main_fq= fre;
+		flag_set_bit(FLAG_BIT_VOL);
+	}
+}
+
+
+void zxc_env_set_logid(unsigned char *logid, unsigned int len)
+{
+	if(len == 12 && 0!=memcmp(p_env->logic_id, logid, 12)){
+		memcpy(p_env->logic_id, logid, len);
+		flag_set_bit(FLAG_BIT_LOGID);
+	}
+}
+
+void zxc_env_set_vol(unsigned char vol)
+{
+	if(vol > 99)
+		vol =99;
+	if(vol != p_env->vol){
+		p_env->vol= vol;
+		flag_set_bit(FLAG_BIT_VOL);
 	}
 }
 
