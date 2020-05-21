@@ -9,6 +9,7 @@
 #define swap16(value) \
 ( (value & 0x00FFU) << 8 | (value & 0xFF00U) >> 8 )
 
+#define DBG_FM_UART 0
 
 enum{
 	ANALOG_CMD_VOLUME = 0X03,
@@ -76,6 +77,23 @@ struct zxc_env{
 	unsigned char vol;
 	unsigned int main_fq;
 	unsigned int scan_fq[3];
+};
+struct zxc_sta{
+#define LOCK_CNT_NUMB 30
+
+#define ZXC_STA_INIT 0
+#define ZXC_STA_UNLOCK 1
+#define ZXC_STA_IDLE 2
+#define ZXC_STA_DAILY 3
+#define ZXC_STA_EMERGENCY 4
+
+	unsigned char step;
+	unsigned char sta;
+	volatile unsigned char locked;
+	volatile unsigned char lock_cnt;
+	unsigned char sq;
+	unsigned int current_fq;
+	unsigned int last_lockfq;
 };
 
 

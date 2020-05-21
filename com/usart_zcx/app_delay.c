@@ -6,9 +6,6 @@
 
 volatile unsigned int tcnt=0;
 
-static volatile unsigned int command_cnt_timer;
-#define CNT_TICK_SLEEP(n) app_sleep(&command_cnt_timer, n*1000)
-#define CNT_TICK_PEND(n) app_pend_wake(command_cnt_timer)
 
 static unsigned int ticktime_get(void)
 {
@@ -60,7 +57,7 @@ int app_read_interval(volatile unsigned int ptcnt)
 	return getNowTime()- ptcnt;
 }
 
-
+#if 0
 
 int main(int argc, char *argv[]) 
 {	
@@ -83,6 +80,5 @@ int main(int argc, char *argv[])
 
 
 	return 0;
-
 }
-
+#endif

@@ -1,5 +1,5 @@
 EXEC	= test
-OBJS    = test_uart.o zcx_msg.o
+OBJS    = test_uart.o zcx_msg.o app_delay.o
 
 CROSS = 
 CC	= $(CROSS)gcc 

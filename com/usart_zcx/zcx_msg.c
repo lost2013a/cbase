@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "zcx_msg.h"
+#include "app_delay.h"
 
 extern void fm_uart_send(unsigned char *data, unsigned int len);
 extern int fm_uart_read(unsigned char *data, unsigned int len);
@@ -16,6 +17,10 @@ static void zcx_msg_parse(unsigned char*p_data, unsigned short data_len);
 
 static struct zxc_env h_env;
 static struct zxc_env *p_env= &h_env;
+static struct zxc_sta h_sta;
+static struct zxc_sta *p_sta= &h_sta;
+
+
 
 #define _STEP_SET_0()	do{gp_zcxCmd->step = gp_zcxCmd->recvLen = 0;}while(0)
 #define _STEP_ADD_1()	do{gp_zcxCmd->step++;}while(0)
@@ -79,7 +84,7 @@ void _zcx_data_parse(unsigned char data)
 				}
 				//else
 				{
-					if(1){
+					if(DBG_FM_UART){
 						printf("zxc rec %02d/%02d: ", len, gp_zcxCmd->allLen);
 						arrry_print(gp_zcxCmd->p_dta, gp_zcxCmd->recvLen);
 					}
@@ -111,13 +116,21 @@ static unsigned short parm_parse(unsigned char*p_data, unsigned short data_len)
 	switch(parm->type){
 		case ANALOG_CMD_STATUS:
 			if(parm_len == 1){
-				printf("sta: %x\n", parm->data);
+				p_sta->lock_cnt= LOCK_CNT_NUMB;
+				if(parm->data == 0x82){
+					p_sta->sta= ZXC_STA_DAILY;
+				}
+				else if(parm->data == 0x80){
+					p_sta->sta= ZXC_STA_EMERGENCY;
+				}
 			}
+			
 			break;
 		case ANALOG_CMD_STOP:
 			if(parm_len == 1){
-				printf("stop: %x\n", parm->data);
-			}			
+				p_sta->lock_cnt= LOCK_CNT_NUMB;
+				p_sta->sta= ZXC_STA_IDLE;
+			}		
 			break;
 		case ANALOG_CMD_VOLUME:
 			if(parm_len == 1){
@@ -308,6 +321,7 @@ void _fm_zcx_init()
 	gp_zcxCmd->p_dta = malloc(_ZCX_DTA_MAX_LEN+1);
 	
 	zxc_send_get_parm();
+
 	zcx_dbg(" _fm_zcx_init ok\n");
 }
 
@@ -347,6 +361,77 @@ void fm_send_handle(void)
 }
 
 
+#define ZXC_STA_INIT 0
+#define ZXC_STA_UNLOCK 1
+#define ZXC_STA_IDLE 2
+#define ZXC_STA_DAILY 3
+#define ZXC_STA_EMERGENCY 4
+
+static void STA_STEP(unsigned char step)
+{
+	p_sta->step= step;
+	printf("zxc step to %d\n", step);
+}
+
+static volatile unsigned int zxc_sta_timer;
+#define STA_TICK_SLEEP(n) app_sleep(&zxc_sta_timer, n*1000)
+#define STA_TICK_PEND() app_pend_wake(zxc_sta_timer)
+
+
+
+static void zxc_sta_machine(void)
+{
+	if(STA_TICK_PEND()){
+		if(p_sta->lock_cnt > 0){
+			p_sta->locked=1;
+			p_sta->lock_cnt--;
+		}
+		else{
+			p_sta->locked=0;
+		}
+		STA_TICK_SLEEP(1);
+	}
+}
+
+
+unsigned char visit_zxc_sta(void)
+{
+	static volatile unsigned int zxc_printf_timer;
+#define PRINTF_TICK_SLEEP(n) app_sleep(&zxc_printf_timer, n*1000)
+#define PRINTF_TICK_PEND() app_pend_wake(zxc_printf_timer)
+
+	const char *str_str[]={
+		"#0 init",
+		"#1 unlock",
+		"#2 idle",
+		"#3 daily",
+		"#4 emergency",
+	};
+	static unsigned char last_sta=0;
+	unsigned char currrent_sta;
+	
+	if(p_sta->locked == 0){
+		currrent_sta=ZXC_STA_UNLOCK;
+	}
+	else{
+		currrent_sta= p_sta->sta;
+	}
+	
+	if(currrent_sta != last_sta){
+		printf("zxc sta: %s\n", str_str[currrent_sta]);
+	}
+	else if(PRINTF_TICK_PEND()){
+		printf("zxc sta: %s\n", str_str[currrent_sta]);
+		//zxc_send_get_parm();
+		PRINTF_TICK_SLEEP(10);
+	}
+	last_sta= currrent_sta;
+
+
+	
+
+}
+
 void zxc_fm_run_sevo(void)
 {
 	unsigned char buf[128];
@@ -360,6 +445,8 @@ void zxc_fm_run_sevo(void)
 			}
 		}
 		fm_send_handle();
+		zxc_sta_machine();
+		visit_zxc_sta();
 		usleep(10*1000);
 	}
 }
@@ -377,7 +464,7 @@ void zxc_env_set_fre(unsigned int fre)
 {
 	if(fre != p_env->main_fq){
 		p_env->main_fq= fre;
-		flag_set_bit(FLAG_BIT_VOL);
+		flag_set_bit(FLAG_BIT_FRE);
 	}
 }
 

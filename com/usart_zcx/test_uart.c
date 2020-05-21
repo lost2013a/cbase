@@ -41,7 +41,7 @@ int fm_uart_read(unsigned char *data, unsigned int len)
 }
 
 
- unsigned int fre=0x9300;
+ unsigned int fre=0x8800;
  unsigned char logid[12]={0xf6,0x52,0x04,0x25,\
 0x10,0x22,0x12,\
 0x03,0x14,0x01,0x04,0x07};
@@ -83,8 +83,9 @@ int main (int argc, char *argv[])
 	}
 	printf("%s set ok\n", DEV_NAME);
 	
-	zxc_env_init();
+	
 	_fm_zcx_init();
+	zxc_env_init();
 	zxc_fm_run_sevo();
 
 release:
