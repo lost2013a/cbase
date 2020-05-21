@@ -34,7 +34,7 @@ static unsigned short __slide_dta_get_len(struct _queue_slide *p_slideQueue)
 	return len;
 }
 
-static void _slide_dta_cpy_send(struct _queue_slide *p_slideQueue,const unsigned char*p_buf,unsigned short len,unsigned char type)
+static void _slide_dta_cpy_send(struct _queue_slide *p_slideQueue,const unsigned char*p_buf,unsigned short len)
 {
 	unsigned int offTmp;
 	__slide_dta_cpy_len(p_slideQueue,len);
@@ -75,7 +75,7 @@ struct _queue_slide* nstar_queue_slide_init(unsigned int memsize,unsigned short 
 	struct _queue_slide *p_slideQueue;
 	p_slideQueue = (struct _queue_slide *)malloc(_SIZE_NSTAR_QUEUE_SLIDE);
 
-	nstar_adt_MutexCreate(p_slideQueue->mutex);
+	Q_MutexCreate(p_slideQueue->mutex);
 
 	p_slideQueue->memsize = memsize;
 	p_slideQueue->p_buf = malloc(memsize);
@@ -91,7 +91,7 @@ unsigned char nstar_queue_slide_destroy( struct _queue_slide* handle)
 	struct _queue_slide *p_slideQueue;
 	if(handle != NULL){
 		p_slideQueue = (struct _queue_slide *)handle;
-		//nstar_adt_MutexDelete(p_slideQueue->mutex);
+		Q_MutexDelete(p_slideQueue->mutex);
 		free(p_slideQueue->p_buf);
 		free(p_slideQueue);
 	}
@@ -104,29 +104,29 @@ unsigned char nstar_queue_slide_get(struct _queue_slide* handle,unsigned char*p_
 	struct _queue_slide *p_slideQueue;
 	if(handle != NULL){
 		p_slideQueue = (struct _queue_slide*)handle;
-		_MUTEX_LOCK_QUEUE(p_slideQueue->mutex);
+		Q_MutexLock(p_slideQueue->mutex);
 		if(p_slideQueue->usSize > _SIZE_QUEUE_PACK){
 			if(*p_inOutLen >= p_slideQueue->packMaxLen){
 				*p_inOutLen = _slide_dta_cpy_get(p_slideQueue,p_out);
 				ret = 1;
 			}		
 		}
-		_MUTEX_UNLOCK_QUEUE(p_slideQueue->mutex);
+		Q_MutexUnLock(p_slideQueue->mutex);
 	}
 	return ret;
 }
 
-unsigned char  nstar_queue_slide_send(struct _queue_slide* handle,const unsigned char*p_buf,unsigned int len,unsigned char type)
+unsigned char  nstar_queue_slide_send(struct _queue_slide* handle,const unsigned char*p_buf,unsigned int len)
 {
 	unsigned char ret = 0;
 	struct _queue_slide *p_slideQueue;
 	unsigned int tmpLen = len;
 	if(handle != NULL){
 		p_slideQueue = (struct _queue_slide*)handle;	
-		_MUTEX_LOCK_QUEUE(p_slideQueue->mutex);	
+		Q_MutexLock(p_slideQueue->mutex);	
 
 		if((tmpLen <= p_slideQueue->packMaxLen) && (p_slideQueue->usSize + tmpLen + _SIZE_QUEUE_PACK <= p_slideQueue->memsize)){
-			_slide_dta_cpy_send(p_slideQueue,p_buf,len,type);
+			_slide_dta_cpy_send(p_slideQueue,p_buf,len);
 			if( p_slideQueue->maxUsSize < p_slideQueue->usSize ){
 				p_slideQueue->maxUsSize = p_slideQueue->usSize;
 			}		
@@ -138,7 +138,7 @@ unsigned char  nstar_queue_slide_send(struct _queue_slide* handle,const unsigned
 				p_slideQueue->indexGet = p_slideQueue->indexSend;
 			}
 		}
-		_MUTEX_UNLOCK_QUEUE(p_slideQueue->mutex);
+		Q_MutexUnLock(p_slideQueue->mutex);
 	}
 	return ret;
 }
@@ -148,10 +148,10 @@ unsigned char  nstar_queue_slide_clear(struct _queue_slide* handle)
 	unsigned char ret = 0;
 	struct _queue_slide *pBCQueue = (struct _queue_slide *)handle;
 	if(pBCQueue != NULL){
-		_MUTEX_LOCK_QUEUE(pBCQueue->mutex);
+		Q_MutexLock(pBCQueue->mutex);
 		pBCQueue->indexGet = pBCQueue->indexSend;
 		pBCQueue->usSize = 0;
-		_MUTEX_UNLOCK_QUEUE(pBCQueue->mutex);
+		Q_MutexUnLock(pBCQueue->mutex);
 		ret = 1;
 	}
 	return ret;
