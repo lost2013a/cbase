@@ -70,7 +70,7 @@ static unsigned int _slide_dta_cpy_get(struct _queue_slide *p_slideQueue,unsigne
 
 
 
-struct _queue_slide* nstar_queue_slide_init(unsigned int memsize,unsigned short packMaxLen)
+struct _queue_slide* nstar_queue_init(unsigned int memsize,unsigned short packMaxLen)
 {
 	struct _queue_slide *p_slideQueue;
 	p_slideQueue = (struct _queue_slide *)malloc(_SIZE_NSTAR_QUEUE_SLIDE);
@@ -86,7 +86,7 @@ struct _queue_slide* nstar_queue_slide_init(unsigned int memsize,unsigned short 
 	return (struct _queue_slide*)p_slideQueue;
 }
 
-unsigned char nstar_queue_slide_destroy( struct _queue_slide* handle)
+unsigned char nstar_queue_destroy( struct _queue_slide* handle)
 {
 	struct _queue_slide *p_slideQueue;
 	if(handle != NULL){
@@ -98,7 +98,7 @@ unsigned char nstar_queue_slide_destroy( struct _queue_slide* handle)
 	return 1;
 }
 
-unsigned char nstar_queue_slide_get(struct _queue_slide* handle,unsigned char*p_out,unsigned int *p_inOutLen)
+unsigned char nstar_queue_get(struct _queue_slide* handle,unsigned char*p_out,unsigned int *p_inOutLen)
 {
 	unsigned char ret = 0;
 	struct _queue_slide *p_slideQueue;
@@ -116,7 +116,23 @@ unsigned char nstar_queue_slide_get(struct _queue_slide* handle,unsigned char*p_
 	return ret;
 }
 
-unsigned char  nstar_queue_slide_send(struct _queue_slide* handle,const unsigned char*p_buf,unsigned int len)
+unsigned char nstar_queue_isempty(struct _queue_slide* handle)
+{
+	unsigned char ret = 1;
+	struct _queue_slide *p_slideQueue;
+	if(handle != NULL){
+		p_slideQueue = (struct _queue_slide*)handle;
+		Q_MutexLock(p_slideQueue->mutex);
+		if(p_slideQueue->usSize > _SIZE_QUEUE_PACK){
+			ret = 0;	
+	    }
+		Q_MutexUnLock(p_slideQueue->mutex);
+	}
+	return ret;
+}
+
+
+unsigned char  nstar_queue_add(struct _queue_slide* handle,const unsigned char*p_buf,unsigned int len)
 {
 	unsigned char ret = 0;
 	struct _queue_slide *p_slideQueue;
@@ -143,7 +159,7 @@ unsigned char  nstar_queue_slide_send(struct _queue_slide* handle,const unsigned
 	return ret;
 }
 
-unsigned char  nstar_queue_slide_clear(struct _queue_slide* handle)
+unsigned char  nstar_queue_clear(struct _queue_slide* handle)
 {
 	unsigned char ret = 0;
 	struct _queue_slide *pBCQueue = (struct _queue_slide *)handle;

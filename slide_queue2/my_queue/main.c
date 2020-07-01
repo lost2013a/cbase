@@ -5,20 +5,19 @@
 #include "nstar_queue.h"
 
 struct _queue_slide *mp3_queue;
-#define QUEUE_GET(p_out,p_inOutLen) nstar_queue_slide_get(mp3_queue, p_out, p_inOutLen)
-#define QUEUE_PUT(p_dta,len)   		nstar_queue_slide_send(mp3_queue, p_dta,len)
+
 
 void mp3_queue_init(void)
 {
 #define QUEUE_MEM_SIZE 100
 #define QUEUE_PACK_MAX 20
-	mp3_queue = nstar_queue_slide_init(QUEUE_MEM_SIZE, QUEUE_PACK_MAX);
+	mp3_queue = nstar_queue_init(QUEUE_MEM_SIZE, QUEUE_PACK_MAX);
 }
 
 void mp3_buf_write(unsigned char *data, unsigned int len)
 {
 	if(len <= QUEUE_PACK_MAX){
-		nstar_queue_slide_send(mp3_queue, data, len);
+		nstar_queue_add(mp3_queue, data, len);
 	}
 	else{
 		printf("mp3 data len too long\n");
@@ -31,7 +30,7 @@ int mp3_buf_read(void)
 	unsigned char buf[500]={0};
 	unsigned int len;
 	len=QUEUE_PACK_MAX;
-	unsigned char ret= nstar_queue_slide_get(mp3_queue, buf, &len);
+	unsigned char ret= nstar_queue_get(mp3_queue, buf, &len);
 	if(ret == 1){
 		buf[len]= 0;
 		printf("len=%d, buf=%s\n",len, buf);

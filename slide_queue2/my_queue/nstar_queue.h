@@ -20,7 +20,6 @@ struct _queue_slide{
 	Q_MUTEX_HANDLE mutex;
 	unsigned int memsize;
 	unsigned int usSize;
-	unsigned int maxUsSize;
 	unsigned int indexSend;
 	unsigned int indexGet;
 	unsigned char *p_buf;
@@ -29,11 +28,12 @@ struct _queue_slide{
 
 
 
-struct _queue_slide* nstar_queue_slide_init(unsigned int memsize,unsigned short packMaxLen);
-unsigned char nstar_queue_slide_destroy(struct _queue_slide* handle);
-unsigned char nstar_queue_slide_send(struct _queue_slide* handle,const unsigned char*p_buf,unsigned int len);
-unsigned char nstar_queue_slide_get(struct _queue_slide* handle,unsigned char*p_out,unsigned int *p_inOutLen);
-unsigned char nstar_queue_slide_clear(struct _queue_slide* handle);
+struct _queue_slide* nstar_queue_init(unsigned int memsize,unsigned short packMaxLen);
+unsigned char nstar_queue_destroy(struct _queue_slide* handle);
+unsigned char nstar_queue_add(struct _queue_slide* handle,const unsigned char*p_buf,unsigned int len);
+unsigned char nstar_queue_isempty(struct _queue_slide* handle);
+unsigned char nstar_queue_get(struct _queue_slide* handle,unsigned char*p_out,unsigned int *p_inOutLen);
+unsigned char nstar_queue_clear(struct _queue_slide* handle);
 
 
 
