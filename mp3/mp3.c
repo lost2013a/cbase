@@ -145,12 +145,12 @@ void main(int argc, char *argv[])
 			exit(1);
 		}
 	}
-
+    printf("ID msg read over\n");
 
 	/*(mp3_FrameHeader)   Reading*/
 	fseek(fp, 0L, SEEK_END); //移文件指针到文件尾   
 	flength = ftell(fp); //文件长   
-
+    printf("file len %d\n", flength);
 
 	rewind(fp);
 	fseek(fp, 10 + ID3V2_size, 1);
@@ -171,48 +171,62 @@ void main(int argc, char *argv[])
 		}
 		memset(cBuffer, 0, cBuffer_size);
 		fread(cBuffer, cBuffer_size, 1, fp);
+        printf("start paser data \n");
 		for (i = 0; i < (cBuffer_size - 4); i++) 
 		{
-			//Mp3帧头(FRAMEHEADER)格式如下：AAAAAAAA   AAABBCCD   EEEEFFGH   IIJJKLMM   
+			//Mp3帧头(FRAMEHEADER)格式如下：AAAAAAAA   AAABBCCD   EEEEFFGH   IIJJKLMM 
+			
 			LayerDescript = (cBuffer[i + 1] & 0x6) >> 1; //Part   CC   IN   'AAABBCCD'   ,Layer   description   '00'   -  reserved    
 
 			//Part     EEEE   in   'EEEEFFGH',   But   '1111'   is   Bad   Bitrate   index,   "bad"   means   that   this   is   not   an   allowed   value   
 			bRateIndex = cBuffer[i + 2] / 0x10; //   EEEEXXXX!='1111'   
 			bSampleRate = (cBuffer[i + 2] & 0xA) >> 2; //Part   FF   IN   'EEEEFFGH'   ,'11'   reserved   
 
+           
 			if (cBuffer[i] == 0xFF
-				&& cBuffer[i + 1] > 0xE0
+				&& cBuffer[i + 1] == 0xFB
 				&& bRateIndex != 0xF
 				&& LayerDescript != 0x0
 				&& bSampleRate < 0x3) 
 			{
-				printf("Mp3_FrameHeader->");
+				printf("i=%x, Mp3_FrameHeader %x %x %x %x %x %x %x %x %x %x %x %x\n", i, cBuffer[i], cBuffer[i+1], cBuffer[i+2], cBuffer[i+3]\
+                    ,cBuffer[i+4], cBuffer[i+5], cBuffer[i+6], cBuffer[i+7]\
+                    ,cBuffer[i+8], cBuffer[i+9], cBuffer[i+10], cBuffer[i+11]\
+                    );
 				memset(cFrameHead_bin, 0, 32);
 				j = cBuffer[i];
+                printf("1 ");
 				getBin(j, cFrameHead_bin_temp);
 				strcat(cFrameHead_bin, cFrameHead_bin_temp);
-				putchar('-');
+				printf("\n");
 
+                printf("2 ");    
 				j = cBuffer[i + 1];
 				getBin(j, cFrameHead_bin_temp);
 				strcat(cFrameHead_bin, cFrameHead_bin_temp); //strcat的两个传入参数都必需以   '\0'   代表结尾  
-				putchar('-');
+				printf("\n");
 
+                printf("3 ");
 				j = cBuffer[i + 2];
 				getBin(j, cFrameHead_bin_temp);
 				strcat(cFrameHead_bin, cFrameHead_bin_temp);
-				putchar('-');
+				printf("\n");
 
+                printf("4 ");
 				j = cBuffer[i + 3];
 				getBin(j, cFrameHead_bin_temp);
 				strcat(cFrameHead_bin, cFrameHead_bin_temp);
+
+               
 
 				Version = (cBuffer[i + 1] & 0x18) >> 3;
 				bPadding = (cBuffer[i + 1] & 0x2) >> 1;
 				Bitrate = GetBitRate(bRateIndex, LayerDescript, Version);
 				bChannelMode = (cBuffer[i + 3] & 0xC0) >> 6;
-				putchar('\n');
+				printf("\n");
 
+                 printf("%s\n", cFrameHead_bin);
+                
 				if (bRateIndex != 0) {
 					switch (Version) 
 					{
@@ -241,6 +255,8 @@ void main(int argc, char *argv[])
 							SamplingrateTable[bSampleRate][0], ChannelDescrip[bChannelMode]);
 
 							FrameSize = ((144 * Bitrate * 1000) / SamplingrateTable[bSampleRate][0]) + bPadding;
+                            //printf("Bitrate %d, bPadding %d\n", Bitrate, bPadding);
+                            
 							FrameCount = (int) ((flength - (ftell(fp) - cBuffer_size + i)) / FrameSize);
 							mp3Duration = (int) (FrameCount * 0.026); //每帧的播放时间：无论帧长是多少，每帧的播放时间都是26ms；   
 
@@ -248,7 +264,8 @@ void main(int argc, char *argv[])
 							printf("长度:%d   秒", mp3Duration);
 							break;
 					}
-				} else
+				}
+                    else
 				printf("\nThis   a   Free   Rate   MP3   File!\n");
 
 
@@ -283,7 +300,8 @@ void main(int argc, char *argv[])
 	else {
 		printf("\nThere   is   no   ID3V1*");
 	}
-
+    printf("\nparse over\n\n");
+    
 	fclose(fp);
 	}
 

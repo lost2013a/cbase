@@ -1,13 +1,11 @@
 [1]RGET / HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Purpose: prefetch
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9336855849251828
 
 
 
@@ -20,31 +18,39 @@ Content-Length:2679
 [2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理</title><meta http-equiv='Content-Type' content='text/html' charset='utf-8'/><style type='text/css'>label{display: inline-block;width: 80px;font-weight: bolder;color: #0066FF;}body {	background-color: #35a6e8;	background: -webkit-linear-gradient(right, #f0f0f0 , #35a6e8);    background: -o-linear-gradient( right, #f0f0f0, #35a6e8);    background: -moz-linear-gradient( right, #f0f0f0, #35a6e8);    background: linear-gradient(to right, #f0f0f0 , #35a6e8);}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: left;color: #ffffff;font-size: 24px;font-weight: bolder;}h4 {color: #78e4ca;font-size: 33px;font-style: oblique;}h5 {text-align: end;color: #FFFFFF;font-size: 11px;}h6 {text-align: left;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}.wrapper {width:720px;margin:auto;}.wrapper1 {	width: 310px;	height: 360px;	padding: 20px;	background: #5e85c0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;	background: -webkit-linear-gradient(left top, #78e4ca , #506de3);	background: -o-linear-gradient(bottom right, #78e4ca, #506de3);	background: -moz-linear-gradient(bottom right, #78e4ca, #506de3);	background: linear-gradient(to bottom right, #78e4ca , #506de3);}.wrapper2 {	width: 330px;	height: 380px;	padding: 10px;	background: #f0f0f0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;}#rcorners1 {	color: #FFFFFF;	font-weight: bolder;	font-size: 18px;	border-radius: 15px;	background: #4cbdf7;	background: #0066CC;	width: 158px;	height: 30px;	border: 0px;}</style></head><body><h1 > STAR-XINHUI </h1><h2> chengdu sida web management interface </h2><br><br><br><br><br><br><div class='wrapper' ><div class='wrapper1' > <h4> Welcome！ </h4><h3> 终端网页管理界面Ver1.1 </h3><br><br><br><br><h5> 型号：适配器<br>&copy;斯达鑫辉视讯科技有限公司 </h5></div><div class='wrapper2' ><div style='padding:100px 00px 00px 85px;'><h6> 用户密码：</h6>	</div><form id='frmSetting' method='POST' action='login.cgi'><div style='padding:0px 00px 00px 0px;'><p><label for='txtpass' ></label> <input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0' name='passw'onFocus="if(value==defaultValue){value='';this.style.color='#303030'}"onBlur="if(!value){value=defaultValue;this.style.color='#c0c0c0'}" /></p></div><div style='padding:1px 00px 00px 85px;'><p> <input  type='submit' value='登录' id='rcorners1'/></p></form></div></div></div>
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Purpose: prefetch
-Referer: http://192.168.251.175/
+Referer: http://192.168.251.176/
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9336855849251828
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
 
 
 
 [1]RPOST /login.cgi HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
 Cache-Control: max-age=0
-Origin: http://192.168.251.175
 Upgrade-Insecure-Requests: 1
+Origin: http://192.168.251.176
 Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://192.168.251.175/
+Referer: http://192.168.251.176/
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9336855849251828
 Content-Length: 11
 
 passw=admin
@@ -55,42 +61,51 @@ Content-Length:319
 
 
 
-[2]W<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head><body><span style='color:green;'>...验证通过</span></body></html><script>var int=setTimeout('refresh()',450);function refresh(){document.cookie='NSTAR_COOKIE9507069447837620'; window.location='sta.html';}</script>
+[2]W<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head><body><span style='color:green;'>...验证通过</span></body></html><script>var int=setTimeout('refresh()',450);function refresh(){document.cookie='NSTAR_COOKIE8506612606255860'; window.location='sta.html';}</script>
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/
+Referer: http://192.168.251.176/login.cgi
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9336855849251828
 
 
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/login.cgi
+Referer: http://192.168.251.176/login.cgi
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9336855849251828
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/login.cgi
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
 
 
 
 [1]RGET /sta.html HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://192.168.251.175/login.cgi
+Referer: http://192.168.251.176/login.cgi
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -103,14 +118,14 @@ Content-Length:2884
 [2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'>STAR-斯达鑫辉</a></li><li><a href='sta.html' class='active'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 参数状态</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='sta.cgi'><p><label>工作模式:</label><input type='text' size='16' disabled='disabled' id='sip' name='sip'/></p><p><label>指令端口状态:</label><input type='text' size='16' disabled='disabled' id='dip' name='dip'/></p><p><label>编码器状态:</label><input type='text' size='16' disabled='disabled' id='programIP' name='programIP'/></p><p><label>数据流量:</label><input type='text' size='16' disabled='disabled' id='logicID' name='logicID'/></p><p><label>当前音源:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function myrefresh(){	var xmlHttp = new XMLHttpRequest();	xmlHttp.open('GET', '/sta.js', true);	xmlHttp.send(null);	xmlHttp.onreadystatechange=function()	{		if(xmlHttp.readyState == 4 && xmlHttp.status == 200) 		{var json=xmlHttp.responseText;var o=eval('('+json+')');if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;}	}}</script>	<script language='JavaScript'>setInterval('myrefresh()',2000);</script><script>myrefresh();</script>
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -123,38 +138,50 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:0','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/sta.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -167,14 +194,14 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:1','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -187,14 +214,14 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:2','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -207,14 +234,14 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:3','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -227,14 +254,14 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:4','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -247,14 +274,14 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:5','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -267,14 +294,14 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:6','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -287,14 +314,14 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:7','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -307,14 +334,14 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:8','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -327,14 +354,14 @@ Content-Length:135
 [2]W{'sip':'192.1.1.170:9','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -347,14 +374,14 @@ Content-Length:136
 [2]W{'sip':'192.1.1.170:10','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
 [1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -366,376 +393,16 @@ Content-Length:136
 
 [2]W{'sip':'192.1.1.170:11','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
 
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:12','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:13','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:14','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:15','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:16','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:17','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:18','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:19','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:20','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:21','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:22','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:23','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:24','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:25','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:26','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:27','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:28','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
-[1]RGET /sta.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/sta.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:136
-
-
-
-[2]W{'sip':'192.1.1.170:29','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
-
 [1]RGET /ipset.html HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://192.168.251.175/sta.html
+Referer: http://192.168.251.176/sta.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -748,14 +415,14 @@ Content-Length:2749
 [2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html' class='active'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_ipset(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='ipset.js'> </script>
 
 [1]RGET /ipset.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/ipset.html
+Referer: http://192.168.251.176/ipset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -768,51 +435,205 @@ Content-Length:152
 [2]Wjson_ipset({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/ipset.html
+Referer: http://192.168.251.176/ipset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/ipset.html
+Referer: http://192.168.251.176/ipset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/ipset.html
+Referer: http://192.168.251.176/ipset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /ipset.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2749
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html' class='active'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_ipset(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='ipset.js'> </script>
+
+[1]RGET /ipset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:152
+
+
+
+[2]Wjson_ipset({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /ipset.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2749
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html' class='active'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_ipset(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='ipset.js'> </script>
+
+[1]RGET /ipset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:152
+
+
+
+[2]Wjson_ipset({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /devset.html HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://192.168.251.175/ipset.html
+Referer: http://192.168.251.176/ipset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -825,14 +646,14 @@ Content-Length:3349
 [2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>label1{display: inline-block;color: #000000;}</style><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html' class='active'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 音频设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='devset.cgi'><p><label>节目号:</label><label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='ProgPid' name='ProgPid'/></p><p><label>MP3音量:</label><input type='text' size='16' id='MP3Vol' name='MP3Vol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='BitRate' name='BitRate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='SamplRate' name='SamplRate'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_devset(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('ProgPid')) $('ProgPid').value = o.ProgPid;if ($('MP3Vol')) $('MP3Vol').value = o.MP3Vol;if ($('BitRate')) $('BitRate').value = o.BitRate;if ($('SamplRate')) $('SamplRate').value = o.SamplRate;if ($('Gain')) $('Gain').value = o.Gain;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='devset.js'> </script>
 
 [1]RGET /devset.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/devset.html
+Referer: http://192.168.251.176/devset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -845,51 +666,341 @@ Content-Length:187
 [2]Wjson_devset({'CmdPid':'192.1.1.170:40001','ProgPid':'192.1.1.1:51001','MP3Vol':'255.255.255.0','BitRate':'01-02-03-04-05-06','SamplRate':'01-02-03-04-05-06','Gain':'01-02-03-04-05-06',});
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/devset.html
+Referer: http://192.168.251.176/devset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/devset.html
+Referer: http://192.168.251.176/devset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/devset.html
+Referer: http://192.168.251.176/devset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /devset.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:3349
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>label1{display: inline-block;color: #000000;}</style><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html' class='active'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 音频设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='devset.cgi'><p><label>节目号:</label><label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='ProgPid' name='ProgPid'/></p><p><label>MP3音量:</label><input type='text' size='16' id='MP3Vol' name='MP3Vol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='BitRate' name='BitRate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='SamplRate' name='SamplRate'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_devset(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('ProgPid')) $('ProgPid').value = o.ProgPid;if ($('MP3Vol')) $('MP3Vol').value = o.MP3Vol;if ($('BitRate')) $('BitRate').value = o.BitRate;if ($('SamplRate')) $('SamplRate').value = o.SamplRate;if ($('Gain')) $('Gain').value = o.Gain;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='devset.js'> </script>
+
+[1]RGET /devset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:187
+
+
+
+[2]Wjson_devset({'CmdPid':'192.1.1.170:40001','ProgPid':'192.1.1.1:51001','MP3Vol':'255.255.255.0','BitRate':'01-02-03-04-05-06','SamplRate':'01-02-03-04-05-06','Gain':'01-02-03-04-05-06',});
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: Keep-Alive
+Pragma: no-cache
+Cache-Control: no-cache
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept-Encoding: gzip, deflate
+
+
+
+[1]RGET / HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2679
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理</title><meta http-equiv='Content-Type' content='text/html' charset='utf-8'/><style type='text/css'>label{display: inline-block;width: 80px;font-weight: bolder;color: #0066FF;}body {	background-color: #35a6e8;	background: -webkit-linear-gradient(right, #f0f0f0 , #35a6e8);    background: -o-linear-gradient( right, #f0f0f0, #35a6e8);    background: -moz-linear-gradient( right, #f0f0f0, #35a6e8);    background: linear-gradient(to right, #f0f0f0 , #35a6e8);}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: left;color: #ffffff;font-size: 24px;font-weight: bolder;}h4 {color: #78e4ca;font-size: 33px;font-style: oblique;}h5 {text-align: end;color: #FFFFFF;font-size: 11px;}h6 {text-align: left;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}.wrapper {width:720px;margin:auto;}.wrapper1 {	width: 310px;	height: 360px;	padding: 20px;	background: #5e85c0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;	background: -webkit-linear-gradient(left top, #78e4ca , #506de3);	background: -o-linear-gradient(bottom right, #78e4ca, #506de3);	background: -moz-linear-gradient(bottom right, #78e4ca, #506de3);	background: linear-gradient(to bottom right, #78e4ca , #506de3);}.wrapper2 {	width: 330px;	height: 380px;	padding: 10px;	background: #f0f0f0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;}#rcorners1 {	color: #FFFFFF;	font-weight: bolder;	font-size: 18px;	border-radius: 15px;	background: #4cbdf7;	background: #0066CC;	width: 158px;	height: 30px;	border: 0px;}</style></head><body><h1 > STAR-XINHUI </h1><h2> chengdu sida web management interface </h2><br><br><br><br><br><br><div class='wrapper' ><div class='wrapper1' > <h4> Welcome！ </h4><h3> 终端网页管理界面Ver1.1 </h3><br><br><br><br><h5> 型号：适配器<br>&copy;斯达鑫辉视讯科技有限公司 </h5></div><div class='wrapper2' ><div style='padding:100px 00px 00px 85px;'><h6> 用户密码：</h6>	</div><form id='frmSetting' method='POST' action='login.cgi'><div style='padding:0px 00px 00px 0px;'><p><label for='txtpass' ></label> <input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0' name='passw'onFocus="if(value==defaultValue){value='';this.style.color='#303030'}"onBlur="if(!value){value=defaultValue;this.style.color='#c0c0c0'}" /></p></div><div style='padding:1px 00px 00px 85px;'><p> <input  type='submit' value='登录' id='rcorners1'/></p></form></div></div></div>
+
+[1]RPOST /login.cgi HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Cache-Control: max-age=0
+Origin: http://192.168.251.176
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8
+Content-Length: 11
+
+passw=admin
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:319
+
+
+
+[2]W<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head><body><span style='color:green;'>...验证通过</span></body></html><script>var int=setTimeout('refresh()',450);function refresh(){document.cookie='NSTAR_COOKIE8506612606255860'; window.location='sta.html';}</script>
+
+[1]RGET /sta.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/login.cgi
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2884
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'>STAR-斯达鑫辉</a></li><li><a href='sta.html' class='active'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 参数状态</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='sta.cgi'><p><label>工作模式:</label><input type='text' size='16' disabled='disabled' id='sip' name='sip'/></p><p><label>指令端口状态:</label><input type='text' size='16' disabled='disabled' id='dip' name='dip'/></p><p><label>编码器状态:</label><input type='text' size='16' disabled='disabled' id='programIP' name='programIP'/></p><p><label>数据流量:</label><input type='text' size='16' disabled='disabled' id='logicID' name='logicID'/></p><p><label>当前音源:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function myrefresh(){	var xmlHttp = new XMLHttpRequest();	xmlHttp.open('GET', '/sta.js', true);	xmlHttp.send(null);	xmlHttp.onreadystatechange=function()	{		if(xmlHttp.readyState == 4 && xmlHttp.status == 200) 		{var json=xmlHttp.responseText;var o=eval('('+json+')');if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;}	}}</script>	<script language='JavaScript'>setInterval('myrefresh()',2000);</script><script>myrefresh();</script>
+
+[1]RGET /sta.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: */*
+Referer: http://192.168.251.176/sta.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:136
+
+
+
+[2]W{'sip':'192.1.1.170:12','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
+
+[1]RGET /ipset.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/sta.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2749
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html' class='active'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 网络设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='ipset.cgi'><p><label>服务器IP地址:</label><input type='text' size='16' id='sip' name='sip'/></p><p><label>终端IP地址:</label><input type='text' size='16' id='dip' name='dip'/></p><p><label>节目源地址:</label><input type='text' size='16' id='programIP' name='programIP'/></p><p><label>逻辑地址:</label><input type='text' size='16' id='logicID' name='logicID'/></p><p><label>物理地址:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_ipset(o) {if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='ipset.js'> </script>
+
+[1]RGET /ipset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: */*
+Referer: http://192.168.251.176/ipset.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:152
+
+
+
+[2]Wjson_ipset({'sip':'192.1.1.170:40001','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',});
+
+[1]RGET /devset.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:3349
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>label1{display: inline-block;color: #000000;}</style><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html' class='active'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 音频设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='devset.cgi'><p><label>节目号:</label><label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='ProgPid' name='ProgPid'/></p><p><label>MP3音量:</label><input type='text' size='16' id='MP3Vol' name='MP3Vol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='BitRate' name='BitRate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='SamplRate' name='SamplRate'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_devset(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('ProgPid')) $('ProgPid').value = o.ProgPid;if ($('MP3Vol')) $('MP3Vol').value = o.MP3Vol;if ($('BitRate')) $('BitRate').value = o.BitRate;if ($('SamplRate')) $('SamplRate').value = o.SamplRate;if ($('Gain')) $('Gain').value = o.Gain;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='devset.js'> </script>
+
+[1]RGET /devset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: */*
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:187
+
+
+
+[2]Wjson_devset({'CmdPid':'192.1.1.170:40001','ProgPid':'192.1.1.1:51001','MP3Vol':'255.255.255.0','BitRate':'01-02-03-04-05-06','SamplRate':'01-02-03-04-05-06','Gain':'01-02-03-04-05-06',});
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[1]RGET /favicon.ico HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /info.html HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://192.168.251.175/devset.html
+Referer: http://192.168.251.176/devset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -902,14 +1013,14 @@ Content-Length:2477
 [2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html' class='active'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 信息日志</h3><div style='background:snow; display:block; padding:10px 10%;'><form><p><label>硬件版本:</label><input type='text' size='16' id='software' name='software'/></p><p><label>软件版本:</label><input type='text' size='16' id='hadware' name='hadware'/></p><p><label>序列号:</label><input type='text' size='16' id='serial' name='serial'/></p><p><textarea style='color: #444444;font-size: 11px;' cols='140' rows='30' id='logtxt' name='logtxt'></textarea></p></form><script>function $(id) { return document.getElementById(id); };function json_info(o) {if ($('software')) $('software').value = o.software;if ($('hadware')) $('hadware').value = o.hadware;if ($('serial')) $('serial').value = o.serial;if ($('logtxt')) $('logtxt').value = o.logtxt;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='info.js'> </script>
 
 [1]RGET /info.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/info.html
+Referer: http://192.168.251.176/info.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -919,54 +1030,42 @@ Content-Length:240
 
 
 
-[2]Wjson_info({'software':'192.1.1.170:40001','hadware':'192.1.1.1:51001','serial':'255.255.255.0','logtxt':'12:50:14  只能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多只能�\r\n',});
+[2]Wjson_info({'software':'192.1.1.170:40001','hadware':'192.1.1.1:51001','serial':'255.255.255.0','logtxt':'53:58:29  只能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多只能�\r\n',});
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/info.html
+Referer: http://192.168.251.176/info.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/info.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/info.html
+Referer: http://192.168.251.176/info.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /devset.html HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://192.168.251.175/info.html
+Referer: http://192.168.251.176/info.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -979,14 +1078,14 @@ Content-Length:3349
 [2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>label1{display: inline-block;color: #000000;}</style><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html' class='active'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 音频设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='devset.cgi'><p><label>节目号:</label><label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='ProgPid' name='ProgPid'/></p><p><label>MP3音量:</label><input type='text' size='16' id='MP3Vol' name='MP3Vol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='BitRate' name='BitRate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='SamplRate' name='SamplRate'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_devset(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('ProgPid')) $('ProgPid').value = o.ProgPid;if ($('MP3Vol')) $('MP3Vol').value = o.MP3Vol;if ($('BitRate')) $('BitRate').value = o.BitRate;if ($('SamplRate')) $('SamplRate').value = o.SamplRate;if ($('Gain')) $('Gain').value = o.Gain;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='devset.js'> </script>
 
 [1]RGET /devset.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: */*
-Referer: http://192.168.251.175/devset.html
+Referer: http://192.168.251.176/devset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -999,51 +1098,183 @@ Content-Length:187
 [2]Wjson_devset({'CmdPid':'192.1.1.170:40001','ProgPid':'192.1.1.1:51001','MP3Vol':'255.255.255.0','BitRate':'01-02-03-04-05-06','SamplRate':'01-02-03-04-05-06','Gain':'01-02-03-04-05-06',});
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/devset.html
+Referer: http://192.168.251.176/devset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/devset.html
+Referer: http://192.168.251.176/devset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
 Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/devset.html
+Referer: http://192.168.251.176/devset.html
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
-[1]RGET /firmware.html HTTP/1.1
-Host: 192.168.251.175
+[1]RGET / HTTP/1.1
+Host: 192.168.251.176
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://192.168.251.175/devset.html
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2679
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理</title><meta http-equiv='Content-Type' content='text/html' charset='utf-8'/><style type='text/css'>label{display: inline-block;width: 80px;font-weight: bolder;color: #0066FF;}body {	background-color: #35a6e8;	background: -webkit-linear-gradient(right, #f0f0f0 , #35a6e8);    background: -o-linear-gradient( right, #f0f0f0, #35a6e8);    background: -moz-linear-gradient( right, #f0f0f0, #35a6e8);    background: linear-gradient(to right, #f0f0f0 , #35a6e8);}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: left;color: #ffffff;font-size: 24px;font-weight: bolder;}h4 {color: #78e4ca;font-size: 33px;font-style: oblique;}h5 {text-align: end;color: #FFFFFF;font-size: 11px;}h6 {text-align: left;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}.wrapper {width:720px;margin:auto;}.wrapper1 {	width: 310px;	height: 360px;	padding: 20px;	background: #5e85c0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;	background: -webkit-linear-gradient(left top, #78e4ca , #506de3);	background: -o-linear-gradient(bottom right, #78e4ca, #506de3);	background: -moz-linear-gradient(bottom right, #78e4ca, #506de3);	background: linear-gradient(to bottom right, #78e4ca , #506de3);}.wrapper2 {	width: 330px;	height: 380px;	padding: 10px;	background: #f0f0f0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;}#rcorners1 {	color: #FFFFFF;	font-weight: bolder;	font-size: 18px;	border-radius: 15px;	background: #4cbdf7;	background: #0066CC;	width: 158px;	height: 30px;	border: 0px;}</style></head><body><h1 > STAR-XINHUI </h1><h2> chengdu sida web management interface </h2><br><br><br><br><br><br><div class='wrapper' ><div class='wrapper1' > <h4> Welcome！ </h4><h3> 终端网页管理界面Ver1.1 </h3><br><br><br><br><h5> 型号：适配器<br>&copy;斯达鑫辉视讯科技有限公司 </h5></div><div class='wrapper2' ><div style='padding:100px 00px 00px 85px;'><h6> 用户密码：</h6>	</div><form id='frmSetting' method='POST' action='login.cgi'><div style='padding:0px 00px 00px 0px;'><p><label for='txtpass' ></label> <input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0' name='passw'onFocus="if(value==defaultValue){value='';this.style.color='#303030'}"onBlur="if(!value){value=defaultValue;this.style.color='#c0c0c0'}" /></p></div><div style='padding:1px 00px 00px 85px;'><p> <input  type='submit' value='登录' id='rcorners1'/></p></form></div></div></div>
+
+[1]RPOST /login.cgi HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Cache-Control: max-age=0
+Origin: http://192.168.251.176
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/
 Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+Content-Length: 7
+
+passw=0
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:271
+
+
+
+[2]W<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head><body><span style='color:red;'>...验证失败</span></body></html><script>var int=setTimeout('refresh()',900);function refresh(){window.location='login.html';}</script>
+
+[1]RGET /login.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/login.cgi
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2679
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉终端网页管理</title><meta http-equiv='Content-Type' content='text/html' charset='utf-8'/><style type='text/css'>label{display: inline-block;width: 80px;font-weight: bolder;color: #0066FF;}body {	background-color: #35a6e8;	background: -webkit-linear-gradient(right, #f0f0f0 , #35a6e8);    background: -o-linear-gradient( right, #f0f0f0, #35a6e8);    background: -moz-linear-gradient( right, #f0f0f0, #35a6e8);    background: linear-gradient(to right, #f0f0f0 , #35a6e8);}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: left;color: #ffffff;font-size: 24px;font-weight: bolder;}h4 {color: #78e4ca;font-size: 33px;font-style: oblique;}h5 {text-align: end;color: #FFFFFF;font-size: 11px;}h6 {text-align: left;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}.wrapper {width:720px;margin:auto;}.wrapper1 {	width: 310px;	height: 360px;	padding: 20px;	background: #5e85c0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;	background: -webkit-linear-gradient(left top, #78e4ca , #506de3);	background: -o-linear-gradient(bottom right, #78e4ca, #506de3);	background: -moz-linear-gradient(bottom right, #78e4ca, #506de3);	background: linear-gradient(to bottom right, #78e4ca , #506de3);}.wrapper2 {	width: 330px;	height: 380px;	padding: 10px;	background: #f0f0f0;	float: left;	border: 5px;	border-style:solid;	border-color:#ffffff;}#rcorners1 {	color: #FFFFFF;	font-weight: bolder;	font-size: 18px;	border-radius: 15px;	background: #4cbdf7;	background: #0066CC;	width: 158px;	height: 30px;	border: 0px;}</style></head><body><h1 > STAR-XINHUI </h1><h2> chengdu sida web management interface </h2><br><br><br><br><br><br><div class='wrapper' ><div class='wrapper1' > <h4> Welcome！ </h4><h3> 终端网页管理界面Ver1.1 </h3><br><br><br><br><h5> 型号：适配器<br>&copy;斯达鑫辉视讯科技有限公司 </h5></div><div class='wrapper2' ><div style='padding:100px 00px 00px 85px;'><h6> 用户密码：</h6>	</div><form id='frmSetting' method='POST' action='login.cgi'><div style='padding:0px 00px 00px 0px;'><p><label for='txtpass' ></label> <input type='text' value='请输入用户密码'  size='16' style='font-size: 16px; color: #c0c0c0' name='passw'onFocus="if(value==defaultValue){value='';this.style.color='#303030'}"onBlur="if(!value){value=defaultValue;this.style.color='#c0c0c0'}" /></p></div><div style='padding:1px 00px 00px 85px;'><p> <input  type='submit' value='登录' id='rcorners1'/></p></form></div></div></div>
+
+[1]RPOST /login.cgi HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Cache-Control: max-age=0
+Origin: http://192.168.251.176
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/login.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+Content-Length: 11
+
+passw=admin
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:319
+
+
+
+[2]W<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/></head><body><span style='color:green;'>...验证通过</span></body></html><script>var int=setTimeout('refresh()',450);function refresh(){document.cookie='NSTAR_COOKIE8506612606255860'; window.location='sta.html';}</script>
+
+[1]RGET /sta.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/login.cgi
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2884
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a class='home'>STAR-斯达鑫辉</a></li><li><a href='sta.html' class='active'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 参数状态</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='sta.cgi'><p><label>工作模式:</label><input type='text' size='16' disabled='disabled' id='sip' name='sip'/></p><p><label>指令端口状态:</label><input type='text' size='16' disabled='disabled' id='dip' name='dip'/></p><p><label>编码器状态:</label><input type='text' size='16' disabled='disabled' id='programIP' name='programIP'/></p><p><label>数据流量:</label><input type='text' size='16' disabled='disabled' id='logicID' name='logicID'/></p><p><label>当前音源:</label><input type='text' size='16' disabled='disabled' id='physID' name='physID'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function myrefresh(){	var xmlHttp = new XMLHttpRequest();	xmlHttp.open('GET', '/sta.js', true);	xmlHttp.send(null);	xmlHttp.onreadystatechange=function()	{		if(xmlHttp.readyState == 4 && xmlHttp.status == 200) 		{var json=xmlHttp.responseText;var o=eval('('+json+')');if ($('sip')) $('sip').value = o.sip;if ($('dip')) $('dip').value = o.dip;if ($('programIP')) $('programIP').value = o.programIP;if ($('logicID')) $('logicID').value = o.logicID;if ($('physID')) $('physID').value = o.physID;}	}}</script>	<script language='JavaScript'>setInterval('myrefresh()',2000);</script><script>myrefresh();</script>
+
+[1]RGET /sta.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: */*
+Referer: http://192.168.251.176/sta.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:136
+
+
+
+[2]W{'sip':'192.1.1.170:13','dip':'192.1.1.1:51001','programIP':'255.255.255.0','logicID':'01-02-03-04-05-06','physID':'01-02-03-04-05-06',}
+
+[1]RGET /firmware.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/sta.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -1056,58 +1287,14 @@ Content-Length:4372
 [2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>progress{width: 468px;height: 5px;color:#ff6300;background:#E0E0E0;}progress::-webkit-progress-bar{     background-color: #E0E0E0;border-radius: 0.2rem;}progress::-webkit-progress-value{background: #ff6300;border-radius: 0.2rem; }</style></head><style>.txt{ height:28px;line-height:28px; border:1px solid #cdcdcd; width:180px;}.ui-upload{height: 30px;width: 110px;background-color:#00abff;font-weight: bolder;font-size:12px;line-height:30px;display: inline-block;text-align:center;color: #ffffff;border-radius:15px;margin: 0px 30px 0px 30px;}</style></div><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html' class='active'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3>面板固件升级</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmFirmware' method='post' action='firmware.cgi' enctype='multipart/form-data'><input type='text' id='textfield' class='txt'/><label class='ui-upload'>选择升级文件<input type='file' id='file' name='myfile' value='' accept='.bin'style='display: none;'onchange="document.getElementById('textfield').value=this.files[0].name"></label><input type='button' onclick ='UpladFile();' value='开始升级' id='rcorners1' style='background: #ff6300'/><br /><progress id='progressBar' value='0' max='100' ></progress><span id='percentage'></span><span id='time' style='color: #FF2222;font-size: 14px;'></span></form><form id='frmSetting' method='POST' action='firmware.cgi'><p><label>烧写进度:</label><input type='text' size='16' disabled='disabled' id='CmdPid' name='CmdPid'/></p></form><p><p style='color: #FF2222;font-size: 14px;'> 注意：烧写过程中不要断电，烧写进度100%后刷新页面检查版本信息</a></p></body></html></script><script type='text/javascript'>var xhr;function UpladFile(){var fileObj = document.getElementById('file').files[0];var url = 'firmware.cgi';var form = new FormData();form.append('file', fileObj);xhr = new XMLHttpRequest();xhr.open('post', url, true);xhr.onload = uploadComplete;xhr.upload.onprogress = progressFunction;xhr.upload.onloadstart = function(){ot = new Date().getTime();oloaded = 0;};xhr.send(form);}function uploadComplete(evt) {var data = JSON.parse(evt.target.responseText);}function progressFunction(evt) {var progressBar = document.getElementById('progressBar');var percentageDiv = document.getElementById('percentage');if (evt.lengthComputable) {progressBar.max = evt.total;progressBar.value = evt.loaded;}time.innerHTML = '固件上传进度'+Math.round(evt.loaded / evt.total * 100)+'%';}</script><script>function $(id) { return document.getElementById(id); };function myrefresh(){	var xmlHttp = new XMLHttpRequest();	xmlHttp.open('GET', '/firmware.js', true);	xmlHttp.send(null);	xmlHttp.onreadystatechange=function()	{		if(xmlHttp.readyState == 4 && xmlHttp.status == 200) 		{var json=xmlHttp.responseText;var o=eval('('+json+')');if ($('CmdPid')) $('CmdPid').value = o.CmdPid;}	}}</script>	<script language='JavaScript'>setInterval('myrefresh()',1000);</script><script>myrefresh();</script>
 
 [1]RGET /firmware.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
 Accept: */*
-Referer: http://192.168.251.175/firmware.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[2]WHTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length:17
-
-
-
-[2]W{'CmdPid':'00%',}
-
-[1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/firmware.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[1]RGET /favicon.ico HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Referer: http://192.168.251.175/firmware.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
-
-
-
-[1]RGET /firmware.js HTTP/1.1
-Host: 192.168.251.175
-Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/firmware.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Referer: http://192.168.251.176/firmware.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -1120,14 +1307,14 @@ Content-Length:17
 [2]W{'CmdPid':'00%',}
 
 [1]RGET /firmware.js HTTP/1.1
-Host: 192.168.251.175
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
 Accept: */*
-Referer: http://192.168.251.175/firmware.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Referer: http://192.168.251.176/firmware.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
@@ -1139,63 +1326,293 @@ Content-Length:17
 
 [2]W{'CmdPid':'00%',}
 
-[1]RGET /firmware.js HTTP/1.1
-Host: 192.168.251.175
+[1]RGET /info.html HTTP/1.1
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/firmware.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/firmware.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [2]WHTTP/1.1 200 OK
 Content-Type: text/html
-Content-Length:17
+Content-Length:2477
 
 
 
-[2]W{'CmdPid':'00%',}
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html' class='active'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 信息日志</h3><div style='background:snow; display:block; padding:10px 10%;'><form><p><label>硬件版本:</label><input type='text' size='16' id='software' name='software'/></p><p><label>软件版本:</label><input type='text' size='16' id='hadware' name='hadware'/></p><p><label>序列号:</label><input type='text' size='16' id='serial' name='serial'/></p><p><textarea style='color: #444444;font-size: 11px;' cols='140' rows='30' id='logtxt' name='logtxt'></textarea></p></form><script>function $(id) { return document.getElementById(id); };function json_info(o) {if ($('software')) $('software').value = o.software;if ($('hadware')) $('hadware').value = o.hadware;if ($('serial')) $('serial').value = o.serial;if ($('logtxt')) $('logtxt').value = o.logtxt;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='info.js'> </script>
 
-[1]RGET /firmware.js HTTP/1.1
-Host: 192.168.251.175
+[1]RGET /info.js HTTP/1.1
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
 Accept: */*
-Referer: http://192.168.251.175/firmware.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Referer: http://192.168.251.176/info.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [2]WHTTP/1.1 200 OK
 Content-Type: text/html
-Content-Length:17
+Content-Length:370
 
 
 
-[2]W{'CmdPid':'00%',}
+[2]Wjson_info({'software':'192.1.1.170:40001','hadware':'192.1.1.1:51001','serial':'255.255.255.0','logtxt':'53:58:29  只能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多只能�\r\n54:03:26  只能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多只能�\r\n',});
 
-[1]RGET /firmware.js HTTP/1.1
-Host: 192.168.251.175
+[1]RGET /devset.html HTTP/1.1
+Host: 192.168.251.176
 Connection: keep-alive
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36
-Accept: */*
-Referer: http://192.168.251.175/firmware.html
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9
-Cookie: NSTAR_COOKIE9507069447837620
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/info.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
 
 
 
 [2]WHTTP/1.1 200 OK
 Content-Type: text/html
-Content-Length:17
+Content-Length:3349
 
 
 
-[2]W{'CmdPid':'00%',}
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>label1{display: inline-block;color: #000000;}</style><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html' class='active'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 音频设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='devset.cgi'><p><label>节目号:</label><label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='ProgPid' name='ProgPid'/></p><p><label>MP3音量:</label><input type='text' size='16' id='MP3Vol' name='MP3Vol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='BitRate' name='BitRate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='SamplRate' name='SamplRate'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_devset(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('ProgPid')) $('ProgPid').value = o.ProgPid;if ($('MP3Vol')) $('MP3Vol').value = o.MP3Vol;if ($('BitRate')) $('BitRate').value = o.BitRate;if ($('SamplRate')) $('SamplRate').value = o.SamplRate;if ($('Gain')) $('Gain').value = o.Gain;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='devset.js'> </script>
+
+[1]RGET /devset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: */*
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:187
+
+
+
+[2]Wjson_devset({'CmdPid':'192.1.1.170:40001','ProgPid':'192.1.1.1:51001','MP3Vol':'255.255.255.0','BitRate':'01-02-03-04-05-06','SamplRate':'01-02-03-04-05-06','Gain':'01-02-03-04-05-06',});
+
+[1]RGET /info.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:2477
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html'>音频设置</a></li><li><a href='info.html' class='active'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 信息日志</h3><div style='background:snow; display:block; padding:10px 10%;'><form><p><label>硬件版本:</label><input type='text' size='16' id='software' name='software'/></p><p><label>软件版本:</label><input type='text' size='16' id='hadware' name='hadware'/></p><p><label>序列号:</label><input type='text' size='16' id='serial' name='serial'/></p><p><textarea style='color: #444444;font-size: 11px;' cols='140' rows='30' id='logtxt' name='logtxt'></textarea></p></form><script>function $(id) { return document.getElementById(id); };function json_info(o) {if ($('software')) $('software').value = o.software;if ($('hadware')) $('hadware').value = o.hadware;if ($('serial')) $('serial').value = o.serial;if ($('logtxt')) $('logtxt').value = o.logtxt;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='info.js'> </script>
+
+[1]RGET /info.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: */*
+Referer: http://192.168.251.176/info.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:500
+
+
+
+[2]Wjson_info({'software':'192.1.1.170:40001','hadware':'192.1.1.1:51001','serial':'255.255.255.0','logtxt':'53:58:29  只能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多只能�\r\n54:03:26  只能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多只能�\r\n56:32:15  只能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多能怪大叔大婶多只能�\r\n',});
+
+[1]RGET /devset.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/info.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:3349
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>label1{display: inline-block;color: #000000;}</style><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html' class='active'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 音频设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='devset.cgi'><p><label>节目号:</label><label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='ProgPid' name='ProgPid'/></p><p><label>MP3音量:</label><input type='text' size='16' id='MP3Vol' name='MP3Vol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='BitRate' name='BitRate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='SamplRate' name='SamplRate'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_devset(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('ProgPid')) $('ProgPid').value = o.ProgPid;if ($('MP3Vol')) $('MP3Vol').value = o.MP3Vol;if ($('BitRate')) $('BitRate').value = o.BitRate;if ($('SamplRate')) $('SamplRate').value = o.SamplRate;if ($('Gain')) $('Gain').value = o.Gain;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='devset.js'> </script>
+
+[1]RGET /devset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: */*
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:187
+
+
+
+[2]Wjson_devset({'CmdPid':'192.1.1.170:40001','ProgPid':'192.1.1.1:51001','MP3Vol':'255.255.255.0','BitRate':'01-02-03-04-05-06','SamplRate':'01-02-03-04-05-06','Gain':'01-02-03-04-05-06',});
+
+[1]RGET /devset.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/info.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:3349
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>label1{display: inline-block;color: #000000;}</style><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html' class='active'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 音频设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='devset.cgi'><p><label>节目号:</label><label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='ProgPid' name='ProgPid'/></p><p><label>MP3音量:</label><input type='text' size='16' id='MP3Vol' name='MP3Vol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='BitRate' name='BitRate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='SamplRate' name='SamplRate'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_devset(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('ProgPid')) $('ProgPid').value = o.ProgPid;if ($('MP3Vol')) $('MP3Vol').value = o.MP3Vol;if ($('BitRate')) $('BitRate').value = o.BitRate;if ($('SamplRate')) $('SamplRate').value = o.SamplRate;if ($('Gain')) $('Gain').value = o.Gain;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='devset.js'> </script>
+
+[1]RGET /devset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: */*
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:187
+
+
+
+[2]Wjson_devset({'CmdPid':'192.1.1.170:40001','ProgPid':'192.1.1.1:51001','MP3Vol':'255.255.255.0','BitRate':'01-02-03-04-05-06','SamplRate':'01-02-03-04-05-06','Gain':'01-02-03-04-05-06',});
+
+[1]RGET /devset.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/info.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:3349
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>label1{display: inline-block;color: #000000;}</style><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html' class='active'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 音频设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='devset.cgi'><p><label>节目号:</label><label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='ProgPid' name='ProgPid'/></p><p><label>MP3音量:</label><input type='text' size='16' id='MP3Vol' name='MP3Vol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='BitRate' name='BitRate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='SamplRate' name='SamplRate'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_devset(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('ProgPid')) $('ProgPid').value = o.ProgPid;if ($('MP3Vol')) $('MP3Vol').value = o.MP3Vol;if ($('BitRate')) $('BitRate').value = o.BitRate;if ($('SamplRate')) $('SamplRate').value = o.SamplRate;if ($('Gain')) $('Gain').value = o.Gain;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='devset.js'> </script>
+
+[1]RGET /devset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: */*
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:187
+
+
+
+[2]Wjson_devset({'CmdPid':'192.1.1.170:40001','ProgPid':'192.1.1.1:51001','MP3Vol':'255.255.255.0','BitRate':'01-02-03-04-05-06','SamplRate':'01-02-03-04-05-06','Gain':'01-02-03-04-05-06',});
+
+[1]RGET /devset.html HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Referer: http://192.168.251.176/info.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:3349
+
+
+
+[2]W<!DOCTYPE html><html><head><title>斯达鑫辉网页管理界面</title><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><style type='text/css'>label{display: inline-block;width: 120px;font-weight: bolder;color: #0066FF;}body {background-color: #F5F5F5;}h1 {font-size: 20px;padding: 8px 10%;font-weight: bolder;color: #FF0000;background-color: #FFFFFF;}h2 {text-align: center;font-size: 12px;font-style: oblique;font-weight: bold;color: #0066CC;}h3 {text-align: center;color: #333333;font-size: 24px;}ul {list-style-type: none;margin: 0px 10%; padding: 0;overflow: hidden;border: 1px solid #e7e7e7;background-color: #f3f3f3;}li { float: left;}li a {display: block;color: #666;text-align: center;padding: 10px 20px;text-decoration: none;}li a:hover:not(.active) {background-color: #CCCCCC;}li a.home {color: #F00;font-weight: bold;background-color: #FFFFFF;}li a.active {color: #F5F5F5;font-weight: bold;background-color: #0066CC;}#rcorners1{color: #FFFFFF;font-weight: bolder;font-size: 12px;border-radius: 15px;background: #0066CC;width: 110px;height: 30px;border: 0px;margin: 0.3rem 2rem 1rem 0rem;}</style></head><style>label1{display: inline-block;color: #000000;}</style><body><ul><li><a href='sta.html'>参数状态</a></li><li><a href='ipset.html'>网络设置</a></li><li><a href='devset.html' class='active'>音频设置</a></li><li><a href='info.html'>信息日志</a></li><li><a href='firmware.html'>面板固件</a></li></ul><h2> chengdu sida web management interface </h2><h3> 音频设置</h3><div style='background:snow; display:block; padding:10px 10%;'><form id='frmSetting' method='POST' action='devset.cgi'><p><label>节目号:</label><label1 style='padding:0px 8px 0px 0px;'>IP地址:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>子网掩码:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/><label1 style='padding:0px 8px 0px 20px;'>默认网关:</label1><input type='text' size='10' id='CmdPid' name='CmdPid'/></p><p><label>节目号:</label><input type='text' size='16' id='ProgPid' name='ProgPid'/></p><p><label>MP3音量:</label><input type='text' size='16' id='MP3Vol' name='MP3Vol'/></p><p><label>编码比特率:</label><input type='text' size='16' id='BitRate' name='BitRate'/></p><p><label>编码采样率:</label><input type='text' size='16' id='SamplRate' name='SamplRate'/></p><p><label>编码增益:</label><input type='text' size='16' id='Gain' name='Gain'/></p><p><p><input type='button' value='保存' onclick ='commit();'  id='rcorners1'/><input type='button' onclick ='savereboot();' value='重启' id='rcorners1' style='background: #ff6300'/></p></form></div></body></html><script>function $(id) { return document.getElementById(id); };function json_devset(o) {if ($('CmdPid')) $('CmdPid').value = o.CmdPid;if ($('ProgPid')) $('ProgPid').value = o.ProgPid;if ($('MP3Vol')) $('MP3Vol').value = o.MP3Vol;if ($('BitRate')) $('BitRate').value = o.BitRate;if ($('SamplRate')) $('SamplRate').value = o.SamplRate;if ($('Gain')) $('Gain').value = o.Gain;};function commit(){document.getElementById('frmSetting').submit();}function savereboot(){document.getElementById('frmSetting').action='sysreboot.cgi'; document.getElementById('frmSetting').submit(); }</script><script type='text/javascript' src='devset.js'> </script>
+
+[1]RGET /devset.js HTTP/1.1
+Host: 192.168.251.176
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0
+Accept: */*
+Referer: http://192.168.251.176/devset.html
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: zh-CN,zh;q=0.8
+Cookie: NSTAR_COOKIE8506612606255860
+
+
+
+[2]WHTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length:187
+
+
+
+[2]Wjson_devset({'CmdPid':'192.1.1.170:40001','ProgPid':'192.1.1.1:51001','MP3Vol':'255.255.255.0','BitRate':'01-02-03-04-05-06','SamplRate':'01-02-03-04-05-06','Gain':'01-02-03-04-05-06',});
 

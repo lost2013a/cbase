@@ -6,7 +6,7 @@ OBJ = test
 #CFLAGS=-Wall -O2
 CFLAGS= -Wall
 LIBS=-lpthread
-OBJS =  tcp_client2.c
+OBJS = app_delay.c
 $(OBJ):$(OBJS)
 	$(CC) -o $@ $(CFLAGS) $^ $(LIBS)
 
