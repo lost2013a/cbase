@@ -1,9 +1,9 @@
 {
 	"Enable":	1,
-	"Image":	[{
+	"fields":	[{
 			"precision":	"zip",
-			"Latitude":	37.7668,
-			"Longitude":	-122.3959,
+			"Latitude":	377668,
+			"Longitude":	223959,
 			"Address":	"",
 			"City":	"SAN FRANCISCO",
 			"State":	"CA",
@@ -11,8 +11,8 @@
 			"Country":	"US"
 		}, {
 			"precision":	"zip",
-			"Latitude":	37.371991,
-			"Longitude":	-122.026,
+			"Latitude":	-231,
+			"Longitude":	1999,
 			"Address":	"",
 			"City":	"SUNNYVALE",
 			"State":	"CA",

@@ -1,23 +1,7 @@
 /*
-  Copyright (c) 2009-2017 Dave Gamble and cJSON contributors
-
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to deal
-  in the Software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
-
-  The above copyright notice and this permission notice shall be included in
-  all copies or substantial portions of the Software.
-
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-  THE SOFTWARE.
+2020-09-17 总结：
+反序列化太麻烦，还是不太适用。
+如果只做序列化到还可以一用。
 */
 
 #include <stdio.h>
@@ -25,12 +9,16 @@
 #include <string.h>
 #include "cJSON.h"
 
+#define FileName "test.json"
+
+
+
 /* Used by some code below as an example datatype. */
 struct record
 {
     const char *precision;
-    double lat;
-    double lon;
+    int lat;
+    int lon;
     const char *address;
     const char *city;
     const char *state;
@@ -38,28 +26,38 @@ struct record
     const char *country;
 };
 
+struct Cfg {
+   unsigned int magic;
+   unsigned int version;
+   unsigned int crcval;
+   unsigned int crcval;
+   struct record fields[2];
+};
+
 /* Our array of "records": */
-struct record fields[2] =
-{
-    {
-        "zip",
-        37.7668,
-        -1.223959e+2,
-        "",
-        "SAN FRANCISCO",
-        "CA",
-        "94107",
-        "US"
-    },
-    {
-        "zip",
-        37.371991,
-        -1.22026e+2,
-        "",
-        "SUNNYVALE",
-        "CA",
-        "94085",
-        "US"
+struct Cfg userCfg ={
+    .enable = 1,
+    .fields = {
+        {
+            "zip",
+            377668,
+            223959,
+            "",
+            "SAN FRANCISCO",
+            "CA",
+            "94107",
+            "US"
+        },
+        {
+            "zip",
+            -231,
+            1999,
+            "",
+            "SUNNYVALE",
+            "CA",
+            "94085",
+            "US"
+        }
     }
 };
 
@@ -82,48 +80,115 @@ static void cjson_free(void *ptr)
 }
 
 /* Create a bunch of objects as demonstration. */
-static int creat(cJSON *root)
-{
+static int save(cJSON *root)
+{ 
+#if 0    
     char *out = NULL;
-    out = cJSON_Print(root);
-    printf("%s\n", out);
-	FILE* fp = fopen("test.json", "w+"); 	
-	fprintf(fp, "%s", out);   
+    out = cJSON_Print(root); /*注意必须用了之后free*/
+    printf("%ld :\n %s\n",strlen(out), out);
+	FILE* fp = fopen(FileName ,"w+"); 	
+	fprintf(fp, "%s", out);
+    free(out);
 	fclose(fp);
+    return 0;
+#else
+    char *out = malloc(FileName);
+    if (!cJSON_PrintPreallocated(root, out, MaxRam, 1)) {
+        printf("cJSON Print failed!\n");
+        return -1;
+    }
+    FILE* fp = fopen(FileName ,"w+"); 	
+	fprintf(fp, "%s", out);
+	fclose(fp);
+    free(out);
+#endif
     return 0;
 }
 
+
+
+
+
 /* Create a bunch of objects as demonstration. */
-static void create_objects(void)
+static void serialize(void)
 {
     cJSON *root = NULL;
-    cJSON *fmt = NULL;
+    cJSON *fields = NULL;
     cJSON *fld = NULL;
     int i = 0;
     root = cJSON_CreateObject();
-    cJSON_AddNumberToObject(root, "Enable", 1);
-    cJSON_AddItemToObject(root, "Image", fmt = cJSON_CreateArray());
+    cJSON_AddNumberToObject(root, "Enable", userCfg.enable);
+    cJSON_AddItemToObject(root, "fields", fields = cJSON_CreateArray());
     for (i = 0; i < 2; i++)
     {
-        cJSON_AddItemToArray(fmt, fld = cJSON_CreateObject());
-        cJSON_AddStringToObject(fld, "precision", fields[i].precision);
-        cJSON_AddNumberToObject(fld, "Latitude", fields[i].lat);
-        cJSON_AddNumberToObject(fld, "Longitude", fields[i].lon);
-        cJSON_AddStringToObject(fld, "Address", fields[i].address);
-        cJSON_AddStringToObject(fld, "City", fields[i].city);
-        cJSON_AddStringToObject(fld, "State", fields[i].state);
-        cJSON_AddStringToObject(fld, "Zip", fields[i].zip);
-        cJSON_AddStringToObject(fld, "Country", fields[i].country);
+        cJSON_AddItemToArray(fields, fld = cJSON_CreateObject());
+        cJSON_AddStringToObject(fld, "precision", userCfg.fields[i].precision);
+        cJSON_AddNumberToObject(fld, "Latitude", userCfg.fields[i].lat);
+        cJSON_AddNumberToObject(fld, "Longitude", userCfg.fields[i].lon);
+        cJSON_AddStringToObject(fld, "Address", userCfg.fields[i].address);
+        cJSON_AddStringToObject(fld, "City", userCfg.fields[i].city);
+        cJSON_AddStringToObject(fld, "State", userCfg.fields[i].state);
+        cJSON_AddStringToObject(fld, "Zip", userCfg.fields[i].zip);
+        cJSON_AddStringToObject(fld, "Country", userCfg.fields[i].country);
     }
-    creat(root); 
+    save(root); 
 }
 
+
+//static 
+//cJSON* getItem(const cJSON * const object, const char * const string) {
+//    
+//}
+
+int unserialize(char *text)
+{
+    int ret = -1;
+    cJSON *root = cJSON_ParseWithLength(text, MaxRam);
+    cJSON *fields = NULL;
+    cJSON *fld = NULL;
+	if (!root) {
+        printf("cJSON unserialize failed\n");
+    }else {
+        fields = cJSON_GetObjectItem(root, "fields");
+        if(fields != NULL) {
+            fld = cJSON_GetArrayItem(fields, 0);
+            if(fld  == NULL) {
+                printf("fld not find\n");
+            }else {
+                cJSON *a = cJSON_GetObjectItem(fld, "precision");
+                if(a != NULL) {
+                    printf("a = %d", cJSON_GetNumberValue(a));
+                    //printf("a = %s\n", cJSON_GetStringValue(a));
+                }
+            }
+        }else {
+            printf("not find\n");
+        }
+        
+       
+	}
+}
+
+void dofile(void)
+{
+	FILE *f;long len;char *data;
+	f= fopen(FileName ,"rb");
+	fseek(f, 0, SEEK_END);
+	len= ftell(f);
+	fseek(f, 0, SEEK_SET);
+	data=(char*)malloc(len + 1);
+	fread(data, 1, len, f);
+	fclose(f);
+	unserialize(data);
+	free(data);
+}
 
 int CJSON_CDECL main(void)
 {
     printf("Version: %s\n", cJSON_Version());
     cJSON_Hooks hooks= {cjson_malloc, cjson_free};
 	cJSON_InitHooks(&hooks);
-    create_objects();
+    serialize();
+    dofile();
     return 0;
 }

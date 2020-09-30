@@ -1,14 +1,10 @@
 .PHONY:clean
-#CC =powerpc-fsl-linux-gnuspe-gcc
-#CFLAGS=-Wall  -O2
+#CC = arm-linux-gnueabihf-gcc
 OBJ = test
-#OBJ = test
-#CFLAGS=-Wall -O2
-CFLAGS= -Wall
-LIBS=-lpthread
-OBJS = main.c mycc936.c
-$(OBJ):$(OBJS)
+CFLAGS=-Wall -O2
+LIBS=
+SRC =  main.c 
+$(OBJ):$(SRC)
 	$(CC) -o $@ $(CFLAGS) $^ $(LIBS)
-
 clean:
 	rm  $(OBJ) 
