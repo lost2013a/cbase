@@ -11,10 +11,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define SERVER_IP	"192.168.251.182"
-#define SERVER_PORT	((uint16_t)24001)
+#define SERVER_IP	"192.168.251.17"
+#define SERVER_PORT	((uint16_t)6666)
 #define BUFF_SIZE	(1024 * 4)
-
+const char *str = "hello world\n";
 int main(int argc, char *argv[])
 {
     int conn_sock;
@@ -55,13 +55,13 @@ int main(int argc, char *argv[])
 	while(1)
 	{
 		
-		if (sendto(conn_sock, test_str, 400, 0,
+		if (sendto(conn_sock, str, strlen(str), 0,
 				   (struct sockaddr *)&server_addr, addr_len) < 0) {
 			perror("send data error");
 			goto err;
 		}
-		test_str[5]++;
-		usleep(100);
+		//test_str[5]++;
+		usleep(2000*1000);
 	}
 #endif
     if (sendto(conn_sock, test_str, strlen(test_str), 0,
