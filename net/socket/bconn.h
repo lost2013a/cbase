@@ -13,7 +13,7 @@
 #include <stdint.h>
 
 #define FD_INVALID 0
-#define bs_dbg(fmt, args...)\
+#define bc_dbg(fmt, args...)\
 do {\
     printf("%s "fmt, b->name, ##args);\
 }while(0)
@@ -29,7 +29,7 @@ do {\
 	0,\
 }
 struct bsockt{
-    char name[16];
+    char *name;
     int fd;
     unsigned int ipaddr; 
 	unsigned short port;
@@ -45,7 +45,7 @@ struct bsockt{
 	unsigned int speed_r;
 	unsigned int speed_s;
 };
-
+typedef struct bsockt BSOCKET;
 
 #define SLEPP_T_R(n)  app_sleep(&b->timer_r, n*1000)
 #define PEND_T_R()  app_pend_wake(b->timer_r)
@@ -53,15 +53,27 @@ struct bsockt{
 #define SLEPP_T_S(n)  app_sleep(&b->timer_s, n*1000)
 #define PEND_T_S()  app_pend_wake(b->timer_s)
 
-
 void bconn_machine(struct bsockt *b);
-void bconn_start(struct bsockt *b, unsigned int remote_ip, unsigned short remote_port);
+void bconn_connect(struct bsockt *b, unsigned int remote_ip, unsigned short remote_port);
 void bconn_stop(struct bsockt *b);
 void bconn_restart(struct bsockt *b);
 int bconn_send(struct bsockt *b, unsigned char *data, unsigned int len);
-unsigned char bconn_sta(struct bsockt *b);
 void bconn_block_rec(struct bsockt *b);
 
+#define bconn_isConnect(b) \
+({ \
+	b->fd != FD_INVALID ? 1: 0; \
+})
+
+#define bconn_speed_r(b) \
+({ \
+	b->speed_r; \
+})
+
+#define bconn_speed_s(b) \
+({ \
+	b->speed_s; \
+})
 
 
 #endif

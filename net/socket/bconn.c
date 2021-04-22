@@ -13,21 +13,13 @@ enum {
 #define SLEPP_T_STEP(n)  app_sleep(&b->timer_step, n*1000)
 #define PEND_T_STEP()  app_pend_wake(b->timer_step)
 
-static void _socket_close(int *fd)
-{
-	if(*fd != FD_INVALID){
-		close(*fd);
-		*fd = FD_INVALID;
-	}
-}
-
-static int _socket_open(struct bsockt *b)
+static int __socket_open(struct bsockt *b)
 {
     int conn_sock;
     struct sockaddr_in	server_addr;
     conn_sock	= socket(AF_INET, SOCK_STREAM , 0);
     if (conn_sock < 0) {
-	    bs_dbg("socket creat error\n");
+	    bc_dbg("socket creat error\n");
 	    return  FD_INVALID;
     }
     (void)memset(&server_addr, 0, sizeof(server_addr));
@@ -37,16 +29,23 @@ static int _socket_open(struct bsockt *b)
 	if (connect(conn_sock,
             (struct sockaddr *)&server_addr,
             sizeof(server_addr)) >= 0) {
-        bs_dbg("command connect ok\n");
-	}
-	else{
-        unsigned int ip = b->ipaddr;
-		bs_dbg("wait connect to command addr failed %d.%d.%d.%d:%d\n",
-				ip>>24, (ip&0xff0000)>>16, (ip&0xff00)>>8, ip&0xff, b->port);
+        bc_dbg("socket connect ok\n");
+	}else {
+//        unsigned int ip = b->ipaddr;
+//		bc_dbg("wait connect to command addr failed %d.%d.%d.%d:%d\n",
+//				ip>>24, (ip&0xff0000)>>16, (ip&0xff00)>>8, ip&0xff, b->port);
 		close(conn_sock);
 		conn_sock= FD_INVALID;
 	}	
 	return conn_sock;
+}
+
+static void _socket_close(int *fd)
+{
+	if(*fd != FD_INVALID){
+		close(*fd);
+		*fd = FD_INVALID;
+	}
 }
 
 static unsigned char _creat_connect_socket(struct bsockt *b)
@@ -54,7 +53,7 @@ static unsigned char _creat_connect_socket(struct bsockt *b)
 	unsigned char ret = 0;
 	_socket_close(&b->fd);
 	if(b->ipaddr > 0 && b->port > 0){
-		int fd = _socket_open(b);
+		int fd = __socket_open(b);
 		if(fd != FD_INVALID){
 			b->fd = fd;
 			ret = 1;	
@@ -63,8 +62,18 @@ static unsigned char _creat_connect_socket(struct bsockt *b)
 	return ret;
 }
 
+static void _cal_speed(struct bsockt *b, unsigned int t) {
+    if(t > 0) {
+        b->speed_r = b->cnt_r/t;
+        b->speed_s = b->cnt_s/t;
+        b->cnt_r = 0;
+        b->cnt_s = 0;
+    }
+}
+
 void bconn_machine(struct bsockt *b)
 {
+    unsigned char t = 2;
     if(PEND_T_STEP()){
         switch(b->isNeedCreat) {
         case NETSTEP_CREAT:
@@ -76,7 +85,9 @@ void bconn_machine(struct bsockt *b)
             }
             if(b->isNeedCreat == NETSTEP_RECREAT) {
                 /*多等待几秒*/
-                SLEPP_T_STEP(5);
+                t = 5;
+            }else {
+                t = 1;
             }
             break;     
         case NETSTEP_STOP:
@@ -86,11 +97,12 @@ void bconn_machine(struct bsockt *b)
         default:
             break;    
         }
-        SLEPP_T_STEP(2);
+        _cal_speed(b, t);
+        SLEPP_T_STEP(t);
     }
 }
 
-void bconn_start(struct bsockt *b, unsigned int remote_ip, unsigned short remote_port)
+void bconn_connect(struct bsockt *b, unsigned int remote_ip, unsigned short remote_port)
 {
     if(remote_ip)
 	    b->ipaddr= remote_ip;
@@ -111,21 +123,18 @@ void bconn_restart(struct bsockt *b)
 	}
 }
 
+
 int bconn_send(struct bsockt *b, unsigned char *data, unsigned int len)
 {
 	int ret= write(b->fd, data, len);
 	if(ret <= 0){
-		printf("command send err=%d\n", ret);
+		bc_dbg("socket send err=%d\n", ret);
 		bconn_restart(b);
-	}
+	}else {
+        b->cnt_s+=ret;
+    }
 	return ret;
 }
-
-unsigned char bconn_sta(struct bsockt *b)
-{
-	return b->fd != FD_INVALID ? 1: 0;
-}
-
 
 void bconn_block_rec(struct bsockt *b)
 {
@@ -142,12 +151,12 @@ void bconn_block_rec(struct bsockt *b)
 	{
 		if(FD_ISSET( fd, &rfd_set )){
 			int rlen = read(fd, rbuf, 1460);
-            printf("read %d\n", rlen);
 			if(rlen <= 0){
-				printf("socket unvaild\n");
+				bc_dbg("socket read failed\n");
 				bconn_restart(b);
 			}
 			else{
+                b->cnt_r+=rlen;
                 if(b->pfunc_r != NULL) {
 				    b->pfunc_r(rbuf, rlen);
                 }
@@ -155,7 +164,6 @@ void bconn_block_rec(struct bsockt *b)
 		}
 	}			
 }
-
 
 
 

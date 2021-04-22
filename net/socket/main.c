@@ -22,7 +22,7 @@ static void *command_tast(void *parm)
 #define TEST_IP (192 << 24 | 168 <<16 | 251 <<8 | 170)
 #define TEST_PORT 50003  
     struct bsockt *b = &command_net_handle;
-	bconn_start(b, TEST_IP, TEST_PORT);
+	bconn_connect(b, TEST_IP, TEST_PORT);
 	while(1)
 	{
 		bconn_machine(b);
@@ -33,7 +33,8 @@ static void *command_tast(void *parm)
 	return 0;
 }
 
-static void creat_command_pthread(void)
+
+void creat_command_pthread(void)
 {
 	pthread_t threads;
 	long t=0;
@@ -47,7 +48,10 @@ int main(int argc, char *argv[])
 {
     app_delay_test();
     creat_command_pthread();
+    struct bsockt *b = &command_net_handle;
 	while(1){
+        
+        printf("sta is %d %d/%d\n", bconn_isConnect(b), bconn_speed_r(b), bconn_speed_s(b));
 		sleep(1);
 	}
 	return 0;

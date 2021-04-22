@@ -28,7 +28,6 @@ void app_delay_test(void) {
             break;
         }
     }
-    printf("TICKS_PER_SEC = %d\n", TICKS_PER_SEC);
     if(wcnt <= 0) {
         printf("app delay parm err\n");
         exit(0);
