@@ -6,76 +6,76 @@ extern "C" {
 
 typedef int handle_t;
 
-#define INI_LINE_LEN    256     /**< INIÎÄ¼þÐÐ³¤¶È*/
-#define INI_SECT_LEN    64      /**< sectionÃû³Æ³¤¶È*/
-#define INI_PARM_LEN    64      /**< parametersÃû³Æ³¤¶È*/
-#define INI_VALUE_LEN   192      /**< valueÃû³Æ³¤¶È*/
+#define INI_LINE_LEN    256     /**< INIæ–‡ä»¶è¡Œé•¿åº¦*/
+#define INI_SECT_LEN    64      /**< sectionåç§°é•¿åº¦*/
+#define INI_PARM_LEN    64      /**< parametersåç§°é•¿åº¦*/
+#define INI_VALUE_LEN   192      /**< valueåç§°é•¿åº¦*/
 
-#define DEF_SECT_ROOT "General" //Ä¬ÈÏ¸ù½ÚµãÃû³Æ
+#define DEF_SECT_ROOT "General" //é»˜è®¤æ ¹èŠ‚ç‚¹åç§°
 
 
 #define EINVALID_HANDLE             (-1)
 
 /** ******************************************************
- * @brief           ´ÓÄÚ´æÖÐ£¬´ò¿ªÒ»¸öINIÎÄ¼þ¸ñÊ½µÄINI¾ä±ú
- * @param [in]      memory Ö¸ÄÚÒ»¿é´æ´¢INIÎÄ¼þ¸ñÊ½µÄÄÚ´æ
- * @param [in] 		size memoryÄÚ´æ´óÐ¡
- * @return handle_t ³É¹¦·µ»ØÖµINI¾ä±ú£¬Ê§°Ü·µ»ØEINVALID_HANDLE
+ * @brief           ä»Žå†…å­˜ä¸­ï¼Œæ‰“å¼€ä¸€ä¸ªINIæ–‡ä»¶æ ¼å¼çš„INIå¥æŸ„
+ * @param [in]      memory æŒ‡å†…ä¸€å—å­˜å‚¨INIæ–‡ä»¶æ ¼å¼çš„å†…å­˜
+ * @param [in] 		size memoryå†…å­˜å¤§å°
+ * @return handle_t æˆåŠŸè¿”å›žå€¼INIå¥æŸ„ï¼Œå¤±è´¥è¿”å›žEINVALID_HANDLE
  * @remarks
  */
 handle_t ini_loadmemory(const char *memory, int size);
 
 
 /** ******************************************************
- * @brief           ´ò¿ªÒ»¸öINIÎÄ¼þ
- * @param [in]      fname INIÎÄ¼þÃû
- * @return handle_t ³É¹¦·µ»ØÖµINI¾ä±ú£¬Ê§°Ü·µ»ØEINVALID_HANDLE
+ * @brief           æ‰“å¼€ä¸€ä¸ªINIæ–‡ä»¶
+ * @param [in]      fname INIæ–‡ä»¶å
+ * @return handle_t æˆåŠŸè¿”å›žå€¼INIå¥æŸ„ï¼Œå¤±è´¥è¿”å›žEINVALID_HANDLE
  * @remarks
  */
 handle_t ini_open(const char*   fname);
 
 /** ******************************************************
- * @brief               ´´½¨Ò»¸öÐÂµÄINIÎÄ¼þ
- * @param [in]          fname Òª´´½¨µÄINIÎÄ¼þÃû
- * @return handle_t     ³É¹¦·µ»ØÖµINI¾ä±ú£¬Ê§°Ü·µ»ØEINVALID_HANDLE
- * @remarks             µ±fnameÎÄ¼þÃûÎªNULLÊ±£¬´´½¨µÄÊÇÒ»¸öÔÚÄÚ´æÖÐµÄÐéÄâ
-                        INIÎÄ¼þ£¬¶ÔÐéÄâINIÎÄ¼þini_save²Ù×÷½«²»»áÓÐÈÎºÎ¸Ä±ä£¬
-                        ini_close½«»áÊÍ·ÅÐéÄâINIÎÄ¼þÏà¹Ø×ÊÔ´
+ * @brief               åˆ›å»ºä¸€ä¸ªæ–°çš„INIæ–‡ä»¶
+ * @param [in]          fname è¦åˆ›å»ºçš„INIæ–‡ä»¶å
+ * @return handle_t     æˆåŠŸè¿”å›žå€¼INIå¥æŸ„ï¼Œå¤±è´¥è¿”å›žEINVALID_HANDLE
+ * @remarks             å½“fnameæ–‡ä»¶åä¸ºNULLæ—¶ï¼Œåˆ›å»ºçš„æ˜¯ä¸€ä¸ªåœ¨å†…å­˜ä¸­çš„è™šæ‹Ÿ
+                        INIæ–‡ä»¶ï¼Œå¯¹è™šæ‹ŸINIæ–‡ä»¶ini_saveæ“ä½œå°†ä¸ä¼šæœ‰ä»»ä½•æ”¹å˜ï¼Œ
+                        ini_closeå°†ä¼šé‡Šæ”¾è™šæ‹ŸINIæ–‡ä»¶ç›¸å…³èµ„æº
  */
 handle_t ini_create(const char* fname);
 
 /** ******************************************************
- * @brief           ½«»º³åÇøÖÐµÄINIÎÄ¼þÄÚÈÝ±£´æµ½ÎÄ¼þ
- * @param [in]      piniÒª±£´æµÄINIÎÄ¼þÖ¸Õë
- * @return int      ·µ»ØÖµÎª´æ´¢ÎÄ¼þÃûÖ¸Õë±£´æ³É¹¦£¬·µ»ØNULLÊ§°Ü
+ * @brief           å°†ç¼“å†²åŒºä¸­çš„INIæ–‡ä»¶å†…å®¹ä¿å­˜åˆ°æ–‡ä»¶
+ * @param [in]      piniè¦ä¿å­˜çš„INIæ–‡ä»¶æŒ‡é’ˆ
+ * @return int      è¿”å›žå€¼ä¸ºå­˜å‚¨æ–‡ä»¶åæŒ‡é’ˆä¿å­˜æˆåŠŸï¼Œè¿”å›žNULLå¤±è´¥
  * @remarks
  */
 char* ini_save(handle_t           ini);
 
 /** ******************************************************
- * @brief           ½«»º³åÇøÖÐµÄINIÎÄ¼þÄÚÈÝ£¬ÒÔINIÎÄ±¾¸ñÊ½±£´æµ½ÄÚ´æ
- * @param [in]      iniÒª±£´æµÄINIÎÄ¼þ¾ä±ú
- * @param [in] 		mem±£´æµÄÄ¿±êÄÚ´æ
- * @param [in]		sizeÄ¿±êÄÚ´æµÄmem´óÐ¡
- * @return int      ·µ»ØÖµÎªmemÊµ¼Ê´æ´¢×Ö½Ú´óÐ¡£¬Èç¹û·µ»Ø0±íÊ¾³ö´í
+ * @brief           å°†ç¼“å†²åŒºä¸­çš„INIæ–‡ä»¶å†…å®¹ï¼Œä»¥INIæ–‡æœ¬æ ¼å¼ä¿å­˜åˆ°å†…å­˜
+ * @param [in]      iniè¦ä¿å­˜çš„INIæ–‡ä»¶å¥æŸ„
+ * @param [in] 		memä¿å­˜çš„ç›®æ ‡å†…å­˜
+ * @param [in]		sizeç›®æ ‡å†…å­˜çš„memå¤§å°
+ * @return int      è¿”å›žå€¼ä¸ºmemå®žé™…å­˜å‚¨å­—èŠ‚å¤§å°ï¼Œå¦‚æžœè¿”å›ž0è¡¨ç¤ºå‡ºé”™
  * @remarks
  */
 unsigned int ini_savememory(handle_t ini, char* mem, unsigned int size);
 
 /** ******************************************************
- * @brief           ÊÍ·ÅINIÎÄ¼þÕ¼ÓÃµÄÄÚ´æ×ÊÔ´
- * @param [in] pini ÒªÊÍ·ÅµÄINIÎÄ¼þÖ¸Õë
- * @return void     ÎÞ·µ»ØÖµ
+ * @brief           é‡Šæ”¾INIæ–‡ä»¶å ç”¨çš„å†…å­˜èµ„æº
+ * @param [in] pini è¦é‡Šæ”¾çš„INIæ–‡ä»¶æŒ‡é’ˆ
+ * @return void     æ— è¿”å›žå€¼
  * @remarks
  */
 void ini_close(handle_t           ini);
 
 /** ******************************************************
- * @brief               È¡µÃÖ¸¶¨¼üµÄ¼üÖµ
- * @param [in] pini     INIÎÄ¼þÖ¸Õë
- * @param [in] section  ¶ÎÃû×Ö·û´®Ö¸Õë
- * @param [in] param    ²ÎÊýÃû×Ö·û´®Ö¸Õë
- * @return char*        ÓÃÓÚvalue·µ»ØÖµµÄ×Ö·û´®Ö¸Õë£¬·µ»ØNULL»ñÈ¡Ê§°Ü
+ * @brief               å–å¾—æŒ‡å®šé”®çš„é”®å€¼
+ * @param [in] pini     INIæ–‡ä»¶æŒ‡é’ˆ
+ * @param [in] section  æ®µåå­—ç¬¦ä¸²æŒ‡é’ˆ
+ * @param [in] param    å‚æ•°åå­—ç¬¦ä¸²æŒ‡é’ˆ
+ * @return char*        ç”¨äºŽvalueè¿”å›žå€¼çš„å­—ç¬¦ä¸²æŒ‡é’ˆï¼Œè¿”å›žNULLèŽ·å–å¤±è´¥
  * @remarks
  */
 char *ini_get(handle_t           ini,
@@ -83,11 +83,11 @@ char *ini_get(handle_t           ini,
               const char*   param);
 
 /** ******************************************************
- * @brief               ÉèÖÃÖ¸¶¨¼üµÄ¼üÖµ
- * @param [in] pini     INIÎÄ¼þÖ¸Õë
- * @param [in] param    ¼üÃû×Ö·û´®Ö¸Õë
- * @value [in]          ÓÃÓÚ±£´æÒªÉèÖÃµÄÖµµÄ×Ö·û´®Ö¸Õë
- * @return int          ·µ»ØÖµÎª0ÉèÖÃ³É¹¦£¬-1ÉèÖÃÊ§°Ü
+ * @brief               è®¾ç½®æŒ‡å®šé”®çš„é”®å€¼
+ * @param [in] pini     INIæ–‡ä»¶æŒ‡é’ˆ
+ * @param [in] param    é”®åå­—ç¬¦ä¸²æŒ‡é’ˆ
+ * @value [in]          ç”¨äºŽä¿å­˜è¦è®¾ç½®çš„å€¼çš„å­—ç¬¦ä¸²æŒ‡é’ˆ
+ * @return int          è¿”å›žå€¼ä¸º0è®¾ç½®æˆåŠŸï¼Œ-1è®¾ç½®å¤±è´¥
  * @remarks
 */
 int ini_set(handle_t           ini,
@@ -96,12 +96,12 @@ int ini_set(handle_t           ini,
             const char*     value);
 
 /** ******************************************************
- * @brief               Ìí¼ÓÐÂ¼ü
- * @param [in] pini     INIÎÄ¼þÖ¸Õë
- * @param [in] section  ¶ÎÃû×Ö·û´®Ö¸Õë
- * @param [in] param    ²ÎÊýÃû×Ö·û´®Ö¸Õë
- * @param [in] value    ¼üÖµ×Ö·û´®Ö¸Õë
- * @return int          ·µ»ØÖµÎª0ÉèÖÃ³É¹¦£¬-1ÉèÖÃÊ§°Ü
+ * @brief               æ·»åŠ æ–°é”®
+ * @param [in] pini     INIæ–‡ä»¶æŒ‡é’ˆ
+ * @param [in] section  æ®µåå­—ç¬¦ä¸²æŒ‡é’ˆ
+ * @param [in] param    å‚æ•°åå­—ç¬¦ä¸²æŒ‡é’ˆ
+ * @param [in] value    é”®å€¼å­—ç¬¦ä¸²æŒ‡é’ˆ
+ * @return int          è¿”å›žå€¼ä¸º0è®¾ç½®æˆåŠŸï¼Œ-1è®¾ç½®å¤±è´¥
  * @remarks
  */
 int ini_append(handle_t           ini,
@@ -110,12 +110,12 @@ int ini_append(handle_t           ini,
                const char*  value);
 
 /** ******************************************************
- * @brief               ÒÆ³ýÖ¸¶¨¼ü
- * @param [in] pini     INIÎÄ¼þÖ¸Õë
- * @param [in] section  ¶ÎÃû×Ö·û´®Ö¸Õë
- * @param [in] param    ²ÎÊýÃû×Ö·û´®Ö¸Õë, µ±ÆäÖµÎªNULLÊ±£¬±íÊ¾½«É¾³ýÕû¸ösection
-                        ËùÓÐparameters
- * @return int          ·µ»ØÖµÎª0É¾³ý³É¹¦£¬-1É¾³ýÊ§°Ü
+ * @brief               ç§»é™¤æŒ‡å®šé”®
+ * @param [in] pini     INIæ–‡ä»¶æŒ‡é’ˆ
+ * @param [in] section  æ®µåå­—ç¬¦ä¸²æŒ‡é’ˆ
+ * @param [in] param    å‚æ•°åå­—ç¬¦ä¸²æŒ‡é’ˆ, å½“å…¶å€¼ä¸ºNULLæ—¶ï¼Œè¡¨ç¤ºå°†åˆ é™¤æ•´ä¸ªsection
+                        æ‰€æœ‰parameters
+ * @return int          è¿”å›žå€¼ä¸º0åˆ é™¤æˆåŠŸï¼Œ-1åˆ é™¤å¤±è´¥
  * @remarks
  */
 int ini_remove(handle_t           ini,
@@ -123,13 +123,13 @@ int ini_remove(handle_t           ini,
                const char*  param);
 
 /** ******************************************************
- * @brief           ºÏ²¢Á½¸öINIÎÄ¼þ
- * @param [in,out]  src_old INIÎÄ¼þÖ¸Õë
- * @param [in]      src_new INIÎÄ¼þÖ¸Õë
- * @return          ·µ»ØÖµÎª0ºÏ²¢³É¹¦£¬-1ºÏ²¢Ê§°Ü
- * @remark          ºÏ²¢Á½¸öINIÎÄ¼þ£¬Èç¹ûÔÚsrc_new´æÔÚµÄsection»òkey,ÔÚsrc_old
-                    ²»´æÔÚ£¬ÔÚÌí¼Óµ½src_oldµ±ÖÐ£¬Èç¹ûÒÑ¾­´æÔÚ£¬Ôò½«src_newÖÐµÄÖµ
-                    ¸²¸Çsrc_oldÖÐµÄÖµ
+ * @brief           åˆå¹¶ä¸¤ä¸ªINIæ–‡ä»¶
+ * @param [in,out]  src_old INIæ–‡ä»¶æŒ‡é’ˆ
+ * @param [in]      src_new INIæ–‡ä»¶æŒ‡é’ˆ
+ * @return          è¿”å›žå€¼ä¸º0åˆå¹¶æˆåŠŸï¼Œ-1åˆå¹¶å¤±è´¥
+ * @remark          åˆå¹¶ä¸¤ä¸ªINIæ–‡ä»¶ï¼Œå¦‚æžœåœ¨src_newå­˜åœ¨çš„sectionæˆ–key,åœ¨src_old
+                    ä¸å­˜åœ¨ï¼Œåœ¨æ·»åŠ åˆ°src_oldå½“ä¸­ï¼Œå¦‚æžœå·²ç»å­˜åœ¨ï¼Œåˆ™å°†src_newä¸­çš„å€¼
+                    è¦†ç›–src_oldä¸­çš„å€¼
  */
 int ini_merge(handle_t  old_ini, handle_t new_ini);
 

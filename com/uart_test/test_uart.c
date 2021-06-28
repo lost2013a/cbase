@@ -13,7 +13,7 @@ int main (int argc, char *argv[])
 {
 	int fd;
 	int len, i,ret;
-        char buf[] = "hello ZLG!";
+        char buf[] = "AT+DMOCONNECT\r\n";
 
 
 	fd = open(DEV_NAME, O_RDWR | O_NOCTTY);
@@ -25,12 +25,12 @@ int main (int argc, char *argv[])
 
 	 ret = set_port_attr (
                          	fd,  
-                          	B115200,          // B1200 B2400 B4800 B9600 .. B115200
+                          	B9600,          // B1200 B2400 B4800 B9600 .. B115200
                          	8,           	  // 5, 6, 7, 8
                           	"1",    	  //  "1", "1.5", "2"
                           	'N',              // N(o), O(dd), E(ven)
-                          	150,		  //VTIME
-                          	255 );		  //VTIME
+                          	0,		  //VTIME
+                          	1 );		  //VTIME
 
 	if(ret < 0) {
 		printf("set uart arrt faile \n");
@@ -42,14 +42,14 @@ int main (int argc, char *argv[])
 		printf("write data error \n");
 		return -1;
 	}
-	
+	printf("send %d\n", len);
 	len = read(fd, buf, sizeof(buf));
         if (len < 0) {
                 printf("read error \n");
                 return -1;
         }
 
-	printf("%s \n", buf);
+	printf("rec %d %s \n", len, buf);
 
 	return(0);
 }

@@ -23,7 +23,6 @@
 
 //#define NTP_SERVER      "120.25.115.20"
 #define NTP_SERVER      "192.168.251.5"
-
 #define NTP_LOOP_TIME   (1)	/*单位：秒*/
 #define K_MS 1		
 

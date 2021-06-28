@@ -6,7 +6,7 @@
 
 #include "serial.h"
 
-#define DEV_NAME  "/dev/ttyS1"
+#define DEV_NAME  "/dev/ttyUSB0"
 
 
 int main (int argc, char *argv[])

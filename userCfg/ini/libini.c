@@ -1,4 +1,5 @@
 #include "libini.h"
+
 #include "list.h"
 #include "string.h"
 #include "stdio.h"
@@ -256,7 +257,7 @@ unsigned int ini_savememory(handle_t ini, char* mem, unsigned int size)
 		}
 		strcat(mem, line);
 		strcat(mem, "\n");
-		w_size +=1;//ËãÉÏĞÂ¼ÓµÄ'\n'
+		w_size +=1;//ç®—ä¸Šæ–°åŠ çš„'\n'
 
 		list_for_each_safe(pos2, n2, &sec->param_list) {
 			pa = list_entry(pos2, INI_PARAM, entry);
@@ -280,7 +281,7 @@ unsigned int ini_savememory(handle_t ini, char* mem, unsigned int size)
 			}
 			strcat(mem, line);
 			strcat(mem, "\n");
-			w_size +=1;//ËãÉÏĞÂ¼ÓµÄ'\n'
+			w_size +=1;//ç®—ä¸Šæ–°åŠ çš„'\n'
 		}
 	}
 	return w_size;

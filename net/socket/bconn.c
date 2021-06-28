@@ -143,7 +143,7 @@ void bconn_block_rec(struct bsockt *b)
 	struct	timeval timeover={0};
 	fd_set rfd_set; 
 	timeover.tv_sec = 0;
-	timeover.tv_usec = 10*1000;
+	timeover.tv_usec = b->rec_tout;
 	FD_ZERO( &rfd_set );
 	FD_SET(fd, &rfd_set );
 	nsel = select( fd+1, &rfd_set, NULL, NULL, &timeover );

@@ -26,8 +26,10 @@ static void *command_tast(void *parm)
 	while(1)
 	{
 		bconn_machine(b);
-        bconn_block_rec(b);
-        command_send_func(b);
+        if(bconn_isConnect(b))
+            bconn_block_rec(b);
+            command_send_func(b);
+	    }
         usleep(10*1000);
 	}
 	return 0;

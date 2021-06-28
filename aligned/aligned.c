@@ -2,7 +2,7 @@
 #include<string.h>   
 #include<stdlib.h>   
 
-
+//指定数组对齐 __attribute__((aligned(16)))
 
 typedef struct st_tag1{
 	char a;

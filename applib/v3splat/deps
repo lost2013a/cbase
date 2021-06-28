@@ -1,0 +1,3 @@
+obj/gpio.o: src/gpio.c
+	@echo -e "compiling [032m[arm-linux-gnueabihf-gcc][0m":  src/gpio.c
+	@arm-linux-gnueabihf-gcc $(CFLAGS) -c -o $@ $^

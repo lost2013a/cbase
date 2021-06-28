@@ -1,7 +1,7 @@
 EXEC	= test_uart_2
 OBJS    = test_uart.o serial.o
 
-CROSS = 
+CROSS = csky-linux-
 CC	= $(CROSS)gcc 
 
 STRIP	= $(CROSS)strip
