@@ -1,8 +1,5 @@
 *.si4project
 *.o
-<<<<<<< HEAD
 /cbase.si4project
-=======
->>>>>>> 3988978b75d4ede69eb761c29836b3c1a3b41c52
-/mp3/*.mp3
-/bin2ary/*.mp3
+*.mp3
+*.exe

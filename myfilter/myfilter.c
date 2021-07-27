@@ -4,7 +4,7 @@
 
 static unsigned char myfilter(unsigned char sta)
 {
-#define FIILTER_DEPTH 9	//滤波级数，必须1-32
+#define FIILTER_DEPTH 3//滤波级数，必须1-32
 #define MASK (0xffffffff >> (32-FIILTER_DEPTH))
 	static unsigned int old_sta=0;
 	old_sta= (old_sta<<1) | (sta&0x1);

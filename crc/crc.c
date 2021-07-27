@@ -161,11 +161,51 @@ static unsigned int calculateCRC32 (const unsigned char *pStart, unsigned int uS
 	return uCRCValue ^ 0xFFFFFFFF;
 }
 //0xAD, 0xB5, 0x45, 0xE3
+/*
+
+*/
+static unsigned int step_crc32(unsigned char ctl, const unsigned char pData) {
+	enum{
+		STEP_CRC_INIT = 0,
+		STEP_CRC_ADD = 1,
+	};
+	static unsigned int uCRCValue = 0xFFFFFFFF;
+	unsigned int ret = 0;
+	switch(ctl) {
+	case STEP_CRC_INIT:
+		ret = uCRCValue ^ 0xFFFFFFFF;
+		uCRCValue = 0xFFFFFFFF;
+		break;
+	case STEP_CRC_ADD:
+		uCRCValue = CRC32_Table2[(uCRCValue ^ pData) & 0xFF] ^ (uCRCValue >> 8);
+		ret = uCRCValue;
+		break;
+	}
+	return ret;
+} 
+static void step_crc_array(const unsigned char *pData, unsigned int len) {
+	for(int i =0 ;i < len; i++) {
+		step_crc32(1, pData[i]);
+	}
+}
+
+
 static unsigned char test_arry[49]={0xFE, 0xFD, 0x01, 0x00, 0x00, 0x00, 0x02, 0x90, 0x01, 0x00, 0x35, 0xF6, 0x52, 0x04, 0x25, 0x00, 0x00, 0x00, 0x03, 0x14, 0x01, 0x02, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x09, 0x01, 0x02, 0x06, 0x12, 0x34, 0x56, 0x78, 0x90, 0x02};
+
 int main(void)
 {
-	unsigned int crc32= nstar_crc32_ts(test_arry, 49);
-	printf("crc32= %x\n", crc32);
+	unsigned int crc32= calculateCRC32(test_arry, 49);
+	printf("func 1 crc32= %x\n", crc32);
+	step_crc32(0, 0);
+	for(int i =0 ;i < 49; i++) {
+		step_crc32(1, test_arry[i]);
+	}
+	crc32 = step_crc32(0, 0);
+	printf("func 2 crc32= %x\n", crc32);
+	
+	step_crc_array(test_arry, 9);
+	step_crc_array(test_arry+9, 40);
+	printf("func 3 crc32= %x\n", crc32);
 	
 }
 
